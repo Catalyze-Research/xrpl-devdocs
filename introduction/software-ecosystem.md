@@ -19,3 +19,5 @@ XRP Ledger는 가치 인터넷을 지원하고 가능하게 하는 소프트웨�
 XRP Ledger의 핵심인 P2P 네트워크는 합의 및 거래 처리 규칙을 시행하기 위해 매우 안정적이고 효율적인 서버를 필요로 합니다. XRP Ledger Foundation은 rippled("리플-디"로 발음)라고 하는 이 서버 소프트웨어의 참조 구현을 게시합니다. 이 서버는 허용된 [a permissive open-source license](https://github.com/XRPLF/rippled/blob/develop/LICENSE.md) 하에 제공되므로 누구나 자신의 서버 인스턴스를 검사하고 수정할 수 있으며, 제한 없이 다시 게시할 수 있습니다.
 
 <figure><img src="../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+
+test
