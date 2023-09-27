@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Start](README.md)
+* [XRPL Docs(Kor)](README.md)
 * [Introduction](introduction/README.md)
   * [XRP Ledger란?](introduction/xrp-ledger.md)
   * [XRP란?](introduction/xrp.md)
