@@ -8,7 +8,7 @@ XRP Ledger는 자체 디지털 통화를 사용하여 금융 거래를 처리하
 
 블록체인은 지속적으로 증가하는 일련의 기록입니다. 블록체인은 데이터 블록에서 시작됩니다.
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 A group of trusted validator nodes reach consensus that the data is valid.
 
