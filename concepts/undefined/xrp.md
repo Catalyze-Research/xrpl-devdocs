@@ -10,7 +10,7 @@ XRP의 바람직한 속성들 중 일부는 XRP Ledger의 성격과 그 [컨센�
 
 ## XRP 속성&#x20;
 
-맨 처음의 ledger에는 1000억의 XRP가 포함되어 있었고, 새로운 XRP를 만들 수는 없습니다. XRP는 [트랜잭션 비용](../undefined-1/undefined-2/undefined.md)에 의해 소멸되거나, 키를 가진 사람이 없는 주소로 보내짐으로써 잃어버릴 수 있으므로, XRP는 본질적으로 약간 [디플레이션적](https://en.wikipedia.org/wiki/Deflation)입니다. 그러나 XRP가 다 소진될 걱정은 하지 않아도 됩니다: 현재의 소멸 속도로는 모든 XRP를 소멸시키는 데 적어도 7만년이 필요하며, XRP의 총 공급량이 변함에 따라 [XRP의 가격과 수수료는 조정될 수](../undefined-4/undefined-8.md) 있습니다.
+맨 처음의 ledger에는 1000억의 XRP가 포함되어 있었고, 새로운 XRP를 만들 수는 없습니다. XRP는 [트랜잭션 비용](../undefined-1/undefined-2/undefined.md)에 의해 소멸되거나, 키를 가진 사람이 없는 주소로 보내짐으로써 잃어버릴 수 있으므로, XRP는 본질적으로 약간 [디플레이션적](https://en.wikipedia.org/wiki/Deflation)입니다. 그러나 XRP가 다 소진될 걱정은 하지 않아도 됩니다: 현재의 소멸 속도로는 모든 XRP를 소멸시키는 데 적어도 7만년이 필요하며, XRP의 총 공급량이 변함에 따라 [XRP의 가격과 수수료는 조정될 수](../undefined-4/undefined-7.md) 있습니다.
 
 기술적인 맥락에서, XRP는 가장 가까운 0.000001 XRP, 즉 "drop"의 XRP로 정확하게 측정됩니다. [rippled API](../../references/http-websocket-apis/)는 모든 XRP 금액이 XRP의 drop으로 명시되도록 요구합니다. 예를 들어, 1 XRP는 1000000 drops로 표현됩니다. 더 자세한 정보를 위해선, [화폐 형식 참조](../../references/xrp-ledger/undefined/undefined.md)를 참고하십시오.
 

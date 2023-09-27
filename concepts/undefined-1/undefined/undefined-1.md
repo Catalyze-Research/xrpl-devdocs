@@ -15,7 +15,7 @@ XRP Ledger의 다중 서명은 여러 개인 키의 조합을 사용하여 XRP L
 
 [SignerListSet 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/signerlistset.md)은 주소에서 트랜잭션을 승인할 수 있는 주소 집합인 서명자 목록을 정의합니다. 서명자 목록에 1-32개의 주소를 포함할 수 있습니다. 목록에 사용자의 주소를 포함할 수 없으며 중복된 항목이 있을 수 없습니다. 목록의 서명자 가중치 및 쿼럼 설정을 사용하여 필요한 서명 수, 조합을 제어할 수 있습니다.
 
-_(_[_ExpandedSignerList수정안_](../../undefined-4/undefined-7/undefined.md#expandedsignerlist)_에 의해 업데이트됨.)_
+_(_[_ExpandedSignerList수정안_](../../xrp-ledger/undefined-2/undefined.md#expandedsignerlist)_에 의해 업데이트됨.)_
 
 ## 서명자 무게&#x20;
 
@@ -29,7 +29,7 @@ _(_[_ExpandedSignerList수정안_](../../undefined-4/undefined-7/undefined.md#ex
 
 각 서명자의 목록에는 최대 256비트의 임의의 데이터를 추가할 수도 있습니다. 이 데이터는 네트워크에서 필요하거나 사용되지 않지만 스마트 계약이나 다른 애플리케이션에서 서명자에 대한 기타 데이터를 식별하거나 확인하는 데 사용될 수 있습니다.
 
-_(_[_ExpandedSignerList수정안_](../../undefined-4/undefined-7/undefined.md#expandedsignerlist)_에 의해 추가됨.)_
+_(_[_ExpandedSignerList수정안_](../../xrp-ledger/undefined-2/undefined.md#expandedsignerlist)_에 의해 추가됨.)_
 
 ## 서명자 가중치 및 쿼럼 사용 예제&#x20;
 

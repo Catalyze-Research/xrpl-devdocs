@@ -27,4 +27,10 @@
 
 클리오 서버가 API 요청을 받으면 이러한 데이터 스토어에서 데이터를 조회합니다. P2P 네트워크에서 데이터가 필요한 요청의 경우, 클리오 서버는 P2P 서버로 요청을 전달하고 응답을 클라이언트에게 반환합니다.
 
+### 참고 <a href="#see-also" id="see-also"></a>
+
+* [Clio source code ](https://github.com/XRPLF/clio)
+* **Tutorials:**
+  * [Install Clio server on Ubuntu](https://xrpl.org/install-clio-on-ubuntu.html)
+
 &#x20;

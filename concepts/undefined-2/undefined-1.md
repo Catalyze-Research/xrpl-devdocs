@@ -1,6 +1,6 @@
 # 수표
 
-_(XRP Ledger의_ [_Checks 수정안_](../undefined-4/undefined-7/undefined.md#checks)_에 의해 추가됨.)_
+_(XRP Ledger의_ [_Checks 수정안_](../xrp-ledger/undefined-2/undefined.md#checks)_에 의해 추가됨.)_
 
 XRP Ledger의 수표 기능은 사용자가 예약된 지불을 생성하고 의도한 수취인에 의해 취소되거나 현금화될 수 있는 기능을 제공합니다. 개인용 종이 수표와 마찬가지로, XRP Ledger 수표는 자금을 보내는 사람이 금액과 수령인을 지정하는 수표를 생성하여 시작됩니다. 수령인은 수표를 현금화하여 자금을 송금자의 계정에서 수령인의 계정으로 이동시킵니다. 수령인이 수표를 현금화할 때까지 자금은 이동하지 않습니다. 수표가 생성될 때 자금이 보류되지 않기 때문에, 수령인이 현금화를 시도할 때 송신자에게 충분한 자금이 없는 경우 수표의 현금화는 실패할 수 있습니다. 수표의 현금화에 실패한 경우 수표의 수령인은 수표가 만료될 때까지 재시도할 수 있습니다.
 
@@ -15,7 +15,7 @@ XRP Ledger 수표는 현금화할 수 없게 되는 만료 시간을 가질 수 
 {% hint style="info" %}
 Note:&#x20;
 
-[수표 수정안](../undefined-4/undefined-7/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../dex/undefined.md#undefined-6)를 참조하세요.
+[수표 수정안](../xrp-ledger/undefined-2/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../dex/undefined.md#undefined-6)를 참조하세요.
 {% endhint %}
 
 ## 수표의 필요성

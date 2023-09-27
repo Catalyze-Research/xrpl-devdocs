@@ -1,6 +1,6 @@
 # 티켓
 
-_(_[_TicketBatch_](../../undefined-4/undefined-7/undefined.md#ticketbatch)[ _수정안_](../../undefined-4/undefined-7/undefined.md#ticketbatch)_에 의해 추가됨.)_
+_(_[_TicketBatch_](../../xrp-ledger/undefined-2/undefined.md#ticketbatch)[ _수정안_](../../xrp-ledger/undefined-2/undefined.md#ticketbatch)_에 의해 추가됨.)_
 
 XRP Ledger의 티켓은 거래의 [일련 번호](../../../references/xrp-ledger/undefined/#undefined-3)를 당장 보내지 않고 미리 설정해두는 방법입니다. 티켓을 사용하면 거래를 일반적인 순서 외에 보낼 수 있습니다. 이에 대한 한 가지 사용 사례는 필요한 서명을 모으는 데 시간이 걸릴 수 있는 [다중 서명](undefined-1.md) 거래를 허용하는 것입니다: 티켓을 사용하는 거래에 대해 서명을 수집하는 동안에도, 다른 거래를 계속 보낼 수 있습니다.
 

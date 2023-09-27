@@ -36,7 +36,7 @@
 {% hint style="info" %}
 Note:
 
-[fix1571 수정안](../undefined-4/undefined-7/undefined.md)은 에스크로 생성에 대한 요구 사항을 변경했습니다. 이전에 생성된 에스크로에는 조건이나 완료 후 시간이 없는 만료 시간이 제공될 수 있습니다. 그러한 에스크로는 누구나 즉시 완료할 수 있습니다(자금을 수령인에게 보내는 것).
+[fix1571 수정안](../xrp-ledger/undefined-2/undefined.md)은 에스크로 생성에 대한 요구 사항을 변경했습니다. 이전에 생성된 에스크로에는 조건이나 완료 후 시간이 없는 만료 시간이 제공될 수 있습니다. 그러한 에스크로는 누구나 즉시 완료할 수 있습니다(자금을 수령인에게 보내는 것).
 {% endhint %}
 
 * 에스크로 생성 트랜잭션이 실행될 때, 시간 값은 과거일 수 없습니다.
@@ -59,7 +59,7 @@ Note:
 
 ## 에스크로의 가용성
 
-조건부 결제는 2017-03-31 이후 XRP Ledger 컨센서스 프로토콜의 ["에스크로" 수정안](../undefined-4/undefined-7/undefined.md#escrow)을 통해 가능해졌습니다. 2016년에는 XRP Ledger testnet에서 "Suspended Payments" (SusPay)라는 이름으로 이와 동일한 기능의 이전 버전이 제공되었습니다.
+조건부 결제는 2017-03-31 이후 XRP Ledger 컨센서스 프로토콜의 ["에스크로" 수정안](../xrp-ledger/undefined-2/undefined.md#escrow)을 통해 가능해졌습니다. 2016년에는 XRP Ledger testnet에서 "Suspended Payments" (SusPay)라는 이름으로 이와 동일한 기능의 이전 버전이 제공되었습니다.
 
 stand-alone 모드에서 테스트하는 경우에는 <mark style="background-color:yellow;">rippled.cfg</mark>에 다음 구절을 추가하여 에스크로 기능을 개별적으로 활성화할 수 있습니다:
 
@@ -82,7 +82,7 @@ Note:
 위의 공식은 거래의 기준 비용이 10드롭의 XRP라는 가정을 기반으로 합니다.
 {% endhint %}
 
-[수수료 투표](../undefined-4/undefined-8.md)가 참조 비용 값을 변경하는 경우, 공식은 새로운 <mark style="background-color:yellow;">reference\_fee</mark>에 따라 조정됩니다. 충족을 포함한 EscrowFinish 트랜잭션의 일반적인 공식은 다음과 같습니다:
+[수수료 투표](../undefined-4/undefined-7.md)가 참조 비용 값을 변경하는 경우, 공식은 새로운 <mark style="background-color:yellow;">reference\_fee</mark>에 따라 조정됩니다. 충족을 포함한 EscrowFinish 트랜잭션의 일반적인 공식은 다음과 같습니다:
 
 ```
 reference_fee * (signer_count + 33 + (fulfillment_bytes / 16))

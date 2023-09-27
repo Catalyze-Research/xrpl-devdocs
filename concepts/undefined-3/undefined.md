@@ -24,7 +24,7 @@
 
 1. [거래](../dex/)를 통해 해당 토큰을 더 획득할 때.
 2. 양의 잔액이 있는 신뢰선의 한도를 줄일 때.
-3. [수표를 현금화](../undefined-2/undefined-1.md)하여 해당 토큰을 더 획득할 때._(_[_CheckCashMakesTrustLine_](../undefined-4/undefined-7/undefined.md) _수정안이 필요.)_
+3. [수표를 현금화](../undefined-2/undefined-1.md)하여 해당 토큰을 더 획득할 때._(_[_CheckCashMakesTrustLine_](../xrp-ledger/undefined-2/undefined.md) _수정안이 필요.)_
 
 ## 신뢰선 설정
 

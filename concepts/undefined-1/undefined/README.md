@@ -55,7 +55,7 @@ XRP Ledger의 계정은 XRP Ledger의 [base58](../../../references/xrp-ledger/un
 {% hint style="info" %}
 Note:&#x20;
 
-XRP 커뮤니티는 [데스티네이션 태그](../undefined-2/undefined-2.md)를 주소에 "packs"하는 X-주소 형식을 [제안](https://github.com/XRPLF/XRPL-Standards/issues/6)하였습니다. 이 주소는 메인넷의 경우 <mark style="background-color:yellow;">X</mark>로, [testnet](../../undefined-4/undefined-10.md)의 경우 <mark style="background-color:yellow;">T</mark>로 시작합니다. 거래소와 지갑은 고객이 알아야 하는 모든 데이터를 하나의 값으로 표현하기 위해 X-주소를 사용할 수 있습니다. 자세한 정보는 [X-주소 형식 사이트](https://xrpaddress.info/)와 [코덱](https://github.com/xrp-community/xrpl-tagged-address-codec)을 참조하세요.
+XRP 커뮤니티는 [데스티네이션 태그](../undefined-2/undefined-2.md)를 주소에 "packs"하는 X-주소 형식을 [제안](https://github.com/XRPLF/XRPL-Standards/issues/6)하였습니다. 이 주소는 메인넷의 경우 <mark style="background-color:yellow;">X</mark>로, [testnet](../../xrp-ledger/undefined-1.md)의 경우 <mark style="background-color:yellow;">T</mark>로 시작합니다. 거래소와 지갑은 고객이 알아야 하는 모든 데이터를 하나의 값으로 표현하기 위해 X-주소를 사용할 수 있습니다. 자세한 정보는 [X-주소 형식 사이트](https://xrpaddress.info/)와 [코덱](https://github.com/xrp-community/xrpl-tagged-address-codec)을 참조하세요.
 
 XRP Ledger 프로토콜은 기본적으로 "클래식" 주소만 지원하지만, 많은 [클라이언트 라이브러리](../../../references/undefined/)도 X-주소를 지원합니다.
 {% endhint %}
@@ -82,7 +82,7 @@ XRP Ledger 주소를 계산하는 방법에 대한 더 자세한 기술적 세�
 
 ## 계정 삭제
 
-[DeletableAccounts 수정안](../../undefined-4/undefined-7/undefined.md) (2020-05-08 활성화)은 계정을 삭제할 수 있게 했습니다.
+[DeletableAccounts 수정안](../../xrp-ledger/undefined-2/undefined.md) (2020-05-08 활성화)은 계정을 삭제할 수 있게 했습니다.
 
 삭제하기 위해 계정은 다음의 요구사항을 충족해야 합니다:
 

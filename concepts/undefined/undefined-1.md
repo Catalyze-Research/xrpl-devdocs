@@ -15,7 +15,7 @@ XRP Ledger는 가치의 인터넷을 구동하고 가능하게 하는 소프트�
 
 XRP Ledger의 중심인 P2P 네트워크는 합의 규칙과 거래 처리를 강제하는 높은 신뢰성과 효율성의 서버가 필요합니다. XRPL Foundation은 이 서버 소프트웨어의 참조 구현을 관리하고 출판하며, 이를 [rippled](../xrp-ledger/)(발음은 "ripple-dee")라고 합니다. 서버는 [허용적인 오픈 소스 라이선스](https://github.com/XRPLF/rippled/blob/develop/LICENSE.md) 하에 제공되므로, 누구나 자신의 서버 인스턴스를 검사하고 수정하고 제한 없이 재배포할 수 있습니다.
 
-<mark style="background-color:yellow;">rippled</mark>의 모든 인스턴스는 같은 네트워크([testnet과 같은 병렬 네트워크](../undefined-4/undefined-10.md)를 따르도록 설정하지 않는 한)와 동기화하며 네트워크 전반의 모든 통신에 접근할 수 있습니다. 네트워크상의 모든 <mark style="background-color:yellow;">rippled</mark> 서버는 전체 XRP Ledger의 최신 상태 데이터의 완전한 복사본을 유지하며, 최근의 거래와 그 거래가 만든 변화의 기록을 가지고 있고, 모든 서버는 모든 거래를 독립적으로 처리하면서 그 결과가 네트워크의 나머지 부분과 일치하는지 확인합니다. 서버는 더 많은 [ledger 역사](../xrp-ledger/ledger/)를 유지하고 [검증인](../xrp-ledger/rippled.md#undefined-2)으로서 합의 과정에 참여하도록 설정될 수 있습니다.
+<mark style="background-color:yellow;">rippled</mark>의 모든 인스턴스는 같은 네트워크([testnet과 같은 병렬 네트워크](../xrp-ledger/undefined-1.md)를 따르도록 설정하지 않는 한)와 동기화하며 네트워크 전반의 모든 통신에 접근할 수 있습니다. 네트워크상의 모든 <mark style="background-color:yellow;">rippled</mark> 서버는 전체 XRP Ledger의 최신 상태 데이터의 완전한 복사본을 유지하며, 최근의 거래와 그 거래가 만든 변화의 기록을 가지고 있고, 모든 서버는 모든 거래를 독립적으로 처리하면서 그 결과가 네트워크의 나머지 부분과 일치하는지 확인합니다. 서버는 더 많은 [ledger 역사](../xrp-ledger/ledger/)를 유지하고 [검증인](../xrp-ledger/rippled.md#undefined-2)으로서 합의 과정에 참여하도록 설정될 수 있습니다.
 
 이 서버는 사용자가 데이터를 조회하고, 서버를 관리하고, 거래를 제출하기 위해 [rippled API](../../references/http-websocket-apis/)를 제공합니다.
 

@@ -6,7 +6,7 @@
 
 XRP Ledger의 메인넷에서는 **다중 서명 트랜잭션**이 변조 가능할 수 있습니다. 이는 필요한 서명보다 많은 서명이 있는 경우나 권한이 있는 서명자가 필요 이상의 서명을 제공하는 경우에 해당됩니다. 우수한 운영 보안은 이러한 문제에 대해 보호해 줄 수 있습니다. 지침은 [다중 서명의 변조 가능성에 대한 완화책](undefined-6.md#undefined-2) 문서에서 확인할 수 있습니다.
 
-2014년 이전까지는 기본 서명 알고리즘인 secp256k1 곡선을 사용하는 ECDSA로 인해 단일 서명 트랜잭션도 변조 가능할 수 있었습니다. 호환성을 위해 [RequireFullyCanonicalSig 수정안](undefined-7/undefined.md)이 2020년 7월 3일에 활성화될 때까지 변조 가능한 단일 서명 트랜잭션을 생성하고 제출할 수 있었습니다. ([Ed25519 키로 서명](../undefined-1/undefined/undefined.md)된 트랜잭션은 이러한 문제에 대해 항상 취약하지 않았습니다.)
+2014년 이전까지는 기본 서명 알고리즘인 secp256k1 곡선을 사용하는 ECDSA로 인해 단일 서명 트랜잭션도 변조 가능할 수 있었습니다. 호환성을 위해 [RequireFullyCanonicalSig 수정안](../xrp-ledger/undefined-2/undefined.md)이 2020년 7월 3일에 활성화될 때까지 변조 가능한 단일 서명 트랜잭션을 생성하고 제출할 수 있었습니다. ([Ed25519 키로 서명](../undefined-1/undefined/undefined.md)된 트랜잭션은 이러한 문제에 대해 항상 취약하지 않았습니다.)
 
 ## 배경&#x20;
 
@@ -36,7 +36,7 @@ ECDSA 서명은 R과 S라는 두 정수로 구성됩니다. secp256k1 그룹 순
 
 RequireFullyCanonicalSig 개선안이 활성화되면(2020년) 모든 트랜잭션은 완전 규범적인 서명만 사용해야 합니다.
 
-2014년부터 2020년까지, XRP Ledger는 완전 규범적 서명을 항상 생성하지 않는 기존 소프트웨어와 호환성이 있었으며, 이러한 문제에 대해 호환성 있는 서명 소프트웨어를 보호하기 위해 [<mark style="background-color:yellow;">**tfFullyCanonicalSig**</mark>](../../references/xrp-ledger/undefined-1/undefined.md) 플래그를 사용했습니다. 호환 가능한 서명 소프트웨어는 기본적으로 이 플래그를 활성화하며, 트랜잭션이 유효하려면 완전 규범적인 서명을 사용해야 했습니다. [RequireFullyCanonicalSig 수정안](undefined-7/)이 활성화된 이후로는 이 플래그는 더 이상 필요하지 않지만, 그래도 활성화하는 데는 해가 없습니다.
+2014년부터 2020년까지, XRP Ledger는 완전 규범적 서명을 항상 생성하지 않는 기존 소프트웨어와 호환성이 있었으며, 이러한 문제에 대해 호환성 있는 서명 소프트웨어를 보호하기 위해 [<mark style="background-color:yellow;">**tfFullyCanonicalSig**</mark>](../../references/xrp-ledger/undefined-1/undefined.md) 플래그를 사용했습니다. 호환 가능한 서명 소프트웨어는 기본적으로 이 플래그를 활성화하며, 트랜잭션이 유효하려면 완전 규범적인 서명을 사용해야 했습니다. [RequireFullyCanonicalSig 수정안](../xrp-ledger/undefined-2/)이 활성화된 이후로는 이 플래그는 더 이상 필요하지 않지만, 그래도 활성화하는 데는 해가 없습니다.
 
 ## 다중 서명과의 변조 가능성&#x20;
 

@@ -8,7 +8,11 @@ Note:
 트랜잭션 처리를 변경하는 버그 수정도 수정안이 필요합니다.
 {% endhint %}
 
-## 수정안 프로세스
+## 수정안 프로세스(Amendment Process)
+
+&#x20;[Contributing Code to the XRP Ledger](https://xrpl.org/contribute-code-flow.html) 주제에서는 아이디어에서 XRP 원장의 활성화까지 수정안을 개발하는 워크플로우를 안내합니다.
+
+수정 코드가 소프트웨어 릴리스에 빌드된 후, 이를 활성화하는 프로세스는 XRP Ledger 네트워크 내에서 이루어지며, 매 플래그 원장마다 수정 상태를 확인합니다(일반적으로 약 15분 간격).
 
 매 256번째 ledger를 플래그 ledger라고 합니다. **플래그** ledger에는 특별한 내용이 없지만 수정안 프로세스가 이루어집니다.
 
@@ -28,7 +32,7 @@ Note:&#x20;
 
 4. **플래그 ledger +2:** 활성화된 수정안은 이 ledger 이후의 트랜잭션에 적용됩니다.
 
-## 수정안 투표&#x20;
+## 수정안 투표(Amendment Voting)&#x20;
 
 각 <mark style="background-color:yellow;">rippled</mark> 버전은 알려진 수정안 목록과 해당 수정안을 구현하는 코드로 컴파일됩니다. <mark style="background-color:yellow;">rippled</mark> 검증인의 운영자는 서버를 각 수정안에 대해 투표하도록 구성할 수 있으며, 언제든지 변경할 수 있습니다. 운영자가 투표를 선택하지 않으면 서버는 소스 코드에서 정의된 기본 투표를 사용합니다.
 
@@ -42,7 +46,7 @@ Note:
 
 소스 코드가 제거되고 활성화되지 않은 수정안은 네트워크에서 **거부된 것**으로 간주됩니다.
 
-## 수정안 차단 서버
+## 수정안 차단 서버(Amendment Blocked Servers)
 
 수정안 차단은 XRP Ledger 데이터의 정확성을 보호하기 위한 보안 기능입니다. 수정안이 활성화되면 해당 수정안의 소스 코드가 없는 이전 버전의 <mark style="background-color:yellow;">rippled</mark>를 실행하는 서버는 네트워크의 규칙을 이해할 수 없게 됩니다. ledger 데이터를 추측하고 잘못 해석하지 않기 위해 이러한 서버는 **수정안 차단 상태**가 되어 다음 작업을 수행할 수 없습니다:
 
@@ -55,8 +59,21 @@ Note:
 
 최신 버전의 <mark style="background-color:yellow;">rippled</mark>로 업그레이드하여 수정안 차단 상태인 서버를 해제할 수 있습니다.
 
-## 수정안 폐기&#x20;
+## 수정안 폐기(Retiring Amendments)
 
 수정안이 활성화되면 이전 버전의 <mark style="background-color:yellow;">rippled</mark>에 대한 사전 수정안 동작의 소스 코드가 유지됩니다. 이전 코드를 보존하는 등의 사용 사례가 있지만, 수정안과 레거시 코드를 추적하면 시간이 지남에 따라 복잡성이 증가합니다.
 
 [XRP Ledger Standard 11d](https://github.com/XRPLF/XRPL-Standards/discussions/19)에서는 오래된 수정안과 관련된 사전 수정안 코드를 폐기하는 프로세스를 정의합니다. Mainnet에서 2년 동안 수정안이 활성화된 후에는 해당 수정안을 폐기할 수 있습니다. 수정안을 폐기하면 해당 수정안이 핵심 프로토콜의 일부가 되며, 더 이상 추적되거나 수정안으로 처리되지 않으며, 모든 사전 수정안 코드가 제거됩니다.
+
+
+
+### 참고 <a href="#see-also" id="see-also"></a>
+
+* **Concepts:**
+  * [Consensus](https://xrpl.org/consensus.html)
+* **Tutorials:**
+  * [Run rippled as a Validator](https://xrpl.org/run-rippled-as-a-validator.html)
+  * [Configure Amendment Voting](https://xrpl.org/configure-amendment-voting.html)
+  * [Contribute Code to the XRP Ledger](https://xrpl.org/contribute-code-flow.html)
+* **References:**
+  * [Known Amendments](https://xrpl.org/known-amendments.html)
