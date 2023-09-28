@@ -13,7 +13,7 @@ P2P XRP Ledger 네트워크는 애플리케이션에 ledger의 상태에 대한 
 * 각 [계정](../undefined-1/undefined/)의 설정.&#x20;
 * XRP 및 [토큰](../undefined-3/)의 잔액.&#x20;
 * 분산 거래소의 거래 요청.&#x20;
-* [트랜잭션 비용](../undefined-1/undefined-2/undefined.md) 및 [reserve](../undefined-1/undefined/reserves.md) 금액과 같은 네트워크 설정.&#x20;
+* [트랜잭션 비용](../transactions/transaction-cost.md) 및 [reserve](../undefined-1/undefined/reserves.md) 금액과 같은 네트워크 설정.&#x20;
 * 타임스탬프.
 
 Ledger 버전에서 포함되는 데이터에 대한 자세한 기술적 설명은 [ledger 형식 참조](../../references/xrp-ledger/ledger/) 문서를 참조하십시오.
@@ -76,7 +76,7 @@ _Figure 5: Validators Propose and Revise Transaction Sets - 컨센서스 시작 
 
 동의되지 않은 제안서에 포함되지 않은 후보 거래는 여전히 후보 거래로 남게 됩니다. 이러한 거래는 다음 ledger 버전에서 다시 고려될 수 있습니다. 일반적으로 한 ledger 버전에서 제외된 거래는 다음 ledger 버전에 포함됩니다.
 
-일부 경우에는 거래가 영원히 컨센서스를 달성하지 못할 수 있습니다. 예를 들어, 네트워크가 [트랜잭션 비용](../undefined-1/undefined-2/undefined.md)을 거래가 제공하는 값보다 높게 설정하는 경우 거래가 영원히 실패할 수 있습니다. 이러한 거래는 수수료가 나중에 낮아지면 언젠가 성공할 수도 있습니다. 거래가 제한 시간 내에 성공하거나 실패하도록 하기 위해 거래는 특정 ledger 인덱스까지 처리되지 않으면 만료되도록 설정할 수 있습니다. 자세한 내용은 [Reliable Transaction Submission](../../tutorials/undefined-2/undefined-2.md)을 참조하십시오.
+일부 경우에는 거래가 영원히 컨센서스를 달성하지 못할 수 있습니다. 예를 들어, 네트워크가 [트랜잭션 비용](../transactions/transaction-cost.md)을 거래가 제공하는 값보다 높게 설정하는 경우 거래가 영원히 실패할 수 있습니다. 이러한 거래는 수수료가 나중에 낮아지면 언젠가 성공할 수도 있습니다. 거래가 제한 시간 내에 성공하거나 실패하도록 하기 위해 거래는 특정 ledger 인덱스까지 처리되지 않으면 만료되도록 설정할 수 있습니다. 자세한 내용은 [Reliable Transaction Submission](../transactions/reliable-transaction-submission.md)을 참조하십시오.
 
 ## 유효화&#x20;
 
@@ -117,7 +117,7 @@ _Figure 8: Ledger is Validated When Supermajority of Peers Calculate the Same Re
 
 서버가 소수인 경우, 해당 서버는 피어들과 다른 ledger을 계산했으므로 자신이 계산한 ledger을 무시합니다. 올바른 ledger을 다시 계산하거나 필요에 따라 올바른 ledger을 검색합니다.
 
-유효화에 대한 과반수 합의를 달성하지 못하면, 이는 거래량이 너무 많거나 네트워크 지연이 컨센서스 프로세스가 일관된 제안을 생성하지 못할만큼 크다는 것을 의미합니다. 이 경우 서버들은 새로운 ledger 버전을 위해 컨센서스 프로세스를 반복합니다. 컨센서스가 시작된 이후 시간이 지남에 따라, 각 컨센서스 라운드는 불일치를 줄이므로 대다수의 서버가 동일한 후보 거래 세트를 수신한 것으로 판단됩니다. XRP Ledger는 이러한 상황에 대응하여 [트랜잭션 비용](../undefined-1/undefined-2/undefined.md) 및 컨센서스 대기 시간을 동적으로 조정합니다.
+유효화에 대한 과반수 합의를 달성하지 못하면, 이는 거래량이 너무 많거나 네트워크 지연이 컨센서스 프로세스가 일관된 제안을 생성하지 못할만큼 크다는 것을 의미합니다. 이 경우 서버들은 새로운 ledger 버전을 위해 컨센서스 프로세스를 반복합니다. 컨센서스가 시작된 이후 시간이 지남에 따라, 각 컨센서스 라운드는 불일치를 줄이므로 대다수의 서버가 동일한 후보 거래 세트를 수신한 것으로 판단됩니다. XRP Ledger는 이러한 상황에 대응하여 [트랜잭션 비용](../transactions/transaction-cost.md) 및 컨센서스 대기 시간을 동적으로 조정합니다.
 
 검증인들이 유효화에 대한 과반수 합의에 도달하면, 서버들은 새로 유효화된 ledger(ledger 인덱스 N+1)과 함께 작업을 진행합니다. 컨센서스 및 유효화 프로세스는 반복되며, 이전 라운드에 포함되지 않았던 후보 거래와 그 동안에 제출된 새로운 거래를 고려합니다.
 

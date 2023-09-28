@@ -1,6 +1,6 @@
 # 부정 UNL
 
-_(_[_NegativeUNL 수정안_](../xrp-ledger/undefined-2/undefined.md)_에 의해 추가되었습니다.)_
+_(_[_NegativeUNL 수정안_](../xrp-ledger/amendments/undefined.md)_에 의해 추가되었습니다.)_
 
 Negative UNL은 XRP Ledger [컨센서스 프로토콜](undefined.md)의 기능으로서, 네트워크가 일부 다운된 상태에서도 전진할 수 있는 능력인 활성성(liveness)을 향상시킵니다. Negative UNL을 사용하여 서버는 현재 온라인 및 동작 중인 검증인에 따라 유효한 [ledger 버전](../undefined-1/ledgers.md)이 선언될 수 있도록 유효한 UNL(effective UNL)을 조정합니다. 따라서 신뢰할 수 있는 검증인 중 일부가 오프라인 상태인 경우에도 새로운 ledger 버전이 유효하다고 선언될 수 있습니다.
 
@@ -74,7 +74,7 @@ Ledger 버전의 ledger 인덱스가 256으로 나누어 떨어지면 해당 led
 
 {% hint style="info" %}
 Note:\
-이는 [트랜잭션](../undefined-1/undefined-2/)이나 유사한 [의사 트랜잭션](../../references/xrp-ledger/undefined-1/pseudo-transactions/) 없이도 ledger의 상태 데이터가 수정되는 몇 가지 경우 중 하나입니다.
+이는 [트랜잭션](../transactions/)이나 유사한 [의사 트랜잭션](../../references/xrp-ledger/undefined-1/pseudo-transactions/) 없이도 ledger의 상태 데이터가 수정되는 몇 가지 경우 중 하나입니다.
 {% endhint %}
 
 2. 만약 Negative UNL이 가득 차 있지 않다면, 각 서버는 신뢰도가 50% 미만인 신뢰할 수 있는 유효성 검증인 중에서 **최대 1**명을 Negative UNL에 추가하기 위해 제안합니다.

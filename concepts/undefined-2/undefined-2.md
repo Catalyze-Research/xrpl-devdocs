@@ -29,14 +29,14 @@
 에스크로는 XRP Ledger를 Interledger Protocol 및 기타 스마트 컨트랙트와와 함께 사용할 수 있도록 지원하기 위해 설계되었습니다. 현재 버전은 복잡성을 피하기 위해 간소한 범위를 가지고 있습니다.
 
 * 에스크로는 토큰이 아닌 XRP만 사용할 수 있습니다.
-* 에스크로는 적어도 두 개의 트랜잭션을 전송해야 합니다: 하나는 에스크로를 생성하기 위한 것이고, 다른 하나는 에스크로를 완료하거나 취소하기 위한 것입니다. 따라서 매우 작은 금액에 대해 에스크로를사용하는 것은 재정적으로 합리적이지 않을 수 있습니다. 왜냐하면 참여자는 두 개의 [트랜잭션의 비용](../undefined-1/undefined-2/undefined.md)을 부담해야 하기 때문입니다.
+* 에스크로는 적어도 두 개의 트랜잭션을 전송해야 합니다: 하나는 에스크로를 생성하기 위한 것이고, 다른 하나는 에스크로를 완료하거나 취소하기 위한 것입니다. 따라서 매우 작은 금액에 대해 에스크로를사용하는 것은 재정적으로 합리적이지 않을 수 있습니다. 왜냐하면 참여자는 두 개의 [트랜잭션의 비용](../transactions/transaction-cost.md)을 부담해야 하기 때문입니다.
   * 암호 조건을 사용하는 경우, 에스크로를 완료하는 트랜잭션의 비용이 일반적인 경우보다 높습니다.
 * 모든 에스크로는 "완료 후" 시간 또는 암호 조건 또는 둘 다로 생성되어야 합니다. 완료 후 시간이 없는 경우, 에스크로에는 반드시 만료 시간이 있어야 합니다.
 
 {% hint style="info" %}
 Note:
 
-[fix1571 수정안](../xrp-ledger/undefined-2/undefined.md)은 에스크로 생성에 대한 요구 사항을 변경했습니다. 이전에 생성된 에스크로에는 조건이나 완료 후 시간이 없는 만료 시간이 제공될 수 있습니다. 그러한 에스크로는 누구나 즉시 완료할 수 있습니다(자금을 수령인에게 보내는 것).
+[fix1571 수정안](../xrp-ledger/amendments/undefined.md)은 에스크로 생성에 대한 요구 사항을 변경했습니다. 이전에 생성된 에스크로에는 조건이나 완료 후 시간이 없는 만료 시간이 제공될 수 있습니다. 그러한 에스크로는 누구나 즉시 완료할 수 있습니다(자금을 수령인에게 보내는 것).
 {% endhint %}
 
 * 에스크로 생성 트랜잭션이 실행될 때, 시간 값은 과거일 수 없습니다.
@@ -59,7 +59,7 @@ Note:
 
 ## 에스크로의 가용성
 
-조건부 결제는 2017-03-31 이후 XRP Ledger 컨센서스 프로토콜의 ["에스크로" 수정안](../xrp-ledger/undefined-2/undefined.md#escrow)을 통해 가능해졌습니다. 2016년에는 XRP Ledger testnet에서 "Suspended Payments" (SusPay)라는 이름으로 이와 동일한 기능의 이전 버전이 제공되었습니다.
+조건부 결제는 2017-03-31 이후 XRP Ledger 컨센서스 프로토콜의 ["에스크로" 수정안](../xrp-ledger/amendments/undefined.md#escrow)을 통해 가능해졌습니다. 2016년에는 XRP Ledger testnet에서 "Suspended Payments" (SusPay)라는 이름으로 이와 동일한 기능의 이전 버전이 제공되었습니다.
 
 stand-alone 모드에서 테스트하는 경우에는 <mark style="background-color:yellow;">rippled.cfg</mark>에 다음 구절을 추가하여 에스크로 기능을 개별적으로 활성화할 수 있습니다:
 
@@ -70,9 +70,9 @@ Escrow
 
 ## EscrowFinish 트랜잭션 비용
 
-EscrowFinish 트랜잭션은 [crypto-condition](https://datatracker.ietf.org/doc/html/draft-thomas-crypto-conditions-04)을 사용하는 경우, crypto-condition 충족을 검증하는 과정에서 높은 처리 부하가 발생하기 때문에 더 [높은 트랜잭션 비용](../undefined-1/undefined-2/undefined.md)을 지불해야 합니다.
+EscrowFinish 트랜잭션은 [crypto-condition](https://datatracker.ietf.org/doc/html/draft-thomas-crypto-conditions-04)을 사용하는 경우, crypto-condition 충족을 검증하는 과정에서 높은 처리 부하가 발생하기 때문에 더 [높은 트랜잭션 비용](../transactions/transaction-cost.md)을 지불해야 합니다.
 
-만약 시간 제한 릴리스 및 만료는 XRP Ledger가 마감될 때로 제한됩니다. crypto-condition 없이 순수하게 시간에 의해 잠겨 있는 경우, EscrowFinish는 참조 트랜잭션의 표준 [트랜잭션 비용](../undefined-1/undefined-2/undefined.md)만 지불하면 됩니다.
+만약 시간 제한 릴리스 및 만료는 XRP Ledger가 마감될 때로 제한됩니다. crypto-condition 없이 순수하게 시간에 의해 잠겨 있는 경우, EscrowFinish는 참조 트랜잭션의 표준 [트랜잭션 비용](../transactions/transaction-cost.md)만 지불하면 됩니다.
 
 추가적인 트랜잭션 비용은 충족의 크기에 비례합니다. 현재, fulfillment를 포함한 EscrowFinish는 충족의 크기에 따라 **최소한 330** [**드롭의 XRP**](../../references/xrp-ledger/undefined/)**와 충족의 크기당 16바이트마다 10 드롭의 XRP가 추가 트랜잭션 비용으로 필요**합니다. 트랜잭션이 다중 서명인 경우, [다중 서명](../undefined-1/undefined/undefined-1.md)의 비용은 충족의 비용에 추가됩니다.
 
@@ -82,7 +82,7 @@ Note:
 위의 공식은 거래의 기준 비용이 10드롭의 XRP라는 가정을 기반으로 합니다.
 {% endhint %}
 
-[수수료 투표](../undefined-4/undefined-7.md)가 참조 비용 값을 변경하는 경우, 공식은 새로운 <mark style="background-color:yellow;">reference\_fee</mark>에 따라 조정됩니다. 충족을 포함한 EscrowFinish 트랜잭션의 일반적인 공식은 다음과 같습니다:
+[수수료 투표](../undefined-4/undefined-6.md)가 참조 비용 값을 변경하는 경우, 공식은 새로운 <mark style="background-color:yellow;">reference\_fee</mark>에 따라 조정됩니다. 충족을 포함한 EscrowFinish 트랜잭션의 일반적인 공식은 다음과 같습니다:
 
 ```
 reference_fee * (signer_count + 33 + (fulfillment_bytes / 16))

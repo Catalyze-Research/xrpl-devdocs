@@ -1,4 +1,4 @@
-# 신뢰할 수 있는 트랜잭션 제출
+# 신뢰할 수 있는 트랜잭션 제출(Reliable Transaction Submission)
 
 XRP Ledger를 사용하는 금융 기관 및 기타 서비스는 여기에 설명된 모범 사례를 사용하여 검증 가능하고 신속한 방법으로 거래가 검증 또는 거부되는지 확인해야 합니다. 신뢰할 수 있는 rippled 서버에 트랜잭션을 제출해야 합니다.
 
@@ -23,7 +23,7 @@ XRP Ledger 프로토콜은 네트워크의 모든 서버에서 공유되는 ledg
 
 정전이나 네트워크 중단이 발생하면 애플리케이션은 제출된 트랜잭션의 상태를 찾는 데 더 많은 어려움을 겪게 됩니다. 응용프로그램은 트랜잭션을 올바르게 제출하고 나중에 신뢰할 수 있는 결과를 올바르게 얻기 위해 주의해야 합니다.
 
-## 트랜잭션 타임라인&#x20;
+## 트랜잭션 타임라인(Transaction Timeline)
 
 트랜잭션을 XRP Ledger에 제출할 때 HTTP API, 클라이언트 라이브러리 또는 다른 앱을 사용했는지 여부에 관계없이 트랜잭션을 Ledger에 적용하는 프로세스는 동일합니다. 이 프로세스는 다음과 같습니다:
 
@@ -96,7 +96,7 @@ HTTP / WebSocket API를 사용하는 응용 프로그램은 거래를 제출할 
 
 재시작 시, 또는 새로운 마지막으로 유효화된 ledger가 결정되었을 때 (의사 코드):
 
-```
+```java
 For each persisted transaction without validated result:
     Query transaction by hash
     If (result appears in any validated ledger)
@@ -130,7 +130,7 @@ For each persisted transaction without validated result:
             Wait to acquire continuous ledger history
 ```
 
-## 거래 실패의 경우&#x20;
+## 거래 실패 케이스(**Failure Cases)**&#x20;
 
 프로그램 코드에서 (1)과 (2)로 표시된 두 거래 실패 사례의 차이는 거래가 유효화된 ledger에 포함되었는지의 여부입니다. 두 경우 모두 어떻게 실패를 처리할지 신중하게 결정해야 합니다.
 
@@ -151,7 +151,7 @@ Tip:
 
 * 악의적인 행위자가 비밀한 키를 사용하여 거래를 보냈을 수 있습니다. 이 경우, 가능하다면 키 쌍을 교체하고 보낸 다른 거래가 있는지 확인하세요. 또한, 비밀 키가 더 큰 침입이나 보안 유출의 일부였는지를 파악하기 위해 네트워크를 감사해야 합니다. 키 쌍을 성공적으로 교체하고 악의적인 행위자가 더 이상 계정과 시스템에 액세스할 수 없다는 것을 확실히 알게 되면, 일반적인 활동을 재개할 수 있습니다.
 
-## Ledger 간격&#x20;
+## Ledger 간격(**Ledger Gaps)**
 
 당신의 서버가 거래가 원래 제출된 시점부터 LastLedgerSequence에 의해 식별된 ledger를 포함하여 연속적인 ledger 기록을 가지고 있지 않다면, 거래의 최종 결과를 알 수 없을 수 있습니다. (서버가 누락한 ledger 버전 중 하나에 포함되었다면, 그것이 성공했는지 실패했는지 알 수 없습니다.)
 
@@ -159,7 +159,7 @@ Tip:
 
 대안적으로, 이미 필요한 ledger 기록을 가지고 있는 다른 rippled 서버, 예를 들면 Ripple의 전체 이력 서버인 s2.ripple.com에서 거래의 상태를 조회할 수 있습니다. 이 목적으로는 신뢰할 수 있는 서버만을 사용하십시오. 악의적인 서버는 거래의 상태와 결과에 대한 거짓 정보를 제공하도록 프로그래밍될 수 있습니다.
 
-## 기술적 응용&#x20;
+## 기술적 응용(Technical Application)
 
 거래 제출과 검증의 모범 사례를 구현하려면, 응용 프로그램은 다음을 수행해야 합니다:
 
@@ -277,7 +277,7 @@ server\_state 메소드는 마지막으로 유효화된 ledger의 ledger 인덱�
 
 이 예시에서 마지막으로 유효화된 ledger 인덱스는 10268596입니다 (응답 내의 result.state.validated\_ledger에서 확인할 수 있습니다). 또한 이 예시는 ledger 이력에 간격이 있음을 나타냅니다. 여기서 사용된 서버는 그 간격 동안 적용된 거래에 대한 정보를 제공할 수 없습니다 (ledger 10256383부터 10256411까지). 설정이 된다면, 서버는 결국 ledger 이력의 그 부분을 검색합니다.
 
-### 트랜잭션 구성&#x20;
+### 트랜잭션 구성(**Construct the Transaction)**
 
 rippled는 제출을 위한 거래 준비를 위해 sign 메소드를 제공합니다. 이 메소드는 계정 비밀번호를 필요로 합니다, 이는 신뢰하는 rippled 인스턴스에만 전달되어야 합니다. 이 예시는 다른 XRP Ledger 주소로 10 FOO (만들어진 화폐)를 발행합니다.
 
@@ -448,7 +448,7 @@ rippled는 [submit method](https://xrpl.org/submit.html)을 제공하여 서명�
 
 만약 응답에 "validated": true가 포함되지 않은 경우, 결과는 임시적이며 변경될 수 있습니다. 최종 결과를 검색하기 위해 애플리케이션은 충분한 시간을 확보하여 네트워크가 더 많은 ledger 버전을 유효화할 수 있도록 tx 메소드를 다시 호출해야 합니다. LastLedgerSequence에 지정된 ledger가 유효화되기를 기다려야 할 수도 있지만, 거래가 이전에 유효한 ledger에 포함된 경우 결과는 그 시점부터 변경되지 않습니다.
 
-## 미확인 거래 확인하기&#x20;
+## 미확인 거래 확인하기(**Verify Missing Transaction)**
 
 응용 프로그램은 tx 메소드에 대한 호출이 txnNotFound 오류를 반환하는 경우를 처리해야 합니다.
 
@@ -508,4 +508,18 @@ txnNotFound 결과 코드는 거래가 어떠한 ledger에도 포함되지 않�
 서버는 지정된 LastLedgerSequence보다 작은 마지막 유효한 ledger 인덱스를 보고할 수 있습니다. 이 경우, txnNotFound는 (a) 제출된 거래가 네트워크에 분산되지 않았거나, (b) 거래가 네트워크에 분산되었지만 아직 처리되지 않았음을 나타낼 수 있습니다. 전자의 경우, 애플리케이션은 동일한 서명된 거래를 다시 제출할 수 있습니다. 거래는 고유한 계정 순서 번호를 가지고 있으므로, 최대 한 번만 처리될 수 있습니다.
 
 마지막으로, 서버는 거래 기록에서 하나 이상의 간격을 보여줄 수 있습니다. 위의 응답에서 표시된 completed\_ledgers 필드는 이 rippled 인스턴스에서 ledgers 10256383부터 10256411까지가 누락되었음을 나타냅니다. 저희 예시 거래는 10268597 - 10268600의 ledgers에만 나타날 수 있으므로, 여기에 표시된 간격은 관련이 없습니다. 그러나 간격이 해당 범위의 ledger가 누락되었음을 나타내면, 애플리케이션은 다른 rippled 서버를 쿼리해야 할 수 있습니다 (또는 이 서버가 누락된 ledgers를 검색하기 위해 기다려야 할 수도 있음) 이를 통해 txnNotFound 결과가 변경 불가능한 것임을 확인할 수 있습니다.
+
+
+
+
+
+## 참고
+
+### See Also <a href="#see-also" id="see-also"></a>
+
+* [Transaction Formats](https://xrpl.org/transaction-formats.html)
+* [Transaction Cost](https://xrpl.org/transaction-cost.html)
+* [Transaction Malleability](https://xrpl.org/transaction-malleability.html)
+* [Overview of XRP Ledger Consensus Process](https://xrpl.org/consensus.html)
+* [Consensus Principles and Rules](https://xrpl.org/consensus-principles-and-rules.html)
 

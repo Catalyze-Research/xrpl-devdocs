@@ -1,6 +1,6 @@
 # 암호화 키
 
-XRP Ledger에서 디지털 서명은 [트랜잭션](../undefined-2/)에 특정한 일련의 작업을 수행하도록 _권한_을 부여합니다. 서명된 트랜잭션만 네트워크에 제출하고 검증된 장부에 포함될 수 있습니다.
+XRP Ledger에서 디지털 서명은 [트랜잭션](../../transactions/)에 특정한 일련의 작업을 수행하도록 _권한_을 부여합니다. 서명된 트랜잭션만 네트워크에 제출하고 검증된 장부에 포함될 수 있습니다.
 
 디지털 서명을 만들기 위해서는 트랜잭션을 보내는 계정과 연관된 암호화 키 쌍을 사용합니다. 키 쌍은 XRP Ledger가 지원하는 [암호화 서명 알고리즘](undefined.md#undefined-10) 중 어떤 것을 사용하여 생성할 수 있습니다. 키 쌍은 그것이 생성된 알고리즘에 관계없이 [마스터 키 쌍](undefined.md#undefined-7), [일반 키 쌍](undefined.md#undefined-9) 또는 서[명자 목록](undefined-1.md)의 구성원으로 사용될 수 있습니다.
 
@@ -38,7 +38,7 @@ _암호화 키 값 사이의 관계를 간략히 나타낸 그림._
 
 ## 시드
 
-시드 값은 계정의 실제 개인 키와 공개 키를 [유도](undefined.md#undefined-12)하는 데 사용되는 축약된 값입니다. [wallet\_propose 메소드](../../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md) 응답에서, <mark style="background-color:yellow;">master\_key</mark>, <mark style="background-color:yellow;">master\_seed</mark>, 그리고 <mark style="background-color:yellow;">master\_seed\_hex</mark>는 모두 다양한 형식으로 같은 시드 값을 나타냅니다. 이러한 형식 중 어느 것이든 [rippled API](../../../references/http-websocket-apis/) 및 [기타 일부 XRP Ledger 소프트웨어](../../undefined/undefined-1.md)에서 [거래에 서명](../undefined-2/)하는 데 사용할 수 있습니다. <mark style="background-color:yellow;">master\_</mark> 접두사가 붙어 있지만, 이 시드가 나타내는 키가 반드시 계정의 마스터 키일 필요는 없습니다; 키 쌍을 일반 키나 다중 서명 목록의 멤버로 사용할 수도 있습니다.
+시드 값은 계정의 실제 개인 키와 공개 키를 [유도](undefined.md#undefined-12)하는 데 사용되는 축약된 값입니다. [wallet\_propose 메소드](../../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md) 응답에서, <mark style="background-color:yellow;">master\_key</mark>, <mark style="background-color:yellow;">master\_seed</mark>, 그리고 <mark style="background-color:yellow;">master\_seed\_hex</mark>는 모두 다양한 형식으로 같은 시드 값을 나타냅니다. 이러한 형식 중 어느 것이든 [rippled API](../../../references/http-websocket-apis/) 및 [기타 일부 XRP Ledger 소프트웨어](../../undefined/undefined-1.md)에서 [거래에 서명](../../transactions/)하는 데 사용할 수 있습니다. <mark style="background-color:yellow;">master\_</mark> 접두사가 붙어 있지만, 이 시드가 나타내는 키가 반드시 계정의 마스터 키일 필요는 없습니다; 키 쌍을 일반 키나 다중 서명 목록의 멤버로 사용할 수도 있습니다.
 
 시드 값은 비밀 정보이므로, 매우 주의 깊게 보호해야 합니다. 주소의 시드 값을 알고 있는 사람은 그 주소를 실질적으로 완전히 제어할 수 있습니다.
 
@@ -59,7 +59,7 @@ XRP Ledger에서의 거래는 네트워크가 거래의 서명을 검증할 수 
 **계정 ID**는 [계정](./)이나 키 쌍의 핵심 식별자입니다. 이는 공개 키에서 유도됩니다. XRP Ledger 프로토콜에서, 계정 ID는 20바이트의 이진 데이터입니다. 대부분의 XRP Ledger API는 계정 ID를 주소 형태로 나타냅니다, 이는 두 가지 형식 중 하나입니다:
 
 * "classic address"는 계정 ID를 체크섬과 함께 [base58](../../../references/xrp-ledger/undefined/base58.md)로 작성합니다. [wallet\_propose 메소드](../../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md) 응답에서, 이는 <mark style="background-color:yellow;">account\_id</mark> 값입니다.&#x20;
-* "X-Address"는 계정 ID와 [데스티네이션 태그](../undefined-2/undefined-2.md)를 결합하고, 결합된 값을 체크섬과 함께 [base58](../../../references/xrp-ledger/undefined/base58.md)로 작성합니다.
+* "X-Address"는 계정 ID와 [데스티네이션 태그](../../transactions/source-and-destination-tags.md)를 결합하고, 결합된 값을 체크섬과 함께 [base58](../../../references/xrp-ledger/undefined/base58.md)로 작성합니다.
 
 두 형식 모두 체크섬이 포함되어 있어서, 작은 변화가 다른 유효한 계정을 참조하는 주소가 아닌 무효한 주소를 결과로 만듭니다. 이렇게 하면, 오타가 나거나 전송 오류가 발생해도 돈을 잘못된 곳으로 보내는 것을 방지할 수 있습니다.
 
@@ -77,7 +77,7 @@ XRP Ledger는 한 가지 이상의 [암호화 서명 알고리즘](undefined.md#
 
 마스터 키 쌍은 개인 키와 공개 키로 구성됩니다. 계정의 주소는 계정의 마스터 키 쌍에서 유도되므로, 둘은 [본질적으로 관련이 있습니다](./). 마스터 키 쌍을 변경하거나 제거할 수는 없지만, 비활성화는 할 수 있습니다.
 
-[wallet\_propose 메소드](../../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md)는 마스터 키 쌍을 생성하는 방법 중 하나입니다. 이 메소드의 응답은 계정의 시드, 주소, 마스터 공개 키를 함께 보여줍니다. 마스터 키 쌍을 설정하는 다른 방법들에 대해서는 [보안 서명 설정](../../../tutorials/undefined-2/undefined.md)을 참조하세요.
+[wallet\_propose 메소드](../../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md)는 마스터 키 쌍을 생성하는 방법 중 하나입니다. 이 메소드의 응답은 계정의 시드, 주소, 마스터 공개 키를 함께 보여줍니다. 마스터 키 쌍을 설정하는 다른 방법들에 대해서는 [보안 서명 설정](../../transactions/secure-signing.md)을 참조하세요.
 
 {% hint style="info" %}
 Warning:&#x20;
@@ -93,10 +93,10 @@ Warning:&#x20;
 
 다음과 같은 특정 작업을 수행하는 거래를 승인할 수 있는 것은 **오직** 마스터 키 쌍뿐입니다:
 
-* 계정의 첫 번째 거래를 보내는 것, 왜냐하면 계정은 다른 방법으로 [트랜잭션을 승인](../undefined-2/)하는 것으로 초기화될 수 없기 때문입니다.
+* 계정의 첫 번째 거래를 보내는 것, 왜냐하면 계정은 다른 방법으로 [트랜잭션을 승인](../../transactions/)하는 것으로 초기화될 수 없기 때문입니다.
 * 마스터 키 쌍을 비활성화하는 것.
 * 영구적으로 [동결](../../undefined-3/undefined-2/) 기능을 포기하는 것.
-* 거래 비용이 0 XRP인 특별한 [키 재설정 거래](../undefined-2/undefined.md)를 보내는 것.
+* 거래 비용이 0 XRP인 특별한 [키 재설정 거래](../../transactions/transaction-cost.md)를 보내는 것.
 
 일반 키나 [다중 서명](undefined-1.md)은 마스터 키 쌍과 동일하게 다른 모든 것을 할 수 있습니다. 특히, 마스터 키 쌍을 비활성화한 후에는, 일반 키 쌍 또는 다중 서명을 사용하여 다시 활성화할 수 있습니다. 또한, [계정 삭제](./) 요구 사항을 충족하는 경우에 계정을 삭제할 수도 있습니다.
 

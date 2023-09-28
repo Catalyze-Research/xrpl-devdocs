@@ -1,4 +1,4 @@
-# 트랜잭션 결과 조회
+# 트랜잭션 결과 조회(Look Up Transaction Results)
 
 XRP Ledger를 효과적으로 사용하려면 거래 결과를 이해해야 합니다: 거래가 성공했는가? 거래는 무엇을 수행했는가? 실패했다면 그 이유는 무엇인가?
 
@@ -6,7 +6,7 @@ XRP Ledger는 모든 데이터가 공개적으로 기록되고 각 새로운 led
 
 이 문서는 거래가 특정 결과에 도달한 이유를 저수준에서 이해하는 방법에 대해 설명합니다. 최종 사용자의 경우, 거래에 대한 처리된 뷰를 보는 것이 더 쉽습니다. 예를 들어, 기록된 모든 거래에 대한 영어로 된 설명을 얻기 위해 XRP 차트를 사용할 수 있습니다.
 
-## 요구 사항
+## 요구 사항(Prerequisites)
 
 이 지침에서 설명한 바와 같이 거래 결과를 이해하려면 다음이 필요합니다:
 
@@ -21,7 +21,7 @@ Tip:
 XRP Ledger에서 거래 데이터를 조회하는 다른 방법도 있습니다. 예를 들어 Data API 및 기타 내보낸 데이터베이스가 있지만, 이들 인터페이스는 비공식적입니다. 이 문서에서는 가능한 가장 직접적이고 공식적인 결과를 얻기 위해 rippled API를 직접 사용하여 데이터를 조회하는 방법을 설명합니다.
 {% endhint %}
 
-## 1. 거래 상태 얻기&#x20;
+## 1. 거래 상태 얻기(Get Transaction Status)
 
 거래가 성공했는지 실패했는지 여부를 알아내는 것은 두 부분으로 나뉩니다:
 
@@ -59,13 +59,13 @@ XRP Ledger에서 거래 데이터를 조회하는 다른 방법도 있습니다.
 
 이 예시는 주소가 rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn인 계정에서 보낸 AccountSet 거래를 보여주며, 이는 시퀀스 번호 376을 사용합니다. 거래의 식별 해시는 017DED8F5E20F0335C6F56E3D5EE7EF5F7E83FB81D2904072E665EEA69402567이고 결과는 tesSUCCESS입니다. 이 거래는 46447423 버전의 ledger에 포함되었으며, 이 ledger는 검증되었으므로 이 결과는 최종적인 것입니다.
 
-## 사례: 검증된 Ledger에 포함되지 않음&#x20;
+## 사례: 검증된 Ledger에 포함되지 않음(Case: Not Included in a Validated Ledger)
 
 거래가 검증된 ledger에 포함되지 않으면 공유 XRP Ledger 상태에 어떠한 영향도 미칠 수 없습니다. 거래가 ledger에 포함되지 않은 것이 최종적이라면, 이 거래는 앞으로도 어떠한 영향도 미칠 수 없습니다.
 
 거래의 실패가 최종적이지 않다면, 이 거래는 여전히 미래의 검증된 ledger에 포함될 수 있습니다. 현재 열린 ledger에 거래를 적용하는 잠정 결과를 사용하여 거래가 최종 ledger에서 미칠 가능성 있는 영향을 미리 볼 수 있지만, 그 결과는 많은 요인들로 인해 변할 수 있습니다.
 
-## 사례: 검증된 Ledger에 포함됨&#x20;
+## 사례: 검증된 Ledger에 포함됨(Case: Included in a Validated Ledger)
 
 거래가 검증된 ledger에 포함되면, 거래 메타데이터는 거래 처리의 결과로 ledger 상태에 생긴 모든 변화에 대한 전체 보고서를 포함하고 있습니다. 메타데이터의 TransactionResult 필드에는 거래 결과를 요약한 코드가 들어 있습니다:
 
@@ -75,7 +75,7 @@ XRP Ledger에서 거래 데이터를 조회하는 다른 방법도 있습니다.
 
 결과 코드는 거래 결과의 요약일 뿐입니다. 거래가 무엇을 수행했는지 더 자세히 이해하려면, 거래의 지시사항과 거래 실행 전의 ledger 상태에 대한 맥락 속에서 메타데이터의 나머지 부분을 읽어야 합니다.
 
-## 2. 메타데이터 해석하기&#x20;
+## 2. 메타데이터 해석하기(Interpret Metadata)
 
 거래 메타데이터는 거래가 ledger에 어떻게 적용되었는지를 정확하게 설명하며, 다음과 같은 필드를 포함합니다:
 
@@ -163,7 +163,7 @@ Tip:
 거래가 XRP를 보내거나 받는 경우, 보내는 사람의 잔액 변동은 거래 비용과 결합되어, 순 금액의 Balance 필드에 단일 변동이 발생합니다. 예를 들어, 1 XRP (1,000,000 드롭)를 보내고 거래 비용으로 10 드롭을 소멸시킨 경우, 메타데이터는 당신의 Balance가 1,000,010 드롭의 XRP로 감소하는 것을 보여줍니다.
 {% endhint %}
 
-## 일반 목적의 회계&#x20;
+## 일반 목적의 회계(General-Purpose Bookkeeping)
 
 거의 모든 트랜잭션은 다음 유형의 변경을 초래할 수 있습니다:
 
@@ -429,7 +429,7 @@ TrustSet 트랜잭션은 RippleState 객체로 표현되는 신뢰선을 생성�
 }
 ```
 
-## 다른 트랜잭션들&#x20;
+## 다른 트랜잭션들(Other Transactions)
 
 대부분의 다른 트랜잭션들은 특정한 유형의 ledger 항목을 생성하고, 발신자의 소유자 reserve와 소유자 디렉터리를 조정합니다:
 
@@ -444,3 +444,15 @@ Pseudo-Transactions도 메타데이터를 가지고 있지만, 일반적인 트�
 
 * EnableAmendment pseudo-transactions은 Amendments ledger 객체를 수정하여 어떤 수정이 활성화되었는지, 어떤 것들이 다수의 지원과 함께 얼마나 오랫동안 보류 중인지를 추적합니다.&#x20;
 * SetFee pseudo-transactions은 FeeSettings ledger 객체를 수정하여 트랜잭션 비용과 [reserve requirements](https://xrpl.org/reserves.html)에 대한 기본 수준을 변경합니다.
+
+### 참고 <a href="#see-also" id="see-also"></a>
+
+* **Concepts:**
+  * [Finality of Results](https://xrpl.org/finality-of-results.html)
+  * [Reliable Transaction Submission](https://xrpl.org/reliable-transaction-submission.html)
+* **Tutorials:**
+  * [Monitor Incoming Payments with WebSocket](https://xrpl.org/monitor-incoming-payments-with-websocket.html)
+* **References:**
+  * [Ledger Entry Types Reference](https://xrpl.org/ledger-object-types.html) - All possible fields of all types of ledger entries
+  * [Transaction Metadata](https://xrpl.org/transaction-metadata.html) - Summary of the metadata format and fields that appear in metadata
+  * [Transaction Results](https://xrpl.org/transaction-results.html) - Tables of all possible result codes for transactions.

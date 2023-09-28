@@ -1,6 +1,6 @@
 # 수표
 
-_(XRP Ledger의_ [_Checks 수정안_](../xrp-ledger/undefined-2/undefined.md#checks)_에 의해 추가됨.)_
+_(XRP Ledger의_ [_Checks 수정안_](../xrp-ledger/amendments/undefined.md#checks)_에 의해 추가됨.)_
 
 XRP Ledger의 수표 기능은 사용자가 예약된 지불을 생성하고 의도한 수취인에 의해 취소되거나 현금화될 수 있는 기능을 제공합니다. 개인용 종이 수표와 마찬가지로, XRP Ledger 수표는 자금을 보내는 사람이 금액과 수령인을 지정하는 수표를 생성하여 시작됩니다. 수령인은 수표를 현금화하여 자금을 송금자의 계정에서 수령인의 계정으로 이동시킵니다. 수령인이 수표를 현금화할 때까지 자금은 이동하지 않습니다. 수표가 생성될 때 자금이 보류되지 않기 때문에, 수령인이 현금화를 시도할 때 송신자에게 충분한 자금이 없는 경우 수표의 현금화는 실패할 수 있습니다. 수표의 현금화에 실패한 경우 수표의 수령인은 수표가 만료될 때까지 재시도할 수 있습니다.
 
@@ -15,7 +15,7 @@ XRP Ledger 수표는 현금화할 수 없게 되는 만료 시간을 가질 수 
 {% hint style="info" %}
 Note:&#x20;
 
-[수표 수정안](../xrp-ledger/undefined-2/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../dex/undefined.md#undefined-6)를 참조하세요.
+[수표 수정안](../xrp-ledger/amendments/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../dex/undefined.md#undefined-6)를 참조하세요.
 {% endhint %}
 
 ## 수표의 필요성
@@ -42,7 +42,7 @@ XRP Ledger 수표는 또한 XRP Ledger에만 있는 문제를 해결합니다. �
 
 **3단계:** 수표를 현금화하기 위해 수령인은 [CheckCash](../../references/xrp-ledger/undefined-1/undefined-1/checkcash.md) 거래를 제출합니다. 수령인은 다음 두 가지 옵션 중 하나를 선택하여 수표를 현금화할 수 있습니다:
 
-* <mark style="background-color:yellow;">Amount</mark> - 수령인은 정확한 현금화 금액을 지정할 수 있습니다. 이는 송신자가 [수수료](../undefined-1/undefined-1.md)를 고려하여 수표를 패딩한 경우에 유용할 수 있으며, 수령인이 송장이나 계약서와 같은 정확한 금액을 수락하고자 할 때 유용할 수 있습니다.
+* <mark style="background-color:yellow;">Amount</mark> - 수령인은 정확한 현금화 금액을 지정할 수 있습니다. 이는 송신자가 [수수료](../transactions/fees.md)를 고려하여 수표를 패딩한 경우에 유용할 수 있으며, 수령인이 송장이나 계약서와 같은 정확한 금액을 수락하고자 할 때 유용할 수 있습니다.
 * <mark style="background-color:yellow;">DeliverMin</mark> - 수령인은 이 옵션을 사용하여 수표로부터 수령하려는 최소 금액을 지정할 수 있습니다. 수령인이 이 옵션을 사용하는 경우, XRP Ledger는 가능한 한 많은 금액을 제공하고 항상 이 금액 이상을 제공합니다. 수령인에게 제공될 수 있는 금액이 요청한 금액 이상이 아닌 경우 거래는 실패합니다.
 
 송신자가 충분한 자금을 가지고 있고 만료 시간이 지나지 않은 경우, 자금은 송신자의 계정에서 인출되어 수령인의 계정에 입금되며, Check 체는 파괴됩니다.

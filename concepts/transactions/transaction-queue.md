@@ -1,0 +1,68 @@
+# 트랜잭션 대기열(Transaction Queue)
+
+<mark style="background-color:yellow;">rippled</mark> 서버는 [개방된 ledger 비용](transaction-cost.md)을 강제하기 위해 트랜잭션 대기열을 사용합니다. 개방된 ledger 비용은 특정 ledger에서의 트랜잭션 수의 목표치를 설정하고, 개방된 ledger가 이 크기를 초과할 경우 트랜잭션 비용을 매우 빠르게 높입니다. escalated된 트랜잭션 비용을 지불할 수 없는 트랜잭션을 삭제하는 대신, <mark style="background-color:yellow;">rippled</mark>는 이러한 트랜잭션을 트랜잭션 대기열에 넣으려고 시도하며, 이 대기열은 다음 ledger를 구성하는 데 사용됩니다.
+
+## 트랜잭션 대기열과 컨센서스(Transaction Queue and Consensus)
+
+트랜잭션 대기열은 컨센서스 과정에서 특정 ledger 버전에 포함되거나 제외되는 트랜잭션을 선택하는 데 중요한 역할을 합니다. 다음 단계에서 트랜잭션 대기열이 [컨센서스 과정](../undefined-4/undefined.md)과 어떻게 관련되는지 설명합니다.
+
+<figure><img src="../../.gitbook/assets/Transaction queue_1.png" alt=""><figcaption></figcaption></figure>
+
+1. **컨센서스 라운드 1** - 각 유효성 검사자는 다음 ledger 버전에 포함될 트랜잭션 세트를 제안합니다. 또한 제안되지 않은 후보 트랜잭션의 대기열을 유지합니다.
+2. **컨센서스 라운드 2** - 유효성 검증인이 나중의 라운드에서 제안된 트랜잭션을 제안에서 제거하면 해당 트랜잭션을 대기열에 추가합니다.
+3. **컨센서스 라운드 N** - 충분한 서버가 트랜잭션 세트에 합의할 때까지 컨센서스 과정이 계속됩니다.
+4. **검증** - 서버는 동일한 결과 ledger를 생성하고, 이를 검증됐다고 선언합니다.
+5. **다음 제안 빌드** - 각 유효성 검사자는 다음 ledger 버전을 위해 제안을 준비합니다. 이때 대기열에 있는 트랜잭션을 시작으로 합니다.
+6. **대기열에 추가** - 다음 제안된 ledger가 이미 가득 찬 경우, 들어오는 트랜잭션은 이후의 ledger 버전을 위해 대기열에 저장됩니다. (개방된 ledger 비용을 지불하는 트랜잭션은 "가득 찬" 상태인 경우에도 다음 제안된 ledger에 포함될 수 있지만, 이 방법으로 추가된 각 트랜잭션마다 개방된 ledger 비용이 지수적으로 증가합니다.) \
+   이 단계 이후, 프로세스는 처음부터 다시 반복됩니다.
+
+{% hint style="info" %}
+Note:
+
+위에서 설명한 단계 중 일부는 실제로는 동시에 발생합니다. 각 서버는 항상 새로운 트랜잭션을 수신 대기하고 있으며, 이전 ledger 버전의 컨센서스 과정이 진행 중일 때에도 다음 ledger 제안을 준비하기 시작합니다.
+{% endhint %}
+
+## 대기열 제한(Queuing Restrictions)
+
+<mark style="background-color:yellow;">rippled</mark> 서버는 "ledger에 포함될 가능성이 있는 트랜잭션"을 추정하기 위해 다양한 휴리스틱을 사용합니다. 현재 구현에서는 다음 규칙을 사용하여 어떤 트랜잭션을 대기열에 넣을지 결정합니다:
+
+* 트랜잭션은 올바르게 구성되고 유효한 서명으로 인증되어야 합니다.&#x20;
+* <mark style="background-color:yellow;">AccountTxnID</mark> 필드가 있는 트랜잭션은 대기열에 넣을 수 없습니다.&#x20;
+* 한 개의 송신 주소는 동시에 최대 10개의 트랜잭션을 대기열에 넣을 수 있습니다.&#x20;
+* 트랜잭션을 대기열에 넣기 위해 송신자는 다음 모든 조건에 대해 충분한 XRP를 가져야 합니다: [![Updated in: rippled 1.2.0](https://img.shields.io/badge/Updated%20in-rippled%201.2.0-blue.svg)](https://github.com/ripple/rippled/releases/tag/1.2.0)
+  * 송신자의 대기열에 있는 모든 트랜잭션의 Fee 필드에 지정된 XRP 트랜잭션 비용을 파괴합니다. 대기열에 있는 트랜잭션들의 총 금액은 기본 계정 예약(현재 10 XRP)보다 많을 수 없습니다. (0.00001 XRP의 최소 트랜잭션 비용보다 상당히 높은 금액을 지불하는 트랜잭션은 일반적으로 대기열을 거치지 않고 바로 개방된 ledger에 들어갑니다.)&#x20;
+  * 송신자의 대기열에 있는 모든 트랜잭션들이 전송할 수 있는 XRP의 최대 합계를 전송합니다.&#x20;
+  * 계정의 [reserve requirements](https://xrpl.org/reserves.html)을 충족하기 위해 충분한 XRP를 유지합니다.
+* 한 트랜잭션이 송신 주소의 트랜잭션 인가 방식에 영향을 미치면, 동일한 주소에서 다른 트랜잭션을 대기열에 넣을 수 없습니다.&#x20;
+* 특정 트랜잭션이 <mark style="background-color:yellow;">LastLedgerSequence</mark> 필드를 포함하는 경우, 해당 필드의 값은 **현재 ledger 인덱스 + 2 이상**이어야 합니다.&#x20;
+
+## 평균 수수료(Fee Averaging)
+
+한 송신 주소에 하나 이상의 대기 중인 트랜잭션이 있는 경우, 해당 송신자는 대기 중인 트랜잭션을 모두 포함하기 위해 새로운 트랜잭션을 제출할 수 있습니다. 특히, 새로운 트랜잭션은 자신과 이전에 대기 중인 트랜잭션 각각에 대해 개방된 ledger 비용을 지불할 수 있을 정도로 충분한 트랜잭션 비용을 지불해야 합니다. (개방된 ledger 비용은 각 트랜잭션이 지불하는 비용에 따라 지수적으로 증가합니다.) 이러한 트랜잭션들은 여전히 다른 대기열 제한 사항을 따르고, 송신 주소는 대기 중인 트랜잭션들의 트랜잭션 비용을 지불하기에 충분한 XRP를 가져야 합니다.
+
+이 기능은 특정 상황에서 작동할 수 있도록 도와줍니다. 낮은 비용으로 하나 이상의 트랜잭션을 제출한 경우, 동일한 주소에서 새로운 트랜잭션을 보낼 수 없습니다. 이 경우 다음 중 하나를 수행해야 합니다:
+
+* 대기 중인 트랜잭션이 확인된 ledger에 포함되기를 기다립니다.&#x20;
+* 대기 중인 트랜잭션이 영구적으로 무효화되기를 기다립니다(트랜잭션에 <mark style="background-color:yellow;">LastLedgerSequence</mark> 필드가 설정된 경우).&#x20;
+* 대기 중인 트랜잭션을 동일한 시퀀스 번호와 더 높은 트랜잭션 비용을 가진 새로운 트랜잭션을 제출하여 대기 중인 트랜잭션을 취소합니다.&#x20;
+
+위의 어느 경우도 발생하지 않으면, 트랜잭션은 이론적으로 무제한 시간 동안 대기열에 남아 있을 수 있으며, 다른 송신자는 더 높은 트랜잭션 비용을 지불하면서 "대기 중인 트랜잭션을 절단"할 수 있습니다. 서명된 트랜잭션은 변경할 수 없기 때문에, 대기 중인 트랜잭션의 우선순위를 높이기 위해 트랜잭션 비용을 증가시킬 수는 없습니다. 이전에 제출한 트랜잭션을 무효화하고 싶지 않은 경우, 수수료 평균화가 해결책을 제공합니다. 새로운 트랜잭션의 트랜잭션 비용을 증가시켜 대기 중인 트랜잭션들이 바로 개방된 ledger에 포함되도록 할 수 있습니다.
+
+## 대기열 내 순서(Order Within the Queue)
+
+트랜잭션 대기열 내에서는 트랜잭션 비용이 더 높은 트랜잭션부터 우선순위를 갖습니다. 이 순위는 트랜잭션의 절대적인 XRP 비용에 의해 결정되는 것이 아니라, 해당 유형의 [_트랜잭션에 대한 최소 비용_](transaction-cost.md)과의 상대적인 비용에 따라 정해집니다. 동일한 트랜잭션 비용을 지불하는 트랜잭션은 서버가 그들을 수신한 순서로 정렬됩니다. 다른 요인들도 대기열 내 트랜잭션의 순서에 영향을 줄 수 있으며, 예를 들어, 동일한 송신자의 트랜잭션은 <mark style="background-color:yellow;">시퀀스</mark> 번호에 따라 정렬되어 순서대로 제출됩니다.
+
+대기열 내 트랜잭션의 순서는 대기열의 크기가 예상되는 다음 ledger 버전의 크기보다 많을 경우, 어떤 트랜잭션이 다음 진행 중인 ledger 버전에 추가되는지를 결정합니다. **트랜잭션의 순서는 검증된 ledger 내에서 트랜잭션이 실행되는 순서에는 영향을 주지 않습니다.** 각 검증된 ledger 버전에서 해당 버전의 트랜잭션 세트는 [정규적인 순서](../undefined-4/undefined.md)로 실행됩니다.
+
+{% hint style="info" %}
+Note:
+
+<mark style="background-color:yellow;">rippled</mark>가 트랜잭션을 대기열에 넣을 때, 임시 트랜잭션 응답 코드는 <mark style="background-color:yellow;">terQUEUED</mark>입니다. 이는 해당 트랜잭션이 미래의 ledger 버전에서 성공할 가능성이 높음을 의미합니다. 모든 임시 응답 코드와 마찬가지로, 트랜잭션의 결과는 유효한 ledger에 포함되거나 영구적으로 무효화될 때까지 [최종적으로 결정](finality-of-results/)되지 않습니다.
+{% endhint %}
+
+
+
+### 참고 <a href="#see-also" id="see-also"></a>
+
+* [Transaction Cost](https://xrpl.org/transaction-cost.html) for information on why the transaction cost exists and how the XRP Ledger enforces it.
+* [Consensus](https://xrpl.org/consensus.html) for a detailed description of how the consensus process approves transactions.

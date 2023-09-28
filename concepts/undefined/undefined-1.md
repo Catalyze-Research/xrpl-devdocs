@@ -6,7 +6,7 @@ XRP Ledger는 가치의 인터넷을 구동하고 가능하게 하는 소프트�
 
 <figure><img src="../../.gitbook/assets/Software Ecosystem_1 (1).png" alt=""><figcaption></figcaption></figure>
 
-* [XRP Ledger의 기초](undefined-1.md#rippled)는 항상 연결된 서버들의 P2P 네트워크로, 이들 서버는 거래를 공유하며 [컨센서스](../undefined-4/undefined.md) 과정에 참여하고 [트랜잭션](../undefined-1/undefined-2/)을 처리합니다. XRP Ledger 생태계의 모든 것은 결국 이 P2P 네트워크 위에 직접적으로, 간접적으로 구축됩니다.
+* [XRP Ledger의 기초](undefined-1.md#rippled)는 항상 연결된 서버들의 P2P 네트워크로, 이들 서버는 거래를 공유하며 [컨센서스](../undefined-4/undefined.md) 과정에 참여하고 [트랜잭션](../transactions/)을 처리합니다. XRP Ledger 생태계의 모든 것은 결국 이 P2P 네트워크 위에 직접적으로, 간접적으로 구축됩니다.
 * [_프로그래밍 라이브러리_](undefined-1.md#undefined-1)는 상위 레벨의 소프트웨어에서 존재하며, 이들은 프로그램 코드에 직접 임포트되고 XRP Ledger에 접근하는 메소드를 포함합니다.
 * [_미들웨어_](undefined-1.md#undefined-2)는 XRP Ledger 데이터에 대한 간접적인 접근을 제공합니다. 이 계층의 응용 프로그램들은 대부분 자체 데이터 저장 및 처리 기능을 가지고 있습니다.
 * [_앱과 서비스_](undefined-1.md#undefined-3)는 사용자 레벨에서 XRP Ledger와의 상호 작용을 제공하거나, 더 높은 수준의 앱과 서비스에 대한 기반을 제공합니다.

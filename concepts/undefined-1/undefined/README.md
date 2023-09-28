@@ -6,7 +6,7 @@ XRP Ledger에서 "계정"은 XRP의 소유자이며, [트랜잭션](../../../ref
 * **XRP 잔액**. 이 XRP 중 일부는 [reserve](reserves.md)를 위해 따로 두어져 있습니다.
 * **시퀀스 번호**는 이 계정이 보내는 모든 트랜잭션이 올바른 순서로, 각각 한 번만 적용되도록 도와줍니다. 트랜잭션 실행하려면, 트랜잭션의 시퀀스 번호와 그 발신자의 시퀀스 번호가 일치해야 합니다. 그 다음, 트랜잭션 적용의 일환으로 계정의 시퀀스 번호가 1씩 증가합니다. (참고: [기본 데이터 유형: 계정 시퀀스](../../../references/xrp-ledger/undefined/).)&#x20;
 * 이 계정과 그 잔액에 영향을 미친 **트랜잭션의 이력**.&#x20;
-* [트랜잭션을 승인](../undefined-2/)하는 한 가지 이상의 방법, 아래를 포함할 수 있습니다: &#x20;
+* [트랜잭션을 승인](../../transactions/)하는 한 가지 이상의 방법, 아래를 포함할 수 있습니다: &#x20;
   * 계정에 본질적으로 속한 마스터 키 쌍. ([비활성화](../../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)는 가능하지만 변경은 불가능합니다.)
   * [교체 가능한](../../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md) "일반" 키 쌍.&#x20;
   * [다중 서명](undefined-1.md)을 위한 서명자 목록. (계정의 핵심 데이터와는 별도로 저장됩니다.)
@@ -55,7 +55,7 @@ XRP Ledger의 계정은 XRP Ledger의 [base58](../../../references/xrp-ledger/un
 {% hint style="info" %}
 Note:&#x20;
 
-XRP 커뮤니티는 [데스티네이션 태그](../undefined-2/undefined-2.md)를 주소에 "packs"하는 X-주소 형식을 [제안](https://github.com/XRPLF/XRPL-Standards/issues/6)하였습니다. 이 주소는 메인넷의 경우 <mark style="background-color:yellow;">X</mark>로, [testnet](../../xrp-ledger/undefined-1.md)의 경우 <mark style="background-color:yellow;">T</mark>로 시작합니다. 거래소와 지갑은 고객이 알아야 하는 모든 데이터를 하나의 값으로 표현하기 위해 X-주소를 사용할 수 있습니다. 자세한 정보는 [X-주소 형식 사이트](https://xrpaddress.info/)와 [코덱](https://github.com/xrp-community/xrpl-tagged-address-codec)을 참조하세요.
+XRP 커뮤니티는 [데스티네이션 태그](../../transactions/source-and-destination-tags.md)를 주소에 "packs"하는 X-주소 형식을 [제안](https://github.com/XRPLF/XRPL-Standards/issues/6)하였습니다. 이 주소는 메인넷의 경우 <mark style="background-color:yellow;">X</mark>로, [testnet](../../xrp-ledger/undefined-1.md)의 경우 <mark style="background-color:yellow;">T</mark>로 시작합니다. 거래소와 지갑은 고객이 알아야 하는 모든 데이터를 하나의 값으로 표현하기 위해 X-주소를 사용할 수 있습니다. 자세한 정보는 [X-주소 형식 사이트](https://xrpaddress.info/)와 [코덱](https://github.com/xrp-community/xrpl-tagged-address-codec)을 참조하세요.
 
 XRP Ledger 프로토콜은 기본적으로 "클래식" 주소만 지원하지만, 많은 [클라이언트 라이브러리](../../../references/undefined/)도 X-주소를 지원합니다.
 {% endhint %}
@@ -82,7 +82,7 @@ XRP Ledger 주소를 계산하는 방법에 대한 더 자세한 기술적 세�
 
 ## 계정 삭제
 
-[DeletableAccounts 수정안](../../xrp-ledger/undefined-2/undefined.md) (2020-05-08 활성화)은 계정을 삭제할 수 있게 했습니다.
+[DeletableAccounts 수정안](../../xrp-ledger/amendments/undefined.md) (2020-05-08 활성화)은 계정을 삭제할 수 있게 했습니다.
 
 삭제하기 위해 계정은 다음의 요구사항을 충족해야 합니다:
 
@@ -93,7 +93,7 @@ XRP Ledger 주소를 계산하는 방법에 대한 더 자세한 기술적 세�
   * <mark style="background-color:yellow;">RippleState.</mark>
   * <mark style="background-color:yellow;">Check.</mark>
 * ledger에서 계정이 소유하는 객체가 1000개 미만이어야 합니다.
-* [AccountDelete 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/accountdelete.md)은 한 개의 항목에 대한 [소유자 reserve](reserves.md)(현재 2 XRP) 이상의 특별한 [트랜잭션 비용](../undefined-2/undefined.md)을 지불해야 합니다.
+* [AccountDelete 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/accountdelete.md)은 한 개의 항목에 대한 [소유자 reserve](reserves.md)(현재 2 XRP) 이상의 특별한 [트랜잭션 비용](../../transactions/transaction-cost.md)을 지불해야 합니다.
 
 계정이 삭제된 후에는, [계정을 생성](./#undefined)하는 일반적인 방법을 통해 ledger에 다시 생성될 수 있습니다. 삭제되었다가 다시 생성된 계정은 처음 생성된 계정과 다르지 않습니다.
 
@@ -105,13 +105,13 @@ Warning:
 
 비트코인과 많은 다른 암호화폐와는 달리, XRP Ledger의 공개 ledger 체인의 각 새 버전에는 ledger의 전체 상태가 포함되어 있으며, 이는 각 새 계정에 따라 크기가 증가합니다. 이러한 이유로, 필요한 경우가 아니라면 새로운 XRP Ledger 계정을 생성하지 않는 것이 좋습니다. 계정을 삭제함으로써 계정의 10 XRP [reserve](reserves.md) 중 일부를 회수할 수 있지만, 그렇게 하기 위해서는 최소한 2 XRP를 소멸시켜야 합니다.
 
-많은 사용자를 대신해서 가치를 송수신하는 기관은 [**출발 태그**와 **데스티네이션 태그**](../undefined-2/undefined-2.md)를 사용하여 고객에게 보내고 받는 결제를 구분할 수 있으며, 이를 통해 XRP Ledger에서 한 개(또는 소수)의 계정만을 사용할 수 있습니다.
+많은 사용자를 대신해서 가치를 송수신하는 기관은 [**출발 태그**와 **데스티네이션 태그**](../../transactions/source-and-destination-tags.md)를 사용하여 고객에게 보내고 받는 결제를 구분할 수 있으며, 이를 통해 XRP Ledger에서 한 개(또는 소수)의 계정만을 사용할 수 있습니다.
 
 ## 트랜잭션 히스토리
 
 XRP Ledger에서는 트랜잭션의 식별 해시와 ledger 인덱스에 의해 연결된 트랜잭션의 "스레드"에 의해 트랜잭션 히스토리가 추적됩니다. <mark style="background-color:yellow;">AccountRoot</mark> ledger 객체는 가장 최근에 그것을 수정한 트랜잭션의 식별 해시와 ledger를 가지고 있습니다; 그 트랜잭션의 메타데이터는 <mark style="background-color:yellow;">AccountRoot</mark> 노드의 이전 상태를 포함하므로, 이 방식으로 단일 계정의 히스토리를 순회하는 것이 가능합니다. 이 트랜잭션 히스토리는 <mark style="background-color:yellow;">AccountRoot</mark> 노드를 직접 수정하는 모든 트랜잭션을 포함하며, 이에는 다음이 포함됩니다:
 
-* 계정에서 보낸 트랜잭션들은 계정의 <mark style="background-color:yellow;">시퀀스</mark> 번호를 수정하므로 포함됩니다. 이러한 트랜잭션들은 [트랜잭션 비용](../undefined-2/undefined.md) 때문에 계정의 XRP 잔액도 수정합니다.
+* 계정에서 보낸 트랜잭션들은 계정의 <mark style="background-color:yellow;">시퀀스</mark> 번호를 수정하므로 포함됩니다. 이러한 트랜잭션들은 [트랜잭션 비용](../../transactions/transaction-cost.md) 때문에 계정의 XRP 잔액도 수정합니다.
 * 계정의 XRP 잔액을 수정한 트랜잭션들, 이에는 들어오는 [결제 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/payment.md)과 [PaymentChannelClaim](../../../references/xrp-ledger/undefined-1/undefined-1/paymentchannelclaim.md) 및 [EscrowFinish](../../../references/xrp-ledger/undefined-1/undefined-1/escrowfinish.md)와 같은 다른 유형의 트랜잭션들이 포함됩니다.
 
 계정의 개념적 트랜잭션 히스토리는 계정이 소유한 객체와 non-XRP 잔액을 수정한 트랜잭션들도 포함합니다. 이러한 객체들은 별도의 ledger 객체로, 각각이 그것들에 영향을 미친 트랜잭션의 자체 스레드를 가지고 있습니다. 계정의 전체 ledger 히스토리를 가지고 있다면, 그것을 앞으로 따라가며 계정이 생성하거나 수정한 ledger 객체를 찾을 수 있습니다. "완전한" 트랜잭션 히스토리는 트랜잭션이 소유한 객체들의 히스토리를 포함합니다. 이에는 다음이 포함됩니다:

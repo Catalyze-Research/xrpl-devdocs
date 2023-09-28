@@ -2,7 +2,7 @@
 
 XRP Ledger에서는 대체 불가능한 토큰(NFT)을 기본적으로 지원합니다. 대체 불가능한 토큰은 고유한 물리적, 비물리적 또는 순수 디지털 상품의 소유권을 인코딩하는 역할을 합니다. 이는 예술 작품이나 게임 아이템과 같은 것들을 포함할 수 있습니다.
 
-_(_[_NonFungibleTokensV1\_1 수정안_](../../xrp-ledger/undefined-2/undefined.md)_으로 추가됨.)_
+_(_[_NonFungibleTokensV1\_1 수정안_](../../xrp-ledger/amendments/undefined.md)_으로 추가됨.)_
 
 ## 배경&#x20;
 

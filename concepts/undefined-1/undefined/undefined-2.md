@@ -1,12 +1,12 @@
 # 티켓
 
-_(_[_TicketBatch_](../../xrp-ledger/undefined-2/undefined.md#ticketbatch)[ _수정안_](../../xrp-ledger/undefined-2/undefined.md#ticketbatch)_에 의해 추가됨.)_
+_(_[_TicketBatch_](../../xrp-ledger/amendments/undefined.md#ticketbatch)[ _수정안_](../../xrp-ledger/amendments/undefined.md#ticketbatch)_에 의해 추가됨.)_
 
 XRP Ledger의 티켓은 거래의 [일련 번호](../../../references/xrp-ledger/undefined/#undefined-3)를 당장 보내지 않고 미리 설정해두는 방법입니다. 티켓을 사용하면 거래를 일반적인 순서 외에 보낼 수 있습니다. 이에 대한 한 가지 사용 사례는 필요한 서명을 모으는 데 시간이 걸릴 수 있는 [다중 서명](undefined-1.md) 거래를 허용하는 것입니다: 티켓을 사용하는 거래에 대해 서명을 수집하는 동안에도, 다른 거래를 계속 보낼 수 있습니다.
 
 ## 배경
 
-[트랜잭션](../undefined-2/)에는 일련 번호가 있어서 주어진 거래는 한 번 이상 실행되지 않도록 합니다. 일련 번호는 또한 주어진 거래가 유일하게 하도록 합니다: 같은 금액의 돈을 동일한 사람에게 여러 번 보낼 경우, 일련 번호는 매번 다르게 보장되는 한 가지 상세 정보입니다. 마지막으로, 일련 번호는 일부 거래가 네트워크 전체에 걸쳐 보내질 때 순서가 뒤섞여 도착하더라도 거래를 일관된 순서로 놓는 우아한 방법을 제공합니다.
+[트랜잭션](../../transactions/)에는 일련 번호가 있어서 주어진 거래는 한 번 이상 실행되지 않도록 합니다. 일련 번호는 또한 주어진 거래가 유일하게 하도록 합니다: 같은 금액의 돈을 동일한 사람에게 여러 번 보낼 경우, 일련 번호는 매번 다르게 보장되는 한 가지 상세 정보입니다. 마지막으로, 일련 번호는 일부 거래가 네트워크 전체에 걸쳐 보내질 때 순서가 뒤섞여 도착하더라도 거래를 일관된 순서로 놓는 우아한 방법을 제공합니다.
 
 그러나, 일련 번호가 너무 제한적인 일부 상황이 있습니다. 예를 들어:
 
@@ -48,7 +48,7 @@ Caution:\
 * 티켓을 사용하여 더 많은 티켓을 생성할 수 있습니다. 그렇게 하면 사용한 티켓은 한 번에 가질 수 있는 티켓의 총 수에 포함되지 않습니다.&#x20;
 * 각 티켓은 [소유자 reserve](reserves.md)로 계산되므로, 아직 사용하지 않은 각 티켓에 대해 2개의 XRP를 설정해야 합니다. 티켓을 사용한 후 XRP를 다시 사용할 수 있습니다.
 * 개별 ledger 내에서, 티켓을 사용하는 거래는 동일한 발신자의 다른 거래 이후에 실행됩니다. 계정이 같은 ledger 버전에서 티켓을 사용하는 여러 거래를 가지고 있다면, 그 티켓들은 티켓 일련 번호가 가장 낮은 것부터 가장 높은 것까지 순서대로 실행됩니다. (자세한 정보는 컨센서스의 [규범 순서](../../undefined-4/undefined.md)에 대한 문서를 참조하십시오.)&#x20;
-* 티켓을 "취소"하려면, 티켓을 사용해 [no-op](../../undefined-4/undefined-5.md) [AccountSet 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 수행하기 위해 티켓을 사용하십시오. 이렇게 하면 그 reserve requirement를충족할 필요 없이 티켓이 삭제됩니다.
+* 티켓을 "취소"하려면, 티켓을 사용해 [no-op](../../undefined-4/undefined-4.md) [AccountSet 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 수행하기 위해 티켓을 사용하십시오. 이렇게 하면 그 reserve requirement를충족할 필요 없이 티켓이 삭제됩니다.
 
 ## 참고 <a href="#see-also" id="see-also"></a>
 

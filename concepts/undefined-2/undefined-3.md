@@ -23,7 +23,7 @@ Amount + (fees) = (sent amount) ≤ SendMax
 {% hint style="info" %}
 Note:
 
-트랜잭션의 <mark style="background-color:yellow;">수수료</mark> 필드는 XRP [트랜잭션 비용](../undefined-1/undefined-2/undefined.md)을 나타내며, 이는 네트워크로 트랜잭션을 전달하기 위해 소멸됩니다. 지정된 정확한 거래 비용은 항상 송신자에서 공제되며, 어떤 유형의 결제에 대한 수수료 계산과 완전히 별개입니다.
+트랜잭션의 <mark style="background-color:yellow;">수수료</mark> 필드는 XRP [트랜잭션 비용](../transactions/transaction-cost.md)을 나타내며, 이는 네트워크로 트랜잭션을 전달하기 위해 소멸됩니다. 지정된 정확한 거래 비용은 항상 송신자에서 공제되며, 어떤 유형의 결제에 대한 수수료 계산과 완전히 별개입니다.
 {% endhint %}
 
 ## 부분결제를 사용할 때

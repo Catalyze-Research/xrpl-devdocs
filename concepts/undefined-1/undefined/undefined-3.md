@@ -17,7 +17,7 @@ _(DepositAuth 수정안으로 추가됨)_
 
 입금 승인이 활성화되어 있을 때, 당신은 [수표](../../undefined-2/undefined-1.md), [에스크로](../../undefined-2/undefined-2.md), 그리고 [결제 채널](../../undefined-2/undefined-4.md)에서 돈을 받을 수 있습니다. 이러한 거래의 "두 단계" 모델에서는, 먼저 소스가 자금을 보내는 것을 인증하는 거래를 보내고, 그 다음에 목적지가 그 자금을 받는 것을 인증하는 거래를 보냅니다.
 
-입금 승인이 활성화되어 있을 때 [결제 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/payment.md)에서 돈을 받으려면, 당신은 그러한 지불의 발신자를 [미리 인증](undefined-3.md#undefined-4)해야 합니다. _(_[_DepositPreauth 수정안_](../../xrp-ledger/undefined-2/undefined.md#depositpreauth)_에 의해 추가되었습니다.)_
+입금 승인이 활성화되어 있을 때 [결제 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/payment.md)에서 돈을 받으려면, 당신은 그러한 지불의 발신자를 [미리 인증](undefined-3.md#undefined-4)해야 합니다. _(_[_DepositPreauth 수정안_](../../xrp-ledger/amendments/undefined.md#depositpreauth)_에 의해 추가되었습니다.)_
 
 ## 추천 사용법&#x20;
 
@@ -32,15 +32,15 @@ _(DepositAuth 수정안으로 추가됨)_
 입금 승인이 활성화된 계정:
 
 * [결제 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/payment.md)의 목적지가 될 수 **없으며**, **다음과 같은 예외 사항**이 있습니다:
-  * 목적지가 지불의 발신자를 미리 인증한 경우. _(_[_DepositPreauth 수정안_](../../xrp-ledger/undefined-2/undefined.md#depositpreauth)_에 의해 추가됨)_
+  * 목적지가 지불의 발신자를 미리 인증한 경우. _(_[_DepositPreauth 수정안_](../../xrp-ledger/amendments/undefined.md#depositpreauth)_에 의해 추가됨)_
   * 계정의 XRP 잔액이 최소 계정 [reserve requirement](reserves.md)과 같거나 그 이하인 경우, <mark style="background-color:yellow;">금액</mark>이 최소 계정 reserve(현재 10 XRP)와 같거나 작은 XRP 지불의 목적지가 될 수 있습니다. 이는 계정이 거래를 보낼 수 없고 또한 XRP를 받을 수 없는 상태가 되는 것을 방지하기 위함입니다. 이 경우에는 계정의 소유자 reserve가 문제가 되지 않습니다.
 * [PaymentChannelClaim 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/paymentchannelclaim.md)에서 XRP를 받을 수 있는 경우는 **다음의 경우들 뿐입니다**:
   * PaymentChannelClaim 트랜잭션의 발신자가 결제 채널의 목적지인 경우.
-  * PaymentChannelClaim 트랜잭션의 목적지가 PaymentChannelClaim의 발신자를 [미리 인증](undefined-3.md#undefined-4)한 경우. _(_[_DepositPreauth 수정안_](../../xrp-ledger/undefined-2/undefined.md)_에 의해 추가됨)_
+  * PaymentChannelClaim 트랜잭션의 목적지가 PaymentChannelClaim의 발신자를 [미리 인증](undefined-3.md#undefined-4)한 경우. _(_[_DepositPreauth 수정안_](../../xrp-ledger/amendments/undefined.md)_에 의해 추가됨)_
 * [EscrowFinish 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/escrowfinish.md)에서 XRP를 받을 수 있는 경우는 다음과 같습니다:
   * EscrowFinish 트랜잭션의 발신자가 에스크로의 목적지인 경우.
-  * EscrowFinish 트랜잭션의 목적지가 EscrowFinish의 발신자를 미리 인증한 경우. _(_[_DepositPreauth 수정안_](../../xrp-ledger/undefined-2/undefined.md)_에 의해 추가됨)_
-* [CheckCash](../../../references/xrp-ledger/undefined-1/undefined-1/checkcash.md) 트랜잭션을 보내서 XRP 또는 토큰을 **받을 수** 있습니다. _(_[_Checks 수정안_](../../xrp-ledger/undefined-2/undefined.md#checks)_에 의해 추가됨)_
+  * EscrowFinish 트랜잭션의 목적지가 EscrowFinish의 발신자를 미리 인증한 경우. _(_[_DepositPreauth 수정안_](../../xrp-ledger/amendments/undefined.md)_에 의해 추가됨)_
+* [CheckCash](../../../references/xrp-ledger/undefined-1/undefined-1/checkcash.md) 트랜잭션을 보내서 XRP 또는 토큰을 **받을 수** 있습니다. _(_[_Checks 수정안_](../../xrp-ledger/amendments/undefined.md#checks)_에 의해 추가됨)_
 * [OfferCreate 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md)을 보내서 XRP 또는 토큰을 받을 수 있습니다.
   * 계정이 즉시 완전히 실행되지 않는 OfferCreate 트랜잭션을 보낸 경우, 나중에 다른 계정의 결제및 OfferCreate 트랜잭션이 제안을 소비할 때 나머지 주문된 XRP 또는 토큰을 받을 수 있습니다.
 * 계정이 No Ripple 플래그가 활성화되지 않은 신뢰선을 생성했거나, Default Ripple 플래그를 활성화하고 통화를 발행한 경우, 계정은 r ippling의 결과로 이러한 신뢰선의 토큰을 [Payment 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/payment.md)에서 받을 수 있습니다. 그러나 그 트랜잭션의 목적지가 될 수는 없습니다.
