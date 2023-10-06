@@ -32,7 +32,7 @@ XRP Ledger의 핵심인 P2P 네트워크는 합의 및 거래 처리 규칙을 �
 
 라이브러리는 일반적으로 HTTP/WebSocket API를 통해 XRP Ledger에 액세스하는 몇 가지 일반적인 작업을 간소화합니다. 라이브러리는 데이터를 다양한 프로그래밍 언어에 더 친숙하고 편리한 형태로 변환하며, 일반적인 작업의 구현을 포함합니다.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 대부분의 클라이언트 라이브러리의 핵심 기능 중 하나는 트랜잭션에 로컬로 서명하는 것이므로 사용자가 네트워크를 통해 개인 키를 전송할 필요가 없습니다.
 
@@ -46,7 +46,7 @@ XRP Ledger의 핵심인 P2P 네트워크는 합의 및 거래 처리 규칙을 �
 
 미들웨어 서비스는 한쪽에서는 XRP Ledger API를 소비하고 다른 쪽에서는 자체 API를 제공하는 프로그램입니다. 미들웨어 서비스는 몇 가지 일반적인 기능을 서비스로 제공함으로써 더 높은 수준의 애플리케이션을 더 쉽게 구축할 수 있도록 추상화 계층을 제공합니다.
 
-<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 새로 인스턴스화되고 이를 가져오는 프로그램과 함께 종료되는 클라이언트 라이브러리와 달리, 미들웨어 서비스는 일반적으로 무기한 실행 상태를 유지하며 자체 데이터베이스(관계형 SQL 데이터베이스 등) 및 구성 파일을 보유할 수 있습니다. 일부는 다양한 가격 또는 사용량 제한이 있는 클라우드 서비스로 제공됩니다.
 

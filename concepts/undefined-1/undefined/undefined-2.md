@@ -18,7 +18,7 @@ XRP Ledger의 티켓은 거래의 [일련 번호](../../../references/xrp-ledger
 
 ## 티켓은 예약된 일련 번호입니다&#x20;
 
-티켓은 나중에 사용하기 위해 일련 번호가 설정되었음을 나타내는 기록입니다. 계정은 먼저 [TicketCreate 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/ticketcreate.md)을 보내서 하나 이상의 일련 번호를 티켓으로 설정해놓습니다. 이는 [ledger의 상태 데이터](../../ledgers/)에 각 예약된 일련 번호에 대한 기록을 만들어, [티켓 객체](../../../references/xrp-ledger/ledger/ledger-1/ticket.md) 형태로 저장합니다.
+티켓은 나중에 사용하기 위해 일련 번호가 설정되었음을 나타내는 기록입니다. 계정은 먼저 [TicketCreate 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/ticketcreate.md)을 보내서 하나 이상의 일련 번호를 티켓으로 설정해놓습니다. 이는 [ledger의 상태 데이터](../ledgers.md)에 각 예약된 일련 번호에 대한 기록을 만들어, [티켓 객체](../../../references/xrp-ledger/ledger/ledger-1/ticket.md) 형태로 저장합니다.
 
 티켓은 그것들을 생성하기 위해 설정해 놓은 일련 번호를 사용하여 번호가 매겨집니다. 예를 들어, 계정의 현재 일련 번호가 101이고 3개의 티켓을 생성하면, 그 티켓들은 티켓 일련 번호 102, 103, 104를 가지게 됩니다. 이렇게 하면 계정의 일련 번호가 105로 증가하게 됩니다.
 
@@ -35,7 +35,7 @@ Caution:\
 각 티켓은 [소유자 reserve](reserves.md)에 대해 별도의 항목으로 계산되므로 각 티켓에 대해 2개의 XRP를 설정해야 합니다. (티켓을 사용한 후에 XRP는 다시 사용 가능해집니다.) 한 번에 많은 수의 티켓을 생성하면 이 비용이 빠르게 누적될 수 있습니다.
 {% endhint %}
 
-일련 번호와 마찬가지로, 거래가 컨센서스에 의해 확인된 경우에만 티켓이 소비됩니다. 그러나 원래 의도한 작업을 수행하지 못한 거래도 [tec 클래스 결과 코드](../../../references/xrp-ledger/undefined-1/pseudo-transactions/undefined/tec-codes.md)를 가진 [컨센서스](../../undefined-1/undefined.md)에 의해 확인될 수 있습니다.
+일련 번호와 마찬가지로, 거래가 컨센서스에 의해 확인된 경우에만 티켓이 소비됩니다. 그러나 원래 의도한 작업을 수행하지 못한 거래도 [tec 클래스 결과 코드](../../../references/xrp-ledger/undefined-1/pseudo-transactions/undefined/tec-codes.md)를 가진 [컨센서스](../../undefined-4/undefined.md)에 의해 확인될 수 있습니다.
 
 계정이 사용할 수 있는 티켓을 조회하려면 [account\_objects 메소드](../../../references/http-websocket-apis/api-1/undefined/account\_objects.md)를 사용하십시오.
 
@@ -47,8 +47,8 @@ Caution:\
 * 각 계정은 ledger에 한 번에 250개 이상의 티켓을 가질 수 없습니다. 한 번에 250개 이상의 티켓을 생성할 수도 없습니다.
 * 티켓을 사용하여 더 많은 티켓을 생성할 수 있습니다. 그렇게 하면 사용한 티켓은 한 번에 가질 수 있는 티켓의 총 수에 포함되지 않습니다.&#x20;
 * 각 티켓은 [소유자 reserve](reserves.md)로 계산되므로, 아직 사용하지 않은 각 티켓에 대해 2개의 XRP를 설정해야 합니다. 티켓을 사용한 후 XRP를 다시 사용할 수 있습니다.
-* 개별 ledger 내에서, 티켓을 사용하는 거래는 동일한 발신자의 다른 거래 이후에 실행됩니다. 계정이 같은 ledger 버전에서 티켓을 사용하는 여러 거래를 가지고 있다면, 그 티켓들은 티켓 일련 번호가 가장 낮은 것부터 가장 높은 것까지 순서대로 실행됩니다. (자세한 정보는 컨센서스의 [규범 순서](../../undefined-1/undefined.md)에 대한 문서를 참조하십시오.)&#x20;
-* 티켓을 "취소"하려면, 티켓을 사용해 [no-op](../../undefined-1/undefined-4.md) [AccountSet 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 수행하기 위해 티켓을 사용하십시오. 이렇게 하면 그 reserve requirement를충족할 필요 없이 티켓이 삭제됩니다.
+* 개별 ledger 내에서, 티켓을 사용하는 거래는 동일한 발신자의 다른 거래 이후에 실행됩니다. 계정이 같은 ledger 버전에서 티켓을 사용하는 여러 거래를 가지고 있다면, 그 티켓들은 티켓 일련 번호가 가장 낮은 것부터 가장 높은 것까지 순서대로 실행됩니다. (자세한 정보는 컨센서스의 [규범 순서](../../undefined-4/undefined.md)에 대한 문서를 참조하십시오.)&#x20;
+* 티켓을 "취소"하려면, 티켓을 사용해 [no-op](../../undefined-4/undefined-4.md) [AccountSet 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 수행하기 위해 티켓을 사용하십시오. 이렇게 하면 그 reserve requirement를충족할 필요 없이 티켓이 삭제됩니다.
 
 ## 참고 <a href="#see-also" id="see-also"></a>
 

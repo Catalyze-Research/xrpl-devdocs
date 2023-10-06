@@ -28,4 +28,4 @@ NFToken 개체의 초기 판매 이전에 시장 활동은 XRP Ledger에 기록�
 
 ## 단점&#x20;
 
-발행하는 모든 NFToken 객체에 대해 [reserve requirement](../../undefined-4/undefined/reserves.md)을 충족해야 합니다. 대략적으로 현재 reserve 비율에 따라 <mark style="background-color:yellow;">NFToken</mark> 객체당 약 1/12 XRP입니다. 충분한 reserve XRP가 없는 경우, 발행 트랜잭션이 실패하게 됩니다.
+발행하는 모든 NFToken 객체에 대해 [reserve requirement](../../undefined-1/undefined/reserves.md)을 충족해야 합니다. 대략적으로 현재 reserve 비율에 따라 <mark style="background-color:yellow;">NFToken</mark> 객체당 약 1/12 XRP입니다. 충분한 reserve XRP가 없는 경우, 발행 트랜잭션이 실패하게 됩니다.
