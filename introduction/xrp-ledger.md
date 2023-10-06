@@ -10,7 +10,7 @@ XRP Ledger는 자체 디지털 통화를 사용하여 금융 거래를 처리하
 
 <figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
-A group of trusted validator nodes reach consensus that the data is valid.
+신뢰할 수 있는 검증자 노드 그룹이 데이터가 유효하다는 합의에 도달합니다.
 
 <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 

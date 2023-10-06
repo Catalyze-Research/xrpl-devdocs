@@ -1,56 +1,36 @@
-# 트랜잭션 검열 감지
+# 클리오 서버
 
-[![New in: rippled 1.2.0](https://img.shields.io/badge/New%20in-rippled%201.2.0-blue.svg) ](https://github.com/ripple/rippled/releases/tag/1.2.0)
+클리오는 검증된 ledger 데이터에 대한 WebSocket 또는 HTTP API 호출을 위해 최적화된 XRP Ledger API 서버입니다.
 
-XRP Ledger는 검열 저항성을 갖도록 설계되었습니다. 이 디자인을 지원하기 위해 XRP Ledger는 모든 <mark style="background-color:yellow;">rippled</mark> 서버에서 사용할 수 있는 자동 트랜잭션 검열 감지기를 제공하여 모든 참여자가 검열이 네트워크에 영향을 미치는지 확인할 수 있게 합니다.
+클리오 서버는 P2P 네트워크에 연결하지 않습니다. 대신, P2P 네트워크에 연결된 지정된 <mark style="background-color:yellow;">rippled</mark> 서버에서 데이터를 추출합니다. API 호출을 효율적으로 처리함으로써, 클리오 서버는 P2P 모드로 실행되는 <mark style="background-color:yellow;">rippled</mark> 서버의 부하를 줄이는 데 도움이 됩니다.
 
-<mark style="background-color:yellow;">rippled</mark> 서버가 네트워크와 동기화되는 동안, 검열 감지기는 최근 [컨센서스](../undefined/undefined.md) 라운드에서 수락되어 유효한 ledger에 포함되어야 했던 모든 트랜잭션을 추적합니다. 검열 감지기는 여러 라운드의 컨센서스 이후에도 유효성이 확인된 ledger에 포함되지 않은 트랜잭션을 발견하면 심각도가 높아지는 로그 메시지를 출력합니다.
+클리오는 검증된 히스토리 ledger와 트랜잭션 데이터를 공간 효율적인 형식으로 저장하며, <mark style="background-color:yellow;">rippled</mark>보다 최대 4배 적은 공간을 사용합니다. 클리오는 Cassandra 또는 ScyllaDB를 사용하여 확장 가능한 읽기 처리량을 제공합니다. 여러 클리오 서버는 동일한 데이터 세트에 대한 액세스를 공유할 수 있으므로, 중복 데이터 저장 또는 계산이 필요하지 않은 고가용성 클리오 서버 클러스터를 구축할 수 있습니다.
 
-## 작동 방식&#x20;
+클리오는 클리오와 동일한 컴퓨터에서 실행되거나 별도로 실행되는 <mark style="background-color:yellow;">rippled</mark> 서버에 대한 액세스가 필요합니다.
 
-트랜잭션 검열 감지기의 작동 원리는 다음과 같습니다:
+클리오는 완전한 [HTTP / WebSocket APIs](https://xrpl.org/http-websocket-apis.html)를 제공하지만, 기본적으로 유효 데이터만 반환합니다. P2P 네트워크에 액세스가 필요한 요청의 경우, 클리오는 자동으로 P2P 네트워크의 <mark style="background-color:yellow;">rippled</mark> 서버로 요청을 전달하고 응답을 반환합니다.
 
-1. 검열 감지기는 서버의 초기 컨센서스 제안에 포함된 모든 트랜잭션을 추적 대상에 추가합니다.
-2. 컨센서스 라운드가 종료되면, 검열 감지기는 검열된 ledger에 포함된 모든 트랜잭션을 추적에서 제거합니다.
-3. 검열 감지기는 해당 트랜잭션이 15개의 ledger에 대한 추적기에 남아 있는 모든 트랜잭션에 대해 잠재적으로 검열된 트랜잭션으로 간주하여 로그에 [경고 메시지](undefined.md#undefined-1)를 출력합니다. 이 시점에서 트랜잭션이 추적기에 남아 있다는 것은 해당 트랜잭션이 15개의 컨센서스 라운드 이후에도 유효한 ledger에 포함되지 않았음을 의미합니다. 만약 해당 트랜잭션이 또 다른 15개의 ledger에 대해 추적기에 남아 있으면, 검열 감지기는 로그에 추가적인 경고 메시지를 출력합니다.\
-   트랜잭션이 추적에 남아 있는 한, 검열 감지기는 최대 5개의 경고 메시지까지 매 15개의  ledger마다 로그에 경고 메시지를 출력합니다. 다섯 번째 경고 메시지 이후에는 검열 감지기가 마지막으로 에러 메시지를 로그에 출력한 후, 경고 및 에러 메시지를 더 이상 출력하지 않습니다.\
-   rippeled 서버 로그에서 이러한 메시지를 확인하면, 다른 서버가 해당 트랜잭션을 포함하지 못하는 이유를 조사해야 합니다. 이때 악의적인 검열보다는 거짓 양성(무고한 버그) 가능성이 높다는 가정부터 시작하는 것이 좋습니다.
+## 클리오 서버를 실행해야 하는 이유는 무엇인가요?&#x20;
 
-## 경고 메시지 예시&#x20;
+클리오 서버를 자체 실행하는 이유는 여러 가지가 있을 수 있지만, 대부분 다음과 같이 요약할 수 있습니다: P2P 네트워크에 연결된 <mark style="background-color:yellow;">rippled</mark> 서버의 부하 감소, 낮은 메모리 사용량 및 저장 공간 오버헤드, 쉬운 수평 확장 및 API 요청에 대한 높은 처리량입니다.
 
-메시지 트랜잭션 검열 감지기가 18851530 ledger에서 18851545  ledger까지 15개의 ledger에 걸쳐 트랜잭션 E08D6E9754025BA2534A78707605E0601F03ACE063687A0CA1BDDACFCD1698C7가 추적기에 남아 있는 경우, 이는 아래의 예시와 같이 검열 감지기에 의해 경고 메시지가 출력됩니다.
+* <mark style="background-color:yellow;">rippled</mark> 서버의 부하 감소 - 클리오 서버는 P2P 네트워크에 연결하지 않습니다. 대신, P2P 네트워크에 연결된 하나 이상의 신뢰할 수 있는 <mark style="background-color:yellow;">rippled</mark> 서버에서 검증된 데이터를 가져오기 위해 gRPC를 사용합니다. 따라서 클리오 서버는 요청을 더 효율적으로 처리하고, P2P 모드로 실행되는 <mark style="background-color:yellow;">rippled</mark> 서버의 부하를 줄입니다.
+* 낮은 메모리 사용량 및 저장 공간 오버헤드 - 클리오는 Cassandra를 데이터베이스로 사용하며, 데이터를 공간 효율적인 형식으로 저장하여 <mark style="background-color:yellow;">rippled</mark>에 비해 최대 4배 적은 공간을 사용합니다.
+* 쉬운 수평 확장 - 여러 클리오 서버가 동일한 데이터 세트에 액세스를 공유할 수 있도록 함으로써, 고가용성 클리오 서버 클러스터를 구축할 수 있습니다.
+* API 요청에 대한 높은 처리량 - 클리오 서버는 하나 이상의 신뢰할 수 있는 <mark style="background-color:yellow;">rippled</mark> 서버에서 검증된 데이터를 추출하고 이 데이터를 효율적으로 저장합니다. 따라서 API 호출을 효율적으로 처리하여 높은 처리량과 때로는 낮은 지연시간을 제공합니다.
 
-```
-LedgerConsensus:WRN Potential Censorship: Eligible tx E08D6E9754025BA2534A78707605E0601F03ACE063687A0CA1BDDACFCD1698C7, which we are tracking since ledger 18851530 has not been included as of ledger 18851545.
-```
+## 클리오 서버는 어떻게 작동하나요?&#x20;
 
-## 오류 메시지 예시&#x20;
+<figure><img src="https://xrpl.org/img/clio-basic-architecture.svg" alt="" width="563"><figcaption></figcaption></figure>
 
-트랜잭션 E08D6E9754025 이후 트랜잭션 검열 감지에서 발생한 오류 메시지의 예입니다BA2534A78707605E0601F03ACE063687A0CA1BDDACFCD1698C7은 18851530 ledger에서 188551605 ledger까지 75개  ledger(15개  ledger 5세트) 동안 추적기에 남아 있었습니다.
+클리오 서버는 트랜잭션 메타데이터, 계정 상태, ledger 헤더와 같은 검증된 ledger 데이터를 영속적인 데이터 스토어에 저장합니다.
 
-```
-LedgerConsensus:ERR Potential Censorship: Eligible tx E08D6E9754025BA2534A78707605E0601F03ACE063687A0CA1BDDACFCD1698C7, which we are tracking since ledger 18851530 has not been included as of ledger 18851605. Additional warnings suppressed.
-```
-
-## 잠재적인 거짓 양성
-
-트랜잭션 검열 감지기는 특정 시나리오에서 거짓 양성을 출력할 수 있습니다. 이 경우, 거짓 양성이란 감지기가 15개 이상의  ledger에 걸쳐 추적에 남아 있는 트랜잭션을  무고한 이유로 플래그를 매긴 것을 의미합니다.
-
-다음은 검열 감지기가 거짓 양성 메시지를 출력할 수 있는 시나리오입니다:
-
-* 서버가 네트워크의 나머지와 다른 코드로 실행 중인 경우. 이는 서버가 트랜잭션을 다르게 적용하여 잘못된 거짓 양성을 초래할 수 있습니다. 이러한 종류의 거짓 양성은 드물지만, 일반적으로 호환되는 버전의 핵심 XRP Ledger 서버를 실행하는 것이 중요합니다.
-* 서버가 네트워크와 동기화 되지 않았고 이를 아직 인식하지 못한 경우.
-*   내 서버를 포함하여 네트워크에 있는 서버가 네트워크의 다른 서버에 트랜잭션을 일관성 없이 전달 되는 버그가 있을 수 있습니다.
-
-    현재로서는 이러한 예기치 않은 동작을 일으키는 알려진 버그는 없습니다. 하지만 버그로 의심되는 영향을 확인하신 경우, [Ripple Bug Bounty](https://ripple.com/bug-bounty/) 프로그램에 신고해주시기 바랍니다.
+클리오 서버가 API 요청을 받으면 이러한 데이터 스토어에서 데이터를 조회합니다. P2P 네트워크에서 데이터가 필요한 요청의 경우, 클리오 서버는 P2P 서버로 요청을 전달하고 응답을 클라이언트에게 반환합니다.
 
 ### 참고 <a href="#see-also" id="see-also"></a>
 
-* **Concepts:**
-  * [Consensus Principles and Rules](https://xrpl.org/consensus-principles-and-rules.html)
-  * [Transaction Queue](https://xrpl.org/transaction-queue.html)
+* [Clio source code ](https://github.com/XRPLF/clio)
 * **Tutorials:**
-  * [Reliable Transaction Submission](https://xrpl.org/reliable-transaction-submission.html)
-  * [Understanding Log Messages](https://xrpl.org/understanding-log-messages.html)
-* **References:**
-  * [Transaction Results](https://xrpl.org/transaction-results.html)
+  * [Install Clio server on Ubuntu](https://xrpl.org/install-clio-on-ubuntu.html)
+
+&#x20;
