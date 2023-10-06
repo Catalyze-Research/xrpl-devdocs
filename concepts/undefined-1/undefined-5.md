@@ -6,7 +6,7 @@
 
 XRP Ledger의 메인넷에서는 **다중 서명 트랜잭션**이 변조 가능할 수 있습니다. 이는 필요한 서명보다 많은 서명이 있는 경우나 권한이 있는 서명자가 필요 이상의 서명을 제공하는 경우에 해당됩니다. 우수한 운영 보안은 이러한 문제에 대해 보호해 줄 수 있습니다. 지침은 [다중 서명의 변조 가능성에 대한 완화책](undefined-5.md#undefined-2) 문서에서 확인할 수 있습니다.
 
-2014년 이전까지는 기본 서명 알고리즘인 secp256k1 곡선을 사용하는 ECDSA로 인해 단일 서명 트랜잭션도 변조 가능할 수 있었습니다. 호환성을 위해 [RequireFullyCanonicalSig 수정안](../xrp-ledger/amendments/undefined.md)이 2020년 7월 3일에 활성화될 때까지 변조 가능한 단일 서명 트랜잭션을 생성하고 제출할 수 있었습니다. ([Ed25519 키로 서명](../undefined-2/undefined/undefined.md)된 트랜잭션은 이러한 문제에 대해 항상 취약하지 않았습니다.)
+2014년 이전까지는 기본 서명 알고리즘인 secp256k1 곡선을 사용하는 ECDSA로 인해 단일 서명 트랜잭션도 변조 가능할 수 있었습니다. 호환성을 위해 [RequireFullyCanonicalSig 수정안](../xrp-ledger/amendments/undefined.md)이 2020년 7월 3일에 활성화될 때까지 변조 가능한 단일 서명 트랜잭션을 생성하고 제출할 수 있었습니다. ([Ed25519 키로 서명](../undefined-4/undefined/undefined.md)된 트랜잭션은 이러한 문제에 대해 항상 취약하지 않았습니다.)
 
 ## 배경&#x20;
 

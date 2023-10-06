@@ -18,7 +18,7 @@ XRP Ledger의 티켓은 거래의 [일련 번호](../../../references/xrp-ledger
 
 ## 티켓은 예약된 일련 번호입니다&#x20;
 
-티켓은 나중에 사용하기 위해 일련 번호가 설정되었음을 나타내는 기록입니다. 계정은 먼저 [TicketCreate 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/ticketcreate.md)을 보내서 하나 이상의 일련 번호를 티켓으로 설정해놓습니다. 이는 [ledger의 상태 데이터](../ledgers.md)에 각 예약된 일련 번호에 대한 기록을 만들어, [티켓 객체](../../../references/xrp-ledger/ledger/ledger-1/ticket.md) 형태로 저장합니다.
+티켓은 나중에 사용하기 위해 일련 번호가 설정되었음을 나타내는 기록입니다. 계정은 먼저 [TicketCreate 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/ticketcreate.md)을 보내서 하나 이상의 일련 번호를 티켓으로 설정해놓습니다. 이는 [ledger의 상태 데이터](../../ledgers/)에 각 예약된 일련 번호에 대한 기록을 만들어, [티켓 객체](../../../references/xrp-ledger/ledger/ledger-1/ticket.md) 형태로 저장합니다.
 
 티켓은 그것들을 생성하기 위해 설정해 놓은 일련 번호를 사용하여 번호가 매겨집니다. 예를 들어, 계정의 현재 일련 번호가 101이고 3개의 티켓을 생성하면, 그 티켓들은 티켓 일련 번호 102, 103, 104를 가지게 됩니다. 이렇게 하면 계정의 일련 번호가 105로 증가하게 됩니다.
 

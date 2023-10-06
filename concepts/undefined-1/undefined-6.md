@@ -1,6 +1,6 @@
 # 수수료 투표
 
-검증인들은 기본 [트랜잭션 비용](../transactions/transaction-cost.md)과 [reserve requirements](../undefined-2/undefined/reserves.md)에 대한 변경에 투표할 수 있습니다. 만약 검증인의 구성 설정이 네트워크의 현재 설정과 다르다면, 검증인은 주기적으로 네트워크에 자신의 선호도를 표현합니다. 만약 쿼럼을 형성하는 검증인들이 변경에 합의한다면, 그들은 이후에 적용되는 변경을 적용할 수 있습니다. 검증인들은 특히 XRP의 가치에 대한 장기적인 변화에 대응하기 위해 이를 수행할 수 있습니다.
+검증인들은 기본 [트랜잭션 비용](../transactions/transaction-cost.md)과 [reserve requirements](../undefined-4/undefined/reserves.md)에 대한 변경에 투표할 수 있습니다. 만약 검증인의 구성 설정이 네트워크의 현재 설정과 다르다면, 검증인은 주기적으로 네트워크에 자신의 선호도를 표현합니다. 만약 쿼럼을 형성하는 검증인들이 변경에 합의한다면, 그들은 이후에 적용되는 변경을 적용할 수 있습니다. 검증인들은 특히 XRP의 가치에 대한 장기적인 변화에 대응하기 위해 이를 수행할 수 있습니다.
 
 [<mark style="background-color:yellow;">rippled</mark> 검증인](../../tutorials/rippled/rippled-1/rippled.md) 운영자들은 <mark style="background-color:yellow;">rippled.cfg</mark> 파일의 <mark style="background-color:yellow;">\[voting]</mark> 구절에서 거래 비용과 reserve requirements에 대한 선호도를 설정할 수 있습니다.
 

@@ -50,7 +50,7 @@ XRP 원장은 2011년에서 2012년 초에 걸쳐 제드 맥칼렙(Jed McCaleb),
 
 ## Naming <a href="#naming" id="naming"></a>
 
-원래 XRP Ledger는기술이 결제를 [여러 홉과 통화를 통해 전파(ripple)](../concepts/undefined-4/rippling.md)시킬 수 있도록 하기 때문에 "Ripple"이라고 불렸습니다. Ledger에 내장된 기본 자산의 티커 심볼로는 'ripple credits' 또는 'ripples'라는 용어에서, 그리고 [ISO 4217 표준](https://www.iso.org/iso-4217-currency-codes.html)의 비국가 통화를 위한 X 접두사에서 'XRP'를 선택했습니다. 회사는 'Ripple Labs'라는 이름으로 등록되었습니다. 'XRP'라는 이름은 모든 맥락에서 자산을 참조하는 데 사용되게 되어, 기술과 회사의 유사한 이름으로 인한 혼동을 피하게 되었고, 결국 회사의 이름을 'Ripple'로 줄였습니다. 2018년 5월, [커뮤니티는 XRP를 대표하기 위해 새로운 'X' 심볼](https://twitter.com/xrpsymbol/status/1006925937571713025)을 선택했습니다. 이는 회사와 디지털 자산 양쪽에서 사용되었던 트리스켈리온 로고와 구별하기 위한 것이었습니다.
+원래 XRP Ledger는기술이 결제를 [여러 홉과 통화를 통해 전파(ripple)](../concepts/undefined-3/rippling.md)시킬 수 있도록 하기 때문에 "Ripple"이라고 불렸습니다. Ledger에 내장된 기본 자산의 티커 심볼로는 'ripple credits' 또는 'ripples'라는 용어에서, 그리고 [ISO 4217 표준](https://www.iso.org/iso-4217-currency-codes.html)의 비국가 통화를 위한 X 접두사에서 'XRP'를 선택했습니다. 회사는 'Ripple Labs'라는 이름으로 등록되었습니다. 'XRP'라는 이름은 모든 맥락에서 자산을 참조하는 데 사용되게 되어, 기술과 회사의 유사한 이름으로 인한 혼동을 피하게 되었고, 결국 회사의 이름을 'Ripple'로 줄였습니다. 2018년 5월, [커뮤니티는 XRP를 대표하기 위해 새로운 'X' 심볼](https://twitter.com/xrpsymbol/status/1006925937571713025)을 선택했습니다. 이는 회사와 디지털 자산 양쪽에서 사용되었던 트리스켈리온 로고와 구별하기 위한 것이었습니다.
 
 <table><thead><tr><th width="359.5">XRP "X" Logo</th><th>Ripple triskelion</th></tr></thead><tbody><tr><td><img src="https://xrpl.org/assets/img/xrp-x-logo.png" alt="&#x22;X&#x22; logo"></td><td><img src="https://xrpl.org/img/ripple-triskelion.png" alt="Triskelion"></td></tr></tbody></table>
 
