@@ -22,7 +22,7 @@ _XRP Ledger의 스테이블코인 발행자_를 이전에는 "**gateways**"라�
 
 외부 시스템의 자금으로 뒷받침되는 토큰을 **스테이블코인**이라고 부르기도 합니다. 여기에는 은행 계좌의 법정 화폐, 다른 블록체인의 암호화폐 또는 다른 유형의 자산과 가치 형태로 뒷받침되는 토큰이 포함됩니다. "스테이블코인(stablecoin)"이라는 용어는 토큰과 토큰이 나타내는 자산 간의 환율이 1:1(수수료 제외)로 "안정적(stable)"이어야 한다는 개념에서 유래했습니다.
 
-* 참조 : [**트러스트 라인과 발행**](https://xrpl.org/trust-lines-and-issuing.html)
+* 참조: [Trust Lines and Issuing](https://xrpl.org/trust-lines-and-issuing.html)
 
 ### XRP
 
@@ -38,7 +38,7 @@ XRP Ledger은 탈중앙화 거래소를 포함하고 있으며, 여기서 모든
 
 스테이블코인 발행자가 탈중앙화 거래소를 직접 사용할 필요는 없지만, 모든 토큰은 자동으로 거래에 사용할 수 있습니다. 토큰이 널리 사용되면 사용자들은 자연스럽게 토큰을 서로 거래하며 다른 인기 자산에 유동성을 공급할 것입니다. 발행자는 특히 토큰이 신규일 때 기준 금리로 XRP 또는 기타 인기 토큰에 유동성을 공급하고자 할 수 있습니다. 스테이블코인 발행자가 유동성을 공급하는 경우, 거래와 발행에 서로 다른 주소를 사용하는 것이 가장 좋습니다.
 
-* 참조 : 탈중앙화 거래소
+* 참조: [Decentralized Exchange](https://xrpl.org/decentralized-exchange.html)
 
 ### 권장하는 비즈니스 관행
 
@@ -58,7 +58,9 @@ XRP Ledger에서 금융기관은 일반적으로 여러 개의 XRP Ledger 주소
 * "핫 지갑"이라고도 하는 하나 이상의 **운영 주소**. 인터넷에 연결된 자동화된 시스템은 이러한 주소의 비밀 키를 사용하여 고객 및 파트너에게 이체하는 등의 일상적인 비즈니스를 수행합니다.&#x20;
 * "웜 월렛"이라고도 하는 **선택적 대기 주소**. 신뢰할 수 있는 사람이 이 주소를 사용하여 운영 주소로 돈을 이체합니다.&#x20;
 
-주요 기사: 발급 및 운영 주소
+주요 기사: [Issuing and Operational Addresses](https://xrpl.org/account-types.html)
+
+
 
 ### 수수료와 수익원(Fees and Revenue Sources)
 
@@ -90,10 +92,9 @@ KYC 프로세스는 일반적으로 다음을 목표로 합니다:
 
 금융기관과 관련 비즈니스가 위험, 특히 법적 위험과 평판 위험을 완화하기 위해서는 KYC가 매우 중요합니다. KYC 프로그램이 부적절하거나 존재하지 않는 경우 기관 또는 직원 개인이 민형사상 처벌을 받을 수 있습니다.
 
-참조:
-
-* [(USA) Bank Secrecy Act / Anti-Money Laundering Examination Manual](https://bsaaml.ffiec.gov/manual/Introduction/01)
-* [The Non-US Standard on KYC set by the Financial Action Task Force (FATF)](http://www.fatf-gafi.org/publications/fatfrecommendations/documents/fatf-recommendations.html)
+* **참조:**
+  * [(USA) Bank Secrecy Act / Anti-Money Laundering Examination Manual](https://bsaaml.ffiec.gov/manual/Introduction/01)
+  * [The Non-US Standard on KYC set by the Financial Action Task Force (FATF)](http://www.fatf-gafi.org/publications/fatfrecommendations/documents/fatf-recommendations.html)
 
 ### 자금 세탁 방지(AML) 및 테러 자금 조달 방지(CFT)
 
@@ -101,10 +102,9 @@ KYC 프로세스는 일반적으로 다음을 목표로 합니다:
 
 테러 자금 조달이란 테러 활동에 관여하는 조직이나 테러 및 그 확산을 지원하는 조직에 자금을 모집, 수집 또는 제공하는 것을 말합니다. 테러 자금 조달 방지(CFT)는 테러 자금 조달에 사용되는 자금의 흐름을 식별, 보고 및 차단하는 프로세스를 말합니다.
 
-See also:
-
-* [“International Standards on Combating Money Laundering and the Financing of Terrorism & Proliferation.” FATF, 2012](http://www.fatf-gafi.org/publications/fatfrecommendations/documents/fatf-recommendations.html)
-* [“Virtual Currencies: Key Definitions and Potential AML/CFT Risks.” FATF, 2014](http://www.fatf-gafi.org/publications/methodsandtrends/documents/virtual-currency-definitions-aml-cft-risk.html)
+* **참조:**
+  * [“International Standards on Combating Money Laundering and the Financing of Terrorism & Proliferation.” FATF, 2012](http://www.fatf-gafi.org/publications/fatfrecommendations/documents/fatf-recommendations.html)
+  * [“Virtual Currencies: Key Definitions and Potential AML/CFT Risks.” FATF, 2014](http://www.fatf-gafi.org/publications/methodsandtrends/documents/virtual-currency-definitions-aml-cft-risk.html)
 
 ### 자금 출처(Source of Funds)
 
@@ -116,10 +116,9 @@ See also:
 
 금융기관에서 자금이 범죄 활동과 관련이 있다고 의심되는 경우 해당 금융기관은 해당 규제 기관에 의심스러운 활동 보고서(SAR)를 제출해야 합니다. 의심스러운 활동을 보고하지 않으면 해당 기관은 처벌을 받을 수 있습니다.
 
-See also:
-
-* [Suspicious Activity Reporting Overview (USA FFIEC)](https://bsaaml.ffiec.gov/manual/RegulatoryRequirements/04\_ep)
-* [FATF Recommendation 16: Reporting of suspicious transactions and compliance](http://www.fatf-gafi.org/publications/fatfrecommendations/documents/fatf-recommendations.html)
+* 참조:
+  * [Suspicious Activity Reporting Overview (USA FFIEC)](https://bsaaml.ffiec.gov/manual/RegulatoryRequirements/04\_ep)
+  * [FATF Recommendation 16: Reporting of suspicious transactions and compliance](http://www.fatf-gafi.org/publications/fatfrecommendations/documents/fatf-recommendations.html)
 
 ### 트래불 룰(Travel rule)
 
@@ -133,9 +132,9 @@ See also:
 * 송금 주문의 실행 날짜, 그리고
 * 수취인의 금융기관 신원.
 
-See also:
 
-* [Funds “Travel” Regulations: Questions & Answers](https://www.fincen.gov/resources/statutes-regulations/guidance/funds-travel-regulations-questions-answers)
+
+* 참조: [Funds “Travel” Regulations: Questions & Answers](https://www.fincen.gov/resources/statutes-regulations/guidance/funds-travel-regulations-questions-answers)
 
 ### 수수료 공개 및 자금 추적(Fee Disclosure and Tracing Fund)
 
@@ -150,9 +149,8 @@ See also:
 
 해외자산통제실(OFAC)은 미국의 외교 정책 및 국가 안보 목표를 지원하기 위해 경제 및 무역 제재를 관리하고 집행하는 미국 재무부 산하 기관입니다. 모든 미국인, 미국 법인 및 그 해외 지사는 OFAC 규정을 준수해야 합니다. OFAC 규정에 따라 미국 금융기관은 OFAC가 승인하거나 법령에 의해 명시적으로 면제되지 않는 한 OFAC가 관리 및 시행하는 제재 또는 금수 프로그램에 따라 개인, 법인 또는 국가와 거래 및 기타 거래를 수행하는 것이 금지됩니다.
 
-See also:
-
-* [A list of OFAC resources](https://www.treasury.gov/resource-center/faqs/Sanctions/Pages/ques\_index.aspx)
+* **참조:**&#x20;
+  * [A list of OFAC resources](https://www.treasury.gov/resource-center/faqs/Sanctions/Pages/ques\_index.aspx)
 
 ### 가상통화 및 자금 서비스업에 대한 규제 정리
 
