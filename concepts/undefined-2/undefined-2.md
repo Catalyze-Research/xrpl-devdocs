@@ -74,7 +74,7 @@ EscrowFinish 트랜잭션은 [crypto-condition](https://datatracker.ietf.org/doc
 
 만약 시간 제한 릴리스 및 만료는 XRP Ledger가 마감될 때로 제한됩니다. crypto-condition 없이 순수하게 시간에 의해 잠겨 있는 경우, EscrowFinish는 참조 트랜잭션의 표준 [트랜잭션 비용](../transactions/transaction-cost.md)만 지불하면 됩니다.
 
-추가적인 트랜잭션 비용은 충족의 크기에 비례합니다. 현재, fulfillment를 포함한 EscrowFinish는 충족의 크기에 따라 **최소한 330** [**드롭의 XRP**](../../references/xrp-ledger/undefined/)**와 충족의 크기당 16바이트마다 10 드롭의 XRP가 추가 트랜잭션 비용으로 필요**합니다. 트랜잭션이 다중 서명인 경우, [다중 서명](../undefined-1/undefined/undefined-1.md)의 비용은 충족의 비용에 추가됩니다.
+추가적인 트랜잭션 비용은 충족의 크기에 비례합니다. 현재, fulfillment를 포함한 EscrowFinish는 충족의 크기에 따라 **최소한 330** [**드롭의 XRP**](../../references/xrp-ledger/undefined/)**와 충족의 크기당 16바이트마다 10 드롭의 XRP가 추가 트랜잭션 비용으로 필요**합니다. 트랜잭션이 다중 서명인 경우, [다중 서명](../undefined-4/undefined/undefined-1.md)의 비용은 충족의 비용에 추가됩니다.
 
 {% hint style="info" %}
 Note:
@@ -82,7 +82,7 @@ Note:
 위의 공식은 거래의 기준 비용이 10드롭의 XRP라는 가정을 기반으로 합니다.
 {% endhint %}
 
-[수수료 투표](../undefined-4/undefined-6.md)가 참조 비용 값을 변경하는 경우, 공식은 새로운 <mark style="background-color:yellow;">reference\_fee</mark>에 따라 조정됩니다. 충족을 포함한 EscrowFinish 트랜잭션의 일반적인 공식은 다음과 같습니다:
+[수수료 투표](../undefined-1/undefined-6.md)가 참조 비용 값을 변경하는 경우, 공식은 새로운 <mark style="background-color:yellow;">reference\_fee</mark>에 따라 조정됩니다. 충족을 포함한 EscrowFinish 트랜잭션의 일반적인 공식은 다음과 같습니다:
 
 ```
 reference_fee * (signer_count + 33 + (fulfillment_bytes / 16))

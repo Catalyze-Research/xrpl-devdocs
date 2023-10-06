@@ -14,7 +14,7 @@ Tip:
 
 ## 배경&#x20;
 
-<mark style="background-color:yellow;">rippled</mark> 서버는 _ledger 저장소_에 [ledger 히스토리](../../../concepts/xrp-ledger/ledger/)를 저장합니다. 이 데이터는 시간이 지남에 따라 누적됩니다.
+<mark style="background-color:yellow;">rippled</mark> 서버는 _ledger 저장소_에 [ledger 히스토리](../../../concepts/xrp-ledger/ledger.md)를 저장합니다. 이 데이터는 시간이 지남에 따라 누적됩니다.
 
 ledger  내부에서는 ledger 데이터가 "중복 제거(deduplicated)"됩니다. 다시 말해, 버전 간에 변경되지 않는 데이터는 한 번만 저장됩니다. ledger 저장소에 있는 레코드 자체에는 어떤 ledger 버전(들)이  그것들을 포함하는지를 나타내지 않습니다. 온라인 삭제 작업의 일부는 오래된 ledger 버전에서만 사용되는 레코드를 식별하는 것입니다. 이 프로세스는 시간이 많이 소요되며 디스크 I/O 및 애플리케이 캐시에 영향을 줍니다. 따라서 서버는 새로운 ledger를 닫을 때마다 오래된 데이터를 삭제할 수 없습니다.
 
@@ -22,7 +22,7 @@ ledger  내부에서는 ledger 데이터가 "중복 제거(deduplicated)"됩니�
 
 온라인 삭제 설정은 <mark style="background-color:yellow;">rippled</mark> 서버가 한 번에 몇 개의 ledger 버전을 ledger 저장소에 유지해야 하는지를 구성합니다. 그러나 지정된 숫자는 엄격한 규칙이 아닌 가이드라인입니다:
 
-* 서버는 설정된 ledger 버전 수보다 더 최근의 데이터를 삭제하지 않지만, 충분히 오랜 시간 실행되지 않았거나 네트워크와 동기화가 손실된 경우 해당 수보다 적은 양의 데이터만 사용 가능할 수 있습니다. (서버는 적어도 일부 히스토리를 보충하려고 시도합니다. 자세한 내용은 [fetching history](../../../concepts/xrp-ledger/ledger/)를 참조하십시오.)&#x20;
+* 서버는 설정된 ledger 버전 수보다 더 최근의 데이터를 삭제하지 않지만, 충분히 오랜 시간 실행되지 않았거나 네트워크와 동기화가 손실된 경우 해당 수보다 적은 양의 데이터만 사용 가능할 수 있습니다. (서버는 적어도 일부 히스토리를 보충하려고 시도합니다. 자세한 내용은 [fetching history](../../../concepts/xrp-ledger/ledger.md)를 참조하십시오.)&#x20;
 * 서버는 온라인 삭제가 자동으로 실행되도록 설정된 경우, 설정된 ledger 버전 수보다 두 배가 넘는 ledger 버전을 저장할 수 있습니다. (실행될 때마다 저장된 ledger 버전 수를 대략적으로 설정된 수로 감소시킵니다.) 서버가 바쁘서온라인 삭제가 지연된 경우 ledger 버전은 계속해서 누적될 수 있습니다. 정상적으로 작동할 때, 온라인 삭제는 서버가 설정된 ledger 버전 수의 두 배를 가지면 시작하지만, 여러 개의 ledger 버전이 더 누적될 때까지 완료되지 않을 수 있습니다.&#x20;
 * advisory deletion이 활성화된 경우, 서버는 관리자가 [can\_delete 메소드](../../../references/http-websocket-apis/api-2/undefined-1/can\_delete.md)를 호출할 때까지 획득하고 구축한 모든 ledger 버전을 저장합니다. 서버가 저장하는 데이터 양은 [can\_delete](../../../references/http-websocket-apis/api-2/undefined-1/can\_delete.md) 메소드를 호출하는 빈도와 <mark style="background-color:yellow;">online\_delete</mark> 설정이 표현하는 시간 간격에 따라 달라집니다:
   * online\_delete 간격보다 _더 자주_ <mark style="background-color:yellow;">can\_delete</mark> 메소드를 호출하는 경우, 서버는 **최대 **<mark style="background-color:yellow;">**online\_delete**</mark>** 값의 두 배까지** ledger 버전을 저장합니다. (삭제 후, 이 값은 대략적으로 online\_delete 값으로 감소합니다.) 예를 들어, 하루에 한 번 now 값을 가지고 <mark style="background-color:yellow;">online\_delete</mark> 값이 50,000인 can\_delete 메소드를 호출하는 경우, 서버는 일반적으로 삭제를 실행하기 전에 최대 100,000개의 ledger 버전을 저장합니다. 삭제를 실행한 후에, 서버는 적어도 50,000개의 ledger 버전 (약 이틀치) 유지합니다. 이러한 구성으로, 대략 모든 다른 <mark style="background-color:yellow;">can\_delete</mark> 호출은 삭제할 ledger 버전을 충분히 가지고 있지 않기 때문에 아무런 변화를 초래하지 을 것입니다.
@@ -48,7 +48,7 @@ ledger  내부에서는 ledger 데이터가 "중복 제거(deduplicated)"됩니�
 온라인 삭제와 관련된 설정은 다음과 같습니다:
 
 * <mark style="background-color:yellow;">**online\_delete**</mark> - 보관할 유효한 ledger 버전 수를 지정합니다. 서버는 주기적으로 이 숫보다 오래된 ledger 버전을 삭제합니다. 지정하지 않으면 어떠한 ledger도 삭제되지 않습니다.\
-  기본 설정 파일에서는 이 값을 2000으로 지정합니다. 이 값은 256보다 작을 수 없습니다. 왜냐하면 [수수료 투표](../../../concepts/undefined-4/undefined-6.md) 및 [수정 프로세스](../../../concepts/xrp-ledger/amendments/)와 같은 일부 이벤트는 256개의 ledger마다 업데이트 되기 때문입니다.
+  기본 설정 파일에서는 이 값을 2000으로 지정합니다. 이 값은 256보다 작을 수 없습니다. 왜냐하면 [수수료 투표](../../../concepts/undefined-1/undefined-6.md) 및 [수정 프로세스](../../../concepts/xrp-ledger/amendments/)와 같은 일부 이벤트는 256개의 ledger마다 업데이트 되기 때문입니다.
 
 {% hint style="info" %}
 Caution:

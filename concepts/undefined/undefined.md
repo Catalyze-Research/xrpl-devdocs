@@ -14,7 +14,7 @@ XRP Ledger는 그 이전의 어떤 디지털 자산과도 다른 컨센서스 �
 
 이러한 속성들은 때때로 다음의 원칙으로 요약됩니다: **정확성, 컨센서스, 진전.**
 
-이 프로토콜은 아직 진화 중이며, 그 한계와 가능한 실패 케이스에 대한 우리의 지식도 진화 중입니다. 프로토콜 자체에 대한 학문적 연구를 위해서는 [컨센서스 연구](../undefined-4/undefined-7.md)를 참조하십시오.
+이 프로토콜은 아직 진화 중이며, 그 한계와 가능한 실패 케이스에 대한 우리의 지식도 진화 중입니다. 프로토콜 자체에 대한 학문적 연구를 위해서는 [컨센서스 연구](../undefined-1/undefined-7.md)를 참조하십시오.
 
 ## 배경
 
@@ -44,11 +44,11 @@ XRP Ledger의 컨센서스 메커니즘의 핵심 원칙은 작은 신뢰가 멀
 
 검증인의 소수 비율이 항상 제대로 작동하지 않는다 해도 괜찮습니다. 신뢰하는 검증인 중 20% 미만이 잘못되었다면, 컨센서스는 원활하게 계속될 수 있으며; 무효한 트랜잭션을 확인하려면 신뢰하는 검증인의 80% 이상이 결탁해야 합니다. 만약 신뢰하는 검증인 중 20% 이상 80% 미만이 잘못되었다면, 네트워크는 진행을 멈춥니다.
 
-XRP Ledger 컨센서스 프로토콜이 다양한 도전, 공격, 그리고 실패 케이스에 어떻게 대응하는지에 대한 더 깊은 탐색을 원하신다면, [공격과 실패 모드에 대한 컨센서스 보호를 참조](../undefined-4/undefined-2.md)하세요.&#x20;
+XRP Ledger 컨센서스 프로토콜이 다양한 도전, 공격, 그리고 실패 케이스에 어떻게 대응하는지에 대한 더 깊은 탐색을 원하신다면, [공격과 실패 모드에 대한 컨센서스 보호를 참조](../undefined-1/undefined-2.md)하세요.&#x20;
 
 ## 참고
 
-* [Consensus Network Concepts](../undefined-4/): XRP Ledger 컨센서스 프로토콜의 작동 메커니즘을 자세히 설명하는 여러 기사를 참조하세요.&#x20;
+* [Consensus Network Concepts](../undefined-1/): XRP Ledger 컨센서스 프로토콜의 작동 메커니즘을 자세히 설명하는 여러 기사를 참조하세요.&#x20;
 * [Run rippled as a Validator](../../tutorials/rippled/rippled-1/rippled.md): 직접 검증인을 운영하는 방법에 대한 안내입니다.&#x20;
 * [Decentralization Strategy Update (Ripple Dev Blog)](https://xrpl.org/blog/2017/decent-strategy-update.html): XRP Ledger의 탈중앙화를 위한 Ripple의 목표와 계획에 대한 설명을 확인하세요.
 

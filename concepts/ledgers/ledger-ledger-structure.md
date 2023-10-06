@@ -51,47 +51,47 @@ Ledger 헤더는 Ledger 버전을 요약하는 데이터 블록입니다. 보고
 
 </div>
 
-Ledger 인덱스는 체인에서 해당 원장 버전의 포지션을 식별합니다. 이는 제네시스 Ledger이라고 알려진 시작 지점으로 되돌아가 한 단계 낮은 인덱스를 가진 Ledger을 기반으로 구축됩니다. 이는 모든 트랜잭션과 결과의 공개 기록을 형성합니다.
-
-
+Ledger 인덱스는 체인에서 해당 원장 버전의 포지션을 식별합니다. 이것은 한 단계 낮은 인덱스를 가진 장부 위에 구축되며, 시작점인 "genesis ledger"라고 알려진 곳까지 거슬러 올라갑니다. 이는 모든 트랜잭션과 결과의 공개 기록을 형성합니다.
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/ledger-hash-icon.svg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/ledger-hash-icon.svg" alt=""><figcaption><p>Ledger hash</p></figcaption></figure>
 
 </div>
 
-
+Ledger의 내용을 고유하게 식별하는 Ledger 해시입니다. 해시는 Ledger 버전의 세부 사항이 변경될 경우 해시가 완전히 달라지도록 계산되며, 이는 Ledger의 데이터가 손실, 수정 또는 손상되지 않았음을 보여주는 체크섬과도 같은 역할을 합니다.
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/ledger-parent-icon.svg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/ledger-parent-icon.svg" alt=""><figcaption><p>P<em>arent ledger hash</em></p></figcaption></figure>
 
 </div>
 
-
+부모 Ledger 해시입니다. Ledger 버전은 주로 그 이전의 상위 Ledgerd와의 차이에 의해 정의되므로 헤더에는 상위 Ledger의 고유 해시도 포함됩니다.
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/ledger-timestamp-icon (1).svg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/ledger-timestamp-icon (1).svg" alt=""><figcaption><p>Close time</p></figcaption></figure>
 
 </div>
 
-
+Ledger의 내용이 확정된 공식 타임스탬프인 마감 시간입니다. 이 숫자는 보통 10초 단위로 반올림됩니다.
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/ledger-state-data-hash-icon (1).svg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/ledger-state-data-hash-icon (1).svg" alt=""><figcaption><p>State data hash</p></figcaption></figure>
 
 </div>
+
+Ledger의 상태 데이터에 대한 체크섬 역할을 하는 상태 데이터 해시입니다.
 
 <div align="left">
 
-<figure><img src="../../.gitbook/assets/ledger-tx-set-hash-icon (1).svg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/ledger-tx-set-hash-icon (1).svg" alt=""><figcaption><p>T<em>ransaction set hash</em> </p></figcaption></figure>
 
 </div>
 
-
+이 Ledger의 트랜잭션 세트 데이터에 대한 체크섬 역할을 하는 트랜잭션 세트 해시입니다.
 
 <div align="left">
 
@@ -99,7 +99,15 @@ Ledger 인덱스는 체인에서 해당 원장 버전의 포지션을 식별합�
 
 </div>
 
+현존하는 총 XRP 수량과 마감 시간이 반올림된 금액과 같은 몇 가지 다른 참고 사항도 있습니다.
 
+
+
+Ledger의 트랜잭션 세트와 상태 데이터는 크기에 제한이 없지만, Ledger 헤더는 항상 고정된 크기입니다. Ledger 헤더의 정확한 데이터와 바이너리 형식은  [Ledger Header](https://xrpl.org/ledger-header.html)를 참조하세요.
+
+
+
+## 검증 상태(Validation Status)
 
 <div align="left">
 
@@ -107,7 +115,17 @@ Ledger 인덱스는 체인에서 해당 원장 버전의 포지션을 식별합�
 
 </div>
 
+서버의 고유 노드 목록에 있는 검증자 컨센서스가 Ledger 버전의 내용에 동의하면 해당 Ledger 버전은 검증이 완료되고 변경 불가능한 것으로 표시됩니다. Ledger의 내용은 후속 트랜잭션이 새로운 Ledger 버전을 만들어 체인을 계속 이어가야만 변경할 수 있습니다.
 
+Ledger 버전이 처음 생성될 때는 아직 검증되지 않은 상태입니다. 후보 트랜잭션이 다른 서버에 도착하는 시점의 차이로 인해 네트워크는 체인의 다음 단계로 여러 개의 다른 원장 버전을 생성하고 제안할 수 있습니다. 합의 프로토콜([consensus protocol](https://xrpl.org/consensus.html))은 이 중 어느 것이 검증될지 결정합니다. (검증된 원장 버전에 포함되지 않은 후보 트랜잭션은 일반적으로 다음 원장 버전의 트랜잭션 세트에 대신 포함될 수 있습니다)
+
+## Ledger Index or Ledger Hash?
+
+Ledger 버전을 식별하는 방법에는 Ledger 인덱스와 Ledger 해시라는 두 가지가 있습니다. 이 두 필드는 모두 Ledger을 식별하지만, 사용 목적은 다릅니다. Ledger 인덱스는 체인에서 Ledger의 위치를 알려주며, Ledger 해시는 Ledger의 내용을 반영합니다.
+
+서로 다른 체인의 Ledger은 Ledger 인덱스는 같지만 해시는 다를 수 있습니다. 또한, 검증되지 않은 Ledger 버전을 다룰 때, 인덱스는 같지만 내용이 다른 여러 후보 Ledger이 있을 수 있으며, 따라서 해시도 다를 수 있습니다.
+
+동일한 Ledger 해시를 가진 두 Ledger은 항상 완전히 동일합니다.
 
 
 

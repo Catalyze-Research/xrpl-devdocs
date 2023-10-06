@@ -1,6 +1,6 @@
 # Ledgers
 
-목가XRP Ledger는 모든 사람에게 열려 있는 공유 전역 ledger입니다. 개별 참여자들은 단일 기관이 그것을 관리한다는 것을 신뢰하지 않고도 ledger의 무결성을 신뢰할 수 있습니다. <mark style="background-color:yellow;">rippled</mark> 서버 소프트웨어는 매우 특정한 규칙에 따라 업데이트할 수 있는 ledger 데이터베이스를 관리함으로써 이를 달성합니다. 각 <mark style="background-color:yellow;">rippled</mark> 인스턴스는 ledger의 전체 복사본을 보관하고, <mark style="background-color:yellow;">rippled</mark> 서버의 P2P 네트워크는 후보 트랜잭션들을 서로 분배합니다. 합의 과정은 어떤 트랜잭션이 각 새로운 ledger 버전에 적용되는지 결정합니다. 참조: [컨센서스 과정](../undefined-4/undefined.md).
+목가XRP Ledger는 모든 사람에게 열려 있는 공유 전역 ledger입니다. 개별 참여자들은 단일 기관이 그것을 관리한다는 것을 신뢰하지 않고도 ledger의 무결성을 신뢰할 수 있습니다. <mark style="background-color:yellow;">rippled</mark> 서버 소프트웨어는 매우 특정한 규칙에 따라 업데이트할 수 있는 ledger 데이터베이스를 관리함으로써 이를 달성합니다. 각 <mark style="background-color:yellow;">rippled</mark> 인스턴스는 ledger의 전체 복사본을 보관하고, <mark style="background-color:yellow;">rippled</mark> 서버의 P2P 네트워크는 후보 트랜잭션들을 서로 분배합니다. 합의 과정은 어떤 트랜잭션이 각 새로운 ledger 버전에 적용되는지 결정합니다. 참조: [컨센서스 과정](../undefined-1/undefined.md).
 
 <figure><img src="../../.gitbook/assets/Ledgers_1.png" alt=""><figcaption></figcaption></figure>
 
@@ -61,7 +61,7 @@ ledger 버전이 닫힌 시간은 [ledger 헤더](../../references/xrp-ledger/le
 2. 검증자는 대부분의 다른 검증자들이(그의 UNL에 있는) 12:00:02의 닫힘 시간을 제안했고, 다른 한 사람이 12:00:03의 닫힘 시간을 제안했다는 것을 관찰합니다. 그는 컨센서스의 닫힘 시간 **12:00:02**에 맞추기 위해 제안한 닫힘 시간을 변경합니다.
 3. 검증자는 이 값을 가장 가까운 닫힘 시간 간격에 반올림하여, **12:00:00**을 얻습니다.
 4. 12:00:00은 이전 ledger의 닫힘 시간보다 크지 않기 때문에, 검증자는 닫힘 시간을 이전 ledger의 닫힘 시간보다 정확히 1초 늦게 조정합니다. 결과적으로 조정된 닫힘 시간은 **12:00:01**입니다.
-5. 검증자는 이러한 세부 사항으로 ledger를 구축하고, 결과적인 해시를 계산하며, 다른 사람들도 같은 것을 확인했다는 것을 [검증 단계](../undefined-4/undefined.md)에서 확인합니다.
+5. 검증자는 이러한 세부 사항으로 ledger를 구축하고, 결과적인 해시를 계산하며, 다른 사람들도 같은 것을 확인했다는 것을 [검증 단계](../undefined-1/undefined.md)에서 확인합니다.
 
 검증되지 않는 서버들도 모두 같은 단계를 수행합니다. 단, 그들은 기록된 닫힘 시간을 네트워크의 나머지 부분에 제안하지 않습니다.
 

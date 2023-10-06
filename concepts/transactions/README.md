@@ -1,8 +1,8 @@
 # 트랜잭션(Transactions)
 
-_트랜잭션_은 XRP Ledger을 수정할 수 있는 유일한 방법입니다. 거래는 서명, 제출, 그리고 [컨센서스 과정](../undefined-4/undefined.md)을 거친 후에 검증된 ledger 버전에 편입되어야만 최종적인 것이 됩니다. 일부 ledger 규칙은 또한 [유사 거래](../../references/xrp-ledger/undefined-1/pseudo-transactions/)를 생성하는데, 이것들은 서명되거나 제출되지 않지만, 여전히 컨센서스에 의해 승인받아야 합니다. 실패한 거래도 또한 ledger에 포함되는데, 그 이유는 스팸 방지 [트랜잭션 비용](transaction-cost.md)을 지불하기 위해 XRP 잔액을 수정하기 때문입니다.
+_트랜잭션_은 XRP Ledger을 수정할 수 있는 유일한 방법입니다. 거래는 서명, 제출, 그리고 [컨센서스 과정](../undefined-1/undefined.md)을 거친 후에 검증된 ledger 버전에 편입되어야만 최종적인 것이 됩니다. 일부 ledger 규칙은 또한 [유사 거래](../../references/xrp-ledger/undefined-1/pseudo-transactions/)를 생성하는데, 이것들은 서명되거나 제출되지 않지만, 여전히 컨센서스에 의해 승인받아야 합니다. 실패한 거래도 또한 ledger에 포함되는데, 그 이유는 스팸 방지 [트랜잭션 비용](transaction-cost.md)을 지불하기 위해 XRP 잔액을 수정하기 때문입니다.
 
-거래는 돈을 보내는 것 이상의 일을 할 수 있습니다. 다양한 [결제 유형](../undefined-2/)을 지원하는 것 외에도, XRP Ledger의 거래는 [암호 키](../undefined-1/undefined/undefined.md)를 교체하고, 다른 설정을 관리하며, XRP Ledger의 [탈중앙화 거래소](../dex/)에서 거래를 수행하는데도 사용됩니다. [<mark style="background-color:yellow;">rippled</mark> API 참조](../../tutorials/undefined-1/http-websocket-api.md)는 [트랜잭션 유형의 전체 목록](../../references/xrp-ledger/undefined-1/undefined-1/)을 제공합니다.
+거래는 돈을 보내는 것 이상의 일을 할 수 있습니다. 다양한 [결제 유형](../undefined-2/)을 지원하는 것 외에도, XRP Ledger의 거래는 [암호 키](../undefined-4/undefined/undefined.md)를 교체하고, 다른 설정을 관리하며, XRP Ledger의 [탈중앙화 거래소](../dex/)에서 거래를 수행하는데도 사용됩니다. [<mark style="background-color:yellow;">rippled</mark> API 참조](../../tutorials/undefined-1/http-websocket-api.md)는 [트랜잭션 유형의 전체 목록](../../references/xrp-ledger/undefined-1/undefined-1/)을 제공합니다.
 
 ## 거래 식별하기&#x20;
 
@@ -32,7 +32,7 @@ XRP Ledger의 전체 이력에서는 거래 해시가 고유하다는 규칙에 
 
 * 보내는 주소와 수학적으로 연관된 마스터 개인 키로부터의 단일 서명. [AccountSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 사용하여 마스터 키 페어를 비활성화하거나 활성화할 수 있습니다.&#x20;
 * 주소와 연관된 일반 개인 키와 일치하는 단일 서명. [SetRegularKey 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md)을 사용하여 일반 키 페어를 추가, 제거, 또는 교체할 수 있습니다.&#x20;
-* 주소가 소유한 서명자 목록과 일치하는 [다중 서명](../undefined-1/undefined/undefined-1.md). [SignerListSet 트랜잭션](../../references/xrp-ledger/ledger/ledger-1/signerlist.md)을 사용하여 서명자 목록을 추가, 제거, 또는 교체할 수 있습니다.&#x20;
+* 주소가 소유한 서명자 목록과 일치하는 [다중 서명](../undefined-4/undefined/undefined-1.md). [SignerListSet 트랜잭션](../../references/xrp-ledger/ledger/ledger-1/signerlist.md)을 사용하여 서명자 목록을 추가, 제거, 또는 교체할 수 있습니다.&#x20;
 
 모든 서명 유형은 다음과 같은 예외를 제외하고 모든 유형의 거래를 승인할 수 있습니다:
 
@@ -40,7 +40,7 @@ XRP Ledger의 전체 이력에서는 거래 해시가 고유하다는 규칙에 
 * [영구적으로 동결 기능을 포기할 수 있는 것](../undefined-3/undefined-2/)은 오직 마스터 개인 키 뿐입니다.&#x20;
 * 당신은 주소에서 거래를 서명하는 마지막 방법을 절대 제거할 수 없습니다.&#x20;
 
-마스터와 일반 키 페어에 대한 더 자세한 정보를 위해, [암호화 키](../undefined-1/undefined/undefined.md)를 참조해보세요.
+마스터와 일반 키 페어에 대한 더 자세한 정보를 위해, [암호화 키](../undefined-4/undefined/undefined.md)를 참조해보세요.
 
 ## 거래 서명 및 제출&#x20;
 

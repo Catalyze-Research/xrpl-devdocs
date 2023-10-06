@@ -10,10 +10,10 @@ XRP Ledger 위에 애플리케이션을 구축할 때는 이 프로세스를 이
 
 P2P XRP Ledger 네트워크는 애플리케이션에 ledger의 상태에 대한 권위있는 정보를 제공하는 전 세계적인 공유 ledger 제공합니다. 이 상태 정보에는 다음과 같은 내용이 포함됩니다:
 
-* 각 [계정](../undefined-1/undefined/)의 설정.&#x20;
+* 각 [계정](../undefined-4/undefined/)의 설정.&#x20;
 * XRP 및 [토큰](../undefined-3/)의 잔액.&#x20;
 * 분산 거래소의 거래 요청.&#x20;
-* [트랜잭션 비용](../transactions/transaction-cost.md) 및 [reserve](../undefined-1/undefined/reserves.md) 금액과 같은 네트워크 설정.&#x20;
+* [트랜잭션 비용](../transactions/transaction-cost.md) 및 [reserve](../undefined-4/undefined/reserves.md) 금액과 같은 네트워크 설정.&#x20;
 * 타임스탬프.
 
 Ledger 버전에서 포함되는 데이터에 대한 자세한 기술적 설명은 [ledger 형식 참조](../../references/xrp-ledger/ledger/) 문서를 참조하십시오.
