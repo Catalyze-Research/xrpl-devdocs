@@ -15,7 +15,7 @@
 }
 ```
 
-이 거래 명령은 다음을 의미합니다: <mark style="background-color:yellow;">rf1Bi...</mark>에서 <mark style="background-color:yellow;">ra5nK...</mark>로 정확히 13 XRP를 보내시오. 거래가 성공적으로 처리되면 정확히 그렇게 수행됩니다. 새로운 ledger 버전이 [유효화](../undefined-1/undefined.md)되기까지 일반적으로 약 4초가 소요되기 때문에, 거래가 성공적으로 생성되고 제출되며 실행되며 최종 결과가 나올 때까지 8초 이내에 완료될 수 있습니다. 현재 진행 중인 ledger 버전 이후에 큐에 들어간다고 하더라도 마찬가지입니다.
+이 거래 명령은 다음을 의미합니다: <mark style="background-color:yellow;">rf1Bi...</mark>에서 <mark style="background-color:yellow;">ra5nK...</mark>로 정확히 13 XRP를 보내시오. 거래가 성공적으로 처리되면 정확히 그렇게 수행됩니다. 새로운 ledger 버전이 [유효화](../undefined-4/undefined.md)되기까지 일반적으로 약 4초가 소요되기 때문에, 거래가 성공적으로 생성되고 제출되며 실행되며 최종 결과가 나올 때까지 8초 이내에 완료될 수 있습니다. 현재 진행 중인 ledger 버전 이후에 큐에 들어간다고 하더라도 마찬가지입니다.
 
 {% hint style="info" %}
 [Payment Transaction 유형](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)은 [교차 화폐 결제](undefined.md)와 [부분 결제](undefined-3.md)를 포함하여 일부 특수한 종류의 결제에도 사용될 수 있습니다. 부분 결제의 경우, 거래가 매우 작은 금액만 전달되었더라도 <mark style="background-color:yellow;">양</mark>에 큰 금액의 XRP가 표시될 수 있습니다. 고객에게 잘못된 금액이 입금되는 것을 방지하는 방법은 [부분 결제 악용](undefined-3.md#undefined-4)을 참조하세요.
@@ -25,13 +25,13 @@
 
 ## 펀딩 계정
 
-수학적으로 유효한 모든 주소는 최소 계정 [reserve](../undefined-4/undefined/reserves.md)를 충족할 수 있는 충분한 XRP를 지급하는 한, XRP Ledger에 해당 주소에 대한 기록이 미리 존재하지 않더라도 지급을 받을 수 있습니다. 결제가 충분한 XRP를 전달하지 못하면 실패합니다.
+수학적으로 유효한 모든 주소는 최소 계정 [reserve](../undefined-1/undefined/reserves.md)를 충족할 수 있는 충분한 XRP를 지급하는 한, XRP Ledger에 해당 주소에 대한 기록이 미리 존재하지 않더라도 지급을 받을 수 있습니다. 결제가 충분한 XRP를 전달하지 못하면 실패합니다.
 
-더 많은 정보는 [계정](../undefined-4/undefined/)을 참조하세요.
+더 많은 정보는 [계정](../undefined-1/undefined/)을 참조하세요.
 
 ## 주소 재사용
 
-XRP Ledger에서 결제를 받을 수 있는 주소는 영구적이며, XRP로 예치된 사용할 수 없는 상당한 [reserve requirement](https://xrpl.org/reserves.html) 필요합니다. 이는 다른 블록체인 시스템과는 달리 각 거래마다 다른 일회용 주소를 사용하는 것은 좋은 생각이 아닙니다. XRP Ledger의 최선의 사용 방법은 여러 거래에 동일한 주소를 재사용하는 것입니다. 해당 주소를 정기적으로 사용하는 경우(특히 인터넷에 연결된 서비스에서 관리하는 경우) 정기적으로 키를 설정하고 [일반 키](../undefined-4/undefined/undefined.md)를 미리 변경하여 키 유출 위험을 줄여야 합니다.
+XRP Ledger에서 결제를 받을 수 있는 주소는 영구적이며, XRP로 예치된 사용할 수 없는 상당한 [reserve requirement](https://xrpl.org/reserves.html) 필요합니다. 이는 다른 블록체인 시스템과는 달리 각 거래마다 다른 일회용 주소를 사용하는 것은 좋은 생각이 아닙니다. XRP Ledger의 최선의 사용 방법은 여러 거래에 동일한 주소를 재사용하는 것입니다. 해당 주소를 정기적으로 사용하는 경우(특히 인터넷에 연결된 서비스에서 관리하는 경우) 정기적으로 키를 설정하고 [일반 키](../undefined-1/undefined/undefined.md)를 미리 변경하여 키 유출 위험을 줄여야 합니다.
 
 송신자로서는 수령자가 이전 결제에서 사용한 주소와 동일한 주소를 사용한다고 가정하는 것이 좋지 않습니다. 때로는 보안 침해가 발생하여 개인 또는 기업이 주소를 변경해야 할 수 있습니다. 자금을 보내기 전에 수령자에게 현재의 수령 주소를 요청하여 침해당한 이전 주소를 통제한 악성 사용자에게 실수로 자금을 보내지 않도록 해야 합니다.
 
@@ -42,7 +42,7 @@ XRP Ledger에서 결제를 받을 수 있는 주소는 영구적이며, XRP로 �
 1. [Payment Transaction](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)의 매개변수를 유효성 검사합니다. 거래가 XRP를 보내고 전달하는 구조로 구성되어 있다면, 거래 처리 엔진은 직접적인 XRP-to-XRP 결제로 인식합니다. 유효성 검사에는 다음이 포함됩니다:
 
 * 모든 필드가 올바르게 형식화되어 있는지 확인합니다. 예를 들어, XRP 직접 결제의 경우 <mark style="background-color:yellow;">양</mark> 필드는 XRP의 drop이어야 합니다.
-* 송신 주소가 XRP Ledger에서 자금을 보유한 [계정](../undefined-4/undefined/)인지 확인합니다.
+* 송신 주소가 XRP Ledger에서 자금을 보유한 [계정](../undefined-1/undefined/)인지 확인합니다.
 * 제공된 모든 서명이 송신 주소에 대해 유효한지 확인합니다.
 * destination address가 송신 주소와 다른지 확인합니다. (다른 [데스티네이션 태그](../transactions/source-and-destination-tags.md)를 사용하여 동일한 주소로 보내는 것만으로는 충분하지 않습니다.)
 * 송신자가 결제를 보내기에 충분한 XRP 잔액을 보유하고 있는지 확인합니다.
@@ -51,7 +51,7 @@ XRP Ledger에서 결제를 받을 수 있는 주소는 영구적이며, XRP로 �
 2. 수령 주소가 자금을 보유하고 있는지 확인합니다.
 
 * 수령 주소가 자금을 보유하고 있다면, 엔진은 입금 허가 또는 <mark style="background-color:yellow;">RequireDest</mark>와 같은 추가적인 결제 수령 요구 사항을 확인합니다. 결제가 이러한 추가 요구 사항 중 어느 하나를 충족하지 않으면 결제가 실패합니다.
-* 수령 주소가 자금을 보유하고 있지 않으면, 결제가 최소 [계정 reserve](../undefined-4/undefined/reserves.md)를 충족시키기에 충분한 XRP를 전달하는지 확인합니다. 그렇지 않으면 결제가 실패합니다.
+* 수령 주소가 자금을 보유하고 있지 않으면, 결제가 최소 [계정 reserve](../undefined-1/undefined/reserves.md)를 충족시키기에 충분한 XRP를 전달하는지 확인합니다. 그렇지 않으면 결제가 실패합니다.
 
 3. 엔진은 <mark style="background-color:yellow;">양</mark> 필드에 지정된 XRP 금액에 [트랜잭션 비용](../transactions/transaction-cost.md)으로 파괴될 XRP를 더하여 송신 계정의 XRP를 차감하고 동일한 금액을 수신 계정에 입금합니다. 필요한 경우, 수신 주소에 대한 새로운 계정([AccountRoot 객체](../../references/xrp-ledger/ledger/ledger-1/accountroot.md))을 생성합니다. 새로운 계정의 시작 잔액은 결제의 <mark style="background-color:yellow;">Amount</mark>와 동일합니다. 엔진은 거래의 메타데이터에 전달된 금액 <mark style="background-color:yellow;">delivered\_amount</mark> 필드를 추가하여 얼마가 전달되었는지 나타냅니다. 받은 XRP의 양을 확인할 때는 <mark style="background-color:yellow;">양</mark> 필드가 아닌 delivered\_amount를 항상 사용해야 하며, (크로스 화폐 "부분 결제"는 Amount 필드에 명시된 것보다 적은 XRP를 전달할 수 있습니다.) 자세한 내용은 [부분 결제](undefined-3.md)를 참조하십시오.
 

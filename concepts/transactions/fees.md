@@ -10,7 +10,7 @@ XRP Ledger는 암호화에 의해 보호되며 분산형 P2P 네트워크에 의
 
 _**트랜잭션 비용**_ (때때로 트랜잭션 수수료라고도 함)은 트랜잭션 보내기 위해 파괴되는 아주 작은 XRP입니다. 이 비용은 네트워크의 부하에 따라 스케일링되며, 이는 P2P 네트워크를 스팸으로부터 보호합니다. 자세한 내용은 [트랜잭션 비용](transaction-cost.md)을 참조하십시오.
 
-_**reserve requirement**_는 계정이 보유해야 하는 최소한의 XRP입니다. 이는 ledger에 소유한 객체의 수에 따라 증가합니다. 이는 사용자가 신중하지 않거나 악의적으로 ledger의 크기를 늘리는 것을 저해합니다. 자세한 내용은 [Reserves](../undefined-4/undefined/reserves.md)를 참조하세요.
+_**reserve requirement**_는 계정이 보유해야 하는 최소한의 XRP입니다. 이는 ledger에 소유한 객체의 수에 따라 증가합니다. 이는 사용자가 신중하지 않거나 악의적으로 ledger의 크기를 늘리는 것을 저해합니다. 자세한 내용은 [Reserves](../undefined-1/undefined/reserves.md)를 참조하세요.
 
 ## 선택적 수수료(Optional Fees)
 
