@@ -16,7 +16,7 @@ _XRP Ledger의 스테이블코인 발행자_를 이전에는 "**gateways**"라�
 
 ## 배경 정보(Background Information)
 
-#### 신뢰선과 토큰(Trust Lines and Tokens) <a href="#trust-lines-and-tokens" id="trust-lines-and-tokens"></a>
+### 신뢰선과 토큰(Trust Lines and Tokens) <a href="#trust-lines-and-tokens" id="trust-lines-and-tokens"></a>
 
 기본 암호화폐인 XRP를 제외한 XRP Ledger의 모든 자산은 **토큰**으로 표시되며, 토큰의 의미를 정의하는 특정 발행자와 연결됩니다. XRP Ledger는 사용자가 원하는 토큰만 보유하고 받을 수 있도록 **신뢰선(Trustline)**이라고 하는 방향성 회계 관계 시스템을 갖추고 있습니다.
 
