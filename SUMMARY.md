@@ -10,7 +10,10 @@
 
 ## Use Cases
 
-* [결제(Payments)](use-cases/payments.md)
+* [결제(Payments)](use-cases/payments/README.md)
+  * [P2P 결제(Peer-to-Peer Payments)](use-cases/payments/p2p-peer-to-peer-payments.md)
+  * [예금 제한(Restricting Deposits)](use-cases/payments/restricting-deposits.md)
+  * [스마트 컨트랙트(Smart Contracts)](use-cases/payments/smart-contracts.md)
 * [토큰화(Tokenization)](use-cases/tokenization.md)
   * [스테이블코인 발행인(Stablecoin Issuer)](use-cases/tokenization/stablecoin-issuer.md)
   * [NFT 마켓플레이스 개요(NFT Marketplace Overview)](use-cases/tokenization/nft-nft-marketplace-overview.md)
