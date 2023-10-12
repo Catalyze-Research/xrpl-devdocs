@@ -51,7 +51,7 @@
 * [Ledgers](concepts/undefined-1/ledgers.md)
   * [Ledger 구조(Ledger Structure)](concepts/ledgers/ledger-ledger-structure.md)
   * [개방형, 폐쇄형, 검증 Ledgers(Open, Closed, and Validated Ledgers)](concepts/ledgers/ledgers-open-closed-and-validated-ledgers.md)
-  * [Ledger Close Times](concepts/ledgers/ledger-close-times.md)
+  * [Ledger 마감 시간(Ledger Close Times)](concepts/ledgers/ledger-ledger-close-times.md)
 * [트랜잭션(Transactions)](concepts/transactions/README.md)
   * [수수료(Fees)](concepts/transactions/fees.md)
   * [신뢰할 수 있는 트랜잭션 제출(Reliable Transaction Submission)](concepts/transactions/reliable-transaction-submission.md)
