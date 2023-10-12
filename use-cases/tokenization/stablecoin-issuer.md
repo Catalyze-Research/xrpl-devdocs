@@ -239,7 +239,7 @@ XRP Ledger을 통한 결제 처리에는 당연히 몇 가지 위험이 따르�
 
 <figure><img src="../../.gitbook/assets/e2g-03.png" alt=""><figcaption></figcaption></figure>
 
-### Freeze 동결
+### Freeze (동결)
 
 발행자는 규제 요건을 충족하기 위해 XRP Ledger의 회계 관계를 동결할 수 있습니다:
 
@@ -249,13 +249,13 @@ XRP Ledger을 통한 결제 처리에는 당연히 몇 가지 위험이 따르�
 
 자세한 내용은 [동결 문서](https://xrpl.org/freezes.html)를 참조하세요.
 
-### 승인된 신탁 라인
+### Authorized Trust Lines (승인된 신뢰선)
 
-XRP Ledger의 승인된 신탁 라인 기능(이전의 "승인된 계정"이라고 함)을 통해 발행자는 해당 발행자의 토큰을 보유할 수 있는 사람을 제한할 수 있으므로, 알 수 없는 XRP Ledger 주소는 토큰을 보유할 수 없습니다.
+XRP Ledger의 Authorized Trust Lines 기능(이전의 "Authorized Accounts"라고 함)을 통해 발행자는 해당 발행자의 토큰을 보유할 수 있는 사람을 제한할 수 있으므로, 알 수 없는 XRP Ledger 주소는 토큰을 보유할 수 없습니다.
 
-자세한 내용은 [승인된 신탁 라인](https://xrpl.org/authorized-trust-lines.html)을 참조하세요.
+자세한 내용은 [승인된 신뢰선](https://xrpl.org/authorized-trust-lines.html)을 참조하세요.
 
-### 출처 및 목적지 태그
+### Source and Destination Tags (출처 및 목적지 태그)
 
 목적지 태그는 XRP Ledger의 결제 기능으로, 결제의 수취인 또는 목적지를 표시하는 데 사용할 수 있습니다. 예를 들어, 발행자에 대한 XRP Ledger의 결제에는 대상 태그가 포함될 수 있으며, 이는 결제를 위해 어떤 고객에게 입금해야 하는지를 나타냅니다. 발행자는 대상 태그와 계정의 매핑을 발행자의 기록 시스템에 보관해야 합니다.
 
@@ -266,6 +266,8 @@ XRP Ledger의 승인된 신탁 라인 기능(이전의 "승인된 계정"이라�
 발급 및 운영 주소에서 목적지 태그 필요 설정을 사용하도록 설정하여 고객이 결제 금액을 송금할 때 반드시 [목적지 태그를 사용](https://xrpl.org/require-destination-tags.html)하여 자금이 입금될 위치를 표시하도록 합니다.
 
 자세한 내용은 [출처 및 대상 태그](https://xrpl.org/source-and-destination-tags.html)를 참조하세요.
+
+
 
 ## 기술적인 세부 내용
 
@@ -368,7 +370,7 @@ TransferRate 설정에 따라 SendMax 트랜잭션 매개변수를 목적지 금
 
 예를 들어: ACME가 송금 수수료를 1%로 설정한 경우, 고객 주소에서 ACME의 발행 주소로 5 EUR.ACME를 전달하기 위한 XRP Ledger 결제는 정확히 5 EUR.ACME가 소요됩니다. 그러나 고객은 5 EUR.ACME를 ACME의 운영 주소로 전달하기 위해 5.05 EUR.ACME를 전송해야 합니다. 고객이 ACME의 운영 주소로 결제한 금액에 대해 고객에게 크레딧을 지급하면 ACME는 운영 주소로 배송된 금액과 송금 수수료에 대해 고객에게 크레딧을 지급하여 고객에게 5,05유로를 ACME의 시스템에 지급합니다.
 
-### **Robustly Monitoring for Payments -**
+### **Robustly Monitoring for Payments**
 
 수신 결제를 강력하게 확인하려면 발급자는 다음을 수행해야 합니다:
 
