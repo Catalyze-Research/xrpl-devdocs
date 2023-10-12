@@ -6,7 +6,7 @@ XRP Ledger는 검열 저항성을 갖도록 설계되었습니다. 이 디자인
 
 <mark style="background-color:yellow;">rippled</mark> 서버가 네트워크와 동기화되는 동안, 검열 감지기는 최근 [컨센서스](../undefined/undefined.md) 라운드에서 수락되어 유효한 ledger에 포함되어야 했던 모든 트랜잭션을 추적합니다. 검열 감지기는 여러 라운드의 컨센서스 이후에도 유효성이 확인된 ledger에 포함되지 않은 트랜잭션을 발견하면 심각도가 높아지는 로그 메시지를 출력합니다.
 
-## 작동 방식&#x20;
+## 작동 방식(How It Works)
 
 트랜잭션 검열 감지기의 작동 원리는 다음과 같습니다:
 
@@ -16,7 +16,7 @@ XRP Ledger는 검열 저항성을 갖도록 설계되었습니다. 이 디자인
    트랜잭션이 추적에 남아 있는 한, 검열 감지기는 최대 5개의 경고 메시지까지 매 15개의  ledger마다 로그에 경고 메시지를 출력합니다. 다섯 번째 경고 메시지 이후에는 검열 감지기가 마지막으로 에러 메시지를 로그에 출력한 후, 경고 및 에러 메시지를 더 이상 출력하지 않습니다.\
    rippeled 서버 로그에서 이러한 메시지를 확인하면, 다른 서버가 해당 트랜잭션을 포함하지 못하는 이유를 조사해야 합니다. 이때 악의적인 검열보다는 거짓 양성(무고한 버그) 가능성이 높다는 가정부터 시작하는 것이 좋습니다.
 
-## 경고 메시지 예시&#x20;
+## 경고 메시지 예시(Example Warning Message)
 
 메시지 트랜잭션 검열 감지기가 18851530 ledger에서 18851545  ledger까지 15개의 ledger에 걸쳐 트랜잭션 E08D6E9754025BA2534A78707605E0601F03ACE063687A0CA1BDDACFCD1698C7가 추적기에 남아 있는 경우, 이는 아래의 예시와 같이 검열 감지기에 의해 경고 메시지가 출력됩니다.
 
@@ -24,7 +24,7 @@ XRP Ledger는 검열 저항성을 갖도록 설계되었습니다. 이 디자인
 LedgerConsensus:WRN Potential Censorship: Eligible tx E08D6E9754025BA2534A78707605E0601F03ACE063687A0CA1BDDACFCD1698C7, which we are tracking since ledger 18851530 has not been included as of ledger 18851545.
 ```
 
-## 오류 메시지 예시&#x20;
+## 오류 메시지 예시(Potential False Positives)
 
 트랜잭션 E08D6E9754025 이후 트랜잭션 검열 감지에서 발생한 오류 메시지의 예입니다BA2534A78707605E0601F03ACE063687A0CA1BDDACFCD1698C7은 18851530 ledger에서 188551605 ledger까지 75개  ledger(15개  ledger 5세트) 동안 추적기에 남아 있었습니다.
 
@@ -32,7 +32,7 @@ LedgerConsensus:WRN Potential Censorship: Eligible tx E08D6E9754025BA2534A787076
 LedgerConsensus:ERR Potential Censorship: Eligible tx E08D6E9754025BA2534A78707605E0601F03ACE063687A0CA1BDDACFCD1698C7, which we are tracking since ledger 18851530 has not been included as of ledger 18851605. Additional warnings suppressed.
 ```
 
-## 잠재적인 거짓 양성
+## 잠재적인 거짓 양성(Potential False Positives)
 
 트랜잭션 검열 감지기는 특정 시나리오에서 거짓 양성을 출력할 수 있습니다. 이 경우, 거짓 양성이란 감지기가 15개 이상의  ledger에 걸쳐 추적에 남아 있는 트랜잭션을  무고한 이유로 플래그를 매긴 것을 의미합니다.
 

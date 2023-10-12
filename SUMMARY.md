@@ -37,7 +37,7 @@
   * [수정안(Amendments)](concepts/xrp-ledger/amendments/README.md)
     * [XRP Ledger에 코드를 기여하는 방법](concepts/xrp-ledger/amendments/xrp-ledger.md)
     * [알려진 수정안](concepts/xrp-ledger/amendments/undefined.md)
-  * [클리오 서버](concepts/xrp-ledger/undefined-2.md)
+  * [클리오 서버(The Clio Server)](concepts/xrp-ledger/the-clio-server.md)
 * [컨센서스 네트워크](concepts/undefined-4/README.md)
   * [컨센서스](concepts/undefined-4/undefined.md)
   * [컨센서스 원칙과 규칙](concepts/undefined-4/undefined-1.md)

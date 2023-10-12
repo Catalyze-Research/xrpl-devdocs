@@ -1,4 +1,4 @@
-# 클리오 서버
+# 클리오 서버(The Clio Server)
 
 클리오는 검증된 ledger 데이터에 대한 WebSocket 또는 HTTP API 호출을 위해 최적화된 XRP Ledger API 서버입니다.
 
@@ -10,7 +10,7 @@
 
 클리오는 완전한 [HTTP / WebSocket APIs](https://xrpl.org/http-websocket-apis.html)를 제공하지만, 기본적으로 유효 데이터만 반환합니다. P2P 네트워크에 액세스가 필요한 요청의 경우, 클리오는 자동으로 P2P 네트워크의 <mark style="background-color:yellow;">rippled</mark> 서버로 요청을 전달하고 응답을 반환합니다.
 
-## 클리오 서버를 실행해야 하는 이유는 무엇인가요?&#x20;
+## 클리오 서버를 실행해야 하는 이유는 무엇인가요? (Why Should I Run a Clio Server?)
 
 클리오 서버를 자체 실행하는 이유는 여러 가지가 있을 수 있지만, 대부분 다음과 같이 요약할 수 있습니다: P2P 네트워크에 연결된 <mark style="background-color:yellow;">rippled</mark> 서버의 부하 감소, 낮은 메모리 사용량 및 저장 공간 오버헤드, 쉬운 수평 확장 및 API 요청에 대한 높은 처리량입니다.
 
@@ -19,7 +19,7 @@
 * 쉬운 수평 확장 - 여러 클리오 서버가 동일한 데이터 세트에 액세스를 공유할 수 있도록 함으로써, 고가용성 클리오 서버 클러스터를 구축할 수 있습니다.
 * API 요청에 대한 높은 처리량 - 클리오 서버는 하나 이상의 신뢰할 수 있는 <mark style="background-color:yellow;">rippled</mark> 서버에서 검증된 데이터를 추출하고 이 데이터를 효율적으로 저장합니다. 따라서 API 호출을 효율적으로 처리하여 높은 처리량과 때로는 낮은 지연시간을 제공합니다.
 
-## 클리오 서버는 어떻게 작동하나요?&#x20;
+## 클리오 서버는 어떻게 작동하나요?(How does a Clio Server Work?)
 
 <figure><img src="https://xrpl.org/img/clio-basic-architecture.svg" alt="" width="563"><figcaption></figcaption></figure>
 
