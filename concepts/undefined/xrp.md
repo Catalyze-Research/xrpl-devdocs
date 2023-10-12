@@ -31,5 +31,5 @@ XRP의 가장 작은 단위는 Ripple 포럼 회원 ThePiachu의 제안에 따�
 ## 참고
 
 * [XRP 보내기(Interactive Tutorial)](../../tutorials/undefined-1/xrp.md)
-* [거래소에 XRP 상장하기](../../tutorials/xrp-ledger/xrp.md)
+* [거래소에 XRP 상장하기](../../use-cases/decentralized-finance/xrp-list-xrp-as-an-exchange.md)
 * [화폐 형식](../../references/xrp-ledger/undefined/undefined.md)

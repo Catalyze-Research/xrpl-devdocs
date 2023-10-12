@@ -37,7 +37,7 @@ XRP Ledger 데이터에 접근하기 위해 [프로그래밍 라이브러리](ht
 
 ## 앱과 서비스
 
-스택의 꼭대기에서는 정말로 흥미로운 일들이 일어납니다. 앱과 서비스는 사용자와 디바이스가 XRP Ledger에 연결하는 방법을 제공합니다. 이 수준에서, 거래소는 [XRP를 상장하고](../../tutorials/xrp-ledger/xrp.md), [게이트웨이는 분산 거래에 사용되는 다른 통화를 발행하며](../../tutorials/xrp-ledger/undefined.md), 지갑은 XRP를 사고, 팔고, 보유하는 사용자 인터페이스를 제공합니다. 그 외에도 더 높은 수준에 추가 서비스가 층층이 쌓이는 등 많은 가능성이 있습니다.&#x20;
+스택의 꼭대기에서는 정말로 흥미로운 일들이 일어납니다. 앱과 서비스는 사용자와 디바이스가 XRP Ledger에 연결하는 방법을 제공합니다. 이 수준에서, 거래소는 [XRP를 상장하고](../../use-cases/decentralized-finance/xrp-list-xrp-as-an-exchange.md), [게이트웨이는 분산 거래에 사용되는 다른 통화를 발행하며](../../tutorials/xrp-ledger/undefined.md), 지갑은 XRP를 사고, 팔고, 보유하는 사용자 인터페이스를 제공합니다. 그 외에도 더 높은 수준에 추가 서비스가 층층이 쌓이는 등 많은 가능성이 있습니다.&#x20;
 
 XRP뿐만 아니라 다른 많은 가치 표시 방법과 호환되는 애플리케이션을 구축하는 좋은 방법은 XRP에 정착하여 [Interledger Protocol](https://interledger.org/)을 사용하는 것입니다.
 

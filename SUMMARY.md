@@ -19,6 +19,7 @@
   * [NFT 마켓플레이스 개요(NFT Marketplace Overview)](use-cases/tokenization/nft-nft-marketplace-overview.md)
 * [탈중앙화 금융(Decentralized Finance)](use-cases/decentralized-finance/README.md)
   * [알고리즘 트레이딩(Algorithmic Trading)](use-cases/decentralized-finance/algorithmic-trading.md)
+  * [거래소에 XRP 상장하기((List XRP as an Exchange)](use-cases/decentralized-finance/xrp-list-xrp-as-an-exchange.md)
 
 ## Concepts
 
@@ -161,8 +162,7 @@
   * [글로벌 동결 시행](tutorials/undefined-5/undefined-3.md)
   * [신뢰선 동결하기](tutorials/undefined-5/undefined-4.md)
 * [XRP Ledger 비즈니스](tutorials/xrp-ledger/README.md)
-  * [거래소에 XRP 상장하기](tutorials/xrp-ledger/xrp.md)
-  * [XRP 차트에 거래소 등록하기](tutorials/xrp-ledger/xrp-1.md)
+  * [XRP 차트에 거래소 등록하기](tutorials/xrp-ledger/xrp.md)
   * [스테이블코인 발행자 되기](tutorials/xrp-ledger/undefined.md)
 * [rippled 서버 관리](tutorials/rippled/README.md)
   * [rippled 설치](tutorials/rippled/rippled/README.md)
