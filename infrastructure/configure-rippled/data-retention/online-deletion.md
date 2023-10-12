@@ -48,7 +48,7 @@ ledger  내부에서는 ledger 데이터가 "중복 제거(deduplicated)"됩니�
 온라인 삭제와 관련된 설정은 다음과 같습니다:
 
 * <mark style="background-color:yellow;">**online\_delete**</mark> - 보관할 유효한 ledger 버전 수를 지정합니다. 서버는 주기적으로 이 숫보다 오래된 ledger 버전을 삭제합니다. 지정하지 않으면 어떠한 ledger도 삭제되지 않습니다.\
-  기본 설정 파일에서는 이 값을 2000으로 지정합니다. 이 값은 256보다 작을 수 없습니다. 왜냐하면 [수수료 투표](../../../concepts/undefined-4/undefined-6.md) 및 [수정 프로세스](../../../concepts/xrp-ledger/amendments/)와 같은 일부 이벤트는 256개의 ledger마다 업데이트 되기 때문입니다.
+  기본 설정 파일에서는 이 값을 2000으로 지정합니다. 이 값은 256보다 작을 수 없습니다. 왜냐하면 [수수료 투표](../../../concepts/consensus-protocol/undefined-3.md) 및 [수정 프로세스](../../../concepts/xrp-ledger/amendments/)와 같은 일부 이벤트는 256개의 ledger마다 업데이트 되기 때문입니다.
 
 {% hint style="info" %}
 Caution:

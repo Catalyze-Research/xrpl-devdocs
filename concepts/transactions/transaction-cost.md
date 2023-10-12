@@ -49,7 +49,7 @@
 
 새 ledger 버전마다 서버는 이전 ledger의 트랜잭션 수를 기준으로 개방 ledger에 포함할 트랜잭션 수에 대한 소프트 한도를 선택합니다. 개방 ledger 비용은 개방 ledger의 트랜잭션 수가 소프트 한도와 같아질 때까지는 스케일링되지 않은 최소 트랜잭션 비용과 같습니다. 그 이후에는 개방 ledger에 포함된 각 트랜잭션에 대해 개방 ledger 비용이 기하급수적으로 증가합니다. 다음 ledger에 대해 서버는 현재 ledger에 소프트 한도보다 많은 트랜잭션이 포함되어 있으면 소프트 한도를 증가시키고, 컨센서스 프로세스가 5초 이상 걸리면 소프트 한도를 감소시킵니다.
 
-개방 ledger 비용 요구 사항은 [거래의 정상 비용에 비례](transaction-cost.md#undefined-5)하며, 절대 거래 비용이 아닙니다. 일반적으로 더 높은 요구 사항을 가진 거래 유형, 예를 들어 [다중 서명 거래](../undefined-1/undefined/undefined-1.md)는 최소 거래 비용 요구 사항을 가진 거래보다 개방 ledger 비용을 충족하기 위해 더 많이 지불해야 합니다.
+개방 ledger 비용 요구 사항은 [거래의 정상 비용에 비례](transaction-cost.md#undefined-5)하며, 절대 거래 비용이 아닙니다. 일반적으로 더 높은 요구 사항을 가진 거래 유형, 예를 들어 [다중 서명 거래](../undefined-3/undefined/undefined-1.md)는 최소 거래 비용 요구 사항을 가진 거래보다 개방 ledger 비용을 충족하기 위해 더 많이 지불해야 합니다.
 
 참고:  [Fee Escalation explanation in rippled repository ](https://github.com/ripple/rippled/blob/release/src/ripple/app/misc/FeeEscalation.md).
 
@@ -61,7 +61,7 @@
 
 ## 참조 거래 비용(Reference Transaction Cost)
 
-"참조 거래"는 부하 스케일링 전에 필요한 [트랜잭션 비용](transaction-cost.md) 측면에서 가장 저렴한(무료가 아닌) 거래입니다. 대부분의 거래는 참조 거래와 동일한 비용을 갖습니다. [다중 서명](../undefined-1/undefined/undefined-1.md) 트랜잭션과 같은 일부 거래는 이 비용의 배수를 요구합니다. 개방 ledger 비용이 상승하면, 요구 사항은 거래의 기본 비용에 비례합니다.
+"참조 거래"는 부하 스케일링 전에 필요한 [트랜잭션 비용](transaction-cost.md) 측면에서 가장 저렴한(무료가 아닌) 거래입니다. 대부분의 거래는 참조 거래와 동일한 비용을 갖습니다. [다중 서명](../undefined-3/undefined/undefined-1.md) 트랜잭션과 같은 일부 거래는 이 비용의 배수를 요구합니다. 개방 ledger 비용이 상승하면, 요구 사항은 거래의 기본 비용에 비례합니다.
 
 ## 수수료 수준(Fee Levels)
 
@@ -96,7 +96,7 @@
 
 모든 서명된 거래는 거래 비용을 [<mark style="background-color:yellow;">수수료</mark> 필드](fees.md)에 포함해야 합니다. 서명된 거래의 모든 필드와 마찬가지로, 이 필드는 서명을 무효화하지 않고 변경할 수 없습니다.
 
-일반적으로, XRP Ledger는 거래를 서명된 그대로 실행합니다. (그렇지 않을 경우 분산 합의 네트워크를 조정하는 것은 적어도 어렵습니다.) 이 때문에, <mark style="background-color:yellow;">수수료</mark> 필드에서 지정된 정확한 XRP 양이 모든 네트워크 부분의 현재 최소 거래 비용보다 훨씬 많을지라도 모든 거래는 XRP를 파괴합니다. 거래 비용은 계정의 [reserve requirement](../undefined-1/undefined/reserves.md)을 위해 별도로 설정될 XRP까지 파괴할 수 있습니다.
+일반적으로, XRP Ledger는 거래를 서명된 그대로 실행합니다. (그렇지 않을 경우 분산 합의 네트워크를 조정하는 것은 적어도 어렵습니다.) 이 때문에, <mark style="background-color:yellow;">수수료</mark> 필드에서 지정된 정확한 XRP 양이 모든 네트워크 부분의 현재 최소 거래 비용보다 훨씬 많을지라도 모든 거래는 XRP를 파괴합니다. 거래 비용은 계정의 [reserve requirement](../undefined-3/undefined/reserves.md)을 위해 별도로 설정될 XRP까지 파괴할 수 있습니다.
 
 거래에 서명하기 전에, 우리는 현재의 부하 기반 거래 비용을 조회하는 것을 추천합니다. 부하 스케일링 때문에 거래 비용이 높다면, 감소할 때까지 기다리고 싶을 수 있습니다. 거래를 즉시 제출할 계획이 없다면, 거래 비용의 미래 부하 기반 변동을 고려하여 약간 더 높은 거래 비용을 지정하는 것을 추천합니다.
 
@@ -137,7 +137,7 @@
 
 ## 거래 비용 변경(Changing the Transaction Cost)
 
-XRP Ledger는 XRP의 가치가 장기적으로 변하는 것을 반영하기 위해 최소 거래 비용을 변경하는 메커니즘이 있습니다. 어떤 변경이든 컨센서스 과정을 통해 승인받아야 합니다. 더 자세한 정보는 [수수료 투표](../undefined-4/undefined-6.md)를 참조하십시오.
+XRP Ledger는 XRP의 가치가 장기적으로 변하는 것을 반영하기 위해 최소 거래 비용을 변경하는 메커니즘이 있습니다. 어떤 변경이든 컨센서스 과정을 통해 승인받아야 합니다. 더 자세한 정보는 [수수료 투표](../consensus-protocol/undefined-3.md)를 참조하십시오.
 
 
 

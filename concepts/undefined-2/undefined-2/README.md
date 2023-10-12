@@ -72,4 +72,4 @@ XRP Ledger는 발행자가 발행한 자금의 의무를 준수할 것을 강제
 
 동결 없음 설정은 주소로부터 발행된 모든 토큰에 적용됩니다. 일부 토큰을 동결하고 다른 토큰을 동결하지 않기 위해서는 각각의 토큰에 대해 서로 다른 주소를 사용해야 합니다.
 
-동결 없음 설정은 해당 주소의 마스터 키 비밀로 서명된 트랜잭션으로만 활성화할 수 있습니다. [일반 키](../../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md)나 [다중 서명 트랜잭션](../../undefined-1/undefined/undefined-1.md)은 동결 없음을 활성화하는 데 사용할 수 없습니다.\
+동결 없음 설정은 해당 주소의 마스터 키 비밀로 서명된 트랜잭션으로만 활성화할 수 있습니다. [일반 키](../../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md)나 [다중 서명 트랜잭션](../../undefined-3/undefined/undefined-1.md)은 동결 없음을 활성화하는 데 사용할 수 없습니다.\

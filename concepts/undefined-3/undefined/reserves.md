@@ -4,7 +4,7 @@ XRP Ledger는 스팸 또는 악의적인 사용으로 인해 과도하게 커지
 
 계정을 보유하려면 해당 주소는 공유 전역 ledger에 최소한의 XRP 금액을 보유해야 합니다. 새 주소에 자금을 지원하기 위해서는 해당 주소로 충분한 XRP를 받아 reserve requirements를 충족해야 합니다. reserved XRP를 다른 사람에게 보낼 수는 없지만 [계정을 삭제함](./#undefined-3)으로써 일부 XRP를 회수할 수 있습니다.
 
-reserve requirements은 [수수료 투표](../../undefined-4/undefined-6.md) 과정을 통해 시간이 지남에 따라 변경될 수 있으며, 여기서 유효성 검증인 새로운 reserve 설정에 동의할 수 있습니다.
+reserve requirements은 [수수료 투표](../../consensus-protocol/undefined-3.md) 과정을 통해 시간이 지남에 따라 변경될 수 있으며, 여기서 유효성 검증인 새로운 reserve 설정에 동의할 수 있습니다.
 
 ## 기본 Reserve과 소유자 Reserve&#x20;
 
@@ -24,7 +24,7 @@ Mainnet에서 현재 reserve requirement은 다음과 같습니다:
 
 ledger에는 특정 계정이 소유하는 여러 객체(ledger entries)가 있습니다. 일반적으로 객체를 생성한 계정이 소유자(owner)가 됩니다. 각 객체는 소유자의 총 reserve requirement를 owner reserve 만큼 증가시킵니다. 객체가 ledger에서 제거되면 예치 요구 사항에는 더 이상 포함되지 않습니다.
 
-소유자의 reserve requirement에 포함되는 객체는 다음과 같습니다: [Checks](../../undefined-2/undefined-1.md), [Deposit Preauthorizations](undefined-3.md), [Escrows](../../undefined-2/undefined-2.md), [NFT Offers](../../undefined-3/non-fungible-tokens/xrp-ledger-nft.md), [NFT Pages](../../undefined-3/non-fungible-tokens/), [Offers](../../../references/xrp-ledger/ledger/ledger-1/offer.md), [Payment Channels](../../undefined-2/undefined-4.md), [Signer Lists](undefined-1.md), [Tickets](../../undefined-2/undefined-1.md), 그리고 [신뢰선](../../undefined-3/undefined.md).
+소유자의 reserve requirement에 포함되는 객체는 다음과 같습니다: [Checks](../../undefined-1/undefined-1.md), [Deposit Preauthorizations](undefined-3.md), [Escrows](../../undefined-1/undefined-2.md), [NFT Offers](../../undefined-2/non-fungible-tokens/xrp-ledger-nft.md), [NFT Pages](../../undefined-2/non-fungible-tokens/), [Offers](../../../references/xrp-ledger/ledger/ledger-1/offer.md), [Payment Channels](../../undefined-1/undefined-4.md), [Signer Lists](undefined-1.md), [Tickets](../../undefined-1/undefined-1.md), 그리고 [신뢰선](../../undefined-2/undefined.md).
 
 일부 특수한 경우:
 
@@ -57,4 +57,4 @@ Tip:
 
 ## Reserve Requirements 변경&#x20;
 
-XRP Ledger에는 reserve requirement를 조정하는 메커니즘이 있습니다. 이런 조정은 예를 들어, XRP의 장기적인 가치 변동, 일반 기계 하드웨어의 용량 향상, 또는 서버 소프트웨어 구현의 효율성 향상 등을 고려할 수 있습니다. 어떤 변경사항이든 합의 과정을 통해 승인 받아야 합니다. 더 많은 정보는 [수수료 투표](../../undefined-4/undefined-6.md)를 참조하세요.
+XRP Ledger에는 reserve requirement를 조정하는 메커니즘이 있습니다. 이런 조정은 예를 들어, XRP의 장기적인 가치 변동, 일반 기계 하드웨어의 용량 향상, 또는 서버 소프트웨어 구현의 효율성 향상 등을 고려할 수 있습니다. 어떤 변경사항이든 합의 과정을 통해 승인 받아야 합니다. 더 많은 정보는 [수수료 투표](../../consensus-protocol/undefined-3.md)를 참조하세요.

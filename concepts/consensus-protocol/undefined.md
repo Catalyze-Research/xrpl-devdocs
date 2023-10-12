@@ -25,15 +25,15 @@
 
 XRP Ledger는 모든 트랜잭션에서 다음과 같은 불변성을 확인합니다:
 
-* [트랜잭션 수수료 체크.](undefined-3.md#undefined-3)
-* [XRP 생성 금지.](undefined-3.md#xrp)
-* [계정 루트 삭제 금지. ](undefined-3.md#undefined-4)
-* [XRP 잔고 체크.](undefined-3.md#xrp-1)
-* [ledger 항목 유형 일치.](undefined-3.md#ledger)
-* [XRP 신뢰선 없음.](undefined-3.md#xrp-2)
-* [잘못된 제안 없음.](undefined-3.md#undefined-5)
-* [0 XRP 에스크로 금지.](undefined-3.md#0-xrp)
-* [유효한 새 계정 루트. ](undefined-3.md#undefined-6)
+* [트랜잭션 수수료 체크.](undefined.md#undefined-3)
+* [XRP 생성 금지.](undefined.md#xrp)
+* [계정 루트 삭제 금지. ](undefined.md#undefined-4)
+* [XRP 잔고 체크.](undefined.md#xrp-1)
+* [ledger 항목 유형 일치.](undefined.md#ledger)
+* [XRP 신뢰선 없음.](undefined.md#xrp-2)
+* [잘못된 제안 없음.](undefined.md#undefined-5)
+* [0 XRP 에스크로 금지.](undefined.md#0-xrp)
+* [유효한 새 계정 루트. ](undefined.md#undefined-6)
 
 ## 트랜잭션 수수료 체크
 

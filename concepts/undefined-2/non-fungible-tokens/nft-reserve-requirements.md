@@ -4,11 +4,11 @@ NFT를 발행하고 보유하며 판매를 위해서는 reserve로 XRP를 보유
 
 ## 기본 Reserve
 
-귀하의 계정은 현재 10 XRP의 기본 reserve을 보유해야 합니다. 기본 reserve XRP 금액은 변경될 수 있습니다. [기본 reserve 및 소유자 reserve](../../undefined-1/undefined/reserves.md)을 참조하세요.
+귀하의 계정은 현재 10 XRP의 기본 reserve을 보유해야 합니다. 기본 reserve XRP 금액은 변경될 수 있습니다. [기본 reserve 및 소유자 reserve](../../undefined-3/undefined/reserves.md)을 참조하세요.
 
 ## 소유자 Reserve&#x20;
 
-XRP Ledger에서 귀하가 소유한 개체 당 소유자 reserve가 현재 2 XRP로 필요합니다. 이는 사용자가 필요 없는 데이터로 ledger를 스팸하게 하지 않도록 하고 더 이상 필요하지 않은 데이터를 정리하도록 유도하기 위한 것입니다. 소유자 reserve 금액은 변경될 수 있습니다. [기본 reserve 및 소유자 reserve](../../undefined-1/undefined/reserves.md)을 참조하세요.
+XRP Ledger에서 귀하가 소유한 개체 당 소유자 reserve가 현재 2 XRP로 필요합니다. 이는 사용자가 필요 없는 데이터로 ledger를 스팸하게 하지 않도록 하고 더 이상 필요하지 않은 데이터를 정리하도록 유도하기 위한 것입니다. 소유자 reserve 금액은 변경될 수 있습니다. [기본 reserve 및 소유자 reserve](../../undefined-3/undefined/reserves.md)을 참조하세요.
 
 NFT의 경우, 개체는 개별 NFT를 의미하는 것이 아닌 계정이 소유한 <mark style="background-color:yellow;">NFTokenPage</mark> 객체를 의미합니다. <mark style="background-color:yellow;">NFTokenPage</mark> 객체는 최대 32개의 NFT를 저장할 수 있습니다.
 
@@ -37,7 +37,7 @@ NFT를 판매한 후에는 예의상 입찰자를 대신해 유효기간이 지�
 
 ## 실제적인 고려사항
 
-NFT를 발행, 보유 및 구매, 판매할 때 reserve requirements은 빠르게 누적될 수 있습니다. 이로 인해 거래 중에 계정의 reserve requirements보다 낮아질 수 있습니다. requirements 미달 시 거래 능력이 제한될 수 있습니다. [reserve requirements 미달 시](../../undefined-1/undefined/reserves.md)를 참조하세요.
+NFT를 발행, 보유 및 구매, 판매할 때 reserve requirements은 빠르게 누적될 수 있습니다. 이로 인해 거래 중에 계정의 reserve requirements보다 낮아질 수 있습니다. requirements 미달 시 거래 능력이 제한될 수 있습니다. [reserve requirements 미달 시](../../undefined-3/undefined/reserves.md)를 참조하세요.
 
 새로운 계정을 생성하고 NFT를 발행한 다음 XRP Ledger에 NFTokenSellOffer를 생성하는 경우, 최소 14 XRP의 reserve이 필요합니다.
 

@@ -1,13 +1,13 @@
-# rippled 서버 모드
+# rippled 서버 모드(rippled Server Modes)
 
 rippled 서버 소프트웨어는 설정에 따라 여러 가지 모드로 실행될 수 있습니다. 주요 모드는 다음과 같습니다:
 
-* [**P2P 모드**](rippled.md#p2p) - 이것이 서버의 주요 모드입니다: P2P 네트워크를 따르며 트랜잭션을 처리하고 [**ledger 히스토리**](ledger/) 일부를 유지합니다. 이 모드는 다음과 같은 역할을 수행할 수 있도록 구성할 수 있습니다:
-  * [**유효성 검증인**](rippled.md#undefined-2) - 컨센서스에 참여하여 네트워크를 안전하게 유지합니다.
-  * [**API 서버**](rippled.md#api) - 공유된 ledger에서 데이터를 읽고 트랜잭션을 제출하며 ledger의 활동을 감시하는 데에 API 액세스를 제공합니다. 선택적으로 완전한 히스토리 서버가 될 수 있으며, 이는 트랜잭션 및 ledger 히스토리의 완전한 기록을 유지합니다.
-  * [**허브 서버**](rippled.md#undefined-1) - 다른 많은 P2P 네트워크 구성원 간의 메시지 중계를 담당합니다.
-* [**리포팅 모드**](rippled.md#undefined-3) - 관계형 데이터베이스에서 API 요청을 제공하기 위한 특수 모드입니다. P2P네트워크에 참여하지 않으므로 P2P 모드 서버를 실행하고 신뢰할 수 있는 gRPC 연결을 통해 리포팅 모드 서버에 연결해야 합니다. [![New in: rippled 1.7.0](https://img.shields.io/badge/New%20in-rippled%201.7.0-blue.svg)](https://github.com/ripple/rippled/releases/tag/1.7.0)
-* [**Stand-alone 모드**](rippled.md#stand-alone) - 테스트용 오프라인 모드입니다. P2P 네트워크에 연결되지 않으며 컨센서스를 사용하지 않습니다.
+* [**P2P 모드**](rippled-rippled-server-modes.md#p2p) - 이것이 서버의 주요 모드입니다: P2P 네트워크를 따르며 트랜잭션을 처리하고 [**ledger 히스토리**](ledger/) 일부를 유지합니다. 이 모드는 다음과 같은 역할을 수행할 수 있도록 구성할 수 있습니다:
+  * [**유효성 검증인**](rippled-rippled-server-modes.md#undefined-2) - 컨센서스에 참여하여 네트워크를 안전하게 유지합니다.
+  * [**API 서버**](rippled-rippled-server-modes.md#api) - 공유된 ledger에서 데이터를 읽고 트랜잭션을 제출하며 ledger의 활동을 감시하는 데에 API 액세스를 제공합니다. 선택적으로 완전한 히스토리 서버가 될 수 있으며, 이는 트랜잭션 및 ledger 히스토리의 완전한 기록을 유지합니다.
+  * [**허브 서버**](rippled-rippled-server-modes.md#undefined-1) - 다른 많은 P2P 네트워크 구성원 간의 메시지 중계를 담당합니다.
+* [**리포팅 모드**](rippled-rippled-server-modes.md#undefined-3) - 관계형 데이터베이스에서 API 요청을 제공하기 위한 특수 모드입니다. P2P네트워크에 참여하지 않으므로 P2P 모드 서버를 실행하고 신뢰할 수 있는 gRPC 연결을 통해 리포팅 모드 서버에 연결해야 합니다. [![New in: rippled 1.7.0](https://img.shields.io/badge/New%20in-rippled%201.7.0-blue.svg)](https://github.com/ripple/rippled/releases/tag/1.7.0)
+* [**Stand-alone 모드**](rippled-rippled-server-modes.md#stand-alone) - 테스트용 오프라인 모드입니다. P2P 네트워크에 연결되지 않으며 컨센서스를 사용하지 않습니다.
 
 <mark style="background-color:yellow;">rippled</mark> 실행 파일은 로컬에서 [<mark style="background-color:yellow;">rippled</mark> API](../../references/http-websocket-apis/)에 액세스하기 위한 클라이언트 어플리케이으로 실행될 수도 있습니다. (이 경우 동일한 바이너리의 두 인스턴스가 함께 실행될 수 있습니다. 하나는 서버로, 다른 하나는 일시적으로 클라이언트로 실행되고 종료됩니다.)
 
@@ -19,9 +19,9 @@ P2P 모드는 <mark style="background-color:yellow;">rippled</mark> 서버의 �
 
 P2P 모드 서버는 추가 기능을 제공할 수 있도록 구성할 수 있습니다. 최소한의 수정이 가해진 구성 파일로 실행되는 P2P 모드 서버는 스톡 서버라고도 합니다. 다른 구성 옵션으로는 다음이 있습니다:
 
-* [검증인.](rippled.md#undefined-2)
-* [API 서버. ](rippled.md#api)
-* [퍼블릭 허브.](rippled.md#undefined-1)
+* [검증인.](rippled-rippled-server-modes.md#undefined-2)
+* [API 서버. ](rippled-rippled-server-modes.md#api)
+* [퍼블릭 허브.](rippled-rippled-server-modes.md#undefined-1)
 
 P2P 모드 서버는 기본적으로 [Mainnet](https://xrpl.org/parallel-networks.html)에 연결합니다.
 
@@ -45,7 +45,7 @@ P2P 모드 서버는 기본적으로 [Mainnet](https://xrpl.org/parallel-network
 
 ## 검증인(Validators)
 
-XRP ledger의 견고성은 각각 일부 다른 검증인 서로가 공모하지 않을 것이라는 신뢰를 가지고 있는 연결된 검증인 웹에 의존합니다. 다른 P2P 모드 서버와 마찬가지로 각 트랜잭션을 처리하고 ledger 상태를 계산하는 것 외에, 검증인 [컨센서스 프로토콜](../undefined-4/undefined.md)에 적극적으로 참여합니다. XRP ledger에 의존하는 경우 검증 과정에 참여하여 컨센서스 프로세스에 기여하는 것이 중요합니다.
+XRP ledger의 견고성은 각각 일부 다른 검증인 서로가 공모하지 않을 것이라는 신뢰를 가지고 있는 연결된 검증인 웹에 의존합니다. 다른 P2P 모드 서버와 마찬가지로 각 트랜잭션을 처리하고 ledger 상태를 계산하는 것 외에, 검증인 [컨센서스 프로토콜](../consensus-protocol/consensus-structure.md)에 적극적으로 참여합니다. XRP ledger에 의존하는 경우 검증 과정에 참여하여 컨센서스 프로세스에 기여하는 것이 중요합니다.
 
 유효성 검사는 작은 계산 리소스만 사용하지만, 단일 엔티티나 조직이 여러 개의 유효성 검증인들을 운영하는 것은 공모에 대한 더 많은 보호를 제공하지 않기 때문에 큰 이점이 없습니다. 각 검증인은 고유한 암호키 쌍으로 자신을 식별하며 이를 주의 깊게 관리해야 합니다. 여러 검증인들은 키 쌍을 공유해서는 안 됩니다. 이러한 이유로 유효성 검사는 기본적으로 비활성화되어 있습니다.
 

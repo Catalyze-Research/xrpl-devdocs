@@ -19,7 +19,7 @@ XRP Ledger는 "gossip" 프로토콜을 사용하여 XRP Ledger 네트워크에�
 
 [peers 메소드](../../references/http-websocket-apis/api-2/undefined-4/peers.md)는 현재 서버에 연결된 피어들의 목록을 보여줍니다.
 
-특정한 중요한 [검증](rippled.md) 등과 같은 고부가 가치 서버의 경우, 서버가 피어 검색 과정을 통해 신뢰할 수 없는 피어에 연결되지 않도록 하는 것이 선호될 수 있습니다. 이 경우, 서버를 [개인 피어](peer-protocol.md#undefined-3)만 사용하도록 구성할 수 있습니다.
+특정한 중요한 [검증](rippled-rippled-server-modes.md) 등과 같은 고부가 가치 서버의 경우, 서버가 피어 검색 과정을 통해 신뢰할 수 없는 피어에 연결되지 않도록 하는 것이 선호될 수 있습니다. 이 경우, 서버를 [개인 피어](peer-protocol.md#undefined-3)만 사용하도록 구성할 수 있습니다.
 
 ## 피어 프로토콜 포트(Peer Protocol Port)
 
@@ -58,7 +58,7 @@ protocol = peer
 다음의 경우에는 <mark style="background-color:yellow;">rippled</mark> 서버가 신뢰할 수 없는 피어에 연결하지 않습니다:
 
 * 서버가 [개인 피어](peer-protocol.md#undefined-3)로 구성된 경우, 고정된 피어에만 연결합니다.&#x20;
-* 서버가[ stand-alone 모드](rippled.md)로 실행 중인 경우, **어떤** 피어에도 연결하지 않습니다.
+* 서버가[ stand-alone 모드](rippled-rippled-server-modes.md)로 실행 중인 경우, **어떤** 피어에도 연결하지 않습니다.
 
 ## 개인 피어(Private Peers)
 

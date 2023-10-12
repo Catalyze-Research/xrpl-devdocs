@@ -2,10 +2,10 @@
 
 _(DepositAuth 수정안으로 추가됨)_
 
-입금 승인은 XRP Ledger에서 선택적인 [계정](./) 설정입니다. 활성화하면, 입금 승인은 모든 외부로부터의 이체를 차단하게 됩니다. 이는 XRP와 [토큰](../../undefined-3/)의 전송을 포함합니다. 입금 승인이 설정된 계정은 오직 두 가지 방법으로만 자금을 받을 수 있습니다:
+입금 승인은 XRP Ledger에서 선택적인 [계정](./) 설정입니다. 활성화하면, 입금 승인은 모든 외부로부터의 이체를 차단하게 됩니다. 이는 XRP와 [토큰](../../undefined-2/)의 전송을 포함합니다. 입금 승인이 설정된 계정은 오직 두 가지 방법으로만 자금을 받을 수 있습니다:
 
 * [미리 인증](undefined-3.md#undefined-4)한 계정들로부터.
-* 자금을 받기 위해 거래를 직접 보내는 방식. 예를 들어, 입금 승인이 설정된 계정은 낯선 사람이 시작한 [에스크로](../../undefined-2/undefined-2.md)를 완료할 수 있습니다.&#x20;
+* 자금을 받기 위해 거래를 직접 보내는 방식. 예를 들어, 입금 승인이 설정된 계정은 낯선 사람이 시작한 [에스크로](../../undefined-1/undefined-2.md)를 완료할 수 있습니다.&#x20;
 
 기본적으로, 새 계정들은 입금 승인이 비활성화되어 있어 누구든지 XRP를 보낼 수 있습니다.
 
@@ -15,7 +15,7 @@ _(DepositAuth 수정안으로 추가됨)_
 
 입금 승인 플래그는 XRP Ledger를 사용하는 사람들이 이러한 규정을 준수하면서 분산 원장의 근본적인 특성을 바꾸지 않는 옵션을 도입합니다. 입금 승인이 활성화된 계정은 계정이 돈을 받게 하는 거래를 보내기 전에 필요한 조사를 수행하여 자금의 발신자를 식별할 수 있습니다.
 
-입금 승인이 활성화되어 있을 때, 당신은 [수표](../../undefined-2/undefined-1.md), [에스크로](../../undefined-2/undefined-2.md), 그리고 [결제 채널](../../undefined-2/undefined-4.md)에서 돈을 받을 수 있습니다. 이러한 거래의 "두 단계" 모델에서는, 먼저 소스가 자금을 보내는 것을 인증하는 거래를 보내고, 그 다음에 목적지가 그 자금을 받는 것을 인증하는 거래를 보냅니다.
+입금 승인이 활성화되어 있을 때, 당신은 [수표](../../undefined-1/undefined-1.md), [에스크로](../../undefined-1/undefined-2.md), 그리고 [결제 채널](../../undefined-1/undefined-4.md)에서 돈을 받을 수 있습니다. 이러한 거래의 "두 단계" 모델에서는, 먼저 소스가 자금을 보내는 것을 인증하는 거래를 보내고, 그 다음에 목적지가 그 자금을 받는 것을 인증하는 거래를 보냅니다.
 
 입금 승인이 활성화되어 있을 때 [결제 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/payment.md)에서 돈을 받으려면, 당신은 그러한 지불의 발신자를 [미리 인증](undefined-3.md#undefined-4)해야 합니다. _(_[_DepositPreauth 수정안_](../../xrp-ledger/amendments/undefined.md#depositpreauth)_에 의해 추가되었습니다.)_
 
@@ -24,7 +24,7 @@ _(DepositAuth 수정안으로 추가됨)_
 입금 승인의 전체 효과를 얻으려면, Ripple은 다음과 같이 하는 것을 추천합니다:
 
 * 항상 최소 [reserve requirement](reserves.md)보다 높은 XRP 잔액을 유지하세요.&#x20;
-* Default Ripple 플래그를 기본값(비활성화) 상태로 유지하세요. 신뢰선에 [rippling](../../undefined-3/rippling.md)을 활성화하지 마세요. [TrustSet 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보낼 때는 항상 [tfSetNoRipple 플래그](../../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)를 사용하세요.&#x20;
+* Default Ripple 플래그를 기본값(비활성화) 상태로 유지하세요. 신뢰선에 [rippling](../../undefined-2/rippling.md)을 활성화하지 마세요. [TrustSet 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보낼 때는 항상 [tfSetNoRipple 플래그](../../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)를 사용하세요.&#x20;
 * [제안](../../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md)을 내지 마세요. 어떤 매칭 제안이 거래를 실행하기 위해 소비될지 미리 알 수 없습니다.
 
 ## 정확한 의미론&#x20;

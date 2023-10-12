@@ -4,7 +4,7 @@
 
 ## 트랜잭션 대기열과 컨센서스(Transaction Queue and Consensus)
 
-트랜잭션 대기열은 컨센서스 과정에서 특정 ledger 버전에 포함되거나 제외되는 트랜잭션을 선택하는 데 중요한 역할을 합니다. 다음 단계에서 트랜잭션 대기열이 [컨센서스 과정](../undefined-4/undefined.md)과 어떻게 관련되는지 설명합니다.
+트랜잭션 대기열은 컨센서스 과정에서 특정 ledger 버전에 포함되거나 제외되는 트랜잭션을 선택하는 데 중요한 역할을 합니다. 다음 단계에서 트랜잭션 대기열이 [컨센서스 과정](../consensus-protocol/consensus-structure.md)과 어떻게 관련되는지 설명합니다.
 
 <figure><img src="../../.gitbook/assets/Transaction queue_1.png" alt=""><figcaption></figcaption></figure>
 
@@ -52,7 +52,7 @@ Note:
 
 트랜잭션 대기열 내에서는 트랜잭션 비용이 더 높은 트랜잭션부터 우선순위를 갖습니다. 이 순위는 트랜잭션의 절대적인 XRP 비용에 의해 결정되는 것이 아니라, 해당 유형의 [_트랜잭션에 대한 최소 비용_](transaction-cost.md)과의 상대적인 비용에 따라 정해집니다. 동일한 트랜잭션 비용을 지불하는 트랜잭션은 서버가 그들을 수신한 순서로 정렬됩니다. 다른 요인들도 대기열 내 트랜잭션의 순서에 영향을 줄 수 있으며, 예를 들어, 동일한 송신자의 트랜잭션은 <mark style="background-color:yellow;">시퀀스</mark> 번호에 따라 정렬되어 순서대로 제출됩니다.
 
-대기열 내 트랜잭션의 순서는 대기열의 크기가 예상되는 다음 ledger 버전의 크기보다 많을 경우, 어떤 트랜잭션이 다음 진행 중인 ledger 버전에 추가되는지를 결정합니다. **트랜잭션의 순서는 검증된 ledger 내에서 트랜잭션이 실행되는 순서에는 영향을 주지 않습니다.** 각 검증된 ledger 버전에서 해당 버전의 트랜잭션 세트는 [정규적인 순서](../undefined-4/undefined.md)로 실행됩니다.
+대기열 내 트랜잭션의 순서는 대기열의 크기가 예상되는 다음 ledger 버전의 크기보다 많을 경우, 어떤 트랜잭션이 다음 진행 중인 ledger 버전에 추가되는지를 결정합니다. **트랜잭션의 순서는 검증된 ledger 내에서 트랜잭션이 실행되는 순서에는 영향을 주지 않습니다.** 각 검증된 ledger 버전에서 해당 버전의 트랜잭션 세트는 [정규적인 순서](../consensus-protocol/consensus-structure.md)로 실행됩니다.
 
 {% hint style="info" %}
 Note:
