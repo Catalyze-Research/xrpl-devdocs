@@ -33,9 +33,13 @@ NFT 비즈니스를 시작하기 위해 준비해야 할 4가지 필수 영역�
 
 ### **Connect to XRPL**
 
-트랜잭션 수가 적은 소규모 사이트를 설정하고 싶으시다면 무료 XRP 레저 퍼블릭 서버 중 하나를 사용하실 수 있습니다. \*\*[퍼블릭 서버](https://xrpl.org/public-servers.html)\*\*를 참조하세요.
+트랜잭션 수가 적은 소규모 사이트를 설정하고 싶으시다면 무료 XRP 레저 퍼블릭 서버 중 하나를 사용하실 수 있습니다.
 
-거래량이 많은 대규모 사이트를 설정하고 싶으시다면 자체 XRP 레저 서버 인스턴스에 투자하는 것이 좋습니다. \*\*[리플 설치](https://xrpl.org/install-rippled.html)\*\*를 참조하세요.
+* [퍼블릭 서버](https://xrpl.org/public-servers.html)를 참조하세요.
+
+거래량이 많은 대규모 사이트를 설정하고 싶으시다면 자체 XRP 레저 서버 인스턴스에 투자하는 것이 좋습니다.&#x20;
+
+* [리플 설치](https://xrpl.org/install-rippled.html)를 참조하세요.
 
 See also:
 
@@ -59,7 +63,7 @@ NFT토큰 URL은 NFT의 콘텐츠가 저장된 위치로 연결되는 링크입�
 
 승인된 채굴자가 여러분을 대신해 NFT 생성을 완료한 후에는 권한을 취소하여 더 이상 NFT를 제어할 수 없도록 할 수 있습니다.
 
-\*\*[승인된 채굴자](https://xrpl.org/nftoken-authorized-minting.html)\*\*를 참조하세요.
+* [승인된 채굴자](https://xrpl.org/nftoken-authorized-minting.html)를 참조하세요.
 
 채굴된 NFT는 NFT 토큰 페이지에 나열됩니다. 계정의 모든 NFT토큰페이지에 대해 2XRP의 준비금이 필요합니다. NFT 준비금 요건을 참조하세요.
 
@@ -71,7 +75,9 @@ NFT토큰 URL은 NFT의 콘텐츠가 저장된 위치로 연결되는 링크입�
 
 새 지갑을 설정합니다. Xumm을 참조하세요.
 
-계정을 설정할 때 기본 예치금 요건인 10XRP가 있다는 점을 기억하세요. \*\*[예약금](https://xrpl.org/reserves.html#base-reserve-and-owner-reserve)\*\*을 참조하세요.
+계정을 설정할 때 기본 예치금 요건인 10XRP가 있다는 점을 기억하세요.&#x20;
+
+* [예약금](https://xrpl.org/reserves.html#base-reserve-and-owner-reserve)을 참조하세요.
 
 
 
@@ -79,15 +85,15 @@ NFT토큰 URL은 NFT의 콘텐츠가 저장된 위치로 연결되는 링크입�
 
 판매 오퍼를 생성하거나 구매 오퍼를 수락하여 NFT를 전송합니다.
 
-* \*\*[NFT 토큰 전송](https://xrpl.org/transfer-nfts-using-javascript.html)\*\*을 참조하세요.
+* [NFT 토큰 전송](https://xrpl.org/transfer-nfts-using-javascript.html)을 참조하세요.
 
 NFT를 경매 형식으로 판매할 수 있습니다.&#x20;
 
-* \*\*[NFT 경매 진행하기](https://xrpl.org/nftoken-auctions.html)\*\*를 참조하세요.
+* [NFT 경매 진행하기](https://xrpl.org/nftoken-auctions.html) 참조하세요.
 
 중개자 역할을 하여 판매자와 입찰자를 연결하고 전송을 완료하고 구매 가격의 일정 비율을 보유할 수 있습니다.&#x20;
 
-* \*\*[NFT 토큰 판매 중개하기](https://xrpl.org/broker-an-nft-sale-using-javascript.html)\*\*를 참조하세요.
+* [NFT 토큰 판매 중개하기](https://xrpl.org/broker-an-nft-sale-using-javascript.html)를 참조하세요.
 
 
 
@@ -107,9 +113,14 @@ See:
 
 ### **Checkout**
 
-XRPL NFT에 대한 가장 간단한 결제는 XRP입니다. XRP를 사용해 NFT를 판매하고 구매하는 예는 \*\*[NFT토큰 전송](https://xrpl.org/transfer-nfts-using-javascript.html)\*\*을 참조하세요.
+XRPL NFT에 대한 가장 간단한 결제는 XRP입니다. \
+XRP를 사용해 NFT를 판매하고 구매하는 예는&#x20;
 
-다른 통화로 거래할 때는 탈중앙화 거래소를 활용하여 모든 종류의 발행 통화를 수락하고 환전할 수 있습니다. \*\*[탈중앙화 거래소에서 거래](https://xrpl.org/trade-in-the-decentralized-exchange.html#trade-in-the-decentralized-exchange)\*\*를 참조하세요.
+* [NFT토큰 전송](https://xrpl.org/transfer-nfts-using-javascript.html)을 참조하세요.
+
+다른 통화로 거래할 때는 탈중앙화 거래소를 활용하여 모든 종류의 발행 통화를 수락하고 환전할 수 있습니다.&#x20;
+
+* [탈중앙화 거래소에서 거래](https://xrpl.org/trade-in-the-decentralized-exchange.html#trade-in-the-decentralized-exchange)를 참조하세요.
 
 ## **Indexing NFTs**
 
