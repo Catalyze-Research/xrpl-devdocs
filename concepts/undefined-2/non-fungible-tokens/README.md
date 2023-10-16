@@ -54,4 +54,4 @@ NFTokenBurn 트랜잭션을 사용하여 소유한 <mark style="background-color
 
 <figure><img src="https://xrpl.org/img/nft-lifecycle.png" alt=""><figcaption></figcaption></figure>
 
-NFT 객체의 이전에 대한 자세한 정보는 [XRP Ledger에서의 NFT 거래](xrp-ledger-nft-trading-nftokens-on-the-xrp-ledger.md) 문서를 참조하십시오.
+NFT 객체의 이전에 대한 자세한 정보는 [XRP Ledger에서의 NFT 거래](xrp-ledger-nft.md) 문서를 참조하십시오.

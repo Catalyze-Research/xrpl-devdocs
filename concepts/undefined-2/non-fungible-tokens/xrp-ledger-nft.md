@@ -1,4 +1,4 @@
-# XRP Ledger에서 NFT 토큰 거래
+# XRP Ledger에서 NFT 토큰 거래(Trading NFTokens on the XRP Ledger)
 
 XRP Ledger에서는 <mark style="background-color:yellow;">NFToken</mark> 객체를 계정 간에 이전할 수 있습니다. <mark style="background-color:yellow;">NFToken</mark>을 구매하거나 판매하기 위해 구매 또는 판매 제안을 할 수 있습니다. 또한 소유한 <mark style="background-color:yellow;">NFToken</mark>을 구매하고자 하는 다른 계정의 제안을 수락할 수도 있습니다. 심지어 <mark style="background-color:yellow;">NFToken</mark>을 0 가격으로 판매 제안하여 무료로 양도할 수도 있습니다. 모든 제안은 [NFTokenCreateOffer 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/nftokencreateoffer.md)을 사용하여 생성됩니다.
 
