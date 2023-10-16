@@ -52,7 +52,7 @@ _(_[_NonFungibleTokensV1\_1 수정안_](../../xrp-ledger/amendments/undefined.md
 
 ## 중개 판매 워크플로우&#x20;
 
-가장 직관적인 워크플로우에서는 창작자가 새로운 <mark style="background-color:yellow;">NFToken</mark>을 발행합니다. 창작자는 최소 허용 판매 가격을 입력하고 중개인을 대상으로 설정하여 판매 제안을 시작합니다. 잠재적인 구매자들은 <mark style="background-color:yellow;">NFToken</mark>에 대한 입찰을 하며 입찰의 대상으로 중개인을 설정합니다. 중개인은 최종적으로 선정된 입찰을 선택하고 거래를 완료하며 중개 수수료를 받습니다. 중개인은 남아있는 <mark style="background-color:yellow;">NFToken</mark>에 대한 구매 제안을 취소하는 것이 좋습니다.
+가장 직관적인 워크플로우에서는 창작자가 새로운 <mark style="background-color:yellow;">NFToken</mark>을 발행합니다. 창작자는 최소 허용 판매 가격을 입력하고 중개인을 destination으로 설정하여 판매 제안을 시작합니다. 잠재적인 구매자들은 <mark style="background-color:yellow;">NFToken</mark>에 대한 구매  제안을 통해 입찰을 하며, destination으로는 중개인을 설정합니다. 중개인은 최종적으로 선정된 입찰을 선택하여 해당 제안을 accept하고, 중개를 완료하며 중개 수수료를 받습니다. 중개인은 남아있는 <mark style="background-color:yellow;">NFToken</mark>에 대한 구매 제안을 취소하는 것이 좋습니다.
 
 <figure><img src="https://xrpl.org/img/nft-brokered-mode-with-reserve.png" alt=""><figcaption></figcaption></figure>
 
