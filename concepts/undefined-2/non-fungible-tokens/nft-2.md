@@ -6,4 +6,4 @@
 
 <mark style="background-color:yellow;">NFTokenTaxon</mark> 필드는 필수지만, 컬렉션을 생성할 의도가 없는 경우 값은 <mark style="background-color:yellow;">0</mark>으로 설정할 수 있습니다.
 
-NFTokenTaxon을 참고하세요.
+[NFTokenTaxon](https://xrpl.org/nftoken.html#nftokentaxon)을 참고하세요.
