@@ -56,7 +56,7 @@ _(_[_NonFungibleTokensV1\_1 수정안_](../../xrp-ledger/amendments/undefined.md
 
 <figure><img src="https://xrpl.org/img/nft-brokered-mode-with-reserve.png" alt=""><figcaption></figcaption></figure>
 
-다른 워크플로우에서는 창작자가 판매에 대한 더 많은 통제권을 가질 수 있습니다. 이 워크플로우에서는 창작자가 새로운 <mark style="background-color:yellow;">NFToken</mark>을 발행합니다. 입찰자들은 중개인을 대상으로 설정하여 자신의 제안을 생성합니다. 중개인은 최종적으로 선정된 입찰을 선택하고 중개 수수료를 제외한 제안에 대해 창작자의 서명을 요청하기 위해 <mark style="background-color:yellow;">NFTokenCreateOffer</mark>를 사용합니다. 창작자는 요청된 제안에 서명하여 중개인을 대상으로 설정합니다. 중개인은 중개 수수료를 보유하며 <mark style="background-color:yellow;">NFTokenAcceptOffer</mark>를 사용하여 판매를 완료합니다. 중개인은 <mark style="background-color:yellow;">NFTokenCancelOffer</mark>를 사용하여 남아있는 <mark style="background-color:yellow;">NFToken</mark>에 대한 입찰을 취소합니다.
+다른 워크플로우에서는 창작자가 판매에 대한 더 많은 통제권을 가질 수 있습니다. 이 워크플로우에서는 창작자가 새로운 <mark style="background-color:yellow;">NFToken</mark>을 발행합니다. 입찰자들은 중개인을 대상으로 설정하여 자신의 제안을 생성합니다. 중개인은 최종적으로 선정된 입찰을 선택하고 중개 수수료를 제외한 제안에 대해 창작자의 서명을 요청하기 위해 <mark style="background-color:yellow;">NFTokenCreateOffer</mark>를 사용합니다. 창작자는 요청된 제안에 서명하여 중개인을 대상으로 설정합니다.(요청된 제안에 대한 통제권을 가질 수 있습니다) 최종적으로 중개인은 중개 수수료를 얻을 수 있으며, <mark style="background-color:yellow;">NFTokenAcceptOffer</mark>를 사용하여 판매를 완료합니다. 중개인은 <mark style="background-color:yellow;">NFTokenCancelOffer</mark>를 사용하여 남아있는 <mark style="background-color:yellow;">NFToken</mark>에 대한 입찰을 취소합니다.
 
 <figure><img src="https://xrpl.org/img/nft-brokered-mode-without-reserve.png" alt=""><figcaption></figcaption></figure>
 
