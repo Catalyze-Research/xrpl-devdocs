@@ -2,7 +2,7 @@
 
 XRPL Docs Korean Version
 
-이 리포지토리는 Ripple의 XRP Ledger (XRPL) 문서의 한국어 번역을 위한 저장소입니다.
+이 리포지토리는 XRP Ledger (XRPL) 문서의 한국어 번역을 위한 저장소입니다.
 
 ###
 
