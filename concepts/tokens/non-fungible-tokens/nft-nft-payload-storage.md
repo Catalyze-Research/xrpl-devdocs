@@ -18,4 +18,4 @@ IFPS와 Arweave는 탈중앙화 솔루션을 제공합니다. 하지만, 메타 
 
 사용자는 중심 데이터를 다루고 있는 웹서버의 URI 필드를 사용할 수  있습니다.
 
-대안으로, 그리고 분산 원장의 공간을 절약하기 위해, 사용자는 발행자의 <mark style="background-color:yellow;">Domain</mark> 필드를 <mark style="background-color:yellow;">AccounSet</mark>를 사용하여 설정할 수 있고, NFT ID를 해당 도메인의 path로써 사용할 수 있습니다. 예를 들어, NFT ID가 <mark style="background-color:yellow;">123ABC</mark>이고, 발행자의 도메인이 <mark style="background-color:yellow;">example.com</mark>이라면, 사용자는 데이터를 <mark style="background-color:yellow;">example.com/tokens/123ABC</mark>로부터 가져올 수 있습니다.
+대안으로, 그리고 분산 원장의 공간을 절약하기 위해, 사용자는 발행자의 <mark style="background-color:yellow;">Domain</mark> 필드를 <mark style="background-color:yellow;">AccounSet</mark>을  사용하여 설정할 수 있고, NFT ID를 해당 도메인의 path로써 사용할 수 있습니다. 예를 들어, NFT ID가<mark style="background-color:yellow;">123ABC</mark>이고, 발행자의 도메인이 <mark style="background-color:yellow;">example.com</mark>라면,사용자는 데이터를 <mark style="background-color:yellow;">example.com/tokens/123ABC</mark>로부터 가져올 수 있습니다.
