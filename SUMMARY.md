@@ -78,7 +78,7 @@
     * [다른 계정에게 NFT 발행 권한 부여](concepts/undefined-2/non-fungible-tokens/nft.md)
     * [NFT 경매 진행하기](concepts/undefined-2/non-fungible-tokens/nft-1.md)
     * [NFT를 컬렉션으로 발행하기](concepts/undefined-2/non-fungible-tokens/nft-2.md)
-    * [NFT의 고정 공급 보장하기](concepts/undefined-2/non-fungible-tokens/nft-3.md)
+    * [NFT의 고정 공급 보장하기(Guaranteeing a Fixed Supply of NFTs)](concepts/undefined-2/non-fungible-tokens/nft-guaranteeing-a-fixed-supply-of-nfts.md)
     * [NFT 관련 API](concepts/undefined-2/non-fungible-tokens/nft-api.md)
   * [토큰 동결](concepts/undefined-2/undefined-2/README.md)
     * [동결에 대한 일반적인 오해사항](concepts/undefined-2/undefined-2/undefined.md)
