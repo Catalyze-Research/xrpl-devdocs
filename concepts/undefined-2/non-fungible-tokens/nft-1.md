@@ -42,7 +42,7 @@
 2. 입찰자들은 <mark style="background-color:yellow;">NFTokenCreateOffer</mark>를 사용하여 입찰을 하고, 중개자를 목적지로 설정합니다.&#x20;
 3. 중개자는 당첨 입찰을 선택하고, 수수료로 수집될 금액을 뺀 다음, 판매자에게 <mark style="background-color:yellow;">NFTokenCreateOffer</mark>를 통해 이 금액에 대한 판매 제안을 서명하도록 요청합니다.&#x20;
 4. 판매자는 요청된 제안에 서명하고, 중개자를 목적지로 설정합니다.&#x20;
-5. 중개자는 <mark style="background-color:yellow;">NFTokenCreateOffer</mark>를 사용하여 판매를 완료하고, 중개 수수료를 받습니다.&#x20;
+5. 중개자는 <mark style="background-color:yellow;">NFTokenAcceptOffer</mark>를 사용하여 판매를 완료하고, 중개 수수료를 받습니다.&#x20;
 6. 중개자는 <mark style="background-color:yellow;">NFTokenCreateOffer</mark>를 사용하여 남은 입찰을 취소합니다.&#x20;
 
 ### 장점:
