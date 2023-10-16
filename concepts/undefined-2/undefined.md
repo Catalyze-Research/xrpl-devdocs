@@ -1,60 +1,119 @@
-# 신뢰선과 발급
+# 승인된 신뢰선
 
-신뢰선은 XRP Ledger에서 [토큰](./)을 보유하기 위한 구조입니다. 신뢰선은 XRP Ledger의 규칙인 '원하지 않는 토큰을 다른 사람에게 보유하게 할 수 없다'는 규칙을 강제합니다. 이 조치는 XRP Ledger의 커뮤니티 크레딧 사용 사례 등의 이점을 가능하게 하기 위해 필요합니다.
+승인된 신뢰선 기능을 사용하면 발행자가 특정한 승인된 계정에만 보유할 수 있는 토큰을 생성할 수 있습니다. 이 기능은 토큰에만 적용되며 XRP에는 적용되지 않습니다.
 
-각 "신뢰선"은 다음을 포함하는 양방향 관계입니다:
+승인된 신뢰선 기능을 사용하려면 발행 계정에서 **Require Auth** 플래그를 활성화하세요. 이 설정이 활성화되어 있는 동안 다른 계정은 발행 계정으로부터 승인받은 신뢰선만 보유할 수 있습니다.
 
-* 신뢰선이 연결하는 [**두 계정**](../undefined-3/undefined/)의 식별자 입니다.
-* 하나의 공유 **잔액**은 한 계정의 관점에서는 긍정적이지만 다른 계정의 관점에서는 부정적입니다.
-  * 음의 잔액을 가진 계정은 일반적으로 토큰의 "발행자"로 간주됩니다. 하지만 [API](../../tutorials/undefined-1/http-websocket-api.md)에서는 <mark style="background-color:yellow;">발행자</mark> 이름이 양쪽을 모두 가리킬 수 있습니다.
-* 다양한 설정과 메타데이터. 각 계정은 신뢰선에 대한 자체 **설정**을 제어할 수 있습니다.
-  * 가장 중요한 점은, 각 측이 신뢰선의 **한도**를 설정한다는 것이며, 이는 기본적으로 0입니다. 각 계정의 잔액(신뢰선의 입장에서)은 해당 계정의 한도를 넘어갈 수 없으며, 이는 해당 계정의 행동을 통해서만 가능합니다.
+신뢰선을 승인하기 위해 발행 주소에서 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보내어 자신의 계정과 승인할 계정 간의 신뢰선을 구성합니다. 한번 신뢰선을 승인하면 해당 승인을 취소할 수 없습니다. (필요한 경우 신뢰선을 [동결](undefined-1/)할 수는 있습니다.)
 
-신뢰선은 주어진 화폐 코드에 특정합니다. 두 계정 사이에는 다른 [화폐 코드](../../references/xrp-ledger/undefined/undefined.md)를 위한 신뢰선 여러 개 있을 수 있지만, 특정 화폐 코드에 대해서는 하나의 공유 신뢰선만 있을 수 있습니다.
+신뢰선을 승인하는 트랜잭션은 발행 주소로부터 서명되어야 합니다. 이는 해당 주소에 대한 위험 요소가 증가한다는 점에 주의해야 합니다.
 
-## 생성&#x20;
+{% hint style="info" %}
+Caution:
 
-어느 계정이든 다른 계정에 대해 토큰을 발행하도록 "신뢰"를 할 수 있습니다. 이는 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 통해 0이 아닌 한도와 자체 설정을 보내는 것으로, 이는 잔액이 0인 선을 생성하고 다른 쪽의 설정을 기본값으로 설정합니다.
+계정에 신뢰선이 없고 XRP Ledger에 제안 없는 경우에만 Require Auth를 활성화할 수 있으므로 토큰 발행을 _시작하기 전_에 Require Auth를 사용할지 여부를 결정해야 합니다.
+{% endhint %}
 
-신뢰선은 [탈중앙화 거래소](../dex/)에서 토큰을 사는 것과 같은 일부 트랜잭션에 의해 암시적으로 생성될 수 있습니다. 이 경우, 신뢰선은 완전히 기본 설정을 사용합니다.
+## 스테이블코인 발행
 
-## 한도 초과&#x20;
+XRP Ledger에서 스테이블코인을 사용하고 승인된 신뢰선을 사용하는 경우, 새로운 고객을 온보딩하는 과정은 다음과 같이 진행될 수 있습니다:
 
-신뢰선의 한도를 초과하여 잔액을 보유할 수 있는 세 가지 경우가 있습니다:
+1. 고객이 스테이블코인 발행자의 시스템에 등록하고, 신원 증명(일명 "고객 식별(KYC)" 정보)을 보냅니다.
+2. 고객과 스테이블코인 발행자는 서로의 XRP Ledger 주소를 알려줍니다.
+3. 고객은 발행자 주소로 향하는 신뢰선을 생성하기 위해 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보냅니다. 이때 신뢰선의 한도를 양수로 설정합니다.
+4. 발행자는 고객의 신뢰선을 승인하기 위해 TrustSet 트랜잭션을 보냅니다.
 
-1. [거래](../dex/)를 통해 해당 토큰을 더 획득할 때.
-2. 양의 잔액이 있는 신뢰선의 한도를 줄일 때.
-3. [수표를 현금화](../undefined-1/undefined-1.md)하여 해당 토큰을 더 획득할 때._(_[_CheckCashMakesTrustLine_](../xrp-ledger/amendments/undefined.md) _수정안이 필요.)_
+{% hint style="info" %}
+Tip:
 
-## 신뢰선 설정
+신뢰선을 승인하는 두 개의 TrustSet 트랜잭션(3단계와 4단계)는 순서에 상관없이 발생할 수 있습니다. 발행자가 먼저 신뢰선을 승인하면, 한도가 0으로 설정된 신뢰선이 생성되고, 고객의 TrustSet 트랜잭션이 미리 승인된 신뢰선에 한도를 설정합니다. _(_[_TrustSetAuth 수정안_](../xrp-ledger/amendments/undefined.md)_으로 추가됨.)_
+{% endhint %}
 
-공유 잔액 외에도 각 계정은 신뢰선에 대한 자체 설정을 가지며, 이는 다음을 포함합니다:
+## 예방 조치&#x20;
 
-* **한도**, 0에서 최대 토큰 금액까지의 수치입니다. 지불과 다른 계정의 행동은 신뢰선의 잔액(이 계정의 입장에서)이 한도를 초과하게 할 수 없습니다. 기본값은 0입니다.
-* **승인됨**: 참/거짓 값으로, 이 계정이 발행하는 토큰을 다른 쪽이 보유하도록 허용하는 [승인된 신뢰선](undefined-1.md) 함께 사용됩니다. 기본값은 <mark style="background-color:yellow;">false</mark>입니다. 일단 <mark style="background-color:yellow;">true</mark>로 설정되면 이를 다시 변경할 수 없습니다.
-* **No Ripple**: 이 신뢰선을 통해 토큰이 [ripple](rippling.md) 될 수 있는지를 제어하는 참/거짓 값입니다. 기본값은 계정의 "Default Ripple" 설정에 따라 다릅니다. 새 계정의 경우, "Default Ripple"이 꺼져 있어서 No Ripple의 기본값은 <mark style="background-color:yellow;">true</mark>입니다. 일반적으로, 발행자는 Ripple을 허용하고, 발행자가 아닌 사람들은 커뮤니티 크레딧에 대한 신뢰선을 사용하지 않는 한 Ripple을 비활성화해야 합니다.
-* **동결**: 이 신뢰선에 대한 [개별 동결](undefined-2/)이 적용되어 있는지를 나타내는 참/거짓 값입니다. 기본값은 <mark style="background-color:yellow;">false</mark>입니다.
-* **Quality In**과 **Quality Out** 설정: 이는 계정이 이 신뢰선에서 다른 계정이 발행한 토큰을 표면 가치보다 낮게(또는 높게) 평가할 수 있게 합니다. 예를 들어, 안정화폐 발행자가 오프-ledger 자산에 대한 토큰을 인출하는데 3%의 수수료를 부과한다면, 이 설정을 사용하여 해당 토큰을 표면 가치의 97%로 평가할 수 있습니다. 기본값인 0은 표면 가치를 나타냅니다.
+승인된 신뢰선을 사용하지 않을 경우에도 [운영 및 대기 계정](undefined-3.md)에 Require Auth 설정을 활성화하고, 해당 계정에서 어떤 신뢰선도 승인하지 않도록 할 수 있습니다. 이렇게 하면 실수로 토큰을 발행하지 않도록 예방할 수 있습니다(예를 들어 사용자가 잘못된 주소를 신뢰하는 경우). 이는 예방 조치일 뿐이며, 운영 및 대기 계정이 _발행자_의 토큰을 전송하는 것을 방지하지는 않습니다.
 
-## Reserves  삭제&#x20;
+## 기술적 세부 사항&#x20;
 
-신뢰선이 ledger에 공간을 차지하기 때문에, [신뢰선은 계정이 보유해야 하는 XRP를 증가시킵니다.](../undefined-3/undefined/reserves.md) 신뢰선에 있는 계정 중 하나 또는 둘 다가 신뢰선의 reserve를 부담할 수 있습니다. 이는 신뢰선의 상태에 따라 다릅니다: 설정이 기본 상태가 아니거나 양의 잔액을 보유하고 있으면, 이는 소유자 reserve에 대한 항목 한 개로 간주됩니다.
+### Require Auth 활성화
 
-일반적으로 이는 신뢰선을 생성한 계정이 reserve 부담하고 발행자는 부담하지 않는다는 것을 의미합니다.
+다음은 <mark style="background-color:yellow;">asfRequireAuth</mark> 플래그를 사용하여 Require Auth를 활성화하는 [AccountSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 로컬 호스트의 <mark style="background-color:yellow;">rippled</mark> [제출 메소드를](../../references/http-websocket-apis/api-1/undefined-1/submit.md) 예시로 나타낸 것입니다. (주소가 발행 주소, 운영 주소 또는 대기 주소인지와 관계없이 방법은 동일하게 작동합니다.)
 
-신뢰선은 양쪽의 설정이 기본 상태에 있고 잔액이 0인 경우 자동으로 삭제됩니다. 이는 신뢰선을 삭제하려면 다음을 수행해야 함을 의미합니다:
+요청:
 
-1. 기본 설정으로 설정하려면 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보냅니다.
-2. 신뢰선에서 양의 잔액을 모두 없애거나 이를 위해 [지불](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)을 보내거나 [탈중앙화 거래소](../dex/)에서 화폐를 팔 수 있습니다.
+```
+POST http://localhost:5005/
+{
+    "method": "submit",
+    "params": [
+        {
+            "secret": "s████████████████████████████",
+            "tx_json": {
+                "Account": "rUpy3eEg8rqjqfUoLeBnZkscbKbFsKXC3v",
+                "Fee": "15000",
+                "Flags": 0,
+                "SetFlag": 2,
+                "TransactionType": "AccountSet"
+            }
+        }
+    ]
+}
+```
 
-잔액이 음수(발행자인 경우)이거나 다른 쪽의 설정이 기본 상태가 아닌 경우, 신뢰 선을 완전히 삭제할 수는 없지만, 동일한 단계를 따르면 소유자 reserve에 대한 부담을 줄일 수 있습니다.
+{% hint style="info" %}
+Caution:
 
-**승인된** 설정은 한 번 작동하면 다시 멈출 수 없으므로, 신뢰선의 기본 상태에는 포함되지 않습니다.
+제어하지 않는 서버에 비밀 키를 제출하지 마십시오. 네트워크를 통해 암호화되지 않은 비밀 키를 전송하지 마십시오.
+{% endhint %}
 
-## 무료 신뢰선
+## Require Auth가 활성화된 계정인지 확인&#x20;
 
-신뢰선은 XRP Ledger의 강력한 기능이므로, 계정의 처음 두 개의 신뢰선을 "무료"로 만드는 특별한 기능이 있습니다.
+Require Auth 설정이 활성화되어 있는지 확인하려면 account\_info 메소드를 사용하여 계정을 조회하십시오. <mark style="background-color:yellow;">result.account\_data</mark> 객체의 <mark style="background-color:yellow;">플래그</mark> 필드의 값과 [AccountRoot ledger 객체에 정의된 비트별 플래그와 비교합니다.](../../references/xrp-ledger/ledger/ledger-1/accountroot.md)
 
-계정이 새로운 신뢰선을 생성할 때, 계정이 새로운 선을 포함하여 ledger에 최대 2개의 항목을 소유하고 있다면, 계정의 소유자 reserve 일반 금액 대신 0으로 취급됩니다. 이는 계정이 ledger의 객체를 소유하는 데 필요한 증가된 reserve requirement을 충족시키지 못하더라도 거래가 성공할 수 있도록 합니다.
+플래그 값의 결과와 lsfRequireAuth <mark style="background-color:yellow;">플래그</mark> 값 (<mark style="background-color:yellow;">0x00040000</mark>)의 bitwise-AND 결과가 0이 아닌 경우 계정에 <mark style="background-color:yellow;">lsfRequireAuth</mark>가 활성화되어 있습니다. 결과가 0인 경우 계정에 Require Auth가 비활성화되어 있습니다.
 
-한 계정이 ledger에 3개 이상의 객체를 소유하고 있는 경우, 전체 소유자 reserve가 적용됩니다.
+## 신뢰선 승인
+
+승인된 신뢰선 기능을 사용하는 경우 다른 사람은 승인되지 않은 신뢰선을 보유할 수 없습니다. 여러 통화를 발행한다면 각 통화에 대해 별도로 신뢰선을 승인해야 합니다.
+
+신뢰선을 승인하기 위해 발행 주소에서 <mark style="background-color:yellow;">LimitAmount</mark>의 <mark style="background-color:yellow;">발행자</mark>로서 사용자를 설정한 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 제출하고, <mark style="background-color:yellow;">값</mark>을(신뢰할 금액) 0으로 설정하고 [<mark style="background-color:yellow;">tfSetfAuth</mark>](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md) 플래그를 트랜잭션에 활성화합니다.
+
+다음은 로컬 호스트의 <mark style="background-color:yellow;">rippled</mark> [제출 메소드](../../references/http-websocket-apis/api-1/undefined-1/submit.md)를 예시로 나타낸 것입니다. 이 예시에서는 발행 주소 <mark style="background-color:yellow;">rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW</mark>가 발행한 USD를 신뢰하는 고객 주소 <mark style="background-color:yellow;">rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn</mark>에 대한 TrustSet 트랜잭션을 보내는 것입니다.
+
+요청:
+
+```
+POST http://localhost:8088/
+
+{
+    "method": "submit",
+    "params": [
+        {
+            "secret": "s████████████████████████████",
+            "tx_json": {
+                "Account": "rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW",
+                "Fee": "15000",
+                "TransactionType": "TrustSet",
+                "LimitAmount": {
+                    "currency": "USD",
+                    "issuer": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+                    "value": 0
+                },
+                "Flags": 65536
+            }
+        }
+    ]
+}
+```
+
+{% hint style="info" %}
+Caution:
+
+제어하지 않는 서버에 비밀 키를 제출하지 마십시오. 네트워크를 통해 암호화되지 않은 비밀 키를 전송하지 마십시오.
+{% endhint %}
+
+## 신뢰선이 승인되었는지 확인하기
+
+신뢰선이 승인되었는지 확인하려면 [account\_lines 메소드](../../references/http-websocket-apis/api-1/undefined/account\_lines.md)를 사용하여 신뢰선을 조회하십시오. 요청에서는 고객의 주소를 <mark style="background-color:yellow;">계정</mark> 필드에, 발행자의 주소를 <mark style="background-color:yellow;">피어</mark> 필드에 제공하십시오.
+
+응답의 <mark style="background-color:yellow;">result.lines</mark> 배열에서 통화 필드가 원하는 <mark style="background-color:yellow;">화폐</mark>의 신뢰선을 나타내는 객체를 찾으십시오. 해당 객체에 <mark style="background-color:yellow;">peer\_authorized</mark> 필드가 <mark style="background-color:yellow;">true</mark>로 설정되어 있는 경우 발행자(요청의 <mark style="background-color:yellow;">peer</mark> 필드로 사용한 주소)가 신뢰선을 승인한 것입니다.

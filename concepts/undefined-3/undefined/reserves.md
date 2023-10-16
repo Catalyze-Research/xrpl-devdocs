@@ -24,7 +24,7 @@ Mainnet에서 현재 reserve requirement은 다음과 같습니다:
 
 ledger에는 특정 계정이 소유하는 여러 객체(ledger entries)가 있습니다. 일반적으로 객체를 생성한 계정이 소유자(owner)가 됩니다. 각 객체는 소유자의 총 reserve requirement를 owner reserve 만큼 증가시킵니다. 객체가 ledger에서 제거되면 예치 요구 사항에는 더 이상 포함되지 않습니다.
 
-소유자의 reserve requirement에 포함되는 객체는 다음과 같습니다: [Checks](../../undefined-1/undefined-1.md), [Deposit Preauthorizations](undefined-3.md), [Escrows](../../undefined-1/undefined-2.md), [NFT Offers](../../undefined-2/non-fungible-tokens/xrp-ledger-nft.md), [NFT Pages](../../undefined-2/non-fungible-tokens/), [Offers](../../../references/xrp-ledger/ledger/ledger-1/offer.md), [Payment Channels](../../undefined-1/undefined-4.md), [Signer Lists](undefined-1.md), [Tickets](../../undefined-1/undefined-1.md), 그리고 [신뢰선](../../undefined-2/undefined.md).
+소유자의 reserve requirement에 포함되는 객체는 다음과 같습니다: [Checks](../../undefined-1/undefined-1.md), [Deposit Preauthorizations](undefined-3.md), [Escrows](../../undefined-1/undefined-2.md), [NFT Offers](../../undefined-2/non-fungible-tokens/xrp-ledger-nft.md), [NFT Pages](../../undefined-2/non-fungible-tokens/), [Offers](../../../references/xrp-ledger/ledger/ledger-1/offer.md), [Payment Channels](../../undefined-1/undefined-4.md), [Signer Lists](undefined-1.md), [Tickets](../../undefined-1/undefined-1.md), 그리고 [신뢰선](../../undefined-2/trust-lines-and-issuing.md).
 
 일부 특수한 경우:
 
