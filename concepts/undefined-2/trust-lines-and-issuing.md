@@ -31,9 +31,9 @@
 공유 잔액 외에도 각 계정은 신뢰선에 대한 자체 설정을 가지며, 이는 다음을 포함합니다:
 
 * **한도**, 0에서 최대 토큰 금액까지의 수치입니다. 지불과 다른 계정의 행동은 신뢰선의 잔액(이 계정의 입장에서)이 한도를 초과하게 할 수 없습니다. 기본값은 0입니다.
-* **승인됨**: 참/거짓 값으로, 이 계정이 발행하는 토큰을 다른 쪽이 보유하도록 허용하는 [승인된 신뢰선](undefined.md) 함께 사용됩니다. 기본값은 <mark style="background-color:yellow;">false</mark>입니다. 일단 <mark style="background-color:yellow;">true</mark>로 설정되면 이를 다시 변경할 수 없습니다.
+* **승인됨**: 참/거짓 값으로, 이 계정이 발행하는 토큰을 다른 쪽이 보유하도록 허용하는 [승인된 신뢰선](authorized-trust-lines.md) 함께 사용됩니다. 기본값은 <mark style="background-color:yellow;">false</mark>입니다. 일단 <mark style="background-color:yellow;">true</mark>로 설정되면 이를 다시 변경할 수 없습니다.
 * **No Ripple**: 이 신뢰선을 통해 토큰이 [ripple](rippling.md) 될 수 있는지를 제어하는 참/거짓 값입니다. 기본값은 계정의 "Default Ripple" 설정에 따라 다릅니다. 새 계정의 경우, "Default Ripple"이 꺼져 있어서 No Ripple의 기본값은 <mark style="background-color:yellow;">true</mark>입니다. 일반적으로, 발행자는 Ripple을 허용하고, 발행자가 아닌 사람들은 커뮤니티 크레딧에 대한 신뢰선을 사용하지 않는 한 Ripple을 비활성화해야 합니다.
-* **동결**: 이 신뢰선에 대한 [개별 동결](undefined-1/)이 적용되어 있는지를 나타내는 참/거짓 값입니다. 기본값은 <mark style="background-color:yellow;">false</mark>입니다.
+* **동결**: 이 신뢰선에 대한 [개별 동결](undefined/)이 적용되어 있는지를 나타내는 참/거짓 값입니다. 기본값은 <mark style="background-color:yellow;">false</mark>입니다.
 * **Quality In**과 **Quality Out** 설정: 이는 계정이 이 신뢰선에서 다른 계정이 발행한 토큰을 표면 가치보다 낮게(또는 높게) 평가할 수 있게 합니다. 예를 들어, 안정화폐 발행자가 오프-ledger 자산에 대한 토큰을 인출하는데 3%의 수수료를 부과한다면, 이 설정을 사용하여 해당 토큰을 표면 가치의 97%로 평가할 수 있습니다. 기본값인 0은 표면 가치를 나타냅니다.
 
 ## Reserves와  삭제&#x20;

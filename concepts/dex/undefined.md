@@ -42,7 +42,7 @@ ledger에 제안이 있는 동안, [소유자 reserve](../undefined-3/undefined/
 
 * 판매 자산을 더 이상 보유하고 있지 않은 경우.
   * 소유자가 해당 자산을 더 많이 획득하면 제안은 다시 자금 지원을 받게 됩니다.
-* 판매 자산이 [동결된 신뢰선](../undefined-2/undefined-1/)의 토큰인 경우.
+* 판매 자산이 [동결된 신뢰선](../undefined-2/undefined/)의 토큰인 경우.
   * 신뢰선이 더 이상 동결되지 않으면 제안은 다시 자금 지원을 받게 됩니다.
 * 제안이 새로운 신뢰선을 만들 필요가 있지만, 소유자가 증가된 [reserve](../undefined-3/undefined/reserves.md)에 대해 충분한 XRP를 보유하고 있지 않은 경우. (제안과 신뢰에 대해 참조하십시오.)
   * 소유자가 더 많은 XRP를 획득하거나 reserve requirements가 감소하면 제안은 다시 자금 지원이 됩니다.
