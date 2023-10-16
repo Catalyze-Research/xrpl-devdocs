@@ -70,6 +70,7 @@
   * [결제 채널](concepts/undefined-1/undefined-4.md)
 * [토큰(Tokens)](concepts/tokens/README.md)
   * [Non-Fungible Tokens](concepts/tokens/non-fungible-tokens/README.md)
+    * [NFT 정보 저장소(NFT Payload Storage)](concepts/tokens/non-fungible-tokens/nft-nft-payload-storage.md)
     * [XRP Ledger에서 NFT 토큰 거래(Trading NFTokens on the XRP Ledger)](concepts/tokens/non-fungible-tokens/xrp-ledger-nft-trading-nftokens-on-the-xrp-ledger.md)
     * [NFT Reserve Requirements](concepts/tokens/non-fungible-tokens/nft-reserve-requirements.md)
     * [일괄 발행(Batch minting)](concepts/tokens/non-fungible-tokens/batch-minting.md)
