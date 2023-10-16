@@ -8,14 +8,14 @@ XRP Ledger 수표는 현금화할 수 없게 되는 만료 시간을 가질 수 
 
 수표는 [에스크로](undefined-2.md)와 [결제 채널](undefined-4.md)과 몇 가지 유사점이 있지만, 이러한 기능과 수표 사이에 중요한 차이점이 있습니다:
 
-* 수표를 사용하여 [토큰](../undefined-2/)을 보낼 수 있습니다. 결제 채널과 에스크로에서는 XRP만 보낼 수 있습니다.
+* 수표를 사용하여 [토큰](../tokens/)을 보낼 수 있습니다. 결제 채널과 에스크로에서는 XRP만 보낼 수 있습니다.
 * 수표는 어떠한 자금도 잠기거나 보류하지 않습니다. 결제 채널과 에스크로에서 사용되는 XRP는 송신자가 제공하는 클레임으로 인출되기 전까지(결제 채널) 또는 만료 또는 암호 조건(에스크로)이 충족되기 전까지 사용할 수 없습니다.
 * 에스크로를 통해 자신에게 XRP를 보낼 수 있습니다. 그러나 수표는 자신에게는 보낼 수 없습니다.
 
 {% hint style="info" %}
 Note:&#x20;
 
-[수표 수정안](../xrp-ledger/amendments/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../dex/undefined.md#undefined-6)를 참조하세요.
+[수표 수정안](../xrp-ledger/amendments/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../tokens/dex/undefined.md#undefined-6)를 참조하세요.
 {% endhint %}
 
 ## 수표의 필요성
@@ -28,7 +28,7 @@ XRP Ledger 수표는 또한 XRP Ledger에만 있는 문제를 해결합니다. �
 
 **문제:** [BSA, KYC, AML 및 CFT](../../tutorials/xrp-ledger/undefined.md)와 같은 규정을 준수하기 위해 금융 기관은 받은 자금의 원천에 대한 문서를 제공해야 합니다. 이러한 규정은 기관이 처리하는 모든 지불의 원천과 목적지를 알고자 하여 불법 자금 이체를 방지하기 위한 것입니다. XRP Ledger의 특성 상, 누구든지 잠재적으로 XRP(그리고 적절한 조건하에 토큰)를 기관의 XRP Ledger 계정으로 송금할 수 있습니다. 이러한 원하지 않는 지불을 처리하는 것은 이러한 기관의 규정 준수 부서에 상당한 비용과 시간 지연을 유발하며, 잠재적으로 벌금이나 처벌을 받을 수도 있습니다.
 
-**해결책:** 기관은 [AccountSet 거래에서 <mark style="background-color:yellow;">asfDepositAuth</mark> 플래그를 설정](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)하여 XRP Ledger 계정에서 [입금 승인](../undefined-3/undefined/undefined-3.md)을 활성화할 수 있습니다. 이렇게 하면 해당 계정은 결제 거래를 통해 자금을 받을 수 없게 됩니다. 예금 승인이 활성화된 계정은 에스크로, 결제 채널, 또는 수표를 통해 자금을 받을 수 있습니다. 수표는 예금 승인이 활성화된 경우 자금을 이동시키는 가장 직관적이고 유연한 방법입니다.
+**해결책:** 기관은 [AccountSet 거래에서 <mark style="background-color:yellow;">asfDepositAuth</mark> 플래그를 설정](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)하여 XRP Ledger 계정에서 [입금 승인](../undefined-2/undefined-3.md)을 활성화할 수 있습니다. 이렇게 하면 해당 계정은 결제 거래를 통해 자금을 받을 수 없게 됩니다. 예금 승인이 활성화된 계정은 에스크로, 결제 채널, 또는 수표를 통해 자금을 받을 수 있습니다. 수표는 예금 승인이 활성화된 경우 자금을 이동시키는 가장 직관적이고 유연한 방법입니다.
 
 ## 사용 방법
 

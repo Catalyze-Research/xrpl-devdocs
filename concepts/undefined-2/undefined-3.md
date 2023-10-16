@@ -1,96 +1,114 @@
-# 경로
+# 입금 승인
 
-XRP Ledger에서 경로는 결제의 일부로 [토큰](./)이 중개 단계를 통과하는 방법을 정의합니다. 경로는 XRP Ledger의 [탈중앙화 거래소](../dex/)에서 주문을 통해 송금인과 수취인을 연결하여 [교차 화폐 결제](../undefined-1/undefined.md)를 가능하게 합니다. 또한 경로는 상계 부채의 복잡한 정산을 가능하게 합니다.
+_(DepositAuth 수정안으로 추가됨)_
 
-XRP Ledger의 단일 결제 트랜잭션은 여러 경로를 사용하여 원하는 금액을 제공하기 위해 다양한 소스에서 유동성을 결합할 수 있습니다. 따라서 트랜잭션에는 경로 세트가 포함되는데, 이는 선택 가능한 경로의 모음입니다. 경로 세트의 모든 경로는 동일한 화폐로 시작해야 하며, 또한 서로 동일한 화폐로 끝나야 합니다.
+입금 승인은 XRP Ledger에서 선택적인 [계정](./) 설정입니다. 활성화하면, 입금 승인은 모든 외부로부터의 이체를 차단하게 됩니다. 이는 XRP와 [토큰](../tokens/)의 전송을 포함합니다. 입금 승인이 설정된 계정은 오직 두 가지 방법으로만 자금을 받을 수 있습니다:
 
-XRP는 직접적으로 모든 주소로 보낼 수 있으므로, [XRP에서 XRP로의 거래](../undefined-1/xrp.md)는 어떤 경로도 사용하지 않습니다.
+* [미리 인증](undefined-3.md#undefined-4)한 계정들로부터.
+* 자금을 받기 위해 거래를 직접 보내는 방식. 예를 들어, 입금 승인이 설정된 계정은 낯선 사람이 시작한 [에스크로](../undefined-1/undefined-2.md)를 완료할 수 있습니다.&#x20;
 
-## 경로 단계&#x20;
+기본적으로, 새 계정들은 입금 승인이 비활성화되어 있어 누구든지 XRP를 보낼 수 있습니다.
 
-경로는 결제의 송신자와 수신자를 연결하는 단계로 구성됩니다. 모든 단계는 다음 중 하나 입니다:
+## 배경&#x20;
 
-* 동일한 화폐로 다른 주소를 통해 Rippling.
-* 주문 도서를 사용하여 토큰 또는 XRP 거래.
+금융 서비스 규정과 허가는 사업체나 기관이 받는 모든 거래의 발신자를 알아야 한다는 요구사항이 있을 수 있습니다. 이는 참여자들이 자유롭게 생성할 수 있는 가명으로 식별되며 모든 주소가 다른 주소로 지불할 수 있는 분산 시스템인 XRP Ledger에서는 도전적인 문제입니다.
 
-[Rippling](rippling.md)은 동일한 화폐 코드를 사용하여 동등한 토큰을 교환하는 과정입니다. 일반적인 경우, 발행자를 통해 Ripple은 한 당사자에게 발행된 토큰을 줄이고 다른 당사자에게 동일한 금액의 토큰을 늘리는 것을 포함합니다. 경로 단계는 어떤 계정을 통해 Ripple할지를 명시합니다.
+입금 승인 플래그는 XRP Ledger를 사용하는 사람들이 이러한 규정을 준수하면서 분산 원장의 근본적인 특성을 바꾸지 않는 옵션을 도입합니다. 입금 승인이 활성화된 계정은 계정이 돈을 받게 하는 거래를 보내기 전에 필요한 조사를 수행하여 자금의 발신자를 식별할 수 있습니다.
 
-[토큰 및 가능한 경우 XRP](../dex/) 거래는 오더북으로 이동하고, 보내는 금액에 대해 자산 간의 최적의 환율을 찾는 것을 포함합니다. 경로 단계는 어떤 화폐로 바꿀지를 명시하지만, 주문 도서의 제안 상태는 기록하지 않습니다. 거래의 캐노니컬 순서는 ledger가 검증될 때까지 확정되지 않으므로, 트랜잭션이 검증된 후에야 어떤 제안을 거래가 받을지를 확실히 알 수 있습니다. (거래가 최종 ledger에서 실행될 때 가장 좋은 제안을 받기 때문에, 합리적인 추측을 할 수 있습니다.)
+입금 승인이 활성화되어 있을 때, 당신은 [수표](../undefined-1/undefined-1.md), [에스크로](../undefined-1/undefined-2.md), 그리고 [결제 채널](../undefined-1/undefined-4.md)에서 돈을 받을 수 있습니다. 이러한 거래의 "두 단계" 모델에서는, 먼저 소스가 자금을 보내는 것을 인증하는 거래를 보내고, 그 다음에 목적지가 그 자금을 받는 것을 인증하는 거래를 보냅니다.
 
-두 종류의 단계 모두에서, 각 중간 주소는 대략적으로 동등한 가치를 얻고 잃습니다: 신뢰선에서 같은 화폐의 또 다른 신뢰선으로 잔액이 Ripple으로되거나, 이전에 배치된 주문에 따라 화폐를 교환합니다. 경우에 따라, 얻고 잃는 금액은 정확하게 동등하지 않을 수 있습니다. 이는 [이체 수수료](undefined-1.md), 신뢰선 품질 설정, 또는 반올림 때문입니다.
+입금 승인이 활성화되어 있을 때 [결제 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)에서 돈을 받으려면, 당신은 그러한 지불의 발신자를 [미리 인증](undefined-3.md#undefined-4)해야 합니다. _(_[_DepositPreauth 수정안_](../xrp-ledger/amendments/undefined.md#depositpreauth)_에 의해 추가되었습니다.)_
 
+## 추천 사용법&#x20;
 
+입금 승인의 전체 효과를 얻으려면, Ripple은 다음과 같이 하는 것을 추천합니다:
 
-<figure><img src="../../.gitbook/assets/Paths_1.png" alt=""><figcaption></figcaption></figure>
+* 항상 최소 [reserve requirement](reserves.md)보다 높은 XRP 잔액을 유지하세요.&#x20;
+* Default Ripple 플래그를 기본값(비활성화) 상태로 유지하세요. 신뢰선에 [rippling](../tokens/rippling.md)을 활성화하지 마세요. [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보낼 때는 항상 [tfSetNoRipple 플래그](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)를 사용하세요.&#x20;
+* [제안](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md)을 내지 마세요. 어떤 매칭 제안이 거래를 실행하기 위해 소비될지 미리 알 수 없습니다.
 
-## 세부 기술
+## 정확한 의미론&#x20;
 
-### 정보 경로 탐색&#x20;
+입금 승인이 활성화된 계정:
 
-<mark style="background-color:yellow;">rippled API</mark>는 경로 탐색에 사용될 수 있는 두 가지 메소드를 가지고 있습니다. [ripple\_path\_find](../../references/http-websocket-apis/api-1/undefined-2/ripple\_path\_find.md) 메소드는 가능한 경로 세트를 한 번만 찾아냅니다. [path\_find 메소드](../../references/http-websocket-apis/api-1/undefined-2/path\_find.md) (WebSocket 전용)는 ledger가 닫히거나 서버가 더 나은 경로를 찾을 때마다 후속 응답으로 검색을 확장합니다.
+* [결제 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)의 목적지가 될 수 **없으며**, **다음과 같은 예외 사항**이 있습니다:
+  * 목적지가 지불의 발신자를 미리 인증한 경우. _(_[_DepositPreauth 수정안_](../xrp-ledger/amendments/undefined.md#depositpreauth)_에 의해 추가됨)_
+  * 계정의 XRP 잔액이 최소 계정 [reserve requirement](reserves.md)과 같거나 그 이하인 경우, <mark style="background-color:yellow;">금액</mark>이 최소 계정 reserve(현재 10 XRP)와 같거나 작은 XRP 지불의 목적지가 될 수 있습니다. 이는 계정이 거래를 보낼 수 없고 또한 XRP를 받을 수 없는 상태가 되는 것을 방지하기 위함입니다. 이 경우에는 계정의 소유자 reserve가 문제가 되지 않습니다.
+* [PaymentChannelClaim 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/paymentchannelclaim.md)에서 XRP를 받을 수 있는 경우는 **다음의 경우들 뿐입니다**:
+  * PaymentChannelClaim 트랜잭션의 발신자가 결제 채널의 목적지인 경우.
+  * PaymentChannelClaim 트랜잭션의 목적지가 PaymentChannelClaim의 발신자를 [미리 인증](undefined-3.md#undefined-4)한 경우. _(_[_DepositPreauth 수정안_](../xrp-ledger/amendments/undefined.md)_에 의해 추가됨)_
+* [EscrowFinish 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/escrowfinish.md)에서 XRP를 받을 수 있는 경우는 다음과 같습니다:
+  * EscrowFinish 트랜잭션의 발신자가 에스크로의 목적지인 경우.
+  * EscrowFinish 트랜잭션의 목적지가 EscrowFinish의 발신자를 미리 인증한 경우. _(_[_DepositPreauth 수정안_](../xrp-ledger/amendments/undefined.md)_에 의해 추가됨)_
+* [CheckCash](../../references/xrp-ledger/undefined-1/undefined-1/checkcash.md) 트랜잭션을 보내서 XRP 또는 토큰을 **받을 수** 있습니다. _(_[_Checks 수정안_](../xrp-ledger/amendments/undefined.md#checks)_에 의해 추가됨)_
+* [OfferCreate 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md)을 보내서 XRP 또는 토큰을 받을 수 있습니다.
+  * 계정이 즉시 완전히 실행되지 않는 OfferCreate 트랜잭션을 보낸 경우, 나중에 다른 계정의 결제및 OfferCreate 트랜잭션이 제안을 소비할 때 나머지 주문된 XRP 또는 토큰을 받을 수 있습니다.
+* 계정이 No Ripple 플래그가 활성화되지 않은 신뢰선을 생성했거나, Default Ripple 플래그를 활성화하고 통화를 발행한 경우, 계정은 r ippling의 결과로 이러한 신뢰선의 토큰을 [Payment 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)에서 받을 수 있습니다. 그러나 그 트랜잭션의 목적지가 될 수는 없습니다.
+* 일반적으로 XRP Ledger의 계정은 다음 사항이 모두 해당되는 한 XRP Ledger에서 XRP가 아닌 통화를 받을 수 없습니다.(이 규칙은 DepositAuth 플래그에만 특정한 것은 아닙니다.)
+  * 계정에 한도가 0이 아닌 신뢰선이 생성되지 않았습니다.
+  * 계정이 다른 사람들이 생성한 신뢰선에서 토큰을 발행하지 않았습니다.
+  * 계정이 제안을 내지 않았습니다.
 
-[sign 메소드](../../references/http-websocket-apis/api-2/undefined-3/sign.md) 또는 submit 명령에 대한 요청에 <mark style="background-color:yellow;">build\_path</mark> 필드를 포함하여, 이를 서명할 때 자동으로 경로를 채울 수 있도록 <mark style="background-color:yellow;">rippled</mark>를 설정할 수 있습니다 (sign-and-submit 모드). 그러나, 우리는 경로를 별도로 찾고 결과를 확인한 후에 서명하는 것을 추천합니다, 이는 뜻하지 않는 놀라움을 피하기 위해서 입니다.
+다음 표는 입금 승인이 활성화되거나 비활성화된 경우 트랜잭션 유형이 돈을 입금할 수 있는지를 요약합니다:
 
-{% hint style="info" %}
-Caution:
+| <p><br>DepositAuth Disabled</p> |                                            | DepositAuth 사용             |   |                       |                                                     |                                                     |
+| ------------------------------- | ------------------------------------------ | -------------------------- | - | --------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| Transaction Type                | 목적지로 전송                                    | 다른 사람이 보냄                  |   | Sent by Destination   | Sent by Others                                      | Sent by Preauthorized Others                        |
+| AccountSet                      | (이 거래 유형은 송금하지 않습니다.)                      |                            |   |                       |                                                     |                                                     |
+| CheckCancel                     | (이 거래 유형은 송금하지 않습니다.)                      |                            |   |                       |                                                     |                                                     |
+| CheckCash                       | OK                                         | 권한 없음                      |   | OK                    | No Permission                                       | No Permission                                       |
+| CheckCreate                     | (This transaction type never sends money.) |                            |   |                       |                                                     |                                                     |
+| EscrowCancel                    | 만료된 에스크로에서 XRP 반환 가능                       |                            |   |                       |                                                     |                                                     |
+| EscrowCreate                    | (이 거래 유형은 XRP를 인출할 수만 있고 입금할 수는 없습니다.)     |                            |   |                       |                                                     |                                                     |
+| EscrowFinish                    | OK                                         | OK                         |   | OK                    | No Permission                                       | OK                                                  |
+| OfferCancel                     | 이 거래 유형은 송금하지 않습니다.                        |                            |   |                       |                                                     |                                                     |
+| OfferCreate                     | OK                                         | 계정이 이전에 매칭 오퍼를 생성한 경우에만 해당 |   | OK                    | Only if account previously created a matching offer | Only if account previously created a matching offer |
+| Payment                         | 교차 화폐만 해당                                  | OK                         |   | Cross-currency only 1 | No Permission                                       | OK                                                  |
+| Payment                         | 교차 화폐만 해당                                  | OK                         |   | Cross-currency only 1 | XRP payments up to the minimum reserve              | OK                                                  |
+| Payment                         | 교차 화폐만 해당                                  | OK                         |   | Cross-currency only 1 | Balance changes from rippling                       | OK                                                  |
+| Payment                         | 교차 화폐만 해당                                  | OK                         |   | Cross-currency only 1 | Balance changes from executing offers               | OK                                                  |
+| PaymentChannelClaim             | OK                                         | OK                         |   | OK                    | No Permission                                       | OK                                                  |
+| PaymentChannelCreate            | (이 거래 유형은 XRP를 인출할 수만 있고 입금할 수는 없습니다.)     |                            |   |                       |                                                     |                                                     |
+| PaymentChannelFund              | 직접 만든 채널을 닫을 때 XRP를 반환할 수 있습니다.            |                            |   |                       |                                                     |                                                     |
+| SetRegularKey                   | (이 거래 유형은 송금하지 않습니다.)                      |                            |   |                       |                                                     |                                                     |
+| SignerListSet                   | (이 거래 유형은 송금하지 않습니다.)                      |                            |   |                       |                                                     |                                                     |
+| TrustSet                        | (이 거래 유형은 송금하지 않습니다.)                      |                            |   |                       |                                                     |                                                     |
 
-<mark style="background-color:yellow;">rippled</mark>는 가능한 가장 저렴한 경로를 찾도록 설계되어 있지만, 항상 그러한 경로를 찾을 수 있는 것은 아닙니다. 신뢰할 수 없는 <mark style="background-color:yellow;">rippled</mark> 인스턴스는 이런 행동을 이익을 위해 변경할 수 있습니다. 경로를 따라 결제를 실행하는 데 필요한 실제 비용은 제출과 트랜잭션 실행 사이에 변경될 수 있습니다.
-{% endhint %}
+_1: DepositPreauth 개정안은 계정이 입금 승인을 요구하는 경우 자신에게 이체하는 통화 간 지불이 실패하는 DepositAuth의 버그를 수정합니다. DepositPreauth 개정안이 활성화되지 않은 경우, 이러한 경우는 "No Permission"으로 결과를 나타냅니다._
 
-경로를 찾는 것은 매우 어려운 문제로, 새로운 ledger가 검증될 때마다 약간씩 변하므로, <mark style="background-color:yellow;">rippled</mark>는 절대적으로 최적의 경로를 찾는 것으로 설계되지 않았습니다. 그래도, 여러 가능한 경로를 찾아 특정 금액을 전달하는 비용을 추정할 수 있습니다.
+## 입금 승인 활성화 또는 비활성화&#x20;
 
-## 암시된 단계&#x20;
+계정은 <mark style="background-color:yellow;">asfDepositAuth</mark> 값(9)으로 <mark style="background-color:yellow;">SetFlag</mark> 필드를 설정하여 [AccountSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 보내 입금 승인을 활성화 할 수 있습니다. 계정은 <mark style="background-color:yellow;">asfDepositAuth</mark> 값(9)으로 <mark style="background-color:yellow;">ClearFlag</mark> 필드를 설정하여 AccountSet 트랜잭션을 보내 입금 승인을 비활성화 할 수 있습니다. AccountSet 플래그에 대한 자세한 정보는 AccountSet 플래그를 참조하세요.
 
-관례적으로, 결제 트랜잭션의 필드에 의해 암시적으로 여러 단계가 나타납니다. 특히, <mark style="background-color:yellow;">Account</mark>(송신자), <mark style="background-color:yellow;">Destination</mark>(수신자), <mark style="background-color:yellow;">Amount</mark>(전송될 화폐 및 금액) 및 <mark style="background-color:yellow;">SendMax</mark>(지정된 경우 전송할 화폐 및 금액)의 필드를 통해 암시된 단계는 다음과 같습니다:
+## 계정이 DepositAuth를 활성화했는지 확인 계정이 입금 승인을 활성화했는지 확인하려면&#x20;
 
-* 경로의 첫 번째 단계는 항상 트랜잭션의 <mark style="background-color:yellow;">Account</mark> 필드에 정의된 송신자로 암시됩니다.&#x20;
-* 만약 트랜잭션에 <mark style="background-color:yellow;">SendMax</mark> 필드가 있고 해당 <mark style="background-color:yellow;">발행자</mark>가 트랜잭션의 송신자가 아닌 경우, 해당 발행자가 경로의 두 번째 단계로 암시됩니다.&#x20;
-  * <mark style="background-color:yellow;">SendMax</mark>의 <mark style="background-color:yellow;">발행자</mark>가 송신 주소인 경우, 경로는 송신 주소에서 시작되며, 해당 주소의 해당 화폐 코드에 대한 신뢰 중 어느 것이든 사용할 수 있습니다. 자세한 내용은 <mark style="background-color:yellow;">SendMax</mark> 및 <mark style="background-color:yellow;">금액</mark>의 특수 값을 참조하세요.
-* 트랜잭션의 <mark style="background-color:yellow;">Amount</mark> 필드에 트랜잭션의 목적지와 동일하지 않은 <mark style="background-color:yellow;">발급자</mark>가 포함된 경우 해당 발급자는 경로의 두 번째에서 마지막 단계로 암시됩니다.&#x20;
-* 마지막으로, 경로의 마지막 단계는 항상 트랜잭션의 <mark style="background-color:yellow;">대상</mark> 필드에 정의된 대로 트랜잭션의 수신자로 암시됩니다.
+[account\_info 메소드](../../references/http-websocket-apis/api-1/undefined/account\_info.md)를 사용하여 계정을 조회합니다. <mark style="background-color:yellow;">Flags</mark> 필드의 값(<mark style="background-color:yellow;">result.account\_data</mark> 객체 내)을 AccountRoot ledger 객체에 대해 정의된 [비트와이즈 플래그와 비교하세요.](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)
 
-## 기본 경로&#x20;
+<mark style="background-color:yellow;">Flags</mark> 값과 <mark style="background-color:yellow;">lsfDepositAuth</mark> 플래그 값(<mark style="background-color:yellow;">0x01000000</mark>)의 비트와이즈 AND 연산 결과가 비 0이면, 계정은 DepositAuth를 활성화했습니다. 결과가 0이면, 계정은 DepositAuth를 비활성화했습니다.
 
-명시적으로 지정된 경로 외에도 트랜잭션은 기본 경로를 따라 실행될 수 있습니다. 기본 경로는 트랜잭션의 암시적 단계를 연결하는 가장 간단한 방법입니다.
+## 미리 인증&#x20;
 
-기본 경로는 다음 중 어느 하나일 수 있습니다:
+_(_[_DepositPreauth 수정안_](../../references/xrp-ledger/ledger/ledger-1/depositpreauth.md)_에 의해 추가됨.)_
 
-* 트랜잭션이 하나의 토큰만 사용하는 경우 (발행자에 상관없이), 기본 경로는 결제가 관련 주소를 통해 Ripple되어야 한다고 가정합니다. 이 경로는 해당 주소가  신뢰선에 의해 연결되어 있는 경우에만 작동합니다.&#x20;
-  * <mark style="background-color:yellow;">SendMax</mark>가 생략되었거나, <mark style="background-color:yellow;">SendMax</mark>의 발행자가 발신자인 경우, 기본 경로는 송금 <mark style="background-color:yellow;">Account</mark>에서 목적지 Amount의 <mark style="background-color:yellow;">발행자</mark>로의 신뢰선이 필요합니다.&#x20;
-  * <mark style="background-color:yellow;">SendMax</mark>와 <mark style="background-color:yellow;">Amount</mark>가 다른 <mark style="background-color:yellow;">발행자</mark> 값을 가지고 있고, 그 중 어느 것도 발신자나 수신자가 아닌 경우, 기본 경로는 아마도 유용하지 않을 것입니다. 왜냐하면 그것은 두 발행자 간의 신뢰선을 통해 Ripple해야 하기 때문입니다. Ripple (회사)은 일반적으로 발행자가 서로를 직접 신뢰하는 것을 권장하지 않습니다.&#x20;
-* 교차 화폐 거래의 경우, 기본 경로는 소스 화폐 (<mark style="background-color:yellow;">SendMax</mark> 필드에 명시된)와 목적지 화폐(<mark style="background-color:yellow;">Amount</mark> 필드에 명시된) 사이의 오더북을을 사용합니다.&#x20;
+DepositAuth를 활성화한 계정은 특정 발신자를 _미리 인증_할 수 있어, 입금 승인이 활성화되어 있어도 그러한 발신자로부터의 지불이 성공하게 할 수 있습니다. 이는 특정 발신자가 수신자가 각각의 거래에 대해 개별적으로 조치를 취하지 않고도 직접 자금을 보낼 수 있게 합니다. 미리 인증은 DepositAuth를 사용하는 데 필요하지 않지만, 특정 작업을 더 편리하게 만들 수 있습니다.
 
-다음 다이어그램은 모든 가능한 기본 경로를 열거합니다:
+미리 인증은 통화에 대해 불가침입니다. 특정 통화에 대해서만 계정을 미리 인증할 수 없습니다.
 
-<figure><img src="../../.gitbook/assets/Path_2.png" alt=""><figcaption></figcaption></figure>
+특정 발신자를 미리 인증하려면, [DepositPreauth 트랜잭션](../../references/xrp-ledger/ledger/ledger-1/depositpreauth.md)을 보내고 <mark style="background-color:yellow;">Authorize</mark> 필드에 미리 인증할 다른 계정의 주소를 입력하세요. 미리 인증을 철회하려면, 대신 <mark style="background-color:yellow;">Unauthorize</mark> 필드에 다른 계정의 주소를 제공하새요. 평소처럼 <mark style="background-color:yellow;">Account</mark> 필드에 자신의 주소를 지정하세요. 현재 DepositAuth를 활성화하지 않은 상태에서도 다른 계정에 대한 미리 인증 상태를 설정하고 저장할 수 있지만, DepositAuth를 활성화하지 않으면 효과가 없습니다. 계정은 자신을 미리 인증할 수 없습니다. 미리 인증은 일방적이며, 반대 방향으로 이동하는 결제에는 영향을 미치지 않습니다.
 
-[<mark style="background-color:yellow;">tfNoDirectRipple</mark> 플래그](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)를 사용하여 기본 경로를 비활성화할 수 있습니다. 이 경우, 트랜잭션은 트랜잭션에 명시적으로 포함된 경로를 사용하여만 실행될 수 있습니다. 트레이더는 이 옵션을 사용하여 사재기 기회를 이용할 수 있습니다.
+다른 계정을 미리 인증하면, ledger에 [DepositPreauth 객체](../../references/xrp-ledger/ledger/ledger-1/depositpreauth.md)가 추가되어 인증을 제공하는 계정의 [소유자 reserve](reserves.md)가 증가합니다. 계정이 이 미리 인증을 철회하면, 이 작업은 객체를 제거하고 소유자 reserve를 감소시킵니다.
 
-## 경로 사양&#x20;
+DepositPreauth 트랜잭션이 처리된 후, 인증된 계정은 입금 승인을 활성화하고 있는 경우에도 다음 트랜잭션 유형 중 하나를 사용하여 자금을 계정에 보낼 수 있습니다:
 
-경로 세트는 배열입니다. 경로 세트의 각 구성원은 개별 경로를 나타내는 또 다른 배열입니다. 경로의 각 구성원은 단계를 명시하는 객체입니다. 단계에는 다음과 같은 필드가 있습니다:
+* [Payment.](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)
+* [EscrowFinish. ](../../references/xrp-ledger/undefined-1/undefined-1/escrowfinish.md)
+* [PaymentChannelClaim. ](../../references/xrp-ledger/undefined-1/undefined-1/paymentchannelclaim.md)
 
-| 필드         | 값           | 설명명                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ---------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `account`  | 문자열 - 주소    | _(선택 사항)_ 있는 경우, 이 경로 단계는 지정된 주소를 통한 rippling을 나타냅니다. 이 단계에서 <mark style="background-color:yellow;">화폐</mark> 또는 <mark style="background-color:yellow;">발행자</mark> 필드를 지정하는 경우에는 제공하지 않아야 합니다.                                                                                                                                                                                                                                               |
-| `currency` | 문자열 - 화폐 코드 | _(선택 사항)_ 있는 경우, 이 경로 단계는 오더북을 통해 통화를 변경하는 것을 나타냅니다. 지정된 통화는 새 통화를 나타냅니다. 이 단계가 <mark style="background-color:yellow;">계정</mark> 필드를 지정하는 경우에는 제공하지 않아야 합니다.                                                                                                                                                                                                                                                                                 |
-| `issuer`   | 문자열 - 주소    | _(선택 사항)_ 있는 경우 이 경로 단계는 변경되는 통화를 나타내며 이 주소는 새 화폐의 발행자를 정의합니다. XRP가 아닌 <mark style="background-color:yellow;">화폐</mark>를 사용하는 단계에서 생략된 경우 경로의 이전 단계에서 발행자를 정의합니다. <mark style="background-color:yellow;">화폐</mark>가 생략된 단계에서 존재하는 경우, 발행자가 다른 동일한 이름의 <mark style="background-color:yellow;">화폐</mark> 간에 오더북을 사용하는 경로 단계를 나타냅니다. 통화가 XRP인 경우 반드시 생략해야 합니다. 이 단계가 <mark style="background-color:yellow;">계정</mark> 필드를 지정하는 경우 제공하지 않아야 합니다. |
-| `type`     | 정수          | **DEPRECATED**_(선택 사항)_ 다른 필드가 있는 표시기입니다.                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `type_hex` | 문자열         | **DEPRECATED**: _(선택 사항)_ 유형 필드의 16진수 표현입니다.                                                                                                                                                                                                                                                                                                                                                                                                 |
+미리 인증은 DepositAuth가 활성화된 계정에 돈을 보내는 다른 방법에는 영향을 미치지 않습니다. 정확한 규칙에 대해서는 Precise Semantics를 참조하세요.
 
-요약하면, 다음 필드의 조합은 <mark style="background-color:yellow;">type</mark>, <mark style="background-color:yellow;">type\_hex</mark> 또는 둘 다 선택적으로 유효합니다:
+## 인증 확인&#x20;
 
-* <mark style="background-color:yellow;">계정</mark> 자체.&#x20;
-* <mark style="background-color:yellow;">화폐</mark> 자체.&#x20;
-* <mark style="background-color:yellow;">화폐</mark> 및 발행자(통화가 XRP가 아닌 경우).&#x20;
-* <mark style="background-color:yellow;">발행자</mark> 자체.&#x20;
+[deposit\_authorized 메소드를](../../references/http-websocket-apis/api-1/undefined-2/deposit\_authorized.md) 사용하여 계정이 다른 계정에 입금할 수 있는지 인증되어 있는지 확인할 수 있습니다. 이 방법은 두 가지를 확인합니다:&#x20;
 
-경로 단계에서 <mark style="background-color:yellow;">계정</mark>, <mark style="background-color:yellow;">화폐</mark>, <mark style="background-color:yellow;">발행자</mark> 필드를 다른 용도로 사용하는 것은 유효하지 않습니다.
-
-경로 집합의 이진 직렬화에 사용되는 <mark style="background-color:yellow;">유형</mark> 필드는 실제로 단일 정수에 대한 비트 단위 연산을 통해 구성됩니다. 비트는 다음과 같이 정의됩니다:
-
-| 값 (Hex) | 값 (Decimal) | 설명                                                                          |
-| ------- | ----------- | --------------------------------------------------------------------------- |
-| `0x01`  | 1           | 주소 변경(rippling): <mark style="background-color:yellow;">계정</mark> 필드가 있습니다. |
-| `0x10`  | 16          | 화폐 변경: 화폐 필드가 있습니다.                                                         |
-| `0x20`  | 32          | 발급자 변경: <mark style="background-color:yellow;">발급자</mark> 필드가 있습니다.         |
+* 대상 계정이 입금 인증을 요구하는지 여부. (인증을 요구하지 않는 경우, 모든 소스 계정은 인증된 것으로 간주됩니다.)&#x20;
+* 원본 계정이 대상에게 돈을 보낼 수 있는지 미리 인증되었는지 여부.\

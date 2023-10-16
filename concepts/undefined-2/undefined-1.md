@@ -1,57 +1,57 @@
-# 이체 수수료
+# 다중 서명
 
-[토큰](./) 발행자는 사용자가 해당 토큰을 상호 교환할 때 발생하는 이체 수수료를 부과할 수 있습니다. 이체의 발신자는 이체 수수료에 기반한 추가 백분율을 차감하고, 이체의 수취인은 의도한 금액을 입금받습니다. 그 차이가 이체 수수료입니다.
+XRP Ledger의 다중 서명은 여러 개인 키의 조합을 사용하여 XRP Ledger에 대한 [트랜잭션을 승인](../transactions/#undefined-2)하는 방법입니다. 다중 서명, [마스터 키 쌍](undefined.md#undefined-7) 및 [일반 키 쌍](undefined.md#undefined-9)을 포함하여 주소에 대해 임의의 인증 방법 조합을 사용할 수 있습니다. (단, 하나의 요구 사항은 하나 이상의 메소드를 활성화해야 한다는 것입니다.)
 
-일반 토큰의 경우, 이체 수수료로 지불된 토큰은 소각되어 XRP Ledger에서 더 이상 추적되지 않습니다. 토큰이 ledger 외부 자산으로 보증되는 경우, 이는 발행자가 XRP Ledger에서의 의무를 충족하기 위해 예비해야 하는 자산의 양을 줄입니다. 이체 수수료는 외부 자산으로 보증되지 않은 토큰에는 적합하지 않습니다.
+다중 서명의 이점은 다음과 같습니다:
 
-대체 불가능한 토큰도 이체 수수료를 가질 수 있지만, 작동 방식이 다릅니다. 자세한 내용은 [대체 불가능한 토큰](non-fungible-tokens/)을 참조하십시오.
+* 서로 다른 장치에서 키를 요구하여 악의적인 행위자가 사용자 대신 트랜잭션을 전송하기 위해 여러 컴퓨터를 손상시켜야 합니다.&#x20;
+* 여러 사용자 간에 주소의 보관을 공유할 수 있으며, 각 사용자는 해당 주소에서 트랜잭션을 보내는 데 필요한 여러 키 중 하나만 가지고 있습니다.&#x20;
+* 사용자가 정상적으로 서명할 수 없거나 서명할 수 없는 경우 주소를 제어할 수 있는 사용자 그룹에 주소에서 트랜잭션을 보낼 권한을 위임할 수 있습니다.
+* ... 기타 등등.
 
-이체 수수료는 발행 계정으로부터 직접 송금하거나 수신할 때는 적용되지 않지만, [운영 주소](undefined-2.md)에서 다른 사용자로 이체할 때는 적용됩니다.
+## 서명자 목록
 
-XRP는 발행자가 없기 때문에 이체 수수료가 없습니다.
+다중 서명하려면 먼저 서명할 수 있는 주소 목록을 만들어야 합니다.
 
-## 예시&#x20;
+[SignerListSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/signerlistset.md)은 주소에서 트랜잭션을 승인할 수 있는 주소 집합인 서명자 목록을 정의합니다. 서명자 목록에 1-32개의 주소를 포함할 수 있습니다. 목록에 사용자의 주소를 포함할 수 없으며 중복된 항목이 있을 수 없습니다. 목록의 서명자 가중치 및 쿼럼 설정을 사용하여 필요한 서명 수, 조합을 제어할 수 있습니다.
 
-이 예시에서 ACME 은행은 XRP Ledger에서 EUR 스테이블코인을 발행합니다. ACME은행은 이체 수수료를 1%로 설정할 수 있습니다. 지불 수신자가 2 EUR.ACME를 받으려면 송신자는 2.02 EUR.ACME를 보내야 합니다. 거래 후에는 ACME의 XRP Ledger에서의 미지급 의무가 0.02€만큼 감소하므로 ACME은행은 EUR 안정화토큰을 보증하기 위해 해당 금액을 은행 계좌에 보유할 필요가 없어집니다.
+_(_[_ExpandedSignerList수정안_](../xrp-ledger/amendments/undefined.md#expandedsignerlist)_에 의해 업데이트됨.)_
 
-다음 다이어그램은 1%의 이체 수수료를 가진 Alice로부터 Charlie로의 2 EUR.ACME의 XRP Ledger 송금을 보여줍니다:
+## 서명자 무게&#x20;
 
-<figure><img src="https://xrpl.org/img/transfer-fees.svg" alt=""><figcaption></figcaption></figure>
+목록의 각 서명자에게 가중치를 할당합니다. 가중치는 목록의 다른 서명자에 대한 서명자의 권한을 나타냅니다. 값이 높을수록 더 많은 권한을 가집니다. 개별 가중치 값은 2^16-1을 초과할 수 없습니다.&#x20;
 
-회계 관점에서 Alice, ACME 및 Charlie의 재무상태는 다음과 같이 변경될 수 있습니다:
+## 쿼럼
 
-<figure><img src="https://xrpl.org/img/transfer-fees-balance-sheets.svg" alt=""><figcaption></figcaption></figure>
+목록의 쿼럼 값은 트랜잭션을 승인하는 데 필요한 최소 가중치 합계입니다. 쿼럼은 0보다 크고 서명자 목록의 가중치 합계보다 작거나 같아야 합니다. 즉, 지정된 서명자 가중치로 쿼럼을 달성할 수 있어야 합니다.
 
-## 이체 수수료와 지불 경로&#x20;
+## 지갑 위치
 
-이체 수수료는 개별 이체가 한 당사자에서 다른 당사자로 토큰을 이동할 때마다 적용됩니다 (발행 계정에 직접 송금/수신하는 경우를 제외하고). 더 복잡한 거래에서는 이체 수수료가 여러 번 발생할 수 있습니다. 이체 수수료는 끝에서부터 역순으로 적용되어, 결국 송금자는 모든 수수료를 감안하여 충분한 금액을 송금해야 합니다. 예를 들어:
+각 서명자의 목록에는 최대 256비트의 임의의 데이터를 추가할 수도 있습니다. 이 데이터는 네트워크에서 필요하거나 사용되지 않지만 스마트 계약이나 다른 애플리케이션에서 서명자에 대한 기타 데이터를 식별하거나 확인하는 데 사용될 수 있습니다.
 
-<figure><img src="https://xrpl.org/img/transfer-fees-in-paths.svg" alt=""><figcaption></figcaption></figure>
+_(_[_ExpandedSignerList수정안_](../xrp-ledger/amendments/undefined.md#expandedsignerlist)_에 의해 추가됨.)_
 
-이 시나리오에서 Salazar (송신자)는 ACME가 발행한 EUR을 보유하고 있으며, WayGate가 발행한 100 USD를 Rosa (수신자)에게 전달하려고 합니다. FXMaker는 주문서에서 최고의 거래를 할 수 있는 공급자로, 0.9 EUR.ACME 당 1 USD.WayGate의 환율을 제시합니다. 이체 수수료가 없다면 Salazar는 90 EUR을 보내어 Rosa에게 100 USD를 전달할 수 있습니다. 그러나 ACME은 1%의 이체 수수료를, WayGate은 0.2%의 이체 수수료를 부과합니다. 이는 다음과 같은 의미를 가지게 됩니다:
+## 서명자 가중치 및 쿼럼 사용 예제&#x20;
 
-* FXMaker는 Rosa가 100 USD.WayGate을 수령하려면 100.20 USD.WayGate을 보내야 합니다.
-* FXMaker의 현재 요청은 90.18 EUR.ACME를 100.20 USD.WayGate을 보내기 위해 사용합니다.
-* &#x20;FXMaker가 90.18 EUR.ACME를 수령하려면 Salazar는 91.0818 EUR.ACME를 보내야 합니다.
+가중치와 쿼럼을 사용하면 각 트랜잭션에 대해 관리하는 책임 있는 참여자에게 할당된 상대적인 신뢰와 권한에 기반하여 적절한 감독 수준을 설정할 수 있습니다.
 
-## 기술적 세부 정보&#x20;
+공유 계정 사용 사례에서는 쿼럼이 1인 목록을 생성한 후, 모든 참여자에게 가중치 1을 부여할 수 있습니다. 그들 중 아무나 한 명의 승인만 필요합니다.
 
-이체 수수료는 [발행 주소](undefined-2.md)의 설정으로 나타냅니다. 이체 수수료는 0% 미만 또는 100% 이상이 될 수 없으며, 가장 가까운 0.0000001%로 반올림됩니다. 이체 수수료는 동일한 계정에서 발행된 모든 토큰에 적용됩니다. 서로 다른 토큰에 대해 다른 이체 수수료를 설정하려면 여러 [발행 주소](undefined-2.md)를 사용하십시오.
+매우 중요한 계정의 경우, 쿼럼을 3으로 설정하고 가중치가 1인 3명의 참여자를 가질 수 있습니다. 모든 참여자는 각 트랜잭션에 동의하고 승인해야 합니다.
 
-XRP Ledger 프로토콜에서 이체 수수료는 <mark style="background-color:yellow;">TransferRate</mark>필드로 표시되며, 해당 토큰의 10억 단위를 수신받기 위해 보내야 하는 금액을 나타내는 정수로 표시됩니다. <mark style="background-color:yellow;">TransferRate</mark> <mark style="background-color:yellow;">1005000000</mark>은 0.5%의 이체 수수료에 해당합니다. 기본적으로 <mark style="background-color:yellow;">TransferRate</mark>는 수수료가 없음을 나타내는 값으로 설정됩니다. <mark style="background-color:yellow;">TransferRate</mark>의 값은 <mark style="background-color:yellow;">1000000000</mark>("0%" 수수료) 미만 또는 <mark style="background-color:yellow;">2000000000</mark>("100%" 수수료) 이상으로 설정할 수 없습니다. 값 <mark style="background-color:yellow;">0</mark>은 수수료가 없는 특수한 경우로, <mark style="background-color:yellow;">1000000000</mark>과 동일합니다.
+다른 계정은 쿼럼이 3인 경우도 있을 수 있습니다. CEO에게 3의 가중치, 3명의 부사장에게 2의 가중치, 3명의 이사에게 1의 가중치를 할당합니다. 이 계정의 트랜잭션를 승인하려면 3명의 이사 (총 가중치 3), 1명의 부사장과 1명의 이사 (총 가중치 3), 2명의 부사장 (총 가중치 4) 또는 CEO (총 가중치 3)의 승인이 필요합니다. 이전 세 가지 사용 사례에서는 일반 키를 구성하지 않고 마스터 키를 비활성화하여 다중 서명이 [트랜잭션 승인](../transactions/#undefined-2)의 유일한 방법이 되도록 설정합니다.
 
-토큰 발행자는 발행 주소에서 [AccountSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 제출하여 모든 토큰의 <mark style="background-color:yellow;">TransferRate</mark>를 변경할 수 있습니다.
+"백업 계획"으로 다중 서명 목록을 생성하는 시나리오도 있을 수 있습니다. 계정 소유자는 보통 트랜잭션에 일반 키(다중 서명 키가 아님)를 사용합니다. 안전을 위해 계정 소유자는 가중치가 각각 1인 3명의 친구를 포함하고 쿼럼이 3인 서명자 목록을 추가합니다. 계정 소유자가 개인 키를 분실한 경우, 친구들에게 정규 키를 대체하기 위해 다중 서명 트랜잭션를 멀티 서명할 수 있습니다.
 
-누구나 [account\_info 메소드](../../references/http-websocket-apis/api-1/undefined/account\_info.md)를 사용하여 계정의 <mark style="background-color:yellow;">TransferRate</mark>를 확인할 수 있습니다. <mark style="background-color:yellow;">TransferRate</mark>가 생략된 경우 수수료가 없음을 나타냅니다.
+## 다중 서명 트랜잭션 전송하기&#x20;
 
-{% hint style="info" %}
-Note:
+다중 서명 트랜잭션를 성공적으로 제출하려면 다음을 수행해야 합니다:
 
-<mark style="background-color:yellow;">rippled</mark>된 v0.80.0에서 도입된 fix1201 개정안은 최대 이체 수수료를 100% (<mark style="background-color:yellow;">TransferRate</mark>  <mark style="background-color:yellow;">2000000000</mark>)로 낮추었으며, 이는 이전에 약 329%의 효과적인 한계로 설정되어 있었습니다 (32비트 정수의 최대 크기에 기반). XRP Ledger에는 여전히 100%보다 높은 이체 수수료 설정이 포함된 계정이 있을 수 있습니다. 이전에 설정된 이체 수수료는 명시된 비율대로 계속 적용됩니다.
-{% endhint %}
-
-## 클라이언트 라이브러리 지원&#x20;
-
-일부 [클라이언트 라이브러리](../../references/undefined/)에는 <mark style="background-color:yellow;">TransferRate</mark>함수를 얻거나 설정하는 편의 기능이 있습니다.
-
-**JavaScript**: <mark style="background-color:yellow;">xrpl.percentToTransferRate()</mark>를 사용하여 백분율 이체 수수료를 문자열에서 해당하는 <mark style="background-color:yellow;">TransferRate</mark> 값으로 변환할 수 있습니다.
+* 트랜잭션를 보내는 주소(<mark style="background-color:yellow;">계정</mark> 필드에 지정됨)는 [ledger에 <mark style="background-color:yellow;">SignerList</mark> 객체](../../references/xrp-ledger/ledger/ledger-1/signerlist.md)를 가져야 합니다. 이를 설정하는 방법에 대한 지침은 [다중 서명 설정](../../tutorials/undefined-3/undefined-3.md)을 참조하세요.
+* 트랜잭션에는 <mark style="background-color:yellow;">SigningPubKey</mark> 필드를 빈 문자열로 포함해야 합니다.
+* 트랜잭션에는 [<mark style="background-color:yellow;">Signers</mark> 필드](../../references/xrp-ledger/undefined-1/undefined.md#undefined-5)가 포함되어야 하며, 서명 배열을 포함해야 합니다.&#x20;
+* <mark style="background-color:yellow;">Signers</mark> 배열에 있는 서명은 <mark style="background-color:yellow;">SignerList</mark>에서 정의된 서명자와 일치해야 합니다.&#x20;
+* 제공된 서명에 대해 해당 서명자와 관련된 총 가중치는 SignerList의 쿼럼과 동일하거나 크거나 같아야 합니다.
+* [트랜잭션 비용](../transactions/transaction-cost.md)(<mark style="background-color:yellow;">수수료</mark> 필드에 지정됨)은 제공된 서명의 수에 대해 최소한 (N+1) 배 이상이어야 합니다. 여기서 N은 제공된 서명의 수입니다.&#x20;
+* 모든 트랜잭션 필드는 서명을 수집하기 전에 정의되어야 합니다. 어떤 필드도 [자동으로 채울 수](../../references/xrp-ledger/undefined-1/undefined.md#undefined) 없습니다.&#x20;
+* 이진 형식으로 제시된 경우 <mark style="background-color:yellow;">Signers</mark> 배열은 서명자 주소의 숫자 값에 따라 정렬되어야 합니다. 가장 낮은 값부터 시작합니다. (JSON으로 제출하는 경우, [submit\_multisigned 메소드](../../references/http-websocket-apis/api-1/undefined-1/submit\_multisigned.md)가 이를 자동으로 처리합니다.)
