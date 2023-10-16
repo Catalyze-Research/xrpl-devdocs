@@ -72,7 +72,7 @@
   * [신뢰선과 발급](concepts/undefined-2/undefined.md)
   * [승인된 신뢰선](concepts/undefined-2/undefined-1.md)
   * [Non-Fungible Tokens](concepts/undefined-2/non-fungible-tokens/README.md)
-    * [XRP Ledger에서 NFT 토큰 거래](concepts/undefined-2/non-fungible-tokens/xrp-ledger-nft.md)
+    * [XRP Ledger에서 NFT 토큰 거래(Trading NFTokens on the XRP Ledger)](concepts/undefined-2/non-fungible-tokens/xrp-ledger-nft-trading-nftokens-on-the-xrp-ledger.md)
     * [NFT Reserve Requirements](concepts/undefined-2/non-fungible-tokens/nft-reserve-requirements.md)
     * [일괄 발행](concepts/undefined-2/non-fungible-tokens/undefined.md)
     * [다른 계정에게 NFT 발행 권한 부여](concepts/undefined-2/non-fungible-tokens/nft.md)
