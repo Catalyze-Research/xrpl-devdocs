@@ -47,7 +47,7 @@ _(_[_NonFungibleTokensV1\_1 수정안_](../../xrp-ledger/amendments/undefined.md
 중개인을 사용하면 여러 가지 이점이 있습니다. 예를 들어 다음과 같습니다:
 
 * 중개인은 <mark style="background-color:yellow;">NFToken</mark>의 판매 가격을 극대화하기 위해 에이전트로 작동할 수 있습니다. 중개인은 판매 가격의 일부로 중개 수수료를 지불받으므로 가격이 높을수록 중개인의 수익도 증가합니다.
-* 중개인은 커리에이터 역할로서, 특정 시장, 가격대 또는 기타 기준에 따라 <mark style="background-color:yellow;">NFToken 객</mark>체를 구성할 수 있습니다. 이는 구매자 그룹을 유형별로 모아서 창작자의 작품을 발견하지 못할 수도 있는 구매자 그룹을 유치할 수 있습니다.&#x20;
+* 중개인은 큐레이터 역할로서, 특정 시장, 가격대 또는 기타 기준에 따라 <mark style="background-color:yellow;">NFToken을</mark> 선별하여 중개할 수 있습니다. 이는 잠재 고객들의 구매를 유도할 수 있습니다.
 * 중개인은 Opensea.io와 유사한 마켓플레이스로서 응용 프로그램 계층에서 경매 프로세스를 처리할 수 있습니다.&#x20;
 
 ## 중개 판매 워크플로우&#x20;
