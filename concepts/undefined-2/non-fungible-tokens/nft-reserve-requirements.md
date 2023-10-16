@@ -27,7 +27,7 @@ NFT의 경우, 개체는 개별 NFT를 의미하는 것이 아닌 계정이 소�
 
 ## NFTokenOffer Reserve&#x20;
 
-각 <mark style="background-color:yellow;">NFTokenOffer</mark> 객체는 제안을 게시하는 계정에게 한 단위의 reserve을 요구합니다. 현재로서는 이 reserve은 2 XRP입니다. reserve은 제안을 취소함으로써 회수할 수 있습니다. 또한 제안이 수락되어 XRP Ledger에서 제거되면 reserve도 회수됩니다.
+각 <mark style="background-color:yellow;">NFTokenOffer</mark> 객체는 제안을 게시하는 계정에게 한 단위의 reserve을 요구합니다. 현재로서는 이 reserve은 2 XRP입니다. reserve은 제안을 취소함으로써 회수할 수 있습니다. 또한 수락되어 해당 제안이 XRP Ledger에서 제거되면 reserve도 회수됩니다.
 
 {% hint style="info" %}
 Tip
