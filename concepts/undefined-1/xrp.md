@@ -58,7 +58,7 @@ XRP Ledger에서 결제를 받을 수 있는 주소는 영구적이며, XRP로 �
 ## 다른 결제 유형과의 비교
 
 * XRP **직접 결제**는 XRP를 하나의 거래로 보내고 받는 유일한 방법입니다. 속도, 간편성, 저렴한 비용의 좋은 균형을 제공합니다.
-* [교차 화폐 결제](undefined.md)도 [Payment](../../references/xrp-ledger/undefined-1/undefined-1/payment.md) Transaction 유형을 사용하지만, XRP-to-XRP를 제외한 어떤 조합의 XRP 및 비-XRP [토큰](../tokens/)을 전송할 수 있습니다. 또한 [부분 결제](undefined-3.md)도 가능합니다. 교차 화폐 결제는 XRP로 표시되지 않은 결제나 [탈중앙화 거래소](../tokens/dex/)에서의 확정차익 기회를 활용하는 데 적합합니다.
+* [교차 화폐 결제](undefined.md)도 [Payment](../../references/xrp-ledger/undefined-1/undefined-1/payment.md) Transaction 유형을 사용하지만, XRP-to-XRP를 제외한 어떤 조합의 XRP 및 비-XRP [토큰](../tokens/)을 전송할 수 있습니다. 또한 [부분 결제](undefined-3.md)도 가능합니다. 교차 화폐 결제는 XRP로 표시되지 않은 결제나 [탈중앙화 거래소](../tokens/decentralized-exchange/)에서의 확정차익 기회를 활용하는 데 적합합니다.
 * [수표](undefined-1.md)는 송신자가 즉시 자금을 이체하지 않고 의무를 설정할 수 있는 기능입니다. 수령자는 수표를 만료되기 전에 언제든지 현금화할 수 있지만, 금액은 보장되지 않습니다. 수표는 XRP 또는 [토큰](../tokens/)을 보낼 수 있습니다. 수표는 수령자가 결제를 요구할 권한을 갖도록 합니다.
 * [에스크로](undefined-2.md)는 특정 조건이 충족될 때 지정된 XRP를 청구할 수 있는 기능입니다. XRP 금액은 완전히 보장되며, 에스크로가 만료되지 않는 한 송신자는 다른 용도로 사용할 수 없습니다. 에스크로는 대규모 스마트 계약에 적합합니다.
 * [결제 채널](undefined-4.md)은 XRP를 보관합니다. 수신자는 서명된 인증서를 사용하여 채널에서 XRP를 대량으로 청구할 수 있습니다. 개별 인증서는 XRP Ledger 거래를 전송하지 않고도 확인할 수 있습니다. 결제 채널은 매우 높은 거래량의 소액 결제나 "스트리밍" 결제에 적합합니다.

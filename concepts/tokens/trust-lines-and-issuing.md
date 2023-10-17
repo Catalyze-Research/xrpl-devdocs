@@ -16,13 +16,13 @@
 
 어느 계정이든 다른 계정에 대해 토큰을 발행하도록 일방적으로 "신뢰"를 할 수 있습니다. 이는 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 통해 0이 아닌 한도와 자체 설정을 보내는 것으로, 이는 잔액이 0인 신뢰선을 생성하고 다른 쪽의 설정을 기본값으로 설정합니다.
 
-신뢰선은 [탈중앙화 거래소](dex/)에서 토큰을 사는 것과 같은 일부 트랜잭션에 의해 암시적으로 생성될 수 있습니다. 이 경우, 신뢰선은 완전히 기본 설정을 사용합니다.
+신뢰선은 [탈중앙화 거래소](decentralized-exchange/)에서 토큰을 사는 것과 같은 일부 트랜잭션에 의해 암시적으로 생성될 수 있습니다. 이 경우, 신뢰선은 완전히 기본 설정을 사용합니다.
 
 ## 한도 초과&#x20;
 
 신뢰선의 한도를 초과하여 잔액을 보유할 수 있는 세 가지 경우가 있습니다:
 
-1. [거래](dex/)를 통해 해당 토큰을 더 획득할 때.
+1. [거래](decentralized-exchange/)를 통해 해당 토큰을 더 획득할 때.
 2. 양의 잔액이 있는 신뢰선의 한도를 줄일 때.
 3. [수표를 현금화](../undefined-1/undefined-1.md)하여 해당 토큰을 더 획득할 때._(_[_CheckCashMakesTrustLine_](../xrp-ledger/amendments/undefined.md) _수정안이 필요.)_
 
@@ -45,7 +45,7 @@
 신뢰선은 양쪽의 설정이 기본 상태에 있고 잔액이 0인 경우 자동으로 삭제됩니다. 이는 신뢰선을 삭제하려면 다음을 수행해야 함을 의미합니다:
 
 1. 기본 설정으로 설정하려면 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보냅니다.
-2. 신뢰선에서 당신이 가진 양의(positive)잔액을 모두 없애야 합니다. 이를 위해 [지불](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)을 보내거나 [탈중앙화 거래소](dex/)에서 화폐를 팔 수 있습니다.
+2. 신뢰선에서 당신이 가진 양의(positive)잔액을 모두 없애야 합니다. 이를 위해 [지불](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)을 보내거나 [탈중앙화 거래소](decentralized-exchange/)에서 화폐를 팔 수 있습니다.
 
 당신의잔액이 음수(발행자인 경우)이거나 다른 쪽의 설정이 기본 상태가 아닌 경우, 신뢰선을 완전히 삭제할 수는 없지만, 동일한 단계를 따르면 소유자 reserve에 대한 부담을 줄일 수 있습니다.
 

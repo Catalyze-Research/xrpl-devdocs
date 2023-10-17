@@ -1,4 +1,4 @@
-# 탈중앙화 거래소 (DEX)
+# 탈중앙화 거래소(Decentralized Exchange)
 
 XRP Ledger는 2012년 XRP Ledger가 출시된 이후로 연속적으로 운영되어온 세계에서 아마도 가장 오래된 탈중앙화 거래소(DEX)를 갖고 있습니다. 이 거래소는 사용자들이 XRP나 다른 [토큰](../)을 구매하고 판매할 수 있도록 해주며, 네트워크에 지불되는 [수수료](../../transactions/fees.md)는 최소화됩니다(어떤 당사자에게도 지급되지 않음).
 
@@ -8,7 +8,7 @@ Caution:
 누구나 자신이 원하는 어떤 화폐 코드나 티커 심볼을 가진 [토큰을 발행](../../../tutorials/undefined-5/undefined.md)하고 탈중앙화 거래소에서 판매할 수 있습니다. 토큰을 구매하기 전에 항상 신중을 기하고 발행자에 주의를 기울이세요. 그렇지 않으면 가치 있는 것을 포기하고 무가치한 토큰을 받게 될 수 있습니다.
 {% endhint %}
 
-## 구조&#x20;
+## 구조(Structure)
 
 구조 XRP Ledger의 탈중앙화 거래소는 필요할 때마다 추적되는 무제한의 화폐 쌍으로 구성됩니다. 화폐 쌍은 XRP와 토큰 또는 두 개의 다른 토큰으로 구성될 수 있으며, 토큰은 발행자와 화폐 코드의 조합으로 항상 식별됩니다. 동일한 화폐 코드와 다른 발행자 또는 동일한 발행자와 다른 화폐 코드로 두 개의 토큰 사이를 거래할 수 있습니다.
 
@@ -20,7 +20,7 @@ XRP Ledger의 모든 변경 사항과 마찬가지로 거래를 수행하려면 
 
 두 개의 토큰을 거래할 때, [자동 브리징](auto-bridging.md)은 직접 토큰 간 거래보다 토큰-XRP 및 XRP-토큰으로 자동 거래하는 것이 더 저렴한 경우에 환율 및 유동성을 개선합니다.
 
-## 예시 거래
+## 예시 거래(Example Trade)
 
 <figure><img src="https://xrpl.org/img/decentralized-exchange-example-trade.svg" alt=""><figcaption></figcaption></figure>
 
@@ -42,7 +42,7 @@ Note:
 ledger가 닫히고 유효성이 검증될 때 거래 순서가 실행되는 표준 주문은 거래가 전송된 순서와 같지 않습니다. 여러 거래가 같은 ledger에서 같은 오더북에 영향을 미칠 때, 그 거래의 최종 결과는 거래 제출 시점에 계산된 잠정 결과와 매우 다를 수 있습니다. 거래 [결과의 불변성](../../transactions/finality-of-results/)에 대한 자세한 내용은 결과의 불변성을 참조하십시오.
 {% endhint %}
 
-## 제한 사항&#x20;
+## 제한 사항(Limitations)
 
 탈중앙화 거래소는 다음과 같은 제한 사항으로 설계되었습니다:
 
@@ -51,3 +51,17 @@ ledger가 닫히고 유효성이 검증될 때 거래 순서가 실행되는 표
 XRP Ledger는 원시적으로 시장 주문, 정지 주문, 레버리지 거래 등의 개념을 표현하지 않습니다. 이들 중 일부는 사용자 정의 토큰과 제안 속성을 창의적으로 사용하여 가능할 수 있습니다.
 
 탈중앙화 시스템으로서 XRP Ledger는 거래에 참여하는 계정 뒤의 실제 사람들과 조직들에 대한 정보를 가지고 있지 않습니다. ledger 자체는 누가 거래에 참여할 수 있는지, 또는 참여할 수 없는지에 대한 제한을 구현할 수 없습니다, 그리고 사용자들과 발행자들은 다양한 종류의 기본 자산을 대표하는 토큰 거래를 규제하기 위해 관련 법률을 준수해야 합니다. 기능들 중에는 [동결](../freezing-tokens/)과 [승인된 신뢰선](../authorized-trust-lines.md)과 같은 것들이 있으며, 이들은 발행자가 관련 법률 및 규정을 준수하는데 도움을 주도록 의도 되었습니다.
+
+### See Also <a href="#see-also" id="see-also"></a>
+
+* **Concepts:**
+  * See [Offers](https://xrpl.org/offers.html) for details on how trades work in the XRP Ledger.
+  * See [Tokens](https://xrpl.org/tokens.html) for an overview of how various types of value can be represented in the XRP Ledger.
+* **References:**
+  * [account\_offers method](https://xrpl.org/account\_offers.html) to look up Offers placed by an account
+  * [book\_offers method](https://xrpl.org/book\_offers.html) to look up Offers to buy or sell a given currency pair
+  * [OfferCreate transaction](https://xrpl.org/offercreate.html) to place a new Offer or replace an existing Offer
+  * [OfferCancel transaction](https://xrpl.org/offercancel.html) to cancel an existing Offer
+  * [Offer object](https://xrpl.org/offer.html) for the data structure of passive Offers in the ledger
+  * [DirectoryNode object](https://xrpl.org/directorynode.html) for the data structure that tracks all the Offers for a given currency pair and exchange rate.
+

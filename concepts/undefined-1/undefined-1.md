@@ -15,7 +15,7 @@ XRP Ledger 수표는 현금화할 수 없게 되는 만료 시간을 가질 수 
 {% hint style="info" %}
 Note:&#x20;
 
-[수표 수정안](../xrp-ledger/amendments/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../tokens/dex/undefined.md#undefined-6)를 참조하세요.
+[수표 수정안](../xrp-ledger/amendments/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../tokens/decentralized-exchange/undefined.md#undefined-6)를 참조하세요.
 {% endhint %}
 
 ## 수표의 필요성
