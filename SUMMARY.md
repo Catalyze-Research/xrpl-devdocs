@@ -61,6 +61,7 @@
   * [트랜잭션 대기열(Transaction Queue)](concepts/transactions/transaction-queue.md)
   * [결과의 불변성(Finality of Results)](concepts/transactions/finality-of-results/README.md)
     * [트랜잭션 결과 조회(Look Up Transaction Results)](concepts/transactions/finality-of-results/look-up-transaction-results.md)
+    * [Transaction Malleability](concepts/transactions/finality-of-results/transaction-malleability.md)
 * [결제 유형](concepts/undefined-1/README.md)
   * [XRP 직접 결제](concepts/undefined-1/xrp.md)
   * [교차 화폐 결제](concepts/undefined-1/undefined.md)

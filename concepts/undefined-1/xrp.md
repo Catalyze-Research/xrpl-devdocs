@@ -1,6 +1,46 @@
 # XRP 직접 결제
 
-금융 시스템의 기반은 가치를 이동시키는 것, 다시 말해 결제입니다. XRP Ledger에서 가장 간단한 결제 유형은 XRP-to-XRP의 직접적인 결제로, XRP Ledger 내의 한 계정에서 다른 계정으로 XRP를 직접적으로 이동시킵니다.
+모든 금융 시스템의 기초는 가치를 전송하는 것입니다. XRP Ledger에서 가장 빠르고 간단한 결제 유형은 한 계정에서 다른 계정으로의 XRP를 직접 결제입니다. 완료를 위해 여러 거래가 필요한 다른 결제 방법과 달리, 직접 XRP 결제는 중개자 없이 하나의 거래에서 실행되며, 일반적으로 8초 이내에 완료됩니다. XRP가 보내는 화폐이자 받는 화폐일 때만 직접 결제를 할 수 있습니다.
+
+
+
+## XRP 직접 결제 수명주기
+
+1. 송신자는 결제의 매개변수를 정의하는 [Payment Transaction](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)을 생성합니다. 보내는 화폐와 받는 화폐가 XRP인 경우, 이 트랜젝션은 직접 XRP 결제입니다.
+2. 트랜젝션 처리는 트랜젝션의 매개변수와 상태를 확인합니다; 어떤 검사라도 실패하면 결제는 실패합니다.
+
+* 모든 필드가 올바르게 포맷되어 있어야 합니다.
+* 보내는 주소는 XRP Ledger의 자금이 확보된 계정이어야 합니다.
+* 제공된 모든 서명은 보내는 주소에 유효해야 합니다.
+* 목적지 주소는 보내는 주소와 달라야 합니다.
+* 송신자는 결제를 보내기 위해 충분한 XRP 잔액을 보유하고 있어야 합니다.&#x20;
+
+3. 트랜젝션 처리는 수신 주소를 확인합니다; 어떤 검사라도 실패하면 결제는 실패합니다.
+
+* 수신 주소에 자금이 있으면 엔진은 [Deposit Authorization](../undefined-2/undefined-3.md)과 같은 설정을 기반으로 추가 검사를 합니다.
+* 수신 주소에 자금이 없으면 결제가 [account reserve](../undefined-2/reserves.md) 요구사항을 충족시키기 위해 충분한 XRP를 전달할 것인지 확인합니다. 예비금이 충족되면 해당 주소에 대한 새 계정이 생성되고 시작 잔액은 수신된 금액입니다.
+
+4. 원장은 해당 계정의 차변 및 대변을 기록합니다.
+
+{% hint style="info" %}
+Note:
+
+송신자는 XRP [transaction cost](../transactions/transaction-cost.md)도 차감됩니다.
+{% endhint %}
+
+## 참고자료
+
+* **Tutorials:**
+  * [Send XRP (Interactive Tutorial)](https://xrpl.org/send-xrp.html)
+  * [Monitor Incoming Payments with WebSocket](https://xrpl.org/monitor-incoming-payments-with-websocket.html)
+* **References:**
+  * [Payment transaction](https://xrpl.org/payment.html)
+  * [Transaction Results](https://xrpl.org/transaction-results.html)
+  * [account\_info method](https://xrpl.org/account\_info.html) - for checking XRP balances
+
+
+
+\---
 
 ## XRP-to-XRP 직접 결제에 대해
 

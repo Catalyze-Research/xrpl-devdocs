@@ -1,10 +1,57 @@
 # 수표
 
-_(XRP Ledger의_ [_Checks 수정안_](../xrp-ledger/amendments/undefined.md#checks)_에 의해 추가됨.)_
+수표 기능은 개인용 종이 수표와 유사한 연기된 결제를 생성할 수 있게 해줍니다. 에스크로나 결제 채널과 달리 수표를 생성할 때 자금이 따로 설정되지 않으므로 수표가 현금화될 때만 돈이 이동합니다. 수표를 현금화할 때 송신자에게 자금이 없으면 트랜잭션은 실패합니다; 수령인은 수표가 만료될 때까지 실패한 트랜잭션을 다시 시도할 수 있습니다.
 
-XRP Ledger의 수표 기능은 사용자가 예약된 지불을 생성하고 의도한 수취인에 의해 취소되거나 현금화될 수 있는 기능을 제공합니다. 개인용 종이 수표와 마찬가지로, XRP Ledger 수표는 자금을 보내는 사람이 금액과 수령인을 지정하는 수표를 생성하여 시작됩니다. 수령인은 수표를 현금화하여 자금을 송금자의 계정에서 수령인의 계정으로 이동시킵니다. 수령인이 수표를 현금화할 때까지 자금은 이동하지 않습니다. 수표가 생성될 때 자금이 보류되지 않기 때문에, 수령인이 현금화를 시도할 때 송신자에게 충분한 자금이 없는 경우 수표의 현금화는 실패할 수 있습니다. 수표의 현금화에 실패한 경우 수표의 수령인은 수표가 만료될 때까지 재시도할 수 있습니다.
+XRP Ledger 수표는 더 이상 현금화될 수 없는 만료 시간을 가질 수 있습니다. 수령인이 만료되기 전에 수표를 성공적으로 현금화하지 않으면 수표는 더 이상 현금화될 수 없지만, 누군가 그것을 취소하기 전까지 XRP Ledger에 객체로 남아 있습니다. 누구나 만료된 후에 수표를 취소할 수 있습니다. 만료되기 전에는 송신자와 수령인만 수표를 취소할 수 있습니다. 수표를 성공적으로 현금화하거나 누군가 그것을 취소하면 Ledger에서 수표 객체가 제거됩니다.
 
-XRP Ledger 수표는 현금화할 수 없게 되는 만료 시간을 가질 수 있습니다. 수령인이 수표를 만료되기 전에 성공적으로 현금화하지 못하면 수표는 더 이상 현금화할 수 없지만, 객체는 XRP Ledger에 그대로 남아 있으며 누군가가 취소할 때까지 유지됩니다. 만료 후에는 누구나 수표를 취소할 수 있습니다. 만료되기 전에는 송신자와 수령인만 수표를 취소할 수 있습니다. 송신자가 수표를 성공적으로 현금화하거나 누군가가 취소할 경우 수표 객체는 ledger에서 제거됩니다.
+## 사용 사례
+
+* 수표는 은행 업계에서 친숙하게 알고 있고 받아들여지는 과정을 사용하여 자금을 교환하게 해줍니다.
+* 당신의 예상 수령인이 낯선 사람들로부터의 직접 결제를 차단하기 위해 [입금 승인](../undefined-2/undefined-3.md)을 사용한다면, 수표는 좋은 대안입니다.
+* 유연한 수표 현금화. 수령인은 최소 금액과 최대 금액 사이에서 수표를 인출할 수 있습니다.
+
+## 수표 수명주기
+
+1. 송신자는 [CheckCreate 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/checkcreate.md)을 보냅니다, 이것은 다음을 정의합니다:
+
+* 수령인.
+* 만료 날짜.
+* 그들의 계정에서 인출될 수 있는 최대 금액.&#x20;
+
+2. 트랜잭션이 처리될 때, XRP Ledger는 <mark style="background-color:yellow;">수표</mark> 객체를 생성합니다. 수표는 송신자나 수신자가 [CheckCancel 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/checkcancel.md)으로 취소할 수 있습니다.
+3. 수령인은 자금을 이체하고 <mark style="background-color:yellow;">수표</mark> 객체를 파괴하는 [CheckCash 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/checkcash.md)을 제출합니다. 수령인은 수표를 현금화하는 데 두 가지 옵션이 있습니다:
+
+* 정확한 금액: 그들은 수표 최대 금액을 초과하지 않는 정확한 금액을 현금화하도록 지정합니다.
+* 유연한 금액: 그들은 현금화할 최소 금액을 지정하고 XRP Ledger는 수표 최대 금액까지 가능한 한 많은 금액을 전달합니다. 송신자가 지정된 최소 금액을 적어도 충족시키기 위한 자금을 보유하고 있지 않으면 트랜잭션은 실패합니다.&#x20;
+
+4. 수령인이 수표를 현금화하기 전에 수표가 만료되면 <mark style="background-color:yellow;">수표</mark> 객체는 누군가 그것을 취소할 때까지 남아 있습니다.
+
+## 참고자료
+
+For more information about Checks in the XRP Ledger, see:
+
+* [Transaction Reference](https://xrpl.org/transaction-types.html)
+  * [CheckCreate](https://xrpl.org/checkcreate.html)
+  * [CheckCash](https://xrpl.org/checkcash.html)
+  * [CheckCancel](https://xrpl.org/checkcancel.html)
+* [Checks Tutorials](https://xrpl.org/use-checks.html)
+  * [Send a Check](https://xrpl.org/send-a-check.html)
+  * [Look up Checks by sender address](https://xrpl.org/look-up-checks-by-sender.html)
+  * [Look up Checks by recipient address](https://xrpl.org/look-up-checks-by-recipient.html)
+  * [Cash a Check for an exact amount](https://xrpl.org/cash-a-check-for-an-exact-amount.html)
+  * [Cash a Check for a flexible amount](https://xrpl.org/cash-a-check-for-a-flexible-amount.html)
+  * [Cancel a Check](https://xrpl.org/cancel-a-check.html)
+* [Checks amendment](https://xrpl.org/known-amendments.html#checks)
+
+For more information about related features, see:
+
+* [Deposit Authorization](https://xrpl.org/depositauth.html)
+* [Escrow](https://xrpl.org/escrow.html)
+* [Payment Channels Tutorial](https://xrpl.org/use-payment-channels.html)
+
+
+
+\---
 
 수표는 [에스크로](undefined-2.md)와 [결제 채널](undefined-4.md)과 몇 가지 유사점이 있지만, 이러한 기능과 수표 사이에 중요한 차이점이 있습니다:
 
