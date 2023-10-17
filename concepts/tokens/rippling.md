@@ -1,6 +1,6 @@
 # Rippling
 
-XRP Ledger에서 "rippling"은 동일한 토큰에 대해 [신뢰선](trust-lines-and-issuing.md)을 가진 여러 연결된 당사자 간의 원자적인 순수 결제 과정을 설명합니다. rippling은 토큰을 보유한 사용자들이 발행자를 수동 중개인으로 사용하여 서로에게 토큰을 전송할 수 있도록 합니다. 일종의 수동 양방향 [환전 주문](decentralized-exchange/undefined.md)으로, 동일한 통화 코드를 가진 두 토큰 간에 1:1 환율과 제한 없이 교환할 수 있게 해줍니다.
+XRP Ledger에서 "rippling"은 동일한 토큰에 대해 [신뢰선](trust-lines-and-issuing.md)을 가진 여러 연결된 당사자 간의 원자적인 순수 결제 과정을 설명합니다. rippling은 토큰을 보유한 사용자들이 발행자를 수동 중개인으로 사용하여 서로에게 토큰을 전송할 수 있도록 합니다. 일종의 수동 양방향 [환전 주문](decentralized-exchange/offers.md)으로, 동일한 통화 코드를 가진 두 토큰 간에 1:1 환율과 제한 없이 교환할 수 있게 해줍니다.
 
 rippling은 결제 [경로](paths.md)를 따라 발생합니다. [직접적인 XRP 간의 결제](../undefined-1/xrp.md)에는 rippling이 포함되지 않습니다.
 

@@ -1,4 +1,4 @@
-# 제안
+# 제안(Offers)
 
 XRP Ledger의 [탈중앙화 거래소](./)에서는 거래 주문을 "제안"이라고 합니다. 제안은 XRP를 [토큰](../)으로 또는 다른 토큰으로 거래하거나, 발행자가 다른 같은 화폐 코드를 가진 토큰을 거래할 수 있습니다. (발행자가 다른 같은 코드를 가진 토큰도 가끔 rippling을 통해 교환될 수 있습니다.)
 
@@ -6,7 +6,7 @@ XRP Ledger의 [탈중앙화 거래소](./)에서는 거래 주문을 "제안"이
 * 즉시 완전히 채워지지 않는 제안은 ledger 데이터의 제안 객체가 됩니다. 나중의 제안과 결제는 ledger에서 [제안 객체](../../../references/xrp-ledger/ledger/ledger-1/)를 소비할 수 있습니다.
 * [교차 화폐 결제](../../undefined-1/undefined.md)는 유동성을 제공하기 위해 제안을 소비합니다. 하지만, 그들은 결코 ledger에 제안 객체를 생성하지 않습니다.
 
-## 제안의 생명주기
+## 제안의 생명주기(Lifecycle of an Offer)
 
 [OfferCreate 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md)은 두 토큰 간, 또는 토큰과 XRP 간에 거래를 수행하라는 지시입니다. 이러한 거래의 각 트랜잭션에는 매입 금액(<mark style="background-color:yellow;">TakerPays</mark>)과 판매 금액(<mark style="background-color:yellow;">TakerGets</mark>)이 포함됩니다. 트랜잭션이 처리되면 가능한 한 많은 매칭이나 크로스 제안을 자동으로 소비합니다. 만약 이것이 새 제안을 완전히 채우지 못하면 나머지는 ledger의 제안 객체가 됩니다.
 
@@ -14,14 +14,14 @@ XRP Ledger의 [탈중앙화 거래소](./)에서는 거래 주문을 "제안"이
 
 ledger에 제안이 있는 동안, [소유자 reserve](../../undefined-2/reserves.md)에 따라 일부 XRP가 분리됩니다. 제안이 어떤 이유로든 제거되면, 해당 XRP는 다시 사용할 수 있게 됩니다.
 
-## 변형
+## 변형(Variations)
 
 * **매입 vs. 매도:** 기본적으로 제안은 "매입" 제안이며, "매입"(<mark style="background-color:yellow;">TakerPays</mark>) 금액 전체를 획득하였을 때 완전히 채워진 것으로 간주됩니다. (당신은 지정된 금액을 받으면서 예상보다 덜 소비할 수 있습니다.) 반대로, "매도" 제안은 "매도" (<mark style="background-color:yellow;">TakerGets</mark>) 금액 전체를 소비했을 때만 완전히 채워진 것으로 간주됩니다. (당신은 지정된 금액을 소비하면서 예상보다 더 많이 받을 수 있습니다.) 이것은 제안이 처음에 요청된 환율보다 더 나은 상황에서만 관련이 있습니다: 제안이 ledger에 배치된 후에는 항상 정확히 요청된 환율에서만 실행됩니다.
 * **즉시 또는 취소** 제안은 ledger에 배치되지 않으므로, 트랜잭션이 처리되는 시점의 기존 매칭 제안과 일치되는 금액까지만 거래됩니다.
 * **Fill 또는 Kill** 제안은 ledger에 배치되지 않으며, 처음에 완전한 금액이 채워지지 않으면 취소됩니다. 이것은 "즉시 또는 취소"와 유사하지만 부분적으로 채워질 수 없습니다.
 * **수동** 제안은 동일한 환율을 가진 매칭 제안을 소비하지 않고 대신 ledger에 직접 배치됩니다. 이를 통해 두 자산 간에 정확한 닻을 생성할 수 있습니다. 수동 제안은 여전히 다른 방향으로 더 나은 환율을 가진 다른 제안을 소비합니다.
 
-## 자금 요구사항
+## 자금 요구사항(Funding Requirements)
 
 제안을 제시하려고 할 때, 거래가 판매할 자산의 일부를 가지고 있지 않은 경우 트랜잭션은 "자금 미보유"로 거부됩니다. 더 구체적으로는:
 
@@ -46,7 +46,7 @@ ledger에 제안이 있는 동안, [소유자 reserve](../../undefined-2/reserve
   * 신뢰선이 더 이상 동결되지 않으면 제안은 다시 자금 지원을 받게 됩니다.
 * 제안이 새로운 신뢰선을 만들 필요가 있지만, 소유자가 증가된 [reserve](../../undefined-2/reserves.md)에 대해 충분한 XRP를 보유하고 있지 않은 경우. (제안과 신뢰에 대해 참조하십시오.)
   * 소유자가 더 많은 XRP를 획득하거나 reserve requirements가 감소하면 제안은 다시 자금 지원이 됩니다.
-* 제안이 만료된 경우. ([제안 만료](undefined.md#undefined-6)에 대해 참조하십시오.)
+* 제안이 만료된 경우. ([제안 만료](offers.md#undefined-6)에 대해 참조하십시오.)
 
 자금이 지원되지 않은 제안은 거래가 제거될 때까지 대장에 남아 있습니다. 제안을 ledger에서 삭제할 수 있는 방법은 다음과 같습니다:
 
@@ -56,13 +56,13 @@ ledger에 제안이 있는 동안, [소유자 reserve](../../undefined-2/reserve
 * 거래 처리 중에 제안이 자금 지원을 받지 않거나 만료된 것으로 확인되었습니다. 일반적으로 이는 다른 제안이 이를 사용하려고 했지만 사용할 수 없음을 의미합니다.
   * 여기에는 제안에서 지불할 수 있는 잔여 금액이 0으로 반올림되는 경우도 포함됩니다.
 
-## 자금 지원되지 않은 제안 추적
+## 자금 지원되지 않은 제안 추적(Tracking Unfunded Offers)
 
 모든 제안의 자금 상태를 추적하는 것은 계산상 부담이 될 수 있습니다. 특히 거래 중인 주소에는 많은 수의 개설이 있을 수 있습니다. 단일 잔액은 많은 서비스의 자금 조달 상태에 영향을 미칠 수 있습니다. 이 때문에 XRP Ledger는 자금이 지원되지 않거나 만료된 제안을 사전에 찾아 제거하지 않습니다.
 
 클라이언트 애플리케이션은 제안의 자금 조달 상태를 로컬로 추적할 수 있습니다. 이렇게 하려면 먼저 [book\_offers 메소드](../../../references/http-websocket-apis/api-1/undefined-2/book\_offers.md)를 사용하여 주문 북을 검색하고 offers의 <mark style="background-color:yellow;">taker\_gits\_funded</mark> 필드를 확인합니다. 그런 다음 트랜잭션 스트림을 구독하고 <mark style="background-color:yellow;">트랜잭션</mark> 메타데이터를 확인하여 수정된 제안을 확인합니다.
 
-## 제안 및 신뢰
+## 제안 및 신뢰(Offers and Trust)
 
 [신뢰선](../trust-lines-and-issuing.md)의 한계 값은 제안에 영향을 주지 않습니다. 즉, 발행자가 신뢰할 수 있는 최대 금액보다 많은 금액을 구입하기 위해 제안을 사용할 수 있습니다.
 
@@ -70,13 +70,13 @@ ledger에 제안이 있는 동안, [소유자 reserve](../../undefined-2/reserve
 
 신뢰선 제한은 원하는 것보다 많은 토큰을 지불로 받는 것을 방지합니다. 제안은 원하는 토큰의 양을 명시적으로 표시하기 때문에 이러한 제한을 초과할 수 있습니다.
 
-## 제안 선호
+## 제안 선호(Offer Expiration)
 
 기존 제안은 환율별로 그룹화되며, 환율은 <mark style="background-color:yellow;">TakerGets</mark>와 <mark style="background-color:yellow;">TakerPays</mark>간의 비율로 측정됩니다. 환율이 더 높은 제안을 우선적으로 받습니다. (즉, 제안을 수락한 사람은 지불한 화폐 금액만큼 가능한 한 많이 받습니다.) 동일한 환율의 제안은 어느 제안이 먼저 제공되었는지를 기준으로 합니다.
 
 제안이 동일한 ledger 블록에서 실행되는 경우, 제안이 실행되는 순서는 거래가 ledger에 적용된 [정식 순서](https://github.com/XRPLF/rippled/blob/release/src/ripple/app/misc/CanonicalTXSet.cpp)에 따라 결정됩니다. 이 동작은 결정적이고 효율적이며 게임하기 어렵도록 설계되었습니다.
 
-## 제안 만료
+## 제안 만료(Offer Expiration)
 
 제안서를 작성할 때 만료 시간을 선택적으로 추가할 수 있습니다. 기본적으로 제안은 만료되지 않습니다. 이미 만료된 새 제안을 만들 수 없습니다.
 
@@ -90,4 +90,16 @@ Note:
 만료된 제안은 트랜잭션이 삭제할 때까지 ledger 데이터에 남아 있습니다. 그 때까지 API에서 검색된 데이터에 계속 나타날 수 있습니다(예: [ledger\_entry 메소드](../../../references/http-websocket-apis/api-1/ledger/ledger\_entry.md) 사용). 트랜잭션은 일반적으로 만료되거나 자금 지원되지 않은 제안을 자동으로 삭제합니다. 일반적으로 해당 제안과 일치하거나 취소된 제안 또는 교차 화폐 결제를 실행합니다. 제안과 관련된 소유자 예약은 제안이 실제로 삭제된 경우에만 다시 사용할 수 있습니다.
 {% endhint %}
 
-&#x20;
+
+
+### 참고 <a href="#see-also" id="see-also"></a>
+
+* **Concepts:**
+  * [Tokens](https://xrpl.org/tokens.html)
+  * [Paths](https://xrpl.org/paths.html)
+* **References:**
+  * [account\_offers method](https://xrpl.org/account\_offers.html)
+  * [book\_offers method](https://xrpl.org/book\_offers.html)
+  * [OfferCreate transaction](https://xrpl.org/offercreate.html)
+  * [OfferCancel transaction](https://xrpl.org/offercancel.html)
+  * [Offer object](https://xrpl.org/offer.html)
