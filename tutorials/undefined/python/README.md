@@ -1,10 +1,10 @@
 # 빠른 시작 (Python)
 
-JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
+Python 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
 ## [빠른 시작 소개 (Python)](python.md)&#x20;
 
-JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
+Python 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
 ## [1. 계정 생성 및 XRP 전송 (Python)](1.-xrp-python.md)[ ](../javascript/1.-xrp-javascript.md)
 
@@ -20,7 +20,7 @@ JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거�
 
 ## [4. NFTs 전송 (Python) ](4.-nfts-python.md)
 
-JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
+Python 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
 ## [NFT 판매 중개 (Python) ](nft-python.md)
 
