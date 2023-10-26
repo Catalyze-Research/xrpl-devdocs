@@ -35,15 +35,15 @@ Mainnet에서 현재 reserve requirement은 다음과 같습니다:
 
 ## Reserves 조회하기&#x20;
 
-애플리케이션은 [server\_info 메소드](../../references/http-websocket-apis/api-1/undefined-5/server\_info.md) 또는 [server\_state 메소드](../../references/http-websocket-apis/api-1/server-info/server\_state.md)를 사용하여 현재 기본 및 증분 reserve 값을 조회할 수 있습니다:
+애플리케이션은 [server\_info 메소드](../../references/http-websocket-apis/api-1/undefined-5/server\_info.md) 또는 [server\_state 메소드](../../references/http-websocket-apis/api-1/server-info/server\_state.md)를 사용하여 현재 기본 및 incremental reserve 값을 조회할 수 있습니다:
 
 <table><thead><tr><th width="153">메소드</th><th width="98">단위</th><th width="239">기본 예비 필드</th><th>증분 준비금 필드</th></tr></thead><tbody><tr><td>server_info method</td><td>소수점 XRP</td><td><mark style="background-color:yellow;">validated_ledger.reserve_base_xrp</mark></td><td><mark style="background-color:yellow;">validated_ledger.reserve_inc_xrp</mark></td></tr><tr><td>server_state method</td><td>XRP의 정수 드롭</td><td><mark style="background-color:yellow;">validated_ledger.reserve_base</mark></td><td><mark style="background-color:yellow;">validated_ledger.reserve_inc</mark></td></tr></tbody></table>
 
-계정 소유자의 reserve를 확인하려면 증분 reserve를 계정이 소유한 객체 수로 곱하세요. 계정이 소유한 객체 수를 확인하려면 [account\_info 메소드](../../references/http-websocket-apis/api-1/undefined/account\_info.md)를 호출하고 <mark style="background-color:yellow;">account\_data.OwnerCount</mark>를 가져옵니다.
+계정의 소유자 reserve를 확인하려면 incremental reserve를 계정이 소유한 객체 수로 곱하세요. 계정이 소유한 객체 수를 확인하려면 [account\_info 메소드](../../references/http-websocket-apis/api-1/undefined/account\_info.md)를 호출하고 <mark style="background-color:yellow;">account\_data.OwnerCount</mark>를 가져옵니다.
 
 주소의 총 reserve requirement를 계산하려면 <mark style="background-color:yellow;">OwnerCount</mark>를 <mark style="background-color:yellow;">reserve\_inc\_xrp</mark>로 곱한 다음 <mark style="background-color:yellow;">reserve\_base\_xrp</mark>를 더하세요. 이것은 [파이썬에서 이 계산을 보여주는 예시](../../tutorials/apps/python.md)입니다.
 
-## Reserve Requirement 아래로 내려가기&#x20;
+## Reserve Requirement 미충족&#x20;
 
 거래 처리 중에, [트랜잭션 비용](../transactions/transaction-cost.md)이 발송 주소의 XRP 잔액 일부를 소멸시킵니다. 이로 인해 주소의 XRP 잔액이 reserve requirement 아래로 내려갈 수 있습니다. 심지어 이런 방법으로 XRP를 모두 소멸시킬 수도 있습니다.
 
