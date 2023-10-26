@@ -2,29 +2,29 @@
 
 XRP Ledger는 스팸 또는 악의적인 사용으로 인한 과성장을 방지하기 위해 XRP로 _reserve requirements_를 적용합니다. 이런 reserve requirements의 목표는 상용화된 기계(PC)의 발전에 맞춰 RAM에서 분산 원장을 언제든지 감당할 수 있도록 분산 원장의 성장을 조절하는 것 입니다.
 
-계정을 보유하려면 해당 주소는 공유 전역 ledger에 최소한의 XRP 금액을 보유해야 합니다. 새 주소에 자금을 지원하기 위해서는 해당 주소로 충분한 XRP를 받아 reserve requirements를 충족해야 합니다. reserved XRP를 다른 사람에게 보낼 수는 없지만 [계정을 삭제함](./#undefined-3)으로써 일부 XRP를 회수할 수 있습니다.
+계정을 보유하려면 해당 계정은 공유 전역 ledger에 최소한의 XRP 금액을 보유해야 합니다. 새 계정에 자금을 지원하기 위해서는 해당 계정으로 충분한 XRP를 받아 reserve requirements를 충족해야 합니다. 한 계정의 reserved XRP를 다른 사람에게 보낼 수는 없지만 [계정을 삭제함](./#undefined-3)으로써 일부 XRP를 회수할 수 있습니다.
 
-reserve requirements은 [수수료 투표](../consensus-protocol/undefined-3.md) 과정을 통해 시간이 지남에 따라 변경될 수 있으며, 여기서 유효성 검증인 새로운 reserve 설정에 동의할 수 있습니다.
+reserve requirements은 [수수료 투표](../consensus-protocol/undefined-3.md) 과정을 통해 시간이 지남에 따라 변경될 수 있으며, 여기서 유효성 검증인(validators)들은 새로운 reserve 설정에 동의할 수 있습니다.
 
 ## 기본 Reserve과 소유자 Reserve&#x20;
 
 reserve requirement는 두 부분으로 구성됩니다:
 
 * **기본 Reserve**는 ledger의 각 주소에 필요한 최소한의 XRP 금액입니다.
-* **소유자 Reserve**는 해당 주소가 ledger에서 소유하는 각 객체에 대한 reserve requirement을 증가시킵니다. 항목당 비용을 _incremental reserve_라고 합니다.
+* **소유자 Reserve**는 해당 주소가 ledger에서 소유하는 각 객체 수만큼 reserve requirement을 증가시키는 양입니다. 항목당 증가분을 _incremental reserve_라고도 합니다.
 
 Mainnet에서 현재 reserve requirement은 다음과 같습니다:
 
 * Base Reserve: **10 XRP**
 * Owner Reserve: 각 항목당 **2 XRP**
 
-다른 네트워크에서의 reserve 다를 수 있습니다.
+네트워크마다 reserve는 다를 수 있습니다.
 
 ## Owner Reserves&#x20;
 
-ledger에는 특정 계정이 소유하는 여러 객체(ledger entries)가 있습니다. 일반적으로 객체를 생성한 계정이 소유자(owner)가 됩니다. 각 객체는 소유자의 총 reserve requirement를 owner reserve 만큼 증가시킵니다. 객체가 ledger에서 제거되면 예치 요구 사항에는 더 이상 포함되지 않습니다.
+분산원장에는 특정 계정이 소유하는 여러 객체(ledger entries)가 있습니다. 일반적으로 객체를 생성한 계정이 소유자(owner)가 됩니다. 각 객체는 소유자의 총 reserve requirement를 owner reserve 만큼 증가시킵니다. 객체가 분산원장에서 제거되면 그에 해당하는 소유자 reserve는 더 이상 reserve requirement 계산에 포함되지 않습니다.
 
-소유자의 reserve requirement에 포함되는 객체는 다음과 같습니다: [Checks](../undefined-1/undefined-1.md), [Deposit Preauthorizations](undefined-3.md), [Escrows](../undefined-1/undefined-2.md), [NFT Offers](../tokens/non-fungible-tokens/xrp-ledger-nft-trading-nftokens-on-the-xrp-ledger.md), [NFT Pages](../tokens/non-fungible-tokens/), [Offers](../../references/xrp-ledger/ledger/ledger-1/offer.md), [Payment Channels](../undefined-1/undefined-4.md), [Signer Lists](undefined-1.md), [Tickets](../undefined-1/undefined-1.md), 그리고 [신뢰선](../tokens/trust-lines-and-issuing.md).
+소유자의 reserve requirement에 가산되는 객체는 다음과 같습니다: [Checks](../undefined-1/undefined-1.md), [Deposit Preauthorizations](undefined-3.md), [Escrows](../undefined-1/undefined-2.md), [NFT Offers](../tokens/non-fungible-tokens/xrp-ledger-nft-trading-nftokens-on-the-xrp-ledger.md), [NFT Pages](../tokens/non-fungible-tokens/), [Offers](../../references/xrp-ledger/ledger/ledger-1/offer.md), [Payment Channels](../undefined-1/undefined-4.md), [Signer Lists](undefined-1.md), [Tickets](../undefined-1/undefined-1.md), 그리고 [신뢰선](../tokens/trust-lines-and-issuing.md).
 
 일부 특수한 경우:
 
