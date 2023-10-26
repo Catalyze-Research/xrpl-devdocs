@@ -47,12 +47,12 @@ Mainnet에서 현재 reserve requirement은 다음과 같습니다:
 
 거래 처리 중에, [트랜잭션 비용](../transactions/transaction-cost.md)이 발송 주소의 XRP 잔액 일부를 소멸시킵니다. 이로 인해 주소의 XRP 잔액이 reserve requirement 아래로 내려갈 수 있습니다. 심지어 이런 방법으로 XRP를 모두 소멸시킬 수도 있습니다.
 
-당신의 계정이 현재의 reserve requirement보다 적은 XRP를 보유하고 있다면, 다른 사람에게 XRP를 보내거나, 계정의 reserve requirement을 늘릴 수 있는 새로운 객체를 생성할 수 없습니다. 그럼에도 불구하고, 계정은 ledger에 계속 존재하고, 충분한 XRP를 가지고 있으면 이러한 것들을 하지 않는 거래를 계속 보낼 수 있습니다. 충분한 XRP를 받아서 reserve requirement 이상으로 돌아가거나, [reserve requirement이 당신이 가지고 있는 금액 아래로 줄어들](reserves.md#reserve-requirements) 경우에도 마찬가지입니다.
+당신의 계정이 현재의 reserve requirement보다 적은 XRP를 보유하고 있다면, 다른 사람에게 XRP를 보내거나, 계정의 reserve requirement을 늘릴 수 있는 새로운 객체를 생성할 수 없습니다. 그럼에도 불구하고, 계정은 ledger에 계속 존재하고, 충분한 XRP를 가지고 있으면 앞에서 말한 계정과는 다르게 정상적인 트랜잭션을 계속 보낼 수 있습니다. 충분한 XRP를 받아서 reserve requirement 이상으로 돌아가거나, [reserve requirement이 당신이 가지고 있는 금액 아래로 줄어들](reserves.md#reserve-requirements) 경우에도 마찬가지입니다.
 
 {% hint style="info" %}
 Tip:
 
-당신의 주소가 reserve requirement 이하라면, 더 많은 XRP를 획득하기 위해 [OfferCreate 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md)을 보내고 reserve requirement 이상으로 되돌릴 수 있습니다. 그러나, reserve requirement 이하일 동안 [ledger에 Offer 항목](../../references/xrp-ledger/ledger/ledger-1/offer.md)을 생성할 수 없기 때문에, 이 거래는 오더북에 이미 있는 Offer만을 소비할 수 있습니다.
+당신의 계정이 reserve requirement를 충족하지 못하면, XRP를 획득하기 위해 [OfferCreate 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md)을 보내고 그 결과로 reserve requirement를 충족시키는방법을 생각해볼 수 있습니다. 그러나, reserve requirement 이하일 동안 [분산원장에 Offer 항목](../../references/xrp-ledger/ledger/ledger-1/offer.md)을 생성할 수 없기 때문에, 이 거래는 오더북에 이미 있는 Offer만을 소비할 수 있습니다.
 {% endhint %}
 
 ## Reserve Requirements 변경&#x20;
