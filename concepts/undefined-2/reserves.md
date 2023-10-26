@@ -1,6 +1,6 @@
 # Reserves
 
-XRP Ledger는 스팸 또는 악의적인 사용으로 인해 과도하게 커지는 것을 방지하기 위해 XRP로 _reserve requirements_을 적용합니다. 목표는 현재의 상용 기계에서도 현재의 ledger를 항상 RAM에 맞출 수 있도록 기술의 발전과 함께 ledger의 성장을 제한하는 것입니다.
+XRP Ledger는 스팸 또는 악의적인 사용으로 인한 과성장을 방지하기 위해 XRP로 _reserve requirements_를 적용합니다. 이런 reserve requirements의 목표는 상용화된 기계(PC)의 발전에 맞춰 RAM에서 분산 원장을 언제든지 감당할 수 있도록 분산 원장의 성장을 조절하는 것 입니다.
 
 계정을 보유하려면 해당 주소는 공유 전역 ledger에 최소한의 XRP 금액을 보유해야 합니다. 새 주소에 자금을 지원하기 위해서는 해당 주소로 충분한 XRP를 받아 reserve requirements를 충족해야 합니다. reserved XRP를 다른 사람에게 보낼 수는 없지만 [계정을 삭제함](./#undefined-3)으로써 일부 XRP를 회수할 수 있습니다.
 
