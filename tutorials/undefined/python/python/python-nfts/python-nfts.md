@@ -1,4 +1,4 @@
-# python을 이용한 NFTs 발행과 소각
+# python을 이용한 NFTs 발행과 소각(Mint and Burn NFTs Using Python)
 
 이 예시는 다음을 보여줍니다:
 
