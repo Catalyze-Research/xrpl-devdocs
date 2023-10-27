@@ -66,7 +66,7 @@ Note:
 
 EscrowFinish 트랜잭션은 [crypto-condition](https://datatracker.ietf.org/doc/html/draft-thomas-crypto-conditions-04)을 사용하는 경우, crypto-condition 충족을 검증하는 과정에서 높은 처리 부하가 발생하기 때문에 더 [높은 트랜잭션 비용](../transactions/transaction-cost.md)을 지불해야 합니다.
 
-추가적으로 필요한 트랜잭션 비용은 주문 처리의 크기에 비례합니다. 트랜잭션이 다중 서명인 경우, [다중 서명](../undefined-2/undefined-1.md)의 비용은 주문 처리의 비용에 추가됩니다.
+추가적으로 필요한 트랜잭션 비용은 주문 처리의 크기에 비례합니다. 트랜잭션이 다중 서명인 경우, [다중 서명](../undefined-2/undefined.md)의 비용은 주문 처리의 비용에 추가됩니다.
 
 현재, 주문 처리를 포함한 EscrowFinish는 **최소한 330** [**드롭의 XRP**](../../references/xrp-ledger/undefined/)**와 주문 처리의 크기당 16바이트마다 10 드롭의 XRP가 추가 트랜잭션 비용으로 필요**합니다.&#x20;
 

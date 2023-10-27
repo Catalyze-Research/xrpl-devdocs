@@ -1,57 +1,64 @@
-# 다중 서명
+# 티켓
 
-XRP Ledger의 다중 서명은 여러 개인 키의 조합을 사용하여 XRP Ledger에 대한 [트랜잭션을 승인](../transactions/#undefined-2)하는 방법입니다. 다중 서명, [마스터 키 쌍](undefined.md#undefined-7) 및 [일반 키 쌍](undefined.md#undefined-9)을 포함하여 주소에 대해 임의의 인증 방법 조합을 사용할 수 있습니다. (단, 하나의 요구 사항은 하나 이상의 메소드를 활성화해야 한다는 것입니다.)
+_(_[_TicketBatch_](../xrp-ledger/amendments/undefined.md#ticketbatch)[ _수정안_](../xrp-ledger/amendments/undefined.md#ticketbatch)_에 의해 추가됨.)_
 
-다중 서명의 이점은 다음과 같습니다:
+XRP Ledger의 티켓은 거래의 [일련 번호](../../references/xrp-ledger/undefined/#undefined-3)를 당장 보내지 않고 미리 설정해두는 방법입니다. 티켓을 사용하면 거래를 일반적인 순서 외에 보낼 수 있습니다. 이에 대한 한 가지 사용 사례는 필요한 서명을 모으는 데 시간이 걸릴 수 있는 [다중 서명](undefined.md) 거래를 허용하는 것입니다: 티켓을 사용하는 거래에 대해 서명을 수집하는 동안에도, 다른 거래를 계속 보낼 수 있습니다.
 
-* 서로 다른 장치에서 키를 요구하여 악의적인 행위자가 사용자 대신 트랜잭션을 전송하기 위해 여러 컴퓨터를 손상시켜야 합니다.&#x20;
-* 여러 사용자 간에 주소의 보관을 공유할 수 있으며, 각 사용자는 해당 주소에서 트랜잭션을 보내는 데 필요한 여러 키 중 하나만 가지고 있습니다.&#x20;
-* 사용자가 정상적으로 서명할 수 없거나 서명할 수 없는 경우 주소를 제어할 수 있는 사용자 그룹에 주소에서 트랜잭션을 보낼 권한을 위임할 수 있습니다.
-* ... 기타 등등.
+## 배경
 
-## 서명자 목록
+[트랜잭션](../transactions/)에는 일련 번호가 있어서 주어진 거래는 한 번 이상 실행되지 않도록 합니다. 일련 번호는 또한 주어진 거래가 유일하게 하도록 합니다: 같은 금액의 돈을 동일한 사람에게 여러 번 보낼 경우, 일련 번호는 매번 다르게 보장되는 한 가지 상세 정보입니다. 마지막으로, 일련 번호는 일부 거래가 네트워크 전체에 걸쳐 보내질 때 순서가 뒤섞여 도착하더라도 거래를 일관된 순서로 놓는 우아한 방법을 제공합니다.
 
-다중 서명하려면 먼저 서명할 수 있는 주소 목록을 만들어야 합니다.
+그러나, 일련 번호가 너무 제한적인 일부 상황이 있습니다. 예를 들어:
 
-[SignerListSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/signerlistset.md)은 주소에서 트랜잭션을 승인할 수 있는 주소 집합인 서명자 목록을 정의합니다. 서명자 목록에 1-32개의 주소를 포함할 수 있습니다. 목록에 사용자의 주소를 포함할 수 없으며 중복된 항목이 있을 수 없습니다. 목록의 서명자 가중치 및 쿼럼 설정을 사용하여 필요한 서명 수, 조합을 제어할 수 있습니다.
+* 둘 이상의 사용자가 각각 독립적으로 거래를 보낼 수 있는 권한을 가지고 계정에 대한 접근을 공유합니다. 이 사용자들이 먼저 협조하지 않고 거의 동시에 거래를 보내려고 시도하면, 그들은 각각 다른 거래에 대해 같은 일련 번호를 사용하려고 시도할 수 있고, 성공할 수 있는 것은 하나 뿐입니다.&#x20;
+* 미리 거래를 준비하고 서명한 후에 이를 안전한 저장소에 저장하여 특정 이벤트가 발생할 경우 언제든지 실행할 수 있게 하려고 할 수 있습니다. 그러나, 그 사이에 계정을 평소와 같이 계속 사용하려는 경우, 미리 설정된 거래가 필요로 할 일련 번호를 알 수 없습니다.&#x20;
+* [여러 사람이 거래를 유효하게 하기 위해 서명](undefined.md)해야 할 때, 한 번에 둘 이상의 거래를 계획하는 것이 어려울 수 있습니다. 거래에 개별 일련 번호를 부여하면, 이전 거래에 모든 사람이 서명한 후에야 나중에 번호가 매겨진 거래를 보낼 수 있습니다. 하지만 만약 보류 중인 각 거래에 같은 일련 번호를 사용한다면, 성공할 수 있는 거래는 하나 뿐입니다.&#x20;
 
-_(_[_ExpandedSignerList수정안_](../xrp-ledger/amendments/undefined.md#expandedsignerlist)_에 의해 업데이트됨.)_
+티켓은 이러한 문제를 모두 해결하기 위해 일련 번호를 미리 설정하여 나중에, 그들의 보통 순서 외에 사용할 수 있도록 하지만, 그래도 각각 한 번 이상은 아니게 하는 방법을 제공합니다.
 
-## 서명자 무게&#x20;
+## 티켓은 예약된 일련 번호입니다&#x20;
 
-목록의 각 서명자에게 가중치를 할당합니다. 가중치는 목록의 다른 서명자에 대한 서명자의 권한을 나타냅니다. 값이 높을수록 더 많은 권한을 가집니다. 개별 가중치 값은 2^16-1을 초과할 수 없습니다.&#x20;
+티켓은 나중에 사용하기 위해 일련 번호가 설정되었음을 나타내는 기록입니다. 계정은 먼저 [TicketCreate 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/ticketcreate.md)을 보내서 하나 이상의 일련 번호를 티켓으로 설정해놓습니다. 이는 [ledger의 상태 데이터](../undefined-1/ledgers.md)에 각 예약된 일련 번호에 대한 기록을 만들어, [티켓 객체](../../references/xrp-ledger/ledger/ledger-1/ticket.md) 형태로 저장합니다.
 
-## 쿼럼
+티켓은 그것들을 생성하기 위해 설정해 놓은 일련 번호를 사용하여 번호가 매겨집니다. 예를 들어, 계정의 현재 일련 번호가 101이고 3개의 티켓을 생성하면, 그 티켓들은 티켓 일련 번호 102, 103, 104를 가지게 됩니다. 이렇게 하면 계정의 일련 번호가 105로 증가하게 됩니다.
 
-목록의 쿼럼 값은 트랜잭션을 승인하는 데 필요한 최소 가중치 합계입니다. 쿼럼은 0보다 크고 서명자 목록의 가중치 합계보다 작거나 같아야 합니다. 즉, 지정된 서명자 가중치로 쿼럼을 달성할 수 있어야 합니다.
+<figure><img src="https://xrpl.org/img/ticket-creation.svg" alt=""><figcaption></figcaption></figure>
 
-## 지갑 위치
+나중에 일련 번호 대신 특정 티켓을 사용하여 거래를 보낼 수 있습니다. 이렇게 하면 ledger의 상태 데이터에서 해당 티켓이 제거되고 계정의 일반적인 일련 번호는 변경되지 않습니다. 또한 티켓을 사용하지 않고 일반 일련 번호를 사용하여 거래를 보낼 수도 있습니다. 언제든지 어떤 순서로든 이용 가능한 티켓을 사용할 수 있지만, 각 티켓은 한 번만 사용할 수 있습니다.
 
-각 서명자의 목록에는 최대 256비트의 임의의 데이터를 추가할 수도 있습니다. 이 데이터는 네트워크에서 필요하거나 사용되지 않지만 스마트 계약이나 다른 애플리케이션에서 서명자에 대한 기타 데이터를 식별하거나 확인하는 데 사용될 수 있습니다.
+<figure><img src="https://xrpl.org/img/ticket-usage.svg" alt=""><figcaption></figcaption></figure>
 
-_(_[_ExpandedSignerList수정안_](../xrp-ledger/amendments/undefined.md#expandedsignerlist)_에 의해 추가됨.)_
+위의 예를 계속하면, 105번 일련 번호 또는 생성한 세 개의 티켓 중 하나를 사용하여 거래를 보낼 수 있습니다. 티켓 103을 사용하여 거래를 보내면, 이를 통해 ledger에서 티켓 103이 삭제됩니다. 그 후에는 105번 일련 번호, 티켓 102, 또는 티켓 104를 사용하여 다음 거래를 할 수 있습니다.
 
-## 서명자 가중치 및 쿼럼 사용 예제&#x20;
+{% hint style="info" %}
+Caution:\
+각 티켓은 [소유자 reserve](reserves.md)에 대해 별도의 항목으로 계산되므로 각 티켓에 대해 2개의 XRP를 설정해야 합니다. (티켓을 사용한 후에 XRP는 다시 사용 가능해집니다.) 한 번에 많은 수의 티켓을 생성하면 이 비용이 빠르게 누적될 수 있습니다.
+{% endhint %}
 
-가중치와 쿼럼을 사용하면 각 트랜잭션에 대해 관리하는 책임 있는 참여자에게 할당된 상대적인 신뢰와 권한에 기반하여 적절한 감독 수준을 설정할 수 있습니다.
+일련 번호와 마찬가지로, 거래가 컨센서스에 의해 확인된 경우에만 티켓이 소비됩니다. 그러나 원래 의도한 작업을 수행하지 못한 거래도 [tec 클래스 결과 코드](../../references/xrp-ledger/undefined-1/pseudo-transactions/undefined/tec-codes.md)를 가진 [컨센서스](../consensus-protocol/consensus-structure.md)에 의해 확인될 수 있습니다.
 
-공유 계정 사용 사례에서는 쿼럼이 1인 목록을 생성한 후, 모든 참여자에게 가중치 1을 부여할 수 있습니다. 그들 중 아무나 한 명의 승인만 필요합니다.
+계정이 사용할 수 있는 티켓을 조회하려면 [account\_objects 메소드](../../references/http-websocket-apis/api-1/undefined/account\_objects.md)를 사용하십시오.
 
-매우 중요한 계정의 경우, 쿼럼을 3으로 설정하고 가중치가 1인 3명의 참여자를 가질 수 있습니다. 모든 참여자는 각 트랜잭션에 동의하고 승인해야 합니다.
+## 제한 사항&#x20;
 
-다른 계정은 쿼럼이 3인 경우도 있을 수 있습니다. CEO에게 3의 가중치, 3명의 부사장에게 2의 가중치, 3명의 이사에게 1의 가중치를 할당합니다. 이 계정의 트랜잭션를 승인하려면 3명의 이사 (총 가중치 3), 1명의 부사장과 1명의 이사 (총 가중치 3), 2명의 부사장 (총 가중치 4) 또는 CEO (총 가중치 3)의 승인이 필요합니다. 이전 세 가지 사용 사례에서는 일반 키를 구성하지 않고 마스터 키를 비활성화하여 다중 서명이 [트랜잭션 승인](../transactions/#undefined-2)의 유일한 방법이 되도록 설정합니다.
+어떤 계정도 티켓을 생성하고 어떤 종류의 거래에도 사용할 수 있습니다. 그러나 일부 제한사항이 적용됩니다:
 
-"백업 계획"으로 다중 서명 목록을 생성하는 시나리오도 있을 수 있습니다. 계정 소유자는 보통 트랜잭션에 일반 키(다중 서명 키가 아님)를 사용합니다. 안전을 위해 계정 소유자는 가중치가 각각 1인 3명의 친구를 포함하고 쿼럼이 3인 서명자 목록을 추가합니다. 계정 소유자가 개인 키를 분실한 경우, 친구들에게 정규 키를 대체하기 위해 다중 서명 트랜잭션를 멀티 서명할 수 있습니다.
+* 각 티켓은 한 번만 사용할 수 있습니다. 같은 티켓 일련 번호를 사용할 수 있는 여러 다른 후보 거래가 있을 수 있지만, 그 후보 중 하나만 컨센서스에 의해 검증될 수 있습니다.
+* 각 계정은 ledger에 한 번에 250개 이상의 티켓을 가질 수 없습니다. 한 번에 250개 이상의 티켓을 생성할 수도 없습니다.
+* 티켓을 사용하여 더 많은 티켓을 생성할 수 있습니다. 그렇게 하면 사용한 티켓은 한 번에 가질 수 있는 티켓의 총 수에 포함되지 않습니다.&#x20;
+* 각 티켓은 [소유자 reserve](reserves.md)로 계산되므로, 아직 사용하지 않은 각 티켓에 대해 2개의 XRP를 설정해야 합니다. 티켓을 사용한 후 XRP를 다시 사용할 수 있습니다.
+* 개별 ledger 내에서, 티켓을 사용하는 거래는 동일한 발신자의 다른 거래 이후에 실행됩니다. 계정이 같은 ledger 버전에서 티켓을 사용하는 여러 거래를 가지고 있다면, 그 티켓들은 티켓 일련 번호가 가장 낮은 것부터 가장 높은 것까지 순서대로 실행됩니다. (자세한 정보는 컨센서스의 [규범 순서](../consensus-protocol/consensus-structure.md)에 대한 문서를 참조하십시오.)&#x20;
+* 티켓을 "취소"하려면, 티켓을 사용해 [no-op](../consensus-protocol/undefined-1.md) [AccountSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 수행하기 위해 티켓을 사용하십시오. 이렇게 하면 그 reserve requirement를충족할 필요 없이 티켓이 삭제됩니다.
 
-## 다중 서명 트랜잭션 전송하기&#x20;
+## 참고 <a href="#see-also" id="see-also"></a>
 
-다중 서명 트랜잭션를 성공적으로 제출하려면 다음을 수행해야 합니다:
+* **Concepts:**
+  * [Multi-Signing](https://xrpl.org/multi-signing.html)
+* **Tutorials:**
+  * [Use Tickets](https://xrpl.org/use-tickets.html)
+* **References:**
+  * [TicketCreate transaction](https://xrpl.org/ticketcreate.html)
+  * [Transaction Common Fields](https://xrpl.org/transaction-common-fields.html)
+  * [Ticket object](https://xrpl.org/ticket.html)
+  * [account\_objects method](https://xrpl.org/account\_objects.html)
 
-* 트랜잭션를 보내는 주소(<mark style="background-color:yellow;">계정</mark> 필드에 지정됨)는 [ledger에 <mark style="background-color:yellow;">SignerList</mark> 객체](../../references/xrp-ledger/ledger/ledger-1/signerlist.md)를 가져야 합니다. 이를 설정하는 방법에 대한 지침은 [다중 서명 설정](../../tutorials/undefined-3/undefined-3.md)을 참조하세요.
-* 트랜잭션에는 <mark style="background-color:yellow;">SigningPubKey</mark> 필드를 빈 문자열로 포함해야 합니다.
-* 트랜잭션에는 [<mark style="background-color:yellow;">Signers</mark> 필드](../../references/xrp-ledger/undefined-1/undefined.md#undefined-5)가 포함되어야 하며, 서명 배열을 포함해야 합니다.&#x20;
-* <mark style="background-color:yellow;">Signers</mark> 배열에 있는 서명은 <mark style="background-color:yellow;">SignerList</mark>에서 정의된 서명자와 일치해야 합니다.&#x20;
-* 제공된 서명에 대해 해당 서명자와 관련된 총 가중치는 SignerList의 쿼럼과 동일하거나 크거나 같아야 합니다.
-* [트랜잭션 비용](../transactions/transaction-cost.md)(<mark style="background-color:yellow;">수수료</mark> 필드에 지정됨)은 제공된 서명의 수에 대해 최소한 (N+1) 배 이상이어야 합니다. 여기서 N은 제공된 서명의 수입니다.&#x20;
-* 모든 트랜잭션 필드는 서명을 수집하기 전에 정의되어야 합니다. 어떤 필드도 [자동으로 채울 수](../../references/xrp-ledger/undefined-1/undefined.md#undefined) 없습니다.&#x20;
-* 이진 형식으로 제시된 경우 <mark style="background-color:yellow;">Signers</mark> 배열은 서명자 주소의 숫자 값에 따라 정렬되어야 합니다. 가장 낮은 값부터 시작합니다. (JSON으로 제출하는 경우, [submit\_multisigned 메소드](../../references/http-websocket-apis/api-1/undefined-1/submit\_multisigned.md)가 이를 자동으로 처리합니다.)
