@@ -40,4 +40,54 @@ X-주소 형식은 주소에 목적지 태그를 "함축"하고 있습니다. �
 
 <figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
-공개 키로부터 분산 원장의 주소를 계산하는 공식은 다음과 같습니다. 완전한 예시 코드를 보려면,[ encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 보세요. 공개 키로부터 seed value 혹은 passphrase를 도출하는 과정을 보려면  ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
+공개 키로부터 분산 원장의 주소를 계산하는 공식은 다음과 같습니다. 완전한 예시 코드를 보려면,[ encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 보세요. 공개 키로부터 seed value 혹은 passphrase를 도출하는 과정을 보려면 [키 파생](undefined.md)을 참고하세요.
+
+&#x20;   1\. 필요한 알고리즘들을 import하세요: SHA-256, RIPEMD160, base58.   &#x20;
+
+```javascript
+'use strict';
+const assert = require('assert');
+const crypto = require('crypto');
+const R_B58_DICT = 'rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz';
+const base58 = require('base-x')(R_B58_DICT);
+
+assert(crypto.getHashes().includes('sha256'));
+assert(crypto.getHashes().includes('ripemd160'));
+```
+
+&#x20;   2\. 33-byte ECDSA secp256k1 공개 키 혹은 32-byte Ed25519 공개키를 사용해서 시작합니다. Ed25519에 대해서는 앞에 1byte <mark style="background-color:yellow;">0xED</mark>로 고정합니다.
+
+```javascript
+const pubkey_hex =
+  'ED9434799226374926EDA3B54B1B461B4ABF7237962EAE18528FEA67595397FA32';
+const pubkey = Buffer.from(pubkey_hex, 'hex');
+assert(pubkey.length == 33);
+```
+
+&#x20;   3\. 공개키에 SHA-256 를 적용하여 얻은 해시값에 RIPEMD160 연산을 하여 해시를 얻습니다. 이 값은 "계정 ID"입니다.
+
+```javascript
+const pubkey_inner_hash = crypto.createHash('sha256').update(pubkey);
+const pubkey_outer_hash = crypto.createHash('ripemd160');
+pubkey_outer_hash.update(pubkey_inner_hash.digest());
+const account_id = pubkey_outer_hash.digest();
+```
+
+&#x20;   4\. 계정 ID와  prefix byte(이 예시에서는 0x00)를 연결한  에 대한 SHA-256을 두번 연산하여 해시를 얻습니다. 그리고 앞자리 4 byte를 가져옵니다. 이 값은 "체크섬"입니다.
+
+```javascript
+const address_type_prefix = Buffer.from([0x00]);
+const payload = Buffer.concat([address_type_prefix, account_id]);
+const chksum_hash1 = crypto.createHash('sha256').update(payload).digest();
+const chksum_hash2 = crypto.createHash('sha256').update(chksum_hash1).digest();
+const checksum =  chksum_hash2.slice(0,4);
+```
+
+&#x20;   5\. payload와 체크섬을 연결합니다. concatenated buffer에 대해 base58 변환을 수행합니다. 이 결과값이 주소입니다.
+
+```javascript
+const dataToEncode = Buffer.concat([payload, checksum]);
+const address = base58.encode(dataToEncode);
+console.log(address);
+// rDTXLQ7ZKZVKz33zJbHjgVShjsBnqMBhmN
+```
