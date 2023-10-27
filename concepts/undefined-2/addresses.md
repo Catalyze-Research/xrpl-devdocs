@@ -34,7 +34,7 @@ X-주소 형식은 주소에 목적지 태그를 "함축"하고 있습니다. �
 이 기술적인 디테일들은 오직 분산원장과의 호환성을 위한low-level library 소프트웨어 개발자들과만 연관이 있습니다!
 {% endhint %}
 
-분산 원장의 주소는                                                                                                                  [\[Source\] ](https://github.com/XRPLF/rippled/blob/35fa20a110e3d43ffc1e9e664fc9017b6f2747ae/src/ripple/protocol/impl/AccountID.cpp#L109-L140)<mark style="background-color:yellow;">rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz</mark> 딕셔너리를 사용하는[ base58](../../references/xrp-ledger/undefined/base58.md)을 사용하여 인코딩됩니다. 분산원장이 여러가지 타입의 키를 base58을 이용하여 인코딩하기 때문에, 각 타입들을 구분하기 위해서 1byte 크기의 "type 지정자"(버전 지정자라고도 부릅니다.)와 함께 인코딩합니다. 타입 지정자는 보통의 경우 base58 형식에서 타입들마다 주소들이 각기 다른 문자로 시작하도록 유도합니다.
+분산 원장의 주소는                                                                                                                  [\[Source\] ](https://github.com/XRPLF/rippled/blob/35fa20a110e3d43ffc1e9e664fc9017b6f2747ae/src/ripple/protocol/impl/AccountID.cpp#L109-L140)<mark style="background-color:yellow;">rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz</mark> 딕셔너리를 사용하는[ base58](../../references/xrp-ledger/undefined/base58.md)을 사용하여 인코딩됩니다. 분산원장이 여러가지 타입의 키를 base58을 이용하여 인코딩하기 때문에, 각 타입들을 구분하기 위해서 1byte 크기의 "type 지정자"(버전 지정자라고도 부릅니다.)와 함께 인코딩합니다. 타입 지정자는 보통의 경우 base58 형식에서 주소들이 각기 다른 문자로 시작하도록 유도합니다.
 
 다음 다이어그램은 키와 주소 사이의 관계를 설명합니다.
 
