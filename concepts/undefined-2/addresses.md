@@ -35,3 +35,9 @@ X-주소 형식은 주소에 목적지 태그를 "함축"하고 있습니다. �
 {% endhint %}
 
 분산 원장의 주소는                                                                                                                  [\[Source\] ](https://github.com/XRPLF/rippled/blob/35fa20a110e3d43ffc1e9e664fc9017b6f2747ae/src/ripple/protocol/impl/AccountID.cpp#L109-L140)<mark style="background-color:yellow;">rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz</mark> 딕셔너리를 사용하는[ base58](../../references/xrp-ledger/undefined/base58.md)을 사용하여 인코딩됩니다. 분산원장이 여러가지 타입의 키를 base58을 이용하여 인코딩하기 때문에, 각 타입들을 구분하기 위해서 1byte 크기의 "type 지정자"(버전 지정자라고도 부릅니다.)와 함께 인코딩합니다. 타입 지정자는 보통의 경우 base58 형식에서 타입들마다 주소들이 각기 다른 문자로 시작하도록 유도합니다.
+
+다음 다이어그램은 키와 주소 사이의 관계를 설명합니다.
+
+<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+
+공개 키로부터 분산 원장의 주소를 계산하는 공식은 다음과 같습니다. 완전한 예시 코드를 보려면,[ encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 보세요. 공개 키로부터 seed value 혹은 passphrase를 도출하는 과정을 보려면  ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
