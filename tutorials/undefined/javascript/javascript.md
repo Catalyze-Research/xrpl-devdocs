@@ -28,7 +28,7 @@ XRP Ledger (XRPL)은 강력하고 안전하며 사용자 정의가 가능한 서
 3. [NFTs 발행 및 소각.](3.-nfts.md)&#x20;
 4. [NFTs 전송.](4.-nfts.md)
 
-또한 [NFT 판매 중개](nft.md), [공인 발행자 지정](undefined.md), [NFTs 일괄 발행](nfts.md) 방법을 보여주는 확장 레슨도 있습니다.
+또한 [NFT 판매 중개](nft.md), [공인 발행자 지정](undefined-2.md), [NFTs 일괄 발행](nfts.md) 방법을 보여주는 확장 레슨도 있습니다.
 
 ## 요구사항&#x20;
 
