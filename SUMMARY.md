@@ -98,16 +98,17 @@
   * [다중 서명](concepts/undefined-2/undefined-1.md)
   * [티켓](concepts/undefined-2/undefined-2.md)
   * [계정 유형](<concepts/undefined-2/undefined-2 (1).md>)
-  * [계정 삭제](<concepts/undefined-2/undefined-3 (1).md>)
+  * [계정 삭제](concepts/undefined-2/undefined-3.md)
   * [준비금(Reserves)](concepts/undefined-2/reserves.md)
   * [주소(Addresses)](concepts/undefined-2/addresses.md)
   * [암호화 키](concepts/undefined-2/undefined.md)
-  * [입금 승인](concepts/undefined-2/undefined-3.md)
+  * [입금 승인](<concepts/undefined-2/undefined-3 (1).md>)
   * [발행 및 운영 주소](concepts/undefined-2/undefined-4.md)
 * [결제 시스템 기초](concepts/undefined-3.md)
 
 ## Tutorials
 
+* [퍼블릭 서버(Public Servers)](tutorials/public-servers.md)
 * [빠른 시작](tutorials/undefined/README.md)
   * [빠른 시작 (JavaScript)](tutorials/undefined/javascript/README.md)
     * [빠른 시작 소개 (JavaScript)](tutorials/undefined/javascript/javascript.md)

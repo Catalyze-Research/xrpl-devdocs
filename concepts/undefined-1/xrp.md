@@ -17,7 +17,7 @@
 
 3. 트랜젝션 처리는 수신 주소를 확인합니다; 어떤 검사라도 실패하면 결제는 실패합니다.
 
-* 수신 주소에 자금이 있으면 엔진은 [Deposit Authorization](../undefined-2/undefined-3.md)과 같은 설정을 기반으로 추가 검사를 합니다.
+* 수신 주소에 자금이 있으면 엔진은 [Deposit Authorization](<../undefined-2/undefined-3 (1).md>)과 같은 설정을 기반으로 추가 검사를 합니다.
 * 수신 주소에 자금이 없으면 결제가 [account reserve](../undefined-2/reserves.md) 요구사항을 충족시키기 위해 충분한 XRP를 전달할 것인지 확인합니다. 예비금이 충족되면 해당 주소에 대한 새 계정이 생성되고 시작 잔액은 수신된 금액입니다.
 
 4. 원장은 해당 계정의 차변 및 대변을 기록합니다.
