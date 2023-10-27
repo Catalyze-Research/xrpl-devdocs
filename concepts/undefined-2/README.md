@@ -9,7 +9,7 @@ XRP Ledger에서 "계정"은 XRP의 소유자이며, [트랜잭션](../../refere
 * [트랜잭션을 승인](../transactions/)하는 한 가지 이상의 방법, 아래를 포함할 수 있습니다: &#x20;
   * 계정에 본질적으로 속한 마스터 키 쌍. ([비활성화](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)는 가능하지만 변경은 불가능합니다.)
   * [교체 가능한](../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md) "일반" 키 쌍.&#x20;
-  * [다중 서명](undefined.md)을 위한 서명자 목록. (계정의 핵심 데이터와는 별도로 저장됩니다.)
+  * [다중 서명](undefined-1.md)을 위한 서명자 목록. (계정의 핵심 데이터와는 별도로 저장됩니다.)
 
 ledger의 데이터 트리에서, 계정의 핵심 데이터는 [AccountRoot](../../references/xrp-ledger/ledger/ledger-1/accountroot.md) ledger 객체 유형에 저장됩니다. 계정은 또한 다른 유형의 데이터의 소유자(또는 일부 소유자)가 될 수도 있습니다.
 
@@ -62,7 +62,7 @@ XRP Ledger 프로토콜은 기본적으로 "클래식" 주소만 지원하지만
 
 자세한 정보는 [계정](./) 및 [base58 인코딩](../../references/xrp-ledger/undefined/base58.md)을 참조하세요.
 
-유효한 주소는 자금을 지원함으로써 [XRP Ledger의 계정이 될 수 있습니다](./#undefined). 또한 자금을 지원하지 않은 주소를 [정규 키 ](../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md)또는 [서명자 목록](undefined.md)의 멤버를 나타내는 데 사용할 수 있습니다. 거래의 발신자는 자금을 지원한 계정만 될 수 있습니다.
+유효한 주소는 자금을 지원함으로써 [XRP Ledger의 계정이 될 수 있습니다](./#undefined). 또한 자금을 지원하지 않은 주소를 [정규 키 ](../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md)또는 [서명자 목록](undefined-1.md)의 멤버를 나타내는 데 사용할 수 있습니다. 거래의 발신자는 자금을 지원한 계정만 될 수 있습니다.
 
 유효한 주소를 생성하는 것은 키 쌍에서 시작하는 엄격히 수학적인 작업입니다. XRP Ledger나 다른 당사자와의 통신 없이 완전히 오프라인에서 키 쌍을 생성하고 그 주소를 계산할 수 있습니다. 공개 키에서 주소로의 변환은 단방향 해시 함수를 포함하므로 공개 키가 주소와 일치하는지 확인할 수 있지만 주소만으로 공개 키를 도출할 수는 없습니다. (이것이 서명된 거래가 발신자의 공개 키와 주소를 포함하는 이유 중 일부입니다.)
 
@@ -121,7 +121,7 @@ XRP Ledger에서는 트랜잭션의 식별 해시와 ledger 인덱스에 의해 
 * <mark style="background-color:yellow;">Offer</mark> 객체, 분산형 거래소에서의 계정의 대기 중인 화폐 교환 주문을 나타냅니다.
 * <mark style="background-color:yellow;">PayChannel</mark> 객체, 계정에서 들어오고 나가는 비동기 지불 채널을 나타냅니다.
 * <mark style="background-color:yellow;">Escrow</mark> 객체, 시간이나 암호 조건에 의해 잠긴 계정에서 또는 계정으로의 보류 중인 결제를 나타냅니다.
-* <mark style="background-color:yellow;">SignerList</mark> 객체, [다중 서명](undefined.md)으로 계정에 대한 트랜잭션을 승인할 수 있는 주소 목록을 나타냅니다.
+* <mark style="background-color:yellow;">SignerList</mark> 객체, [다중 서명](undefined-1.md)으로 계정에 대한 트랜잭션을 승인할 수 있는 주소 목록을 나타냅니다.
 
 이러한 각 객체에 대한 자세한 정보는 [ledger 형식 참조](../../references/xrp-ledger/ledger/)를 참조하세요.
 
@@ -139,7 +139,7 @@ XRP Ledger 주소는 rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz 
 
 <figure><img src="../../.gitbook/assets/Accounts_1.png" alt=""><figcaption></figcaption></figure>
 
-공개 키에서 XRP Ledger 주소를 계산하는 공식은 다음과 같습니다. 완전한 예제 코드는 [encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 참조하세요. 패스프레이즈(passpharase)나 시드 값에서 공개 키를 파생시키는 과정은 [키 유도](undefined-4.md)를 참조하세요.
+공개 키에서 XRP Ledger 주소를 계산하는 공식은 다음과 같습니다. 완전한 예제 코드는 [encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 참조하세요. 패스프레이즈(passpharase)나 시드 값에서 공개 키를 파생시키는 과정은 [키 유도](undefined.md)를 참조하세요.
 
 1.  필요한 알고리즘을 가져옵니다: SHA-256, RIPEMD160, 그리고 base58. base58에 대한 사전을 설정합니다.\
 
@@ -204,8 +204,8 @@ XRP Ledger 주소는 rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz 
 
 * **Concepts:**
   * [Reserves](reserves.md)
-  * [Cryptographic Keys](undefined-4.md)
-  * [Issuing and Operational Addresses](undefined-6.md)
+  * [Cryptographic Keys](undefined.md)
+  * [Issuing and Operational Addresses](undefined-4.md)
 * **References:**
   * [account\_info method](../../references/http-websocket-apis/api-1/undefined/account\_info.md)
   * [wallet\_propose method](../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md)
