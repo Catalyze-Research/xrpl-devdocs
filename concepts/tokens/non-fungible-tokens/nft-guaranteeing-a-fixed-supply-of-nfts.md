@@ -8,7 +8,7 @@
 2. <mark style="background-color:yellow;">AccountSet</mark>을 사용하여 운영 지갑을 발행자(issuer)의 인증된 발행자로 지정합니다. [다른 계정에게 NFT 발행 권한 부여](nft-authorizing-another-account-to-mint-your-nfts.md)를 참조하세요.
 3. 운영 계정을 사용하여 <mark style="background-color:yellow;">NFTokenMint</mark>를 사용하여 토큰을 발행합니다. 운영 지갑은 발행자를 위해 발행된 모든 토큰을 보유합니다. 일괄 발행을 참조하세요.
 4. <mark style="background-color:yellow;">AccountSet</mark>을 사용하여 운영 지갑을 발행자의 인증된 발행자에서 제거합니다.
-5. 발행자 계정을 "블랙홀" 처리합니다. [마스터 키 페어 비활성화](../../../tutorials/undefined-3/undefined-2.md)를 참조하세요.
+5. 발행자 계정을 "블랙홀" 처리합니다. [마스터 키 페어 비활성화](../../../tutorials/tasks/manage-account-settings/undefined-2.md)를 참조하세요.
 
 이 시점에서 발행 계정으로서 발행자의 주소를 가진 새 토큰을 발행하는 것은 불가능합니다.
 

@@ -19,7 +19,7 @@ NFToken 개체의 초기 판매 이전에 시장 활동은 XRP Ledger에 기록�
 
 프로그램 또는 스크립트를 사용하여 한 번에 많은 토큰을 발행합니다. 한 그룹에서 최대 200개의 트랜잭션을 병렬로 제출할 수 있는 [Tickets](../../../references/xrp-ledger/ledger/ledger-1/ticket.md)가 도움이 될 수 있습니다.
 
-실제적인 예는 [일괄 발행 NFTokens](../../../tutorials/undefined/javascript/nfts.md) 튜토리얼을 참조하세요.
+실제적인 예는 [일괄 발행 NFTokens](../../../tutorials/javascript/nfts.md) 튜토리얼을 참조하세요.
 
 ## 장점&#x20;
 

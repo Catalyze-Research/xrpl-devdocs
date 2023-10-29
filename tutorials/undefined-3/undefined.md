@@ -1,638 +1,178 @@
-# 일반 키 쌍 할당
+# 우분투 리눅스에 클리오 설치
 
-XRP Ledger를 통해 계정은 일반 키 쌍이라고 하는 보조 키 쌍을 승인하여 향후 트랜잭션에 서명할 수 있습니다.일반 키 쌍의 개인 키가 손상된 경우 계정의 나머지 부분을 변경하거나 다른 계정과의 관계를 다시 설정하지 않고 키 쌍을 제거하거나 교체할 수 있습니다.또한 일반 키 쌍을 사전에 순환시킬 수도 있습니다. (계정의 주소와 본질적으로 연결된 계정의 마스터 키 쌍에서는 이러한 작업을 수행할 수 없습니다.)
+이 페이지는 **우분투 리눅스 20.04 이상**에서 apt 유틸리티를 사용하여 최신 안정 버전의 클리오를 설치하기 위한 권장 지침을 설명합니다.
 
-마스터 및 일반 키 쌍에 대한 자세한 내용은 암호화 키를 참조하세요.
+이 지침은 Ripple에서 컴파일한 바이너리를 설치합니다. 소스에서 클리오를 빌드하는 방법에 대한 지침은 클리오 소스 코드 저장소를 참조하십시오.
 
-이 튜토리얼에서는 계정에 일반 키 쌍을 할당하는 데 필요한 단계를 설명합니다.
+## 요구 조건
 
-1. [키 쌍 생성](undefined.md#1-generate-a-key-pair)
-2. [계정에 키 쌍을 일반 키 쌍으로 할당](undefined.md#2-assign-the-key-pair-to-your-account-as-a-regular-key-pair)
-3. [일반 키 쌍 확인](undefined.md#3.)
-4. 다음 단계 탐색
+클리오를 설치하기 전에 다음 요구 사항을 충족해야 합니다.
 
-## 1. 키 쌍 생성 <a href="#1-generate-a-key-pair" id="1-generate-a-key-pair"></a>
+* 시스템이 시스템 요구 사항을 충족하는지 확인합니다.
 
-계정에 일반 키 쌍으로 할당할 키 쌍을 생성합니다.
+{% hint style="info" %}
+Note:
 
-이 키 쌍은 마스터 키 쌍과 동일한 데이터 유형이므로 원하는 클라이언트 라이브러리를 사용하거나 실행 중인 서버의 wallet\_propose 메소드를 사용할 수 있습니다. 다음과 같이 표시될 수 있습니다.
+클리오는 rippled 서버와 시스템 요구 사항이 동일하지만, 동일한 양의 ledger 기록을 저장하는 데 필요한 디스크 공간이 더 적습니다.
+{% endhint %}
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-// Request:
+* 호환되는 버전의 CMake와 Boost가 필요합니다. 클리오는 C++20 및 Boost 1.75.0 이상이 필요합니다.
+* 로컬 또는 원격으로 실행 중인 Cassandra 클러스터에 액세스할 수 있어야 합니다. Cassandra 설치 지침에 따라 수동으로 Cassandra 클러스터를 설치 및 구성하거나 다음 명령 중 하나를 사용하여 Docker 컨테이너에서 Cassandra를 실행하도록 선택할 수 있습니다.
+  * 클리오 데이터를 유지하기로 선택한 경우, Docker 컨테이너에서 Cassandra를 실행하고 클리오 데이터를 저장할 빈 디렉터리를 지정하세요:
 
-{
-  "command": "wallet_propose"
-}
-
-// Response:
-
-{
-  "result": {
-    "account_id": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-    "key_type": "secp256k1",
-    "master_key": "KNEW BENT LYNN LED GAD BEN KENT SHAM HOBO RINK WALT ALLY",
-    "master_seed": "sh8i92YRnEjJy3fpFkL8txQSCVo79",
-    "master_seed_hex": "966C0F68643EFBA50D58D191D4CA8AA7",
-    "public_key": "aBRNH5wUurfhZcoyR6nRwDSa95gMBkovBJ8V4cp1C1pM28H7EPL1",
-    "public_key_hex": "03AEEFE1E8ED4BBC009DE996AC03A8C6B5713B1554794056C66E5B8D1753C7DD0E"
-  },
-  "status": "success",
-  "type": "response"
-}
 ```
-{% endtab %}
+docker run --rm -it --network=host --name cassandra  -v $PWD/cassandra_data:/var/lib/
+cassandra cassandra:4.0.4
+```
 
-{% tab title="JSON-RPC" %}
-```json
-// Request:
+* 클리오 데이터를 유지하지 않으려면 다음 명령을 실행하세요:
 
-{
-  "method": "wallet_propose"
-}
+```
+docker run --rm -it --network=host --name cassandra cassandra:4.0.4
+```
 
-// Response:
+* P2P 모드에서 하나 이상의 rippled 서버에 대한 gRPC 액세스가 필요합니다. rippled 서버는 로컬 또는 원격 서버일 수 있지만 반드시 신뢰해야 합니다. 가장 신뢰할 수 있는 방법은 rippled를 직접 설치하는 것입니다.
 
-{
-    "result": {
-        "account_id": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-        "key_type": "secp256k1",
-        "master_key": "KNEW BENT LYNN LED GAD BEN KENT SHAM HOBO RINK WALT ALLY",
-        "master_seed": "sh8i92YRnEjJy3fpFkL8txQSCVo79",
-        "master_seed_hex": "966C0F68643EFBA50D58D191D4CA8AA7",
-        "public_key": "aBRNH5wUurfhZcoyR6nRwDSa95gMBkovBJ8V4cp1C1pM28H7EPL1",
-        "public_key_hex": "03AEEFE1E8ED4BBC009DE996AC03A8C6B5713B1554794056C66E5B8D1753C7DD0E",
-        "status": "success"
+## 설치 단계
+
+1. 저장소를 업데이트합니다:
+
+```
+sudo apt -y update
+```
+
+{% hint style="info" %}
+Tip:
+
+동일한 컴퓨터에 이미 최신 버전의 rippled를 설치한 경우, rippled의 패키지 저장소와 서명 키를 추가하는 다음 단계를 건너뛸 수 있으며, 이는 rippled 설치 과정과 동일합니다. 5단계 "rippled 저장소 가져오기"부터 다시 시작합니다.
+{% endhint %}
+
+2. 유틸리티를 설치합니다:
+
+```
+sudo apt -y install apt-transport-https ca-certificates wget gnupg
+```
+
+3. 신뢰할 수 있는 키 목록에 Ripple 패키지 서명 GPG 키를 추가합니다:
+
+```
+sudo mkdir /usr/local/share/keyrings/
+wget -q -O - "https://repos.ripple.com/repos/api/gpg/key/public" | gpg --dearmor > ripple-key.gpg
+sudo mv ripple-key.gpg /usr/local/share/keyrings
+```
+
+4. 새로 추가한 키의 지문을 확인합니다:
+
+```
+gpg /usr/local/share/keyrings/ripple-key.gpg
+```
+
+출력에는 다음과 같은 Ripple에 대한 항목이 포함되어야 합니다:
+
+```
+gpg: WARNING: no command supplied.  Trying to guess what you mean ...
+pub   rsa3072 2019-02-14 [SC] [expires: 2026-02-17]
+    C0010EC205B35A3310DC90DE395F97FFCCAFD9A2
+uid           TechOps Team at Ripple <techops+rippled@ripple.com>
+sub   rsa3072 2019-02-14 [E] [expires: 2026-02-17]
+```
+
+특히 지문이 일치하는지 확인하세요. (위의 예에서 지문은 C001로 시작하는 세 번째 줄에 있습니다.)
+
+5. 운영 체제 버전에 적합한 Ripple 저장소를 추가합니다:
+
+```
+echo "deb [signed-by=/usr/local/share/keyrings/ripple-key.gpg] https://repos.ripple.com/repos/rippled-deb focal stable" | \
+    sudo tee -a /etc/apt/sources.list.d/ripple.list
+```
+
+위의 예는 **우분투 20.04 포컬 포사**에 적합합니다.
+
+6. Ripple 저장소를 가져옵니다.
+
+```
+sudo apt -y update
+```
+
+7. 클리오 소프트웨어 패키지를 설치합니다. 두 가지 옵션이 있습니다:
+
+* 동일한 컴퓨터에서 rippled를 실행하려면 두 서버를 모두 설정하는 클리오 패키지를 설치합니다:
+
+```
+sudo apt -y install clio
+```
+
+* rippled와 별도의 컴퓨터에서 클리오를 실행하려면, 클리오만 설정하는 클리오-서버 패키지를 설치합니다:
+
+```
+sudo apt -y install clio-server
+```
+
+8. 별도의 컴퓨터에서 rippled를 실행하는 경우, 해당 컴퓨터가 rippled를 가리키도록 클리오 구성 파일을 수정합니다. 동일한 머신에 두 가지를 모두 설치하기 위해 클리오 패키지를 사용한 경우 이 단계를 건너뛸 수 있습니다.
+   1. 클리오 서버의 구성 파일을 편집하여 rippled 서버에 대한 연결 정보를 수정합니다. 패키지는 이 파일을 `/opt/clio/etc/config.json`에 설치합니다.
+
+```
+"etl_sources":
+[
+    {
+        "ip":"127.0.0.1",
+        "ws_port":"6006",
+        "grpc_port":"50051"
     }
-}
+]
 ```
-{% endtab %}
 
-{% tab title="Commandline" %}
-```json
-$ rippled wallet_propose
+여기에는 다음이 포함됩니다:
 
-{
-   "result" : {
-      "account_id" : "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-      "key_type" : "secp256k1",
-      "master_key" : "KNEW BENT LYNN LED GAD BEN KENT SHAM HOBO RINK WALT ALLY",
-      "master_seed" : "sh8i92YRnEjJy3fpFkL8txQSCVo79",
-      "master_seed_hex" : "966C0F68643EFBA50D58D191D4CA8AA7",
-      "public_key" : "aBRNH5wUurfhZcoyR6nRwDSa95gMBkovBJ8V4cp1C1pM28H7EPL1",
-      "public_key_hex" : "03AEEFE1E8ED4BBC009DE996AC03A8C6B5713B1554794056C66E5B8D1753C7DD0E",
-      "status" : "success"
-   }
-}
+* rippled 서버의 IP.
+* rippled 서버가 암호화되지 않은 웹소켓 연결을 수락하는 포트.
+* rippled이 gRPC 요청을 수락하는 포트.
+
+{% hint style="info" %}
+Note:
+
+etl\_sources 섹션에 항목을 더 추가하여 여러 rippled 서버를 데이터 소스로 사용할 수 있습니다. 이렇게 하면 클리오는 목록에 있는 모든 서버에 걸쳐 요청을 로드 밸런싱하며, rippled 서버 중 하나 이상이 동기화되어 있는 한 네트워크를 따라잡을 수 있습니다.
+{% endhint %}
+
+예제 구성 파일은 로컬 루프백 네트워크(127.0.0.1)에서 실행 중인 rippled 서버에 액세스하며, 포트 6006의 웹 소켓(WS)과 포트 50051의 gRPC를 사용합니다.
+
+2. rippled 서버의 구성 파일을 업데이트하여 클리오 서버가 rippled 서버에 연결할 수 있도록 합니다. 패키지는 이 파일을 /etc/opt/ripple/rippled.cfg에 설치합니다.
+
+* 암호화되지 않은 웹소켓 연결을 허용할 포트를 엽니다.
+
 ```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-keypair = xrpl.wallet.Wallet.create()
-print("seed:", keypair.seed)
-print("classic address:", keypair.address)
+[port_ws_public]
+port = 6005
+ip = 0.0.0.0
+protocol = ws
 ```
-{% endtab %}
 
-{% tab title="JavaScript" %}
-```javascript
-const keypair = new xrpl.Wallet()
-console.log("seed:", keypair.seed)
-console.log("classic address:", keypair.classicAddress)
+* gRPC 요청을 처리할 포트를 열고 secure\_gateway 항목에 클리오 서버의 IP를 지정합니다.
+
 ```
-{% endtab %}
-
-{% tab title="Java" %}
-```java
-WalletFactory walletFactory = DefaultWalletFactory.getInstance();
-Wallet keypair = walletFactory.randomWallet(true).wallet();
-System.out.println(keypair);
-System.out.println(keypair.privateKey().get());
+[port_grpc]
+port = 50051
+ip = 0.0.0.0
+secure_gateway = 127.0.0.1
 ```
-{% endtab %}
-{% endtabs %}
 
-다음 단계에서는 이 응답의 주소를 사용합니다.`account_id`키 쌍을 일반 키 쌍으로 계정에 할당합니다.또한 이 키 쌍에서 시드 값을 저장합니다(`master_seed`API 응답에서) 이 키를 사용하여 나중에 트랜잭션에 서명할 수 있습니다. (다른 모든 것은 잊어버릴 수 있습니다.)
+{% hint style="info" %}
+Tip:
 
-## 2. 계정에 키 쌍을 일반 키 쌍으로 할당 <a href="#2-assign-the-key-pair-to-your-account-as-a-regular-key-pair" id="2-assign-the-key-pair-to-your-account-as-a-regular-key-pair"></a>
+rippled와 동일한 시스템에서 클리오를 실행하지 않는 경우, 예제 구절의 secure\_gateway를 클리오 서버의 IP 주소를 사용하도록 변경하세요.
+{% endhint %}
 
-SetRegularKey 트랜잭션을 사용하여 1단계에서 생성한 키 쌍을 계정에 일반 키 쌍으로 할당합니다.
+9. 클리오 systemd 서비스를 활성화하고 시작합니다.
 
-일반 키 쌍을 계정에 처음으로 할당할 때 SetRegularKey 트랜잭션은 계정의 마스터 개인 키(비밀)로 서명해야 합니다. 거래를 안전하게 서명하는 방법에는 여러 가지가 있지만 이 자습서에서는 로컬 `rippled`서버를 사용합니다.
-
-나중에 SetRegularKey 트랜잭션을 보낼 때 기존 일반 개인 키를 사용하여 서명하여 자체를 교체하거나 제거 할 수 있습니다. 여전히 네트워크를 통해 일반 개인 키를 제출해서는 안 됩니다.
-
-## 트랜잭션 서명 <a href="#sign-your-transaction" id="sign-your-transaction"></a>
-
-트랜잭션에 서명하는 가장 안전한 방법은 클라이언트 라이브러리를 사용하여 로컬로 서명하는 것입니다. 또는 자체 노드를 실행하는 경우 서명 방법을`rippled`를 사용하여 트랜잭션에 서명할 수 있지만 이는 신뢰할 수 있고 암호화된 연결 또는 로컬(동일 시스템) 연결을 통해 수행되어야 합니다.
-
-모든 경우에 나중을 위해 서명된 트랜잭션의 식별 해시를 기록해 두세요.
-
-요청 필드를 다음 값으로 채웁니다.
-
-<table data-header-hidden><thead><tr><th width="269"></th><th></th></tr></thead><tbody><tr><td>요청 필드</td><td>값</td></tr><tr><td><code>Account</code></td><td>귀하의 계정 주소.</td></tr><tr><td><code>RegularKey</code></td><td><code>account_id</code>1단계에서 생성.</td></tr><tr><td><code>secret</code></td><td>귀하  계정에 대한 <code>master_key</code>, <code>master_seed</code>, 또는 <code>master_seed_hex</code>(마스터 개인 키)</td></tr></tbody></table>
-
-### 요청 형식&#x20;
-
-요청 형식의 예는 다음과 같습니다:
-
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "command": "sign",
-  "tx_json": {
-      "TransactionType": "SetRegularKey",
-      "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-      "RegularKey": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7"
-      },
-   "secret": "ssCATR7CBvn4GLd1UuU2bqqQffHki"
-}
 ```
-{% endtab %}
-
-{% tab title="JSON-RPC" %}
-```json
-{
-   "method": "sign",
-   "params": [
-      {
-         "tx_json": {
-            "TransactionType": "SetRegularKey",
-            "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-            "RegularKey": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7"
-         },
-         "secret": "ssCATR7CBvn4GLd1UuU2bqqQffHki"
-      }
-   ]
-}
+sudo systemctl enable clio
 ```
-{% endtab %}
 
-{% tab title="Commandline" %}
-```json
-#Syntax: sign secret tx_json
-rippled sign ssCATR7CBvn4GLd1UuU2bqqQffHki '{"TransactionType": "SetRegularKey", "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93", "RegularKey": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7"}'
+10. rippled 및 클리오 서버를 시작합니다.
+
 ```
-{% endtab %}
-{% endtabs %}
-
-### 응답 형식&#x20;
-
-성공적인 응답의 예는 다음과 같습니다:
-
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "result": {
-    "tx_blob": "1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540",
-    "tx_json": {
-      "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-      "Fee": "10",
-      "Flags": 2147483648,
-      "RegularKey": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-      "Sequence": 4,
-      "SigningPubKey": "0384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A",
-      "TransactionType": "SetRegularKey",
-      "TxnSignature": "304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C26",
-      "hash": "AB73BBF7C99061678B59FB48D72CA0F5FC6DD2815B6736C6E9EB94439EC236CE"
-    }
-  },
-  "status": "success",
-  "type": "response"
-}
+sudo systemctl start rippled
+sudo systemctl start clio
 ```
-{% endtab %}
 
-{% tab title="JSON-RPC" %}
-```json
-{
-    "result": {
-        "status": "success",
-        "tx_blob": "1200052280000000240000000768400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402201453CA3D4D17F0EE3828B9E3D6ACF65327F5D4FC2BA30953CACF6CBCB4145E3502202F2154BED1D7462CAC1E3DBB31864E48C3BA0B3133ACA5E37EC54F0D0C339E2D8114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540",
-        "tx_json": {
-            "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-            "Fee": "10",
-            "Flags": 2147483648,
-            "RegularKey": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-            "Sequence": 4,
-            "SigningPubKey": "0384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A",
-            "TransactionType": "SetRegularKey",
-            "TxnSignature": "304402201453CA3D4D17F0EE3828B9E3D6ACF65327F5D4FC2BA30953CACF6CBCB4145E3502202F2154BED1D7462CAC1E3DBB31864E48C3BA0B3133ACA5E37EC54F0D0C339E2D",
-            "hash": "AB73BBF7C99061678B59FB48D72CA0F5FC6DD2815B6736C6E9EB94439EC236CE"
-        }
-    }
-}
-```
-{% endtab %}
-
-{% tab title="Commandline" %}
-```json
-{
-   "result" : {
-      "status" : "success",
-      "tx_blob" : "1200052280000000240000000768400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402201453CA3D4D17F0EE3828B9E3D6ACF65327F5D4FC2BA30953CACF6CBCB4145E3502202F2154BED1D7462CAC1E3DBB31864E48C3BA0B3133ACA5E37EC54F0D0C339E2D8114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540",
-      "tx_json" : {
-         "Account" : "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-         "Fee" : "10",
-         "Flags" : 2147483648,
-         "RegularKey" : "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-         "Sequence" : 4,
-         "SigningPubKey" : "0384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A",
-         "TransactionType" : "SetRegularKey",
-         "TxnSignature" : "304402201453CA3D4D17F0EE3828B9E3D6ACF65327F5D4FC2BA30953CACF6CBCB4145E3502202F2154BED1D7462CAC1E3DBB31864E48C3BA0B3133ACA5E37EC54F0D0C339E2D",
-         "hash" : "AB73BBF7C99061678B59FB48D72CA0F5FC6DD2815B6736C6E9EB94439EC236CE"
-      }
-   }
-}
-```
-{% endtab %}
-{% endtabs %}
-
-거래 명령 응답에는 tx\_blob 값이 포함되어 있습니다. 이는 위에서 보여진 것과 같이 거래의 서명된 이진 표현(blobs)입니다. 오프라인 서명 응답에는 signedTransaction값이 포함됩니다. 이것도 거래의 서명된 이진 표현입니다.
-
-다음으로, submit 명령을 사용하여 거래 blob(tx\_blob 또는 signedTransaction)을 네트워크에 전송합니다.
-
-## 트랜잭션 제출
-
-오프라인 서명 응답에서의 signedTransaction 값 또는 sign 명령 응답에서의 tx\_blob 값을 가져와서 submit 메소드를 사용할 때 tx\_blob 값으로 제출하세요.
-
-### 요청 형식&#x20;
-
-요청 형식의 예는 다음과 같습니다:
-
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-    "command": "submit",
-    "tx_blob": "1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540"
-}
-```
-{% endtab %}
-
-{% tab title="JSON-RPC" %}
-```json
-{
-   "method":"submit",
-   "params": [
-      {
-         "tx_blob": "1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540"
-      }
-   ]
-}
-```
-{% endtab %}
-
-{% tab title="Commandline" %}
-```json
-#Syntax: submit tx_blob
-rippled submit 1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540
-```
-{% endtab %}
-{% endtabs %}
-
-### 응답 형식&#x20;
-
-성공적인 응답의 예는 다음과 같습니다:
-
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "result": {
-    "engine_result": "tesSUCCESS",
-    "engine_result_code": 0,
-    "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
-    "tx_blob": "1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540",
-    "tx_json": {
-      "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-      "Fee": "10",
-      "Flags": 2147483648,
-      "RegularKey": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-      "Sequence": 4,
-      "SigningPubKey": "0384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A",
-      "TransactionType": "SetRegularKey",
-      "TxnSignature": "304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C26",
-      "hash": "AB73BBF7C99061678B59FB48D72CA0F5FC6DD2815B6736C6E9EB94439EC236CE"
-    }
-  },
-  "status": "success",
-  "type": "response"
-}
-```
-{% endtab %}
-
-{% tab title="JSON-RPC" %}
-```json
-{
-    "result": {
-       "engine_result": "tesSUCCESS",
-       "engine_result_code": 0,
-       "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
-        "status": "success",
-        "tx_blob": "1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540",
-        "tx_json": {
-            "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-            "Fee": "10",
-            "Flags": 2147483648,
-            "RegularKey": "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-            "Sequence": 4,
-            "SigningPubKey": "0384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A",
-            "TransactionType": "SetRegularKey",
-            "TxnSignature": "304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C26",
-            "hash": "AB73BBF7C99061678B59FB48D72CA0F5FC6DD2815B6736C6E9EB94439EC236CE"
-        }
-    }
-}
-```
-{% endtab %}
-
-{% tab title="Commandline" %}
-```json
-{
-   "result" : {
-      "engine_result" : "tesSUCCESS",
-      "engine_result_code" : 0,
-      "engine_result_message" : "The transaction was applied. Only final in a validated ledger.",
-      "status" : "success",
-      "tx_blob" : "1200052280000000240000000468400000000000000A73210384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A7446304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C268114830923439D307E642CED308FD91EF701A7BAA74788141620D685FB08D81A70D0B668749CF2E130EA7540",
-      "tx_json" : {
-         "Account" : "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-         "Fee" : "10",
-         "Flags" : 2147483648,
-         "RegularKey" : "rsprUqu6BHAffAeG4HpSdjBNvnA6gdnZV7",
-         "Sequence" : 4,
-         "SigningPubKey" : "0384CA3C528F10C75F26E0917F001338BD3C9AA1A39B9FBD583DFFFD96CF2E2D7A",
-         "TransactionType" : "SetRegularKey",
-         "TxnSignature" : "304402204BCD5663F3A2BA02D2CE374439096EC6D27273522CD6E6E0BDBFB518730EAAE402200ECD02D8D2525D6FA4642613E71E395ECCEA01C42C35A668BF092A00EB649C26",
-         "hash" : "AB73BBF7C99061678B59FB48D72CA0F5FC6DD2815B6736C6E9EB94439EC236CE"
-      }
-   }
-}
-```
-{% endtab %}
-{% endtabs %}
-
-응답에는 거래의 해시가 포함되어 있으며, 이를 사용하여 거래의 최종 결과를 확인할 수 있습니다.
-
-## 3. 일반 키 쌍 확인&#x20;
-
-이 시점에서, 일반 키 쌍이 계정에 할당되고 일반 키 쌍을 사용하여 거래를 보낼 수 있어야 합니다. 마스터 키 쌍을 비활성화하는 등 추가적인 단계를 수행하기 전에 계정을 잃어버리는 것을 방지하기 위해 일반키를 테스트하는 것이 중요합니다. 실수로 계정에 접근을 잃어버리면 아무도 그것을 복구할 수 없습니다.
-
-계정에 일반 키 쌍이 제대로 설정되어 있는지 확인하려면, 단계 2에서 계정에 할당한 일반 비공개 키로부터 계정의 AccountSet 거래를 제출합니다. 단계 1과 같이, 이 튜토리얼은 안전하게 거래를 서명하기 위한 방법으로 로컬 rippled 서버를 사용합니다.
-
-## 트랜잭션 서명 <a href="#sign-your-transaction" id="sign-your-transaction"></a>
-
-트랜잭션에 서명하는 가장 안전한 방법은 클라이언트 라이브러리를 사용하여 로컬로 서명하는 것입니다. 또는 자체 rippled 노드를 실행하는 경우 서명 방법을 사용하여 트랜잭션에 서명할 수 있지만 이는 신뢰할 수 있고 암호화된 연결 또는 로컬(동일 시스템) 연결을 통해 수행되어야 합니다.&#x20;
-
-모든 경우에 나중을 위해 서명된 트랜잭션의 식별 해시를 기록해 두세요.
-
-요청 필드를 다음 값으로 채웁니다:
-
-<table><thead><tr><th width="267">Request Field</th><th>Value</th></tr></thead><tbody><tr><td><code>Account</code></td><td>계정의 주소입니다.</td></tr><tr><td><code>secret</code></td><td>1단계에서 생성하고 2단계에서 계정에 할당된 <code>master_key</code>, <code>master_seed</code>, 또는 <code>master_seed_hex</code>(일반 개인 키)를 입력합니다.</td></tr></tbody></table>
-
-### 요청  형식
-
-다음은 요청 형식의 예입니다. 요청에는 AccountSet 옵션이 포함되어 있지 않습니다. 이것은 성공적인 거래가 귀하의 계정에 대해 일반 키 쌍이 올바르게 설정되었는지 확인하고 거래 비용을 없애는 것 외에는 아무런 영향을 미치지 않는다는 것을 의미합니다.
-
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "command": "sign",
-  "tx_json": {
-      "TransactionType": "AccountSet",
-      "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93"
-      },
-   "secret": "sh8i92YRnEjJy3fpFkL8txQSCVo79"
-}
-```
-{% endtab %}
-
-{% tab title="JSON-RPC" %}
-```json
-{
-   "method": "sign",
-   "params": [
-      {
-         "tx_json": {
-            "TransactionType": "AccountSet",
-            "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93"
-         },
-         "secret": "sh8i92YRnEjJy3fpFkL8txQSCVo79"
-      }
-   ]
-}
-```
-{% endtab %}
-
-{% tab title="Commandline" %}
-```
-#Syntax: sign secret tx_json
-rippled sign sh8i92YRnEjJy3fpFkL8txQSCVo79 '{"TransactionType": "AccountSet", "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93"}'
-```
-{% endtab %}
-{% endtabs %}
-
-### 응답 형식&#x20;
-
-성공적인 응답의 예는 다음과 같습니다:
-
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "result": {
-    "tx_blob": "1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E",
-    "tx_json": {
-      "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-      "Fee": "10",
-      "Flags": 2147483648,
-      "Sequence": 4,
-      "SigningPubKey": "0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020",
-      "TransactionType": "AccountSet",
-      "TxnSignature": "3045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB8",
-      "hash": "D9B305CB6E861D0994A5CDD4726129D91AC4277111DC444DE4CEE44AD4674A9F"
-    }
-  },
-  "status": "success",
-  "type": "response"
-}
-```
-{% endtab %}
-
-{% tab title="JSON-RPC" %}
-```json
-{
-    "result": {
-        "status": "success",
-        "tx_blob": "1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E",
-        "tx_json": {
-            "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-            "Fee": "10",
-            "Flags": 2147483648,
-            "Sequence": 4,
-            "SigningPubKey": "0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020",
-            "TransactionType": "AccountSet",
-            "TxnSignature": "3045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB8",
-            "hash": "D9B305CB6E861D0994A5CDD4726129D91AC4277111DC444DE4CEE44AD4674A9F"
-        }
-    }
-}
-```
-{% endtab %}
-
-{% tab title="Commandline" %}
-```
-{
-   "result" : {
-      "status" : "success",
-      "tx_blob" : "1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E",
-      "tx_json" : {
-         "Account" : "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-         "Fee" : "10",
-         "Flags" : 2147483648,
-         "Sequence" : 4,
-         "SigningPubKey" : "0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020",
-         "TransactionType" : "AccountSet",
-         "TxnSignature" : "3045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB8",
-         "hash" : "D9B305CB6E861D0994A5CDD4726129D91AC4277111DC444DE4CEE44AD4674A9F"
-      }
-   }
-}
-```
-{% endtab %}
-{% endtabs %}
-
-서명 명령 응답에는 위와 같이 tx\_blob 값이 포함됩니다. 오프라인 서명 응답에는 signedTransaction 값이 포함되어 있습니다. 둘 다 트랜잭션의 서명된 이진 표현(blobs)입니다.
-
-그런 다음 제출 명령을 사용하여 트랜잭션 blob(tx\_blob 또는 signedTransaction)을 네트워크로 보냅니다.
-
-### 트랜잭션 제출&#x20;
-
-오프라인 서명 응답에서 signedTransaction 값 또는 서명 명령 응답에서 tx\_blob 값을 가져오고 submit 메소드를 사용하여 tx\_blob 값으로 제출합니다.
-
-### 요청 형식&#x20;
-
-요청 형식의 예는 다음과 같습니다:
-
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-    "command": "submit",
-    "tx_blob": "1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E"
-}
-```
-{% endtab %}
-
-{% tab title="JSON-RPC" %}
-```json
-{
-   "method":"submit",
-   "params": [
-      {
-         "tx_blob": "1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E"
-      }
-   ]
-}
-```
-{% endtab %}
-
-{% tab title="Commandline" %}
-```
-#Syntax: submit tx_blob
-rippled submit 1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E
-```
-{% endtab %}
-{% endtabs %}
-
-### 응답 형식&#x20;
-
-성공적인 응답의 예는 다음과 같습니다:
-
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "result": {
-    "engine_result": "tesSUCCESS",
-    "engine_result_code": 0,
-    "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
-    "tx_blob": "1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E",
-    "tx_json": {
-      "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-      "Fee": "10",
-      "Flags": 2147483648,
-      "Sequence": 4,
-      "SigningPubKey": "0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020",
-      "TransactionType": "AccountSet",
-      "TxnSignature": "3045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB8",
-      "hash": "D9B305CB6E861D0994A5CDD4726129D91AC4277111DC444DE4CEE44AD4674A9F"
-    }
-  },
-  "status": "success",
-  "type": "response"
-}
-```
-{% endtab %}
-
-{% tab title="JSON-RPC" %}
-```json
-{
-    "result": {
-        "engine_result": "tesSUCCESS",
-        "engine_result_code": 0,
-        "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
-        "status": "success",
-        "tx_blob": "1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E",
-        "tx_json": {
-            "Account": "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-            "Fee": "10",
-            "Flags": 2147483648,
-            "Sequence": 4,
-            "SigningPubKey": "0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020",
-            "TransactionType": "AccountSet",
-            "TxnSignature": "3045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB8",
-            "hash": "D9B305CB6E861D0994A5CDD4726129D91AC4277111DC444DE4CEE44AD4674A9F"
-        }
-    }
-}
-```
-{% endtab %}
-
-{% tab title="Commandline" %}
-```
-{
-   "result" : {
-      "engine_result" : "tesSUCCESS",
-      "engine_result_code" : 0,
-      "engine_result_message" : "The transaction was applied. Only final in a validated ledger.",
-      "status" : "success",
-      "tx_blob" : "1200032280000000240000000468400000000000000A73210330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD02074473045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB88114623B8DA4A0BFB3B61AB423391A182DC693DC159E",
-      "tx_json" : {
-         "Account" : "rUAi7pipxGpYfPNg3LtPcf2ApiS8aw9A93",
-         "Fee" : "10",
-         "Flags" : 2147483648,
-         "Sequence" : 4,
-         "SigningPubKey" : "0330E7FC9D56BB25D6893BA3F317AE5BCF33B3291BD63DB32654A313222F7FD020",
-         "TransactionType" : "AccountSet",
-         "TxnSignature" : "3045022100A50E867D3B1B5A39F23F1ABCA5C7C3EC755442FDAA357EFD897B865ACA7686DB02206077BF459BCE39BCCBFE1A128DA986D1E00CBEC5F0D6B0E11710F60BE2976FB8",
-         "hash" : "D9B305CB6E861D0994A5CDD4726129D91AC4277111DC444DE4CEE44AD4674A9F"
-      }
-   }
-}
-```
-{% endtab %}
-{% endtabs %}
-
-다음 결과 코드와 함께 트랜잭션이 실패하면 다음 사항을 확인해야 합니다:
-
-* tefBAD\_AUTH: 테스트 트랜잭션에 서명한 일반 키가 이전 단계에서 설정한 일반 키와 일치하지 않습니다. 일반 키 쌍의 비밀과 주소가 일치하는지 확인하고 각 단계에서 사용한 값을 다시 확인하세요.
-* tefBAD\_AUTH\_MASTER 또는 temBAD\_AUTH\_MASTER: 계정에 할당된 일반 키가 없습니다. SetRegularKey 트랜잭션이 성공적으로 실행되었는지 확인하세요. 또한 account\_info 메소드를 사용하여 일반 키가 예상대로 RegularKey 필드에 설정되어 있는지 확인할 수 있습니다.&#x20;
-
-다른 결과 코드의 가능한 원인은 트랜잭션 결과를 참조하세요.
+새로운 데이터베이스로 시작하는 경우, 클리오는 전체 ledger를 다운로드해야 합니다. 시간이 다소 걸릴 수 있습니다. 두 서버를 처음 시작하는 경우, 클리오는 ledger을 추출하기 전에 rippled에 동기화될 때까지 기다리기 때문에 시간이 더 오래 걸릴 수 있습니다.

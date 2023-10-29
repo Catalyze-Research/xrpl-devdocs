@@ -6,7 +6,7 @@
 
 * 신뢰선이 연결하는 [**두 계정**](../undefined-2/)의 식별자 입니다.
 * 하나의 공유 **잔액**은 한 계정의 관점에서는 양(positive)이지만 다른 계정의 관점에서는 음(negative)입니다.
-  * 음의(negative) 잔액을 가진 계정은 일반적으로 토큰의 "발행자"로 간주됩니다. 하지만 [API](../../tutorials/undefined-1/http-websocket-api.md)에서는 <mark style="background-color:yellow;">발행자</mark> 이름이 양쪽을 모두 가리킬 수 있습니다.
+  * 음의(negative) 잔액을 가진 계정은 일반적으로 토큰의 "발행자"로 간주됩니다. 하지만 [API](../../tutorials/http-websocket-apis/http-websocket-api.md)에서는 <mark style="background-color:yellow;">발행자</mark> 이름이 양쪽을 모두 가리킬 수 있습니다.
 * 다양한 설정과 메타데이터. 각 계정은 신뢰선에 대한 자체 **설정**을 제어할 수 있습니다.
   * 가장 중요한 점은, 각 측이 신뢰선의 **한도**를 설정한다는 것이며, 이는 기본적으로 0입니다. 각 계정의 잔액(신뢰선의 입장에서)은 해당 계정의 한도를 넘어갈 수 없으며, 이는 [해당 계정의 행동](https://xrpl.org/trust-lines-and-issuing.html#going-above-the-limit)을 통해서만 가능합니다.
 

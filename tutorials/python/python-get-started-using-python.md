@@ -1,10 +1,10 @@
-# Python으로 시작하기
+# Python으로 시작하기(Get Started Using Python)
 
 이 튜토리얼에서는 순수 Python 라이브러리인 xrpl-py를 사용하여 XRP Ledger와 연결된 애플리케이션을 구축하는 기본 사항을 안내합니다.
 
 이 튜토리얼은 초보자를 위한 것이며 완료하는 데 약 30분이 소요됩니다.
 
-## 학습 목표&#x20;
+## 학습 목표(Learning Goals)
 
 이 튜토리얼에서는 다음을 배우게 됩니다:
 
@@ -14,11 +14,11 @@
 * xrpl-py 라이브러리를 사용하여 XRP Ledger의 계정 정보를 조회하는 방법.
 * 이러한 단계를 결합하여 파이썬 앱을 만드는 방법.&#x20;
 
-## 요구 사항&#x20;
+## 요구 사항(Requirements)
 
 xrpl-py 라이브러리는 Python 3.7 이상을 지원합니다.
 
-## 설치&#x20;
+## 설치(Installation)
 
 xrpl-py 라이브러리는 PyPI에서 사용할 수 있습니다.&#x20;
 
@@ -28,7 +28,7 @@ pip로 설치하세요:
 pip3 install xrpl-py
 ```
 
-## 개발 시작
+## 개발 시작(Start Building)
 
 XRP Ledger을 다룰 때 몇 가지를 관리해야 하며, 이는 계정에 XRP를 추가하든, 탈중앙화 거래소와 통합하든, 토큰을 발행하든 간에 마찬가지입니다. 이 튜토리얼은 이러한 모든 사용 사례로 시작하는 기본 패턴을 안내하며, 그것들을 구현하는 샘플 코드를 제공합니다.
 
@@ -38,7 +38,7 @@ XRP Ledger을 다룰 때 몇 가지를 관리해야 하며, 이는 계정에 XRP
 * 계정을 가져옵니다.
 * XRP Ledger을 쿼리합니다.
 
-## 1. XRP Ledger에 연결&#x20;
+## 1. XRP Ledger에 연결 (Connect to the XRP Ledger)
 
 쿼리를 하고 트랜잭션을 제출하려면 XRP Ledger에 연결해야 합니다. 이를 xrpl-py로 수행하려면 xrp.clients 모듈을 사용합니다:
 
@@ -49,7 +49,7 @@ JSON_RPC_URL = "https://s.altnet.rippletest.net:51234/"
 client = JsonRpcClient(JSON_RPC_URL)
 ```
 
-## 제작용 XRP Ledger에 연결&#x20;
+## 제작용 XRP Ledger에 연결(**Connect to the production XRP Ledger)**
 
 이전 섹션의 샘플 코드는 돈이 실제 가치가 없는 테스트를 위한 병렬 네트워크인 Testnet에 연결하는 방법을 보여줍니다. 제작용 XRP Ledger과 통합할 준비가 되면 Mainnet에 연결해야 합니다. 두 가지 방법으로 할 수 있습니다:
 
@@ -63,7 +63,7 @@ client = JsonRpcClient(JSON_RPC_URL)
 
 기본 값에 대한 자세한 정보는 예제 핵심 서버 구성 파일을 참조하십시오.
 
-* 사용 가능한 공개 서버 중 하나를 사용하여:
+* 사용 가능한 퍼블릭 서버 중 하나를 사용하여:
 
 ```python
 from xrpl.clients import JsonRpcClient
@@ -75,7 +75,7 @@ client = JsonRpcClient(JSON_RPC_URL)
 
 XRP Ledger에서 가치를 저장하고 트랜잭션을 실행하려면 계정이 필요합니다. 계정은 키 세트와 계정 reserve를 충족시킬만큼 XRP로 충전된 주소입니다. 주소는 계정의 식별자이며, 개인 키를 사용하여 XRP Ledger에 제출하는 트랜잭션에 서명합니다.
 
-테스트 및 개발 목적으로 XRP Faucets를 사용하여 키를 생성하고 Testnet 또는 Devnet에서 계정을 충전할 수 있습니다. 생산적인 목적으로는 키를 저장하고 안전한 서명 방법을 설정하는 것이 중요합니다. 생산에서의 또 다른 차이점은 XRP가 실제 가치를 가지므로 faucet에서 무료로 얻을 수 없습니다.
+테스트 및 개발 목적으로 XRP Faucets를 사용하여 키를 생성하고 Testnet 또는 Devnet에서 계정을 충전할 수 있습니다. 메인넷에서 키를 저장하고 안전한 서명 방법을 설정하는 것이 중요합니다. 메인넷에서 또 다른 차이점은 XRP가 실제 가치를 가지므로 faucet에서 무료로 얻을 수 없습니다.
 
 Testnet에서 계정을 만들고 충전하려면, xrpl-py는 generate\_faucet\_wallet 메소드를 제공합니다:
 

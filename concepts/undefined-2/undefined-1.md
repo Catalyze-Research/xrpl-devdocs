@@ -47,7 +47,7 @@ _(_[_ExpandedSignerList수정안_](../xrp-ledger/amendments/undefined.md#expande
 
 다중 서명 트랜잭션를 성공적으로 제출하려면 다음을 수행해야 합니다:
 
-* 트랜잭션를 보내는 주소(<mark style="background-color:yellow;">계정</mark> 필드에 지정됨)는 [ledger에 <mark style="background-color:yellow;">SignerList</mark> 객체](../../references/xrp-ledger/ledger/ledger-1/signerlist.md)를 가져야 합니다. 이를 설정하는 방법에 대한 지침은 [다중 서명 설정](../../tutorials/undefined-3/undefined-3.md)을 참조하세요.
+* 트랜잭션를 보내는 주소(<mark style="background-color:yellow;">계정</mark> 필드에 지정됨)는 [ledger에 <mark style="background-color:yellow;">SignerList</mark> 객체](../../references/xrp-ledger/ledger/ledger-1/signerlist.md)를 가져야 합니다. 이를 설정하는 방법에 대한 지침은 [다중 서명 설정](../../tutorials/tasks/manage-account-settings/undefined-3.md)을 참조하세요.
 * 트랜잭션에는 <mark style="background-color:yellow;">SigningPubKey</mark> 필드를 빈 문자열로 포함해야 합니다.
 * 트랜잭션에는 [<mark style="background-color:yellow;">Signers</mark> 필드](../../references/xrp-ledger/undefined-1/undefined.md#undefined-5)가 포함되어야 하며, 서명 배열을 포함해야 합니다.&#x20;
 * <mark style="background-color:yellow;">Signers</mark> 배열에 있는 서명은 <mark style="background-color:yellow;">SignerList</mark>에서 정의된 서명자와 일치해야 합니다.&#x20;

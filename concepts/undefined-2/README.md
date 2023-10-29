@@ -213,5 +213,5 @@ XRP Ledger 주소는 rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz 
   * [Payment transaction](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)
   * [AccountRoot object](../../references/xrp-ledger/ledger/ledger-1/accountroot.md)
 * **Tutorials:**
-  * [Manage Account Settings (Category)](../../tutorials/undefined-3/)
-  * [Monitor Incoming Payments with WebSocket](../../tutorials/undefined-1/websocket.md)
+  * [Manage Account Settings (Category)](../../tutorials/tasks/manage-account-settings/)
+  * [Monitor Incoming Payments with WebSocket](../../tutorials/http-websocket-apis/http-websocket-apis-get-started-using-http-websocket-apis.md)
