@@ -31,6 +31,8 @@
 
 ## 중개 트랜잭션 준비&#x20;
 
+{% embed url="https://youtu.be/GemQ-t7g9fo" %}
+
 1. Standby account을 사용하여 Broker account를대상으로 하는 NFT 판매 제안을 생성합니다.&#x20;
    1. 판매 제안 **Amount**을 드롭 단위로 입력합니다(XRP의 백만분의 일).&#x20;
    2. **Flags** 필드를 1로 설정합니다.&#x20;

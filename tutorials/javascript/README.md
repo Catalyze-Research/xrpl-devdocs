@@ -1,7 +1,3 @@
----
-description: JavaScript XRPL 튜토리얼.
----
-
 # JavaScript
 
 JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.

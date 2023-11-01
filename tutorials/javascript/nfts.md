@@ -27,6 +27,8 @@ Note:
 
 ## NFTs 일괄 발행
 
+{% embed url="https://youtu.be/tJeDnEMZ7RU" %}
+
 이 예제를 사용하면 고유한 단일 항목에 대해 여러 NFT를 만들 수 있습니다. NFT는 원본 아트워크의 "인쇄", 이벤트 티켓 또는 다른 제한된 고유 항목 세트를 나타낼 수 있습니다.
 
 non-fungible token 객체를 일괄적으로 작성하는 방법:

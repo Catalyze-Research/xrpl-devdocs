@@ -36,6 +36,8 @@
 
 ## 다른 계정을 위해 NFT 생성하기&#x20;
 
+{% embed url="https://youtu.be/cXvyu2ZDCBM" %}
+
 이 예제에서는 이전 단계에서 권한이 부여된 운영 계정을 사용하여 Standby account를 대신하여 토큰을 발행합니다.
 
 다른 계정을 위해 non-fungible token을 발행하려면:
