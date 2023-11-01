@@ -1,4 +1,4 @@
-# 빠른 시작 (JavaScript)
+# JavaScript
 
 JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
@@ -10,7 +10,7 @@ JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거�
 
 빠른 시작 1, 두 계정을 생성하고 그 사이에서 XRP를 전송합니다.
 
-## [2. Trust Line 생성 및 Currency 전송 ](../python/2.-currency-python.md)
+## [2. Trust Line 생성 및 Currency 전송 ](../python/python-modular-tutorials-in-python/python-send-payments-send-payments-using-python/currency-create-trust-line-and-send-currency-using-python.md)
 
 빠른 시작 2단계, 신뢰선을 생성하고 화폐를 전송합니다.
 

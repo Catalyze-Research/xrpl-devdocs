@@ -1,4 +1,4 @@
-# 2. 신뢰 생성 및 Currency 전송 (Python)
+# 신뢰 생성 및 Currency 전송 (Create Trust Line and Send Currency Using Python)
 
 이 예제는 다음을 보여줍니다:
 
@@ -32,6 +32,8 @@ Quickstart 창을 열고 다음 계정을 가져옵니다:
       2. **Get New Operational Account**를 클릭합니다.
 
 ## 신뢰선 생성
+
+{% embed url="https://youtu.be/6KWP0PV6J8Y" %}
 
 계정 간 신뢰선을 생성하려면:
 
@@ -87,10 +89,8 @@ Dependencies을 가져오고 `testnet_url`을 설정합니다.
 
 ```python
 import xrpl
-import json
 from xrpl.clients import JsonRpcClient
 from xrpl.wallet import Wallet
-from xrpl.models.requests.account_info import AccountInfo
 
 testnet_url = "https://s.altnet.rippletest.net:51234"
 ```
@@ -107,7 +107,7 @@ def create_trust_line(seed, issuer, currency, amount):
 지갑과 새 클라이언트 인스턴스를 가져옵니다.
 
 ```python
-    receiving_wallet = Wallet(seed, sequence = 16237283)
+    receiving_wallet = Wallet.from_seed(seed)
     client = JsonRpcClient(testnet_url)
 ```
 
@@ -124,28 +124,17 @@ def create_trust_line(seed, issuer, currency, amount):
     )
 ```
 
-거래에 서명합니다.
-
-```python
-    signed_tx = xrpl.transaction.safe_sign_and_autofill_transaction(
-        trustline_tx, receiving_wallet, client)
-```
-
 트랜잭션을 XRP Ledger에 제출합니다.
 
 ```python
-    reply = ""
-    try:
-        response = xrpl.transaction.send_reliable_submission(signed_tx,client)
-        reply = response.result
-    except xrpl.transaction.XRPLReliableSubmissionException as e:
-        reply = f"Submit failed: {e}"
+    response =  xrpl.transaction.submit_and_wait(trustline_tx,
+        client, receiving_wallet)
 ```
 
 결과를 반환합니다.
 
 ```python
-    return reply
+    return response.result
 ```
 
 ### send\_currency <a href="#send_currency" id="send_currency"></a>
@@ -160,7 +149,7 @@ def send_currency(seed, destination, currency, amount):
 Testnet에서 송신 지갑 및 클라이언트 인스턴스를 가져옵니다.
 
 ```python
-    sending_wallet=Wallet(seed, sequence=16237283)
+    sending_wallet=Wallet.from_seed(seed)
     client=JsonRpcClient(testnet_url)
 ```
 
@@ -168,38 +157,27 @@ Testnet에서 송신 지갑 및 클라이언트 인스턴스를 가져옵니다.
 
 ```python
     send_currency_tx=xrpl.models.transactions.Payment(
-        account=sending_wallet.classic_address,
+        account=sending_wallet.address,
         amount=xrpl.models.amounts.IssuedCurrencyAmount(
             currency=currency,
             value=int(amount),
-            issuer=sending_wallet.classic_address
+            issuer=sending_wallet.address
         ),
         destination=destination
     )
 ```
 
-거래에 서명하고 작성합니다.
-
-```python
-    signed_tx=xrpl.transaction.safe_sign_and_autofill_transaction(
-        send_currency_tx, sending_wallet, client)
-```
-
 트랜잭션을 제출하고 응답을 받습니다.
 
 ```python
-    reply = ""
-    try:
-        response=xrpl.transaction.send_reliable_submission(signed_tx,client)
-        reply = response.result
-    except xrpl.transaction.XRPLReliableSubmissionException as e:
-        reply = f"Submit failed: {e}"
+    response=xrpl.transaction.submit_and_wait(send_currency_tx, client, sending_wallet)
+
 ```
 
 JSON 응답을 반환하거나 트랜잭션이 실패할 경우 오류 메시지를 반환합니다.
 
 ```python
-    return reply
+    return response.result
 ```
 
 ### get\_balance <a href="#get_balance" id="get_balance"></a>
@@ -214,8 +192,7 @@ def get_balance(sb_account_id, op_account_id):
 XRP Ledger에 연결하고 클라이언트를 인스턴스화합니다.
 
 ```python
-    JSON_RPC_URL='wss://s.altnet.rippletest.net:51234'
-    client=JsonRpcClient(JSON_RPC_URL)
+    client=JsonRpcClient(testnet_url)
 ```
 
 `GatewayBalances` 요청을 만듭니다.
@@ -249,7 +226,7 @@ def configure_account(seed, default_setting):
 계정 지갑을 가져오고 클라이언트를 인스턴스화합니다.
 
 ```python
-    wallet=Wallet(seed, sequence = 16237283)
+    wallet=Wallet.from_seed(seed)
     client=JsonRpcClient(testnet_url)
 ```
 
@@ -268,28 +245,11 @@ def configure_account(seed, default_setting):
         )
 ```
 
-거래에 서명하고 작성합니다.
-
-```python
-    signed_tx=xrpl.transaction.safe_sign_and_autofill_transaction(
-        setting_tx, wallet, client)
-```
-
 트랜잭션을 제출하고 결과를 가져옵니다
 
 ```python
-    reply = ""
-    try:
-        response = xrpl.transaction.send_reliable_submission(signed_tx,client)
-        reply = response.result
-    except xrpl.transaction.XRPLReliableSubmissionException as e:
-        reply = f"Submit failed: {e}"
-```
-
-결과를 반환합니다.
-
-```python
-    return reply
+    response=xrpl.transaction.submit_and_wait(setting_tx,client,wallet)
+    return response.result   
 ```
 
 ### lesson2-send-currency.py <a href="#lesson2-send-currencypy" id="lesson2-send-currencypy"></a>
