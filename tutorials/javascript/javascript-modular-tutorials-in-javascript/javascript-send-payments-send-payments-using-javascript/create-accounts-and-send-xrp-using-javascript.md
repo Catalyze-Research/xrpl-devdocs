@@ -3,7 +3,7 @@
 이번 페이지에서 아래의 3가지를 배울 수 있습니다:
 
 1. 테스트넷에 계정을 생성하고, 실제 가치가 없는 1000개의 테스트 XRP를 받습니다.
-2. 시드 값(seed values)에서 계정을 검색합니다.&#x20;
+2. Seed Values에서 계정을 검색합니다.&#x20;
 3. 계정 간에 XRP를 전송합니다.
 
 계정을 만들면 오프라인에서 공개/개인 키 쌍을 받게 됩니다. 계정은 XRP로 자금을 조달할 때까지 원장에 표시되지 않습니다. 이 예시는 테스트넷용 계정을 만드는 방법을 보여드리며, 메인넷에서 사용할 수 있는 계정을 만드는 방법은 설명하지 않습니다.
@@ -32,11 +32,12 @@
 
 **Test 계정 만들기:**
 
-1. Open `1.get-accounts-send-xrp.html` in a browser
-2. Choose **Testnet** or **Devnet**.
-3. Click **Get New Standby Account**.
-4. Click **Get New Operational Account.**
+1. `1.get-accounts-send-xrp.html` 를 브라우저에서 열기
+2. **'Testnet'** 또는 '**Devnet'**을 선택하기
+3. **'Get New Standby Account'** 클릭하기
+4. **'Get New Operational Account'** 클릭하기
 5. Copy and paste the **Seeds** field in a persistent location, such as a Notepad, so that you can reuse the accounts after reloading the form.
+6. Reloading 이후에도 계정을 재사용할 수 있도록 **Seeds** field를 메모장 등의 위치에 복사하여 붙여넣습니다.
 
 <figure><img src="../../../../.gitbook/assets/quickstart3.png" alt=""><figcaption></figcaption></figure>
 
