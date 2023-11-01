@@ -50,7 +50,7 @@
 
 이 예제는 모든 XRP 레저 네트워크, 테스트넷 또는 데브넷에서 사용할 수 있습니다. 코드를 업데이트하여 다른 또는 추가적인 XRP 레저 네트워크를 선택할 수 있습니다.
 
-### getNet() <a href="#getnet" id="getnet"></a>
+#### getNet() <a href="#getnet" id="getnet"></a>
 
 ```
 // ******************************************************
@@ -70,7 +70,7 @@
 } // End of getNet()
 ```
 
-### getAccount(type) <a href="#getaccounttype" id="getaccounttype"></a>
+#### getAccount(type) <a href="#getaccounttype" id="getaccounttype"></a>
 
 ```
 // *******************************************************
@@ -186,7 +186,7 @@ XRP Ledger 와 연결을 끊습니다.
 } // End of getAccount()
 ```
 
-### Get Accounts from Seeds <a href="#get-accounts-from-seeds" id="get-accounts-from-seeds"></a>
+#### Get Accounts from Seeds <a href="#get-accounts-from-seeds" id="get-accounts-from-seeds"></a>
 
 ```
 // *******************************************************
@@ -251,7 +251,7 @@ XRP Ledger에서 연결을 끊습니다.
 } // End of getAccountsFromSeeds()
 ```
 
-### Send XRP <a href="#send-xrp" id="send-xrp"></a>
+#### Send XRP <a href="#send-xrp" id="send-xrp"></a>
 
 ```
 // *******************************************************
@@ -322,7 +322,7 @@ async function sendXRP() {
 
 
 
-### Reciprocal Transactions <a href="#reciprocal-transactions" id="reciprocal-transactions"></a>
+#### Reciprocal Transactions <a href="#reciprocal-transactions" id="reciprocal-transactions"></a>
 
 각 트랜잭션에는 운영 계정에 대해 접두사 oP가 붙은 상호 트랜잭션이 수반됩니다. 코드 설명은 standby account의 해당 함수를 참조하세요.
 
