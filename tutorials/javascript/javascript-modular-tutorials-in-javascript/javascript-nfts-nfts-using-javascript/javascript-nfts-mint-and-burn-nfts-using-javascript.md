@@ -1,4 +1,4 @@
-# 3. NFTs 발행 및 소각
+# JavaScript를 이용한 NFTs 발행 및 소각(Mint and Burn NFTs Using JavaScript)
 
 이 예제는 다음을 보여줍니다:
 
@@ -26,6 +26,8 @@
 <figure><img src="https://xrpl.org/img/quickstart9.png" alt=""><figcaption></figcaption></figure>
 
 ## NFT 발행하기&#x20;
+
+{% embed url="https://youtu.be/Qyb_x_GlUDg" %}
 
 non-fungible token 객체를 발행하려면:
 

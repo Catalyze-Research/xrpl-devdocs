@@ -1,4 +1,4 @@
-# 4. NFTs 전송
+# JavaScript를 이용한 NFTs 전송(Transfer NFTs Using JavaScript)
 
 이 예제는 다음을 보여줍니다:
 
@@ -31,7 +31,9 @@
 
 ## 판매 제안 생성하기
 
-&#x20;NFT 판매 제안을 생성하려면:
+{% embed url="https://youtu.be/He5PpO7TQbQ" %}
+
+NFT 판매 제안을 생성하려면:
 
 1. 판매 제안의 **Amount**를 드랍(백만 분의 1 XRP)으로 입력합니다.&#x20;
 2. **Flags** 필드를 1로 설정합니다.&#x20;

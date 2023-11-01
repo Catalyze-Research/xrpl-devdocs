@@ -18,18 +18,18 @@ JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거�
 
 빠른 시작 3단계, NFTs를 발하고 소각합니다.
 
-## [4. NFTs 전송](4.-nfts.md)&#x20;
+## [4. NFTs 전송](javascript-modular-tutorials-in-javascript/javascript-nfts-nfts-using-javascript/javascript-nfts-transfer-nfts-using-javascript.md)&#x20;
 
 JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
-## [NFT 판매 중개](nft.md)&#x20;
+## [NFT 판매 중개](javascript-modular-tutorials-in-javascript/javascript-nfts-nfts-using-javascript/javascript-nft-broker-an-nft-sale-using-javascript.md)&#x20;
 
 판매 제안과 구매 제안 사이에서 판매를 중개합니다.
 
-## [공인 발행인 지정](undefined-2.md)
+## [공인 발행인 지정](javascript-modular-tutorials-in-javascript/javascript-nfts-nfts-using-javascript/javascript-assign-an-authorized-minter-using-javascript.md)
 
 다른 계정에게 당신 대신 NFTs를 발행할 수 있는 권한을 부여합니다.
 
-## [NFTs 일괄 발행](nfts.md)
+## [NFTs 일괄 발행](javascript-modular-tutorials-in-javascript/javascript-nfts-nfts-using-javascript/javascript-nfts-batch-mint-nfts-using-javascript.md)
 
 판매 제안과 구매 제안 사이에서 판매를 중개합니다.
