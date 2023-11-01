@@ -2,9 +2,9 @@
 
 이 페이지에서는 아래 3가지를 배울 수 있습니다:
 
-1. Create escrow payments that become available when any account enters a fulfillment code.
-2. Complete a conditional escrow transaction.
-3. Cancel a conditional escrow transaction.
+1. 모든 계정에서 주문 처리 코드(fulfillment code)를 입력하면 사용할 수 있는, 에스크로 결제를 생성합니다.&#x20;
+2. 조건부 에스크로 거래를 완료합니다.&#x20;
+3. 조건부 에스크로 거래를 취소합니다.
 
 <figure><img src="../../.gitbook/assets/conditional-escrow1.png" alt=""><figcaption></figcaption></figure>
 
@@ -20,30 +20,30 @@
 
 조건 코드와 연결된 주문 처리 코드를 사용하여 조건 기반 에스크로를 생성합니다. 다섯 종 조건 애플리케이션을 사용하여 조건/이행 쌍을 생성합니다.
 
-Install `five-bells-condition`:
+`five-bells-condition`설치하기:
 
-1. In a terminal window, navigate to your local `Quickstart` directory (for convenience).
-2. Enter the command `npm install five-bells-condition`.
+1. 터미널 창에서, navig로컬의 `Quickstart` 디렉토리로 이동하기 (편의를 위해)
+2. `npm install five-bells-condition`를 작성하기&#x20;
 
-To create a condition/fulfillment pair:
+Condition/Fulfillment pair 생성하기:
 
-1. In a terminal window, navigate to your `Quickstart` directory.
-2. Enter the command `node getConditionAndFulfillment.js`.
-3. Copy and save the generated Condition and Fulfillment pair.
+1. 터미널 창에서, navig로컬의 `Quickstart` 디렉토리로 이동하기 (편의를 위해)
+2. `node getConditionAndFulfillment.js`를 작성하기
+3. 생성된 Condition 및 Fulfillment pair를 복사하여 저장하기
 
 <figure><img src="../../.gitbook/assets/conditional-escrow2.png" alt=""><figcaption></figcaption></figure>
 
-To get test accounts:
+**Test 계정 만들기**:
 
 1. Open `9.escrow-condition.html` in a browser
-2. Choose **Testnet** or **Devnet**.
-3. Get test accounts.
-   1. If you have existing account seeds
-      1. Paste account seeds in the **Seeds** field.
-      2. Click **Get Accounts from Seeds**.
-   2. If you do not have account seeds:
-      1. Click **Get New Standby Account**.
-      2. Click **Get New Operational Account**.
+2. **'Testnet'** 또는 '**Devnet'** 선택하기
+3. Test 계정들을 가져오기
+   1. 만약 기존의 account seeds 를 갖고 있다면,
+      1. **Seeds** field에 account seeds 값을 붙여넣기
+      2. **'Get Accounts from Seeds'** 클릭하기
+   2. 만약 기존의 account seeds 를 갖고 있지 않다면,
+      1. **'Get New Standby Account'** 클릭하기
+      2. **'Get New Operational Account'** 클릭하기
 
 <figure><img src="../../.gitbook/assets/conditional-escrow3.png" alt=""><figcaption></figcaption></figure>
 
@@ -53,15 +53,15 @@ To get test accounts:
 
 조건부 에스크로를 생성할 때는 예약하고자 하는 금액과 위에서 생성한 조건 값을 지정해야 합니다. 에스크로를 더 이상 사용할 수 없는 취소 날짜와 시간을 설정할 수도 있습니다.
 
-To create a conditional escrow:
+**조건부 에스크로 생성하기:**
 
-1. Enter an **Amount** to transfer.
-2. Copy the **Operational Account** value.
-3. Paste it in the **Destination Account** field.
-4. Enter the **Escrow Condition** value.
-5. Enter the **Escrow Cancel (seconds)** value.
-6. Click **Create Escrow**.
-7. Copy and save the _Sequence Number_ of the escrow called out in the **Standby Result** field.
+1. 전송할 **Amount** 를 입력하기
+2. **Operational Account** 값을 복사하기
+3. **Destination Account** field 에 붙여넣기
+4. **Escrow Condition** 값을 작성하기
+5. **Escrow Cancel (seconds)** 값을 작성하기
+6. **'Create Escrow'** 클릭하기&#x20;
+7. **Standby Result** field 에서 나오는 에스크로 _Sequence Number_ 를 복사하여 저장하기&#x20;
 
 에스크로는 XRP Ledger instance에 생성되며, 요청하신 XRP 금액에 거래 비용을 더한 금액을 예약합니다.
 
@@ -73,11 +73,11 @@ To create a conditional escrow:
 
 모든 계정은 에스크로 취소 시간 전에 언제든지 조건부 에스크로를 완료할 수 있습니다. 위의 예에 따라 에스크로 취소 시간이 지나면 시퀀스 번호를 사용하여 거래를 완료할 수 있습니다.
 
-To finish a time-based escrow:
+**조건부 에스크로 완료하기:**
 
-1. Paste the sequence number in the Operational account **Escrow Sequence Number** field.
-2. Enter the `Fulfillment` code for the `Condition`.
-3. Click **Finish Conditional Escrow**.
+1. Operational account **Escrow Sequence Number** field에 Sequence number 를 붙여넣기
+2. `Condition`에 대한 `Fulfillment` 코드를 작성하기
+3. **Finish Conditional Escrow** 클릭하기
 
 거래가 완료되고 Standby 및 Operational accounts, 모두에 대한 잔액이 업데이트됩니다.
 

@@ -2,10 +2,10 @@
 
 이 페이지에서는 아래의 4가지를 배울 수 있습니다:
 
-1. Create escrow payments that become available at a specified time and expire at a specified time.
-2. Finish an escrow payment.
-3. Retrieve information on escrows attached to an account.
-4. Cancel an escrow payment and return the XRP to the sending account.
+1. 지정된 시간에 사용할 수 있고 지정된 시간에 만료되는 에스크로 결제를 생성합니다.&#x20;
+2. 에스크로 결제를 완료합니다.
+3. 계정에 연결된 에스크로에 대한 정보를 검색합니다.&#x20;
+4. 에스크로 결제를 취소하고 송금 계정으로 XRP를 반환합니다.
 
 <figure><img src="../../.gitbook/assets/quickstart-escrow1.png" alt=""><figcaption></figcaption></figure>
 
@@ -17,15 +17,15 @@
 
 **Test 계정 만들기**:
 
-1. Open `8.escrow.html` in a browser
-2. Choose **Testnet** or **Devnet**.
-3. Get test accounts.
-   1. If you have existing account seeds
-      1. Paste account seeds in the **Seeds** field.
-      2. Click **Get Accounts from Seeds**.
-   2. If you do not have account seeds:
-      1. Click **Get New Standby Account**.
-      2. Click **Get New Operational Account**.
+1. `8.escrow.html` 를 브라우저에 열기
+2. **'Testnet'** 또는 '**Devnet'** 선택하기
+3. Test 계정들을 가져오기
+   1. 만약 기존의 account seeds 를 갖고 있다면,
+      1. **Seeds** field에 account seeds 값을 붙여넣기
+      2. **'Get Accounts from Seeds'** 클릭하기
+   2. 만약 기존의 account seeds 를 갖고 있지 않다면,
+      1. **'Get New Standby Account'** 클릭하기
+      2. **'Get New Operational Account'** 클릭하기
 
 <figure><img src="../../.gitbook/assets/quickstart-escrow2.png" alt=""><figcaption></figcaption></figure>
 
