@@ -128,7 +128,7 @@
   * [JavaScript로 시작하기](tutorials/javascript/javascript.md)
   * [JavaScript 모듈형 튜토리얼(Modular Tutorials in JavaScript)](tutorials/javascript/javascript-modular-tutorials-in-javascript/README.md)
     * [JavaScript를 이용한 Send Payments(Send Payments Using JavaScript)](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-send-payments-send-payments-using-javascript/README.md)
-      * [Create Accounts and Send XRP Using JavaScript](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-send-payments-send-payments-using-javascript/create-accounts-and-send-xrp-using-javascript.md)
+      * [계정 생성 및 XRP 전송(Create Accounts and Send XRP Using JavaScript)](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-send-payments-send-payments-using-javascript/xrp-create-accounts-and-send-xrp-using-javascript.md)
       * [Create Trust Line and Send Currency Using JavaScript](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-send-payments-send-payments-using-javascript/create-trust-line-and-send-currency-using-javascript.md)
       * [Create Time-based Escrows Using JavaScript](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-send-payments-send-payments-using-javascript/create-time-based-escrows-using-javascript.md)
       * [Create Conditional Escrows Using JavaScript](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-send-payments-send-payments-using-javascript/create-conditional-escrows-using-javascript.md)
