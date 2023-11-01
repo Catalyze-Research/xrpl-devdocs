@@ -7,7 +7,7 @@ XRP Ledger 수표는 더 이상 현금화될 수 없는 만료 시간을 가질 
 ## 사용 사례
 
 * 수표는 은행 업계에서 친숙하게 알고 있고 받아들여지는 과정을 사용하여 자금을 교환하게 해줍니다.
-* 당신의 예상 수령인이 낯선 사람들로부터의 직접 결제를 차단하기 위해 [입금 승인](<../undefined-2/undefined-3 (1).md>)을 사용한다면, 수표는 좋은 대안입니다.
+* 당신의 예상 수령인이 낯선 사람들로부터의 직접 결제를 차단하기 위해 [입금 승인](../undefined-2/deposit-authorization.md)을 사용한다면, 수표는 좋은 대안입니다.
 * 유연한 수표 현금화. 수령인은 최소 금액과 최대 금액 사이에서 수표를 인출할 수 있습니다.
 
 ## 수표 수명주기
@@ -75,7 +75,7 @@ XRP Ledger 수표는 또한 XRP Ledger에만 있는 문제를 해결합니다. �
 
 **문제:** [BSA, KYC, AML 및 CFT](../../tutorials/xrp-ledger/undefined.md)와 같은 규정을 준수하기 위해 금융 기관은 받은 자금의 원천에 대한 문서를 제공해야 합니다. 이러한 규정은 기관이 처리하는 모든 지불의 원천과 목적지를 알고자 하여 불법 자금 이체를 방지하기 위한 것입니다. XRP Ledger의 특성 상, 누구든지 잠재적으로 XRP(그리고 적절한 조건하에 토큰)를 기관의 XRP Ledger 계정으로 송금할 수 있습니다. 이러한 원하지 않는 지불을 처리하는 것은 이러한 기관의 규정 준수 부서에 상당한 비용과 시간 지연을 유발하며, 잠재적으로 벌금이나 처벌을 받을 수도 있습니다.
 
-**해결책:** 기관은 [AccountSet 거래에서 <mark style="background-color:yellow;">asfDepositAuth</mark> 플래그를 설정](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)하여 XRP Ledger 계정에서 [입금 승인](<../undefined-2/undefined-3 (1).md>)을 활성화할 수 있습니다. 이렇게 하면 해당 계정은 결제 거래를 통해 자금을 받을 수 없게 됩니다. 예금 승인이 활성화된 계정은 에스크로, 결제 채널, 또는 수표를 통해 자금을 받을 수 있습니다. 수표는 예금 승인이 활성화된 경우 자금을 이동시키는 가장 직관적이고 유연한 방법입니다.
+**해결책:** 기관은 [AccountSet 거래에서 <mark style="background-color:yellow;">asfDepositAuth</mark> 플래그를 설정](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)하여 XRP Ledger 계정에서 [입금 승인](../undefined-2/deposit-authorization.md)을 활성화할 수 있습니다. 이렇게 하면 해당 계정은 결제 거래를 통해 자금을 받을 수 없게 됩니다. 예금 승인이 활성화된 계정은 에스크로, 결제 채널, 또는 수표를 통해 자금을 받을 수 있습니다. 수표는 예금 승인이 활성화된 경우 자금을 이동시키는 가장 직관적이고 유연한 방법입니다.
 
 ## 사용 방법
 

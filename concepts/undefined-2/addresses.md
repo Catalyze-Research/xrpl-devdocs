@@ -14,7 +14,7 @@ X-주소 형식은 주소에 목적지 태그를 "함축"하고 있습니다. �
 
 더 많은 정보를 얻으려면 [계정](./) 그리고[ base58 인코딩](../../references/xrp-ledger/undefined/base58.md)을 참고하세요.
 
-타당한 주소는 펀딩을 받음으로 인해서 [분산원장의 계정이 될 수 있습니다](./). 또한, 펀딩 받지못한 주소는 [일반 키](undefined.md)를 표현하기 위해 사용될 수 있습니다. 또는 [서명자 목록](undefined-1.md)의 멤버가 될 수 있습니다. 오직 펀딩 받은 계정만이 트랜잭션의 송신자가 될 수 있습니다.
+타당한 주소는 펀딩을 받음으로 인해서 [분산원장의 계정이 될 수 있습니다](./). 또한, 펀딩 받지못한 주소는 [일반 키](cryptographic-keys.md)를 표현하기 위해 사용될 수 있습니다. 또는 [서명자 목록](undefined-1.md)의 멤버가 될 수 있습니다. 오직 펀딩 받은 계정만이 트랜잭션의 송신자가 될 수 있습니다.
 
 타당한 주소를 생성하는 것은 키 쌍을 가지고 하는 딱딱한 수학적인 작업입니다. 사용자는 키 쌍을 만들고 이것의 주소를 생성하는 일을 완전히 오프라인 환경에서 분산원장 혹은 다른 집단과의 통신없이 진행할 수 있습니다. 공개 키로부터 주소를 얻는 것은 일-방향 해쉬 함수를 포함하므로, 공개 키가 주소와 매치가 되는 것인지 확인할 수 있습니다. 하지만, 주소만으로 공개 키를 도출할 수는 없습니다.( 이 내용은 왜 서명된 트랜잭션이 공개 키와 송신자의 주소를 포함하는지에 대한 이유파트입니다.)
 
@@ -38,7 +38,7 @@ X-주소 형식은 주소에 목적지 태그를 "함축"하고 있습니다. �
 
 <figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
-공개 키로부터 분산 원장의 주소를 계산하는 공식은 다음과 같습니다. 완전한 예시 코드를 보려면,[ encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 보세요. 공개 키로부터 seed value 혹은 passphrase를 도출하는 과정을 보려면 [키 파생](undefined.md)을 참고하세요.
+공개 키로부터 분산 원장의 주소를 계산하는 공식은 다음과 같습니다. 완전한 예시 코드를 보려면,[ encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 보세요. 공개 키로부터 seed value 혹은 passphrase를 도출하는 과정을 보려면 [키 파생](cryptographic-keys.md)을 참고하세요.
 
 &#x20;   1\. 필요한 알고리즘들을 import하세요: SHA-256, RIPEMD160, base58.   &#x20;
 

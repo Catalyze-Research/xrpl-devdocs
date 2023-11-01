@@ -2,7 +2,7 @@
 
 _트랜잭션_은 XRP Ledger을 수정할 수 있는 유일한 방법입니다. 거래는 서명, 제출, 그리고 [컨센서스 과정](../consensus-protocol/consensus-structure.md)을 거친 후에 검증된 ledger 버전에 편입되어야만 최종적인 것이 됩니다. 일부 ledger 규칙은 또한 [유사 거래](../../references/xrp-ledger/undefined-1/pseudo-transactions/)를 생성하는데, 이것들은 서명되거나 제출되지 않지만, 여전히 컨센서스에 의해 승인받아야 합니다. 실패한 거래도 또한 ledger에 포함되는데, 그 이유는 스팸 방지 [트랜잭션 비용](transaction-cost.md)을 지불하기 위해 XRP 잔액을 수정하기 때문입니다.
 
-거래는 돈을 보내는 것 이상의 일을 할 수 있습니다. 다양한 [결제 유형](../undefined-1/)을 지원하는 것 외에도, XRP Ledger의 거래는 [암호 키](../undefined-2/undefined.md)를 교체하고, 다른 설정을 관리하며, XRP Ledger의 [탈중앙화 거래소](../tokens/decentralized-exchange/)에서 거래를 수행하는데도 사용됩니다. [<mark style="background-color:yellow;">rippled</mark> API 참조](../../tutorials/http-websocket-apis/http-websocket-api.md)는 [트랜잭션 유형의 전체 목록](../../references/xrp-ledger/undefined-1/undefined-1/)을 제공합니다.
+거래는 돈을 보내는 것 이상의 일을 할 수 있습니다. 다양한 [결제 유형](../undefined-1/)을 지원하는 것 외에도, XRP Ledger의 거래는 [암호 키](../undefined-2/cryptographic-keys.md)를 교체하고, 다른 설정을 관리하며, XRP Ledger의 [탈중앙화 거래소](../tokens/decentralized-exchange/)에서 거래를 수행하는데도 사용됩니다. [<mark style="background-color:yellow;">rippled</mark> API 참조](../../tutorials/http-websocket-apis/http-websocket-api.md)는 [트랜잭션 유형의 전체 목록](../../references/xrp-ledger/undefined-1/undefined-1/)을 제공합니다.
 
 ## 거래 식별하기&#x20;
 
@@ -40,7 +40,7 @@ XRP Ledger의 전체 이력에서는 거래 해시가 고유하다는 규칙에 
 * [영구적으로 동결 기능을 포기할 수 있는 것](../tokens/freezing-tokens/)은 오직 마스터 개인 키 뿐입니다.&#x20;
 * 당신은 주소에서 거래를 서명하는 마지막 방법을 절대 제거할 수 없습니다.&#x20;
 
-마스터와 일반 키 페어에 대한 더 자세한 정보를 위해, [암호화 키](../undefined-2/undefined.md)를 참조해보세요.
+마스터와 일반 키 페어에 대한 더 자세한 정보를 위해, [암호화 키](../undefined-2/cryptographic-keys.md)를 참조해보세요.
 
 ## 거래 서명 및 제출&#x20;
 

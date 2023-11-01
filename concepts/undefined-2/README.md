@@ -139,7 +139,7 @@ XRP Ledger 주소는 rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz 
 
 <figure><img src="../../.gitbook/assets/Accounts_1.png" alt=""><figcaption></figcaption></figure>
 
-공개 키에서 XRP Ledger 주소를 계산하는 공식은 다음과 같습니다. 완전한 예제 코드는 [encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 참조하세요. 패스프레이즈(passpharase)나 시드 값에서 공개 키를 파생시키는 과정은 [키 유도](undefined.md)를 참조하세요.
+공개 키에서 XRP Ledger 주소를 계산하는 공식은 다음과 같습니다. 완전한 예제 코드는 [encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 참조하세요. 패스프레이즈(passpharase)나 시드 값에서 공개 키를 파생시키는 과정은 [키 유도](cryptographic-keys.md)를 참조하세요.
 
 1.  필요한 알고리즘을 가져옵니다: SHA-256, RIPEMD160, 그리고 base58. base58에 대한 사전을 설정합니다.\
 
@@ -204,7 +204,7 @@ XRP Ledger 주소는 rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz 
 
 * **Concepts:**
   * [Reserves](reserves.md)
-  * [Cryptographic Keys](undefined.md)
+  * [Cryptographic Keys](cryptographic-keys.md)
   * [Issuing and Operational Addresses](undefined-4.md)
 * **References:**
   * [account\_info method](../../references/http-websocket-apis/api-1/undefined/account\_info.md)

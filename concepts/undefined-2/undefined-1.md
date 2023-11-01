@@ -1,6 +1,6 @@
 # 다중 서명
 
-XRP Ledger의 다중 서명은 여러 개인 키의 조합을 사용하여 XRP Ledger에 대한 [트랜잭션을 승인](../transactions/#undefined-2)하는 방법입니다. 다중 서명, [마스터 키 쌍](undefined.md#undefined-7) 및 [일반 키 쌍](undefined.md#undefined-9)을 포함하여 주소에 대해 임의의 인증 방법 조합을 사용할 수 있습니다. (단, 하나의 요구 사항은 하나 이상의 메소드를 활성화해야 한다는 것입니다.)
+XRP Ledger의 다중 서명은 여러 개인 키의 조합을 사용하여 XRP Ledger에 대한 [트랜잭션을 승인](../transactions/#undefined-2)하는 방법입니다. 다중 서명, [마스터 키 쌍](cryptographic-keys.md#undefined-7) 및 [일반 키 쌍](cryptographic-keys.md#undefined-9)을 포함하여 주소에 대해 임의의 인증 방법 조합을 사용할 수 있습니다. (단, 하나의 요구 사항은 하나 이상의 메소드를 활성화해야 한다는 것입니다.)
 
 다중 서명의 이점은 다음과 같습니다:
 

@@ -101,8 +101,8 @@
   * [계정 삭제](concepts/undefined-2/undefined-3.md)
   * [준비금(Reserves)](concepts/undefined-2/reserves.md)
   * [주소(Addresses)](concepts/undefined-2/addresses.md)
-  * [암호화 키](concepts/undefined-2/undefined.md)
-  * [입금 승인](<concepts/undefined-2/undefined-3 (1).md>)
+  * [암호화 키(Cryptographic Keys)](concepts/undefined-2/cryptographic-keys.md)
+  * [입금 승인(Deposit Authorization)](concepts/undefined-2/deposit-authorization.md)
   * [발행 및 운영 주소](concepts/undefined-2/undefined-4.md)
 * [결제 시스템 기초](concepts/undefined-3.md)
 
