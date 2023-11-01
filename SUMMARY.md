@@ -126,7 +126,7 @@
   * [NFT 판매 중개 (Python)](tutorials/python/nft-python.md)
   * [공인 발행인 지정 (Python)](tutorials/python/python.md)
 * [JavaScript](tutorials/javascript/README.md)
-  * [JavaScript로 시작하기](tutorials/javascript/javascript.md)
+  * [JavaScript로 시작하기(Get Started Using JavaScript)](tutorials/javascript/javascript-get-started-using-javascript.md)
   * [JavaScript 모듈형 튜토리얼(Modular Tutorials in JavaScript)](tutorials/javascript/javascript-modular-tutorials-in-javascript/README.md)
     * [JavaScript를 이용한 Send Payments(Send Payments Using JavaScript)](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-send-payments-send-payments-using-javascript/README.md)
       * [JavaScript를 이용한 계정 생성 및 XRP 전송(Create Accounts and Send XRP Using JavaScript)](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-send-payments-send-payments-using-javascript/create-accounts-and-send-xrp-using-javascript.md)

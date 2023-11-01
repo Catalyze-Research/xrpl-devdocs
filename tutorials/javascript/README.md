@@ -2,7 +2,7 @@
 
 JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
-## [빠른 시작 소개 (JavaScript) ](javascript.md)
+## [빠른 시작 소개 (JavaScript) ](javascript-get-started-using-javascript.md)
 
 JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
