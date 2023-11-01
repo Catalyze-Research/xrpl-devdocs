@@ -1,4 +1,4 @@
-# NFTs 일괄 발행
+# JavaScript를 이용한 NFTs 일괄 발행(Batch Mint NFTs Using JavaScript)
 
 한 번에 여러 NFT를 만드는 응용 프로그램을 만들 수 있습니다. `for` loop를 사용하여 트랜잭션을 차례로 전송할 수 있습니다.
 

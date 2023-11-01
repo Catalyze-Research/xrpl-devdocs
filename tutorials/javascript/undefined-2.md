@@ -1,4 +1,4 @@
-# 공인 발행인 지정
+# JavaScript를 이용한 공인 발행인 지정(Assign an Authorized Minter Using JavaScript)
 
 다른 계정에게 당신을 대신하여 NFT를 생성할 수 있는 권한을 부여할 수 있습니다.
 

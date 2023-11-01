@@ -1,4 +1,4 @@
-# JavaScript로 시작하기
+# JavaScript로 시작하기(Get Started Using JavaScript)
 
 이 튜토리얼은 Node.js 또는 웹 브라우저에서 [xrpl.js](https://github.com/XRPLF/xrpl.js/) 클라이언트 라이브러리를 사용해 자바스크립트 또는 타입스크립트로 XRP 레저 연결 애플리케이션을 구축하는 기본 사항을 안내합니다.
 
@@ -32,7 +32,7 @@ npm install xrpl
 
 ## BUILD 시작하기
 
-XRP 원장으로 작업할 때 계정에 XRP를 추가하거나, 탈중앙화 거래소와 통합하거나, 토큰을 발행하는 등 몇 가지 관리해야 할 사항이 있습니다. 이 튜토리얼에서는 이러한 모든 사용 사례를 시작하는 데 공통적인 기본 패턴을 안내하고, 이를 구현하기 위한 샘플 코드를 제공합니다.
+XRP Ledger으로 작업할 때 계정에 XRP를 추가하거나, 탈중앙화 거래소와 통합하거나, 토큰을 발행하는 등 몇 가지 관리해야 할 사항이 있습니다. 이 튜토리얼에서는 이러한 모든 사용 사례를 시작하는 데 공통적인 기본 패턴을 안내하고, 이를 구현하기 위한 샘플 코드를 제공합니다.
 
 다음은 많은 XRP 레저 프로젝트에서 사용하는 몇 가지 단계입니다:
 
@@ -74,7 +74,7 @@ const xrpl = require("xrpl")
 
 ## 2. Connect to the XRP Ledger <a href="#2-connect-to-the-xrp-ledger" id="2-connect-to-the-xrp-ledger"></a>
 
-트랜잭션을 쿼리하고 제출하려면 XRP 원장에 연결해야 합니다. xrpl.js를 사용하여 이 작업을 수행하려면 Client 클래스의 인스턴스를 생성하고 connect() 메서드를 사용합니다.
+트랜잭션을 쿼리하고 제출하려면 XRP Ledger에 연결해야 합니다. xrpl.js를 사용하여 이 작업을 수행하려면 Client 클래스의 인스턴스를 생성하고 connect() 메서드를 사용합니다.
 
 {% hint style="success" %}
 **TIP:** \
@@ -103,7 +103,7 @@ main()
 
 ### **Connect to the XRP Ledger Mainnet**
 
-이전 섹션의 샘플 코드는 사용 가능한 병렬 네트워크 중 하나인 테스트넷에 연결하는 방법을 보여드리고 있습니다. 프로덕션으로 전환할 준비가 되면, XRP 원장 메인넷에 연결해야 합니다. 두 가지 방법으로 연결할 수 있습니다:
+이전 섹션의 샘플 코드는 사용 가능한 병렬 네트워크 중 하나인 테스트넷에 연결하는 방법을 보여드리고 있습니다. 프로덕션으로 전환할 준비가 되면, XRP Ledger 메인넷에 연결해야 합니다. 두 가지 방법으로 연결할 수 있습니다:
 
 *   코어 서버(리플드)를 설치하고 노드를 직접 실행합니다. 코어 서버는 기본적으로 메인넷에 연결되지만, 테스트넷이나 개발넷을 사용하도록 구성을 변경할 수 있습니다. 자체 코어 서버를 실행하는 데는 여러 가지 이유가 있습니다. 자체 서버를 실행하는 경우 다음과 같이 연결할 수 있습니다:\
 
@@ -150,7 +150,7 @@ const test_wallet = xrpl.Wallet.fromSeed("sn3nxiW7v8KXzPzAqzyHXbSSKNuN9") // Tes
 
 ## 4. Query the XRP Ledger <a href="#4-query-the-xrp-ledger" id="4-query-the-xrp-ledger"></a>
 
-클라이언트의 요청() 메서드를 사용해 XRP 원장의 웹소켓 API에 액세스합니다. 예를 들어
+아래와 같이, 클라이언트의 요청() 메서드를 사용해 XRP Ledger의 웹소켓 API에 액세스합니다.&#x20;
 
 ```
 // Get info from the ledger about the address we just funded
@@ -179,7 +179,7 @@ XRP 레저의 합의 프로세스가 새로운 레저 버전을 생성할 때마
 
 ## NEXT STEP
 
-이제 xrpl.js를 사용해 XRP 원장에 연결하고, 계정을 생성하고, 관련 정보를 조회하는 방법을 알게 되었으니, 이제 다른 방법도 사용하실 수 있습니다:
+이제 xrpl.js를 사용해 XRP Ledger에 연결하고, 계정을 생성하고, 관련 정보를 조회하는 방법을 알게 되었으니, 이제 다른 방법도 사용하실 수 있습니다:
 
 * [Send XRP](https://xrpl.org/send-xrp.html).
 * [Issue a Fungible Token](https://xrpl.org/issue-a-fungible-token.html)
