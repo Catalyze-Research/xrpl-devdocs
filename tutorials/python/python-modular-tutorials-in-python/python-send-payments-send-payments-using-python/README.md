@@ -4,7 +4,7 @@ XRP Ledger (XRPL)은 강력하고 안전하며 사용자 정의가 가능한 서
 
 이 빠른 시작은 XRP Ledger를 시도해 볼 수 있는 테스트 harness 인터페이스를 구축하는 방법을 설명합니다. 테스트 harness는 여러 계정을 표시하므로 한 계정에서 다른 계정으로 토큰을 전송하고 결과를 실시간으로 확인할 수 있습니다. 아래 이미지는 4단계 완료 시의 토큰 테스트 Harness를 보여줍니다.
 
-<figure><img src="../../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
 
 많은 필드와 버튼이 모두 함께 작동하여 상당히 실질적인 작업을 수행합니다. 그러나 XRP Ledger를 시작하는 것은 그렇게 복잡하지 않습니다. 조금씩 한 발짝 한 발짝 나아가다 보면 어떤 작업도 어렵지 않습니다.
 
@@ -21,12 +21,12 @@ XRP Ledger (XRPL)은 강력하고 안전하며 사용자 정의가 가능한 서
 
 대부분 가독성을 위해 간결함을 희생한 "브루트 포스" 코드입니다. 각 예제는 이전 단계를 기반으로 하며, 새로운 Python UI 파일과 모듈을 추가하여 레슨의 새로운 동작을 지원합니다. 여러분이 만든 애플리케이션은 이 예제를 통해 크게 개선될 것으로 기대합니다. 여러분의 피드백과 기여를 환영합니다.이 빠른 시작에서 당신 다음을 수행할 수 있습니다:
 
-1. [계정 생성 및 XRP 전송](../1.-xrp-python.md)
-2. [신뢰선 생성 및 화폐 전송.](../2.-currency-python.md)
-3. [NFTs 발행 및 소각. ](../3.-nfts-python.md)
-4. [NFTs 전송.](../4.-nfts-python.md)
+1. [계정 생성 및 XRP 전송](xrp-create-accounts-and-send-xrp-using-python.md)
+2. [신뢰선 생성 및 화폐 전송.](../../2.-currency-python.md)
+3. [NFTs 발행 및 소각. ](../../3.-nfts-python.md)
+4. [NFTs 전송.](../../4.-nfts-python.md)
 
-또한 [NFT 판매 중개](../nft-python.md), [공인 발행자 지정](../python.md) 방법을 보여주는 확장 레슨도 있습니다.
+또한 [NFT 판매 중개](../../nft-python.md), [공인 발행자 지정](../../python.md) 방법을 보여주는 확장 레슨도 있습니다.
 
 ## 요구사항&#x20;
 

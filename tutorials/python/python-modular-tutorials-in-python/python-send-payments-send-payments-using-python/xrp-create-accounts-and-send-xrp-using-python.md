@@ -1,4 +1,4 @@
-# 1. 계정 생성 및 XRP 전송 (Python)
+# 계정 생성 및 XRP 전송(Create Accounts and Send XRP Using Python)
 
 이 예제에서는 다음을 보여줍니다:
 
@@ -28,6 +28,8 @@ Quickstart Samples가 없다면, 이후 예제들을 시도할 수 없습니다.
 
 ## 사용법&#x20;
 
+{% embed url="https://youtu.be/Uu36ga0iMv0" %}
+
 테스트 계정을 얻으려면:
 
 1. 브라우저에서 `lesson1-send-xrp.py`을 엽니다
@@ -40,6 +42,8 @@ Quickstart Samples가 없다면, 이후 예제들을 시도할 수 없습니다.
 <figure><img src="https://xrpl.org/img/quickstart-py3.png" alt=""><figcaption></figcaption></figure>
 
 당신의 새로운 계정 간에 XRP를 전송할 수 있습니다. 각 계정은 자신만의 필드와 버튼을 가지고 있습니다.
+
+{% embed url="https://youtu.be/qUd-CTFdiks" %}
 
 Standby account에서 Operational account로 XRP를 전송하려면:
 

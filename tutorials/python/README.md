@@ -2,11 +2,11 @@
 
 Python 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
-## [빠른 시작 소개 (Python)](python-modular-tutorials-in-python/python-send-payments-send-payments-using-python.md)&#x20;
+## [빠른 시작 소개 (Python)](python-modular-tutorials-in-python/python-send-payments-send-payments-using-python/)&#x20;
 
 Python 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거래하며, NFTs를 생성하고 거래해보세요.
 
-## [1. 계정 생성 및 XRP 전송 (Python)](1.-xrp-python.md)[ ](../javascript/1.-xrp-javascript.md)
+## [1. 계정 생성 및 XRP 전송 (Python)](python-modular-tutorials-in-python/python-send-payments-send-payments-using-python/xrp-create-accounts-and-send-xrp-using-python.md)[ ](../javascript/1.-xrp-javascript.md)
 
 빠른 시작 1, 두 계정을 생성하고 그 사이에서 XRP를 전송합니다.
 
