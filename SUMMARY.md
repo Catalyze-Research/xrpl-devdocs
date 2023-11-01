@@ -125,7 +125,7 @@
   * [NFT 판매 중개 (Python)](tutorials/python/nft-python.md)
   * [공인 발행인 지정 (Python)](tutorials/python/python.md)
 * [JavaScript](tutorials/javascript/README.md)
-  * [빠른 시작 소개 (JavaScript)](tutorials/javascript/javascript.md)
+  * [JavaScript로 시작하기](tutorials/javascript/javascript.md)
   * [1. 계정 생성 및 XRP 전송 (JavaScript)](tutorials/javascript/1.-xrp-javascript.md)
   * [2. 신뢰선(trust line) 생성 및 화폐(currency) 전송](tutorials/javascript/2.-trust-line-currency.md)
   * [시간 보류 에스크로 생성하기](tutorials/javascript/undefined.md)
