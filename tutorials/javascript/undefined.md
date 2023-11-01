@@ -1,361 +1,521 @@
-# 공인 발행인 지정
+# 시간 기반 에스크로 생성하기(Create Time-based Escrows Using JavaScript)
 
-다른 계정에게 당신을 대신하여 NFT를 생성할 수 있는 권한을 부여할 수 있습니다.
+이 페이지에서는 아래의 4가지를 배울 수 있습니다:
 
-다음 예제에서는 다음 작업을 수행하는 방법을 보여줍니다:
+1. Create escrow payments that become available at a specified time and expire at a specified time.
+2. Finish an escrow payment.
+3. Retrieve information on escrows attached to an account.
+4. Cancel an escrow payment and return the XRP to the sending account.
 
-1. 다른 계정에게 당신의 계정을 위해 NFT를 생성할 수 있는 권한 부여하기.&#x20;
-2. 권한이 부여된 경우, 다른 계정을 대신하여 NFT를 발행하기.&#x20;
+<figure><img src="../../.gitbook/assets/quickstart-escrow1.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="https://xrpl.org/img/quickstart28.png" alt=""><figcaption></figcaption></figure>
+## 전제 조건
 
-## 사용법
+[Quickstart Samples](https://github.com/XRPLF/xrpl-dev-portal/tree/master/content/\_code-samples/quickstart/js/)로드 하세요.
 
-[Quickstart Samples](https://github.com/XRPLF/xrpl-dev-portal/tree/master/content/\_code-samples/quickstart/js/) 아카이브를 다운로드하여 각 샘플을 브라우저에서 시도해볼 수 있습니다.
+## 사용 방법 <a href="#usage" id="usage"></a>
 
-## 계정 가져오기&#x20;
+**Test 계정 만들기**:
 
-1. 브라우저에서 6.authorized-minter.html 파일을 엽니다.&#x20;
-2. ledger 인스턴스를 선택합니다 (_testnet_ 또는 _devnet_).&#x20;
-   1. 기존의 테스트 계정 seeds가 있는 경우:&#x20;
-      1. 계정 시드를 **Seeds** 필드에 붙여넣습니다.&#x20;
-      2. **Get Accounts from Seeds**를 클릭합니다.&#x20;
-   2. 기존의 테스트 계정이 없는 경우:&#x20;
-      1. **Get New Standby Account**를 클릭합니다.&#x20;
-      2. **Get New Operational Account**를 클릭합니다.&#x20;
+1. Open `8.escrow.html` in a browser
+2. Choose **Testnet** or **Devnet**.
+3. Get test accounts.
+   1. If you have existing account seeds
+      1. Paste account seeds in the **Seeds** field.
+      2. Click **Get Accounts from Seeds**.
+   2. If you do not have account seeds:
+      1. Click **Get New Standby Account**.
+      2. Click **Get New Operational Account**.
 
-## 계정에 NFT 생성 권한 부여
+<figure><img src="../../.gitbook/assets/quickstart-escrow2.png" alt=""><figcaption></figcaption></figure>
 
-다른 계정이 당신의 계정을 위해 NFT를 생성할 수 있도록 하려면:
+## 에스크로 생성(Create Escrow)
 
-1. **Operational Account** 값을 복사합니다.&#x20;
-2. **Operational Account** 값을 **Authorized Minter** 필드에 붙여넣습니다.&#x20;
-3. **Set Minter**을 클릭합니다.&#x20;
+{% embed url="https://youtu.be/mNPSSZxcq7s" %}
 
-<figure><img src="https://xrpl.org/img/quickstart29.png" alt=""><figcaption></figcaption></figure>
+에스크로를 완료하는 데 걸리는 최소 시간과 수취인이 에스크로에 있는 자금을 더 이상 사용할 수 없는 취소 시간을 설정하여 시간 기반 에스크로를 만들 수 있습니다. 실제 시나리오에서는 시간을 며칠 또는 몇 주 단위로 표현하지만, 이 양식을 사용하면 완료 및 취소 시간을 초 단위로 설정할 수 있으므로 다양한 시나리오를 빠르게 실행할 수 있습니다. (장기 에스크로를 사용하려면 하루에 86,400초가 있습니다).
 
-## 다른 계정을 위해 NFT 생성하기&#x20;
+**시간 기반 에스크로 만들기**:
 
-이 예제에서는 이전 단계에서 권한이 부여된 운영 계정을 사용하여 Standby account를 대신하여 토큰을 발행합니다.
+1. Enter an **Amount** to transfer.
+2. Copy the **Operational Account** value.
+3. Paste it in the **Destination Account** field.
+4. Set the **Escrow Finish (seconds)** value. For example, enter _10_.
+5. Set the **Escrow Cancel (seconds)** value. For example, enter _120_.
+6. Click **Create Escrow**.
+7. Copy the _Sequence Number_ of the escrow called out in the **Standby Result** field.
 
-다른 계정을 위해 non-fungible token을 발행하려면:
+에스크로는 XRP Ledger instance에 생성되며, 거래 비용에 100XRP를 더한 금액을 예약합니다. 에스크로를 생성할 때 **Sequence Number**를 캡처하여 저장하면 에스크로 트랜잭션을 완료하는 데 사용할 수 있습니다.
 
-1. **Flags** 필드를 설정합니다. 테스트 목적으로는 값이 _8_로 설정하는 것을 권장합니다.&#x20;
-2. **NFT URL**을 입력합니다. 이는 NFT 개체와 관련된 데이터 또는 메타데이터를 가리키는 URI입니다. 직접 URL을 소유하고 있지 않은 경우 샘플 URI를 사용할 수 있습니다.&#x20;
-3. 이전 판매에서 원작자가 향후 판매에서 수익의 일부를 받는 이체 수수료를 입력합니다. 0에서 50000 사이의 값을 입력할 수 있으며, 0부터 0.001% 단위로 50.000%까지의 이체 비율을 허용합니다. NFT가 이전 가능하도록 하기 위해 Flags 필드를 설정하지 않았다면, 이 필드를 0으로 설정합니다.&#x20;
-4. **Standby Account** 값을 복사합니다. **Standby Account** 값을 Operational account **Issuer** 필드에 붙여넣습니다.&#x20;
-5. Operational account **Mint Other** 버튼을 클릭합니다.
+<figure><img src="../../.gitbook/assets/quickstart-escrow3.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="https://xrpl.org/img/quickstart30.png" alt=""><figcaption></figcaption></figure>
+## 에스크로 완료(Finish Escrow)
 
-아이템이 발행되면 권한이 부여된 Minter는 일반적인 방식으로 NFT를 판매할 수 있습니다. 판매 수익은 이체 수수료를 제외한 권한이 부여된 Minter에게 지급됩니다. 발행자와 Minter는 가격 분배에 대해 별도로 협의할 수 있습니다.
+에스크로에 보관된 XRP를 받는 사람은 에스크로 완료 날짜 및 시간 이후부터 에스크로 취소 날짜 및 시간 전까지 기간 내에 언제든지 거래를 완료할 수 있습니다. 위의 예시에 따라 시퀀스 번호를 사용하여 10초가 지나면 트랜잭션을 완료할 수 있습니다.
 
-## 판매 오더 생성하기&#x20;
+**시간 기반의 에스크로 완료하기**
 
-NFT 판매 오더를 생성하려면:
+1. Paste the sequence number in the Operational account **Escrow Sequence Number** field.
+2. Click **Finish Escrow**.
 
-1. Operational account 측에서 제안 **Amount**를 드롭 (XRP의 백만 분의 1)으로 입력합니다. 예를 들어, 100000000 (100 XRP)를 입력합니다.&#x20;
-2. **Flags** 필드를 1로 설정합니다.&#x20;
-3. 판매할 NFT의 **NFT ID**를 입력합니다.&#x20;
-4. 선택적으로 **Expiration**까지 남은 일 수를 입력합니다.&#x20;
-5. **Create Sell Offer**을 클릭합니다.&#x20;
+거래가 완료되고 Standby 및 Operational accounts, 모두에 대한 잔액이 업데이트됩니다.
 
-응답에서 중요한 정보는 NFT Offer Index입니다. 이 인덱스는 sell offer를 수락하는 데 사용되며, `nft_offer_index`라고 표시됩니다.
+<figure><img src="../../.gitbook/assets/quickstart-escrow4.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="https://xrpl.org/img/quickstart31.png" alt=""><figcaption></figcaption></figure>
+## 에스크로 불러오기(Get Escrows) <a href="#get-escrows" id="get-escrows"></a>
 
-## Sell Offer 수락하기&#x20;
+Standby 및 Operational accounts에 대한 **Get Escrows**를 클릭하여 현재 에스크로 목록을 확인합니다. 지금 버튼을 클릭하면 현재 에스크로가 없습니다.
 
-Sell Offer가 있는 경우, 새로운 계정을 생성하여 해당 offer를 수락하고 NFT를 구매할 수 있습니다.
+이 튜토리얼에서는 위의 에스크로 만들기의 단계에 따라 새 에스크로 트랜잭션을 생성하고, **Escrow Cancel (seconds)** 필드를 600초로 설정하여 탐색할 시간을 더 확보할 수 있습니다. 트랜잭션 결과에서 시퀀스 번호를 캡처하는 것을 잊지 마세요.
 
-사용 가능한 Sell Offer를 수락하려면:
+Standby 및 Operational accounts의 모두에 대해 **Get Escrows**를 클릭합니다. 계정 정보 요청은 두 계정에 대해 동일한 계정 오브젝트를 반환하며, 에스크로 트랜잭션으로 생성된 계정 간의 링크를 보여줍니다.
 
-1. **Get New Standby Account**를 클릭합니다.&#x20;
-2. **NFT Offer Index** (NFT 판매 결과의 `nft_offer_index`로 표시됨)를 입력합니다. 이는 `nft_id`와 다른 값입니다.)
-3. **Accept Sell Offer**을 클릭합니다.&#x20;
+<figure><img src="../../.gitbook/assets/quickstart-escrow5.png" alt=""><figcaption></figcaption></figure>
 
-결과에서 발행자 계정에 25 XRP가 입금된 것을 확인할 수 있습니다. 구매자 계정은 100 XRP 가격과 12 드롭의 거래 비용을 차감한 것입니다. 판매자(권한이 부여된 Minter) 계정은 75 XRP를 입금받았습니다. 발행자와 판매자는 별도의 거래에서 수익을 분배할 수 있습니다.
+## 에스크로 취소(Cancel Escrow) <a href="#cancel-escrow" id="cancel-escrow"></a>
 
-<figure><img src="https://xrpl.org/img/quickstart32.png" alt=""><figcaption></figcaption></figure>
+에스크로 취소 시간이 지나면 수취인은 더 이상 에스크로를 사용할 수 없습니다. 에스크로 개시자는 거래 수수료를 제외한 XRP를 회수할 수 있습니다. 에스크로 취소 시간 전에 거래를 취소하려고 하면 거래 수수료가 청구되지만, 실제 에스크로는 제한 시간에 도달할 때까지 취소할 수 없습니다.
 
-## Code Walkthrough <a href="#code-walkthrough" id="code-walkthrough"></a>
+이전 단계에서 생성한 에스크로에 할당된 시간을 기다린 다음 에스크로 취소 버튼을 사용해볼 수 있습니다.
 
-[Quickstart Samples](https://github.com/XRPLF/xrpl-dev-portal/tree/master/content/\_code-samples/quickstart/js/) 아카이브를 다운로드하여 각 샘플을 브라우저에서 시도해볼 수 있습니다.
+**만료된 에스크로를 취소하기:**
 
-### Set Minter <a href="#set-minter" id="set-minter"></a>
+1. Enter the sequence number in the Standby **Escrow Sequence Number** field.
+2. Click **Cancel Escrow**.
 
-이 함수는 계정에 대한 권한 있는 관리자를 설정합니다. 각 계정에는 NFT를 대신 작성할 수 있는 권한이 있는 관리자가 0개 또는 1개 있을 수 있습니다.
+자금은 초기 거래 수수료를 제외한 금액이 Standby account로 반환됩니다.
 
-```javascript
-// *******************************************************
-// ****************  Set Minter  *************************
-// *******************************************************
+<figure><img src="../../.gitbook/assets/quickstart-escrow6.png" alt=""><figcaption></figcaption></figure>
 
-async function setMinter() {    
+## 시퀀스 번호 찾기(Oh No! I Forgot to Save the Sequence Number!)
+
+시퀀스 번호를 저장하는 것을 잊어버린 경우 에스크로 거래 기록에서 찾을 수 있습니다.
+
+**시퀀스 번호 찾기:**
+
+1. Create a new escrow as described in [Create Escrow](https://xrpl.org/create-time-based-escrows-using-javascript.html#create-escrow), above.
+2. Click **Get Escrows** to get the escrow information.
+3.  Copy the _PreviousTxnID_ value from the results.
+
+    <figure><img src="../../.gitbook/assets/quickstart-escrow7.png" alt=""><figcaption></figcaption></figure>
+4.  Paste the _PreviousTxnID_ in the **Transaction to Look Up** field.&#x20;
+
+    <figure><img src="https://xrpl.org/img/quickstart-escrow8.png" alt=""><figcaption></figcaption></figure>
+5. Click **Get Transaction**.
+6.  Locate the _Sequence_ value in the results.&#x20;
+
+    <figure><img src="https://xrpl.org/img/quickstart-escrow9.png" alt=""><figcaption></figcaption></figure>
+
+## 실전 예제
+
+이 웹사이트의 소스 리포지토리에서  [Quickstart Sample](https://github.com/XRPLF/xrpl-dev-portal/tree/master/content/\_code-samples/quickstart/js/) 다운로드할 수 있습니다.\
+
+
+### ripple8-escrow.js <a href="#ripple8-escrowjs" id="ripple8-escrowjs"></a>
+
+이 예제는 모든 XRP 레저 네트워크, 테스트넷 또는 데브넷에서 사용할 수 있습니다. 코드를 업데이트하여 다른 또는 추가적인 XRP 레저 네트워크를 선택할 수 있습니다.
+
+#### Add Seconds to Date <a href="#add-seconds-to-date" id="add-seconds-to-date"></a>
+
+이 함수는 두 가지 작업을 수행합니다. 새 날짜 객체를 생성하고 양식 필드에서 가져온 초 수를 추가합니다. 그런 다음 날짜를 JavaScript 형식에서 XRP 원장 형식으로 조정합니다.
+
+You provide the _numOfSeconds_ argument, the second parameter is a new Date object.
+
+```
+function addSeconds(numOfSeconds, date = new Date()) {
 ```
 
-ledger에 연결해 계정을 가져오세요.
+Set the _seconds_ value to the date seconds plus the number of seconds you provide.
 
-````javascript
+```
+  date.setSeconds(date.getSeconds() + numOfSeconds);
+```
+
+JavaScript dates are in milliseconds. Divide the date by 1000 to base it on seconds.
+
+```
+  date = Math.floor(date / 1000)
+```
+
+Subtract the number of seconds in the Ripple epoch to convert the value to an XRP Ledger compatible date value.
+
+```
+  date = date - 946684800
+```
+
+Return the result.
+
+```
+  return date;
+}
+```
+
+#### Create Time-based Escrow <a href="#create-time-based-escrow" id="create-time-based-escrow"></a>
+
+```
+async function createTimeEscrow() {
+```
+
+Instantiate two new date objects, then set the dates to the current date plus the set number of seconds for the finish and cancel dates.
+
+```
+  let escrow_finish_date = new Date()
+  let escrow_cancel_date = new Date()
+  escrow_finish_date = addSeconds(parseInt(standbyEscrowFinishDateField.value))
+  escrow_cancel_date = addSeconds(parseInt(standbyEscrowCancelDateField.value))
+```
+
+Connect to the ledger.
+
+```
+  results  = "Connecting to the selected ledger.\n"
+  standbyResultField.value = results
   let net = getNet()
+  results = "Connecting to " + net + "....\n"
   const client = new xrpl.Client(net)
-  results = 'Connecting to ' + getNet() + '....'
-  standbyResultField.value = results    
   await client.connect()
-  results += '\nConnected, finding wallet.'
-  standbyResultField.value = results    
-  my_wallet = xrpl.Wallet.fromSeed(standbySeedField.value)
-  standbyResultField.value = results    ```
-
-Define the AccountSet transaction, setting the `NFTokenMinter` account and the `asfAuthorizedNFTokenMinter` flag.
-
-```javascript
-  tx_json = {
-    "TransactionType": "AccountSet",
-    "Account": my_wallet.address,
-````
-
-`NFTokenMinter`를 인증된 Minter의 계정 번호로 설정합니다.
-
-```javascript
-    "NFTokenMinter": standbyMinterField.value,
+  results  += "Connected. Creating time-based escrow.\n"
+  standbyResultField.value = results
 ```
 
-`asfAuthorizedNFTokenMinter`플래그(숫자 값은 10) 설정.
+Get the wallet information based on the account seed values.
 
-```javascript
-    "SetFlag": xrpl.AccountSetAsfFlags.asfAuthorizedNFTokenMinter
-    }
 ```
-
-진행 상황을 보고합니다.
-
-```javascript
-  results += '\nSet Minter.' 
-  standbyResultField.value = results    
-```
-
-트랜잭션을 준비하고 전송한 다음 결과를 기다립니다.
-
-```javascript
-  const prepared = await client.autofill(tx_json)
-  const signed = my_wallet.sign(prepared)
-  const result = await client.submitAndWait(signed.tx_blob)
-```
-
-트랜잭션이 성공하면 결과를 표시합니다. 그렇지 않으면 트랜잭션이 실패했다고 보고합니다.
-
-```javascript
-  if (result.result.meta.TransactionResult == "tesSUCCESS") {
-    results += '\nAccount setting succeeded.\n'
-    results += JSON.stringify(result,null,2)
-    standbyResultField.value = results    
-  } else {
-    throw 'Error sending transaction: ${result}'
-    results += '\nAccount setting failed.'
-  standbyResultField.value = results    
-  }
-```
-
-ledger에서 연결을 끊습니다.
-
-```javascript
-  client.disconnect()
-} // End of configureAccount()
-```
-
-### Mint Other <a href="#mint-other" id="mint-other"></a>
-
-이 수정된 mint function을 통해 한 계정이 다른 발행자를 위해 mint할 수 있습니다.
-
-```javascript
-// *******************************************************
-// ****************  Mint Other  *************************
-// *******************************************************
-
-async function mintOther() {
-```
-
-ledger에 연결해 계정을 가져오세요.
-
-```javascript
-  results = 'Connecting to ' + getNet() + '....'
-  standbyResultField.value = results    
-  let net = getNet()
   const standby_wallet = xrpl.Wallet.fromSeed(standbySeedField.value)
-  const client = new xrpl.Client(net)
-  await client.connect()
-```
-
-성공을 보고합니다.
-
-```javascript
-  results += '\nConnected. Minting NFT.'
-  standbyResultField.value = results    
-```
-
-이 트랜잭션 blob은 이전의 [`mintToken()` function](https://xrpl.org/mint-and-burn-nfts.html#mint-token)에 사용된 것과 동일하며, `Issuer` 필드가 추가되었습니다.
-
-```javascript
-  const tx_json = {
-    "TransactionType": "NFTokenMint",
-    "Account": standby_wallet.classicAddress,
-```
-
-URI는 NFT로 표시되는 데이터 파일에 대한 링크입니다.
-
-```javascript
-    "URI": xrpl.convertStringToHex(standbyTokenUrlField.value),
-```
-
-최소한`tfTransferable`플래그(8)를 설정하여 계정이 테스트 목적으로 NFT를 판매 및 재판매할 수 있도록 하는 것이 좋습니다.
-
-```javascript
-    "Flags": parseInt(standbyFlagsField.value),
-```
-
-이전 수수료는 원래 발행자에게 반환될 재판매 가격의 0.001%를 나타내는 0-50000 값입니다. 예를 들어, _25000_은 재판매 시 발행자에게 보낼 가격의 25%를 의미합니다.
-
-```javascript
-    "TransferFee": parseInt(standbyTransferFeeField.value),
-```
-
-**Issuer**는 NFT로 표시되는 객체의 원래 작성자입니다.
-
-```javascript
-    "Issuer": standbyIssuerField.value,
-```
-
-`NFTokenTaxon`은 발행자가 자신의 목적을 위해 사용할 수 있는 선택적 번호 필드입니다. 여러 토큰에 동일한 분류법을 사용할 수 있습니다. 사용할 필요가 없으면 0으로 설정합니다.
-
-```javascript
-    "NFTokenTaxon": 0 //Required, but if you have no use for it, set to zero.
-  }
-```
-
-트랜잭션을 제출하고 결과를 기다립니다.
-
-```javascript
-  const tx = await client.submitAndWait(tx_json, { wallet: standby_wallet} )
-  const nfts = await client.request({
-    method: "account_nfts",
-    account: standby_wallet.classicAddress
-  })
-```
-
-결과를 보고합니다.
-
-```javascript
-  results += '\n\nTransaction result: '+ tx.result.meta.TransactionResult
-  results += '\n\nnfts: ' + JSON.stringify(nfts, null, 2)
-  standbyResultField.value = results  + (await
-    client.getXrpBalance(standby_wallet.address))
-  standbyResultField.value = results    
-```
-
-XRP Ledger에서 연결을 끊습니다.
-
-```javascript
-  client.disconnect()
-} //End of mintOther()
-```
-
-### Reciprocal Transactions <a href="#reciprocal-transactions" id="reciprocal-transactions"></a>
-
-이러한 기능은 operational account에 대한 standby account의 기능을 복제합니다. 자세한 내용은 해당 standby account function을 참조하십시오.
-
-```javascript
-// *******************************************************
-// ****************  Set Operational Minter  **************
-// ********************************************************
-
-async function oPsetMinter() {    
-  let net = getNet()
-  const client = new xrpl.Client(net)
-  results = 'Connecting to ' + getNet() + '....'
-  operationalResultField.value = results
-  await client.connect()
-  results += '\nConnected, finding wallet.'
-  operationalResultField.value = results
-  my_wallet = xrpl.Wallet.fromSeed(operationalSeedField.value)
-  operationalResultField.value = results
-
-  tx_json = {
-    "TransactionType": "AccountSet",
-    "Account": my_wallet.address,
-    "NFTokenMinter": operationalMinterField.value,
-    "SetFlag": xrpl.AccountSetAsfFlags.asfAuthorizedNFTokenMinter
-  } 
-  results += '\nSet Minter.' 
-  operationalResultField.value = results
-
-  const prepared = await client.autofill(tx_json)
-  const signed = my_wallet.sign(prepared)
-  const result = await client.submitAndWait(signed.tx_blob)
-  if (result.result.meta.TransactionResult == "tesSUCCESS") {
-    results += '\nAccount setting succeeded.\n'
-    results += JSON.stringify(result,null,2)
-    operationalResultField.value = results
-  } else {
-    throw 'Error sending transaction: ${result}'
-    results += '\nAccount setting failed.'
-    operationalResultField.value = results
-  }
-
-  client.disconnect()
-} // End of oPsetMinter()
-
-
-// *******************************************************
-// ************** Operational Mint Other *****************
-// *******************************************************
-
-async function oPmintOther() {
-  results = 'Connecting to ' + getNet() + '....'
-  operationalResultField.value = results
-  let net = getNet()
   const operational_wallet = xrpl.Wallet.fromSeed(operationalSeedField.value)
-  const client = new xrpl.Client(net)
-  await client.connect()
-  results += '\nConnected. Minting NFT.'
-  operationalResultField.value = results
-
-  // This version adds the "Issuer" field.
-  // ------------------------------------------------------------------------
-  const tx_json = {
-    "TransactionType": 'NFTokenMint',
-    "Account": operational_wallet.classicAddress,
-    "URI": xrpl.convertStringToHex(operationalTokenUrlField.value),
-    "Flags": parseInt(operationalFlagsField.value),
-    "Issuer": operationalIssuerField.value,
-    "TransferFee": parseInt(operationalTransferFeeField.value),
-    "NFTokenTaxon": 0 //Required, but if you have no use for it, set to zero.
-  }
-
-  // ----------------------------------------------------- Submit signed blob 
-  const tx = await client.submitAndWait(tx_json, { wallet: operational_wallet} )
-  const nfts = await client.request({
-    method: "account_nfts",
-    account: operational_wallet.classicAddress  
-  })
-
-  // ------------------------------------------------------- Report results
-  results += '\n\nTransaction result: '+ tx.result.meta.TransactionResult
-  results += '\n\nnfts: ' + JSON.stringify(nfts, null, 2)
-  results += await client.getXrpBalance(operational_wallet.address)
-  operationalResultField.value = results
-  client.disconnect()
-} //End of oPmintToken
+  const sendAmount = standbyAmountField.value
+  results += "\nstandby_wallet.address: = " + standby_wallet.address
+  standbyResultField.value = results
 ```
 
-### 6.authorized-minter.html <a href="#6authorized-minterhtml" id="6authorized-minterhtml"></a>
+Define the `EscrowCreate` transaction, automatically filling values in common fields.
 
-새 기능을 지원하도록 필드와 버튼으로 양식을 업데이트합니다.
+```
+  const escrowTx = await client.autofill({
+    "TransactionType": "EscrowCreate",
+    "Account": standby_wallet.address,
+    "Amount": xrpl.xrpToDrops(sendAmount),
+    "Destination": standbyDestinationField.value,
+    "FinishAfter": escrow_finish_date,
+    "CancelAfter": escrow_cancel_date
+  })
+```
 
-```html
+Sign the escrow transaction definition.
+
+```
+  const signed = standby_wallet.sign(escrowTx)
+```
+
+Submit the transaction.
+
+```
+  const tx = await client.submitAndWait(signed.tx_blob)
+```
+
+Report the results.
+
+```
+  results += "\nSequence Number (Save!): " + JSON.stringify(tx.result.Sequence)
+  results += "\n\nBalance changes: " + 
+  JSON.stringify(xrpl.getBalanceChanges(tx.result.meta), null, 2)
+  standbyBalanceField.value = (await client.getXrpBalance(standby_wallet.address))
+  operationalBalanceField.value = (await client.getXrpBalance(operational_wallet.address))
+  standbyResultField.value = results
+```
+
+Disconnect from the XRP Ledger.
+
+```
+  client.disconnect()
+} // End of createTimeEscrow()
+```
+
+#### Finish Time-based Escrow <a href="#finish-time-based-escrow" id="finish-time-based-escrow"></a>
+
+```
+async function finishEscrow() {
+```
+
+Connect to the XRP Ledger and get the account wallets.
+
+```
+  results  = "Connecting to the selected ledger.\n"
+  operationalResultField.value = results
+  let net = getNet()
+  results = 'Connecting to ' + getNet() + '....'
+  const client = new xrpl.Client(net)
+  await client.connect()
+
+  results  += "\nConnected. Finishing escrow.\n"
+  operationalResultField.value = results
+
+  const operational_wallet = xrpl.Wallet.fromSeed(operationalSeedField.value)
+  const standby_wallet = xrpl.Wallet.fromSeed(standbySeedField.value)
+  const sendAmount = operationalAmountField.value
+
+  results += "\noperational_wallet.address: = " + operational_wallet.address
+  operationalResultField.value = results
+```
+
+Define the transaction. The _Owner_ is the account that created the escrow. The _OfferSequence_ is the sequence number of the escrow transaction. Automatically fill in the common fields for the transaction.
+
+```
+  const prepared = await client.autofill({
+    "TransactionType": "EscrowFinish",
+    "Account": operationalAccountField.value,
+    "Owner": standbyAccountField.value,
+    "OfferSequence": parseInt(operationalEscrowSequenceField.value)
+  })
+```
+
+Sign the transaction definition.
+
+```
+  const signed = operational_wallet.sign(prepared)
+```
+
+Submit the signed transaction to the XRP ledger.
+
+```
+  const tx = await client.submitAndWait(signed.tx_blob)
+```
+
+Report the results.
+
+```
+  results  += "\nBalance changes: " + 
+    JSON.stringify(xrpl.getBalanceChanges(tx.result.meta), null, 2)
+  operationalResultField.value = results
+
+  standbyBalanceField.value = (await client.getXrpBalance(standby_wallet.address))
+  operationalBalanceField.value = (await client.getXrpBalance(operational_wallet.address))
+```
+
+Disconnect from the XRP Ledger.
+
+```
+  client.disconnect()
+} // End of finishEscrow()
+```
+
+#### Get Standby Escrows <a href="#get-standby-escrows" id="get-standby-escrows"></a>
+
+Get the escrows associated with the Standby account.
+
+```
+async function getStandbyEscrows() {
+```
+
+Connect to the network. The information you are looking for is public information, so there is no need to instantiate your wallet.
+
+```
+  let net = getNet()
+  const client = new xrpl.Client(net)
+  results = 'Connecting to ' + getNet() + '....'
+  standbyResultField.value = results
+
+  await client.connect()   
+  results += '\nConnected.'
+  standbyResultField.value = results
+
+  results= "\nGetting standby account escrows...\n"
+```
+
+Create the `account_objects` request. Specify that you want objects of the type _escrow_.
+
+```
+  const escrow_objects = await client.request({
+    "id": 5,
+    "command": "account_objects",
+    "account": standbyAccountField.value,
+    "ledger_index": "validated",
+    "type": "escrow"
+  })
+```
+
+Report the results.
+
+```
+  results += JSON.stringify(escrow_objects.result, null, 2)
+  standbyResultField.value = results
+```
+
+Disconnect from the XRP Ledger
+
+```
+  client.disconnect()
+} // End of getStandbyEscrows()
+```
+
+#### Get Operational Escrows <a href="#get-operational-escrows" id="get-operational-escrows"></a>
+
+This function is the same as `getStandbyEscrows()`, but for the Operational account.
+
+```
+async function getOperationalEscrows() {
+```
+
+Connect to the network. The information you are looking for is public information, so there is no need to instantiate your wallet.
+
+```
+  let net = getNet()
+  const client = new xrpl.Client(net)
+  results = 'Connecting to ' + getNet() + '....'
+  operationalResultField.value = results
+
+  await client.connect()   
+  results += '\nConnected.'
+  operationalResultField.value = results
+
+  results= "\nGetting operational account escrows...\n"
+```
+
+Create the `account_objects` request. Specify that you want objects of the type _escrow_.
+
+```
+  const escrow_objects = await client.request({
+    "id": 5,
+    "command": "account_objects",
+    "account": operationalAccountField.value,
+    "ledger_index": "validated",
+    "type": "escrow"
+  })
+```
+
+Report the results.
+
+```
+  results += JSON.stringify(escrow_objects.result, null, 2)
+  operationalResultField.value = results
+```
+
+Disconnect from the XRP Ledger instance.
+
+```
+  client.disconnect()
+} // End of getOperationalEscrows()
+```
+
+#### Get Transaction Info <a href="#get-transaction-info" id="get-transaction-info"></a>
+
+```
+async function getTransaction() {
+```
+
+Connect to the XRP Ledger.
+
+```
+  let net = getNet()
+  const client = new xrpl.Client(net)
+  results = 'Connecting to ' + getNet() + '....'
+  operationalResultField.value = results
+
+  await client.connect()   
+  results += '\nConnected.'
+  operationalResultField.value = results
+
+  results= "\nGetting transaction information...\n"
+```
+
+Prepare and send the transaction information request. The only required parameter is the transaction ID.
+
+```
+  const tx_info = await client.request({
+    "id": 1,
+    "command": "tx",
+    "transaction": operationalTransactionField.value,
+  })
+```
+
+Report the results.
+
+```
+  results += JSON.stringify(tx_info.result, null, 2)
+  operationalResultField.value = results
+```
+
+Disconnect from the XRP Ledger instance.
+
+```
+  client.disconnect()
+} // End of getTransaction()
+```
+
+#### Cancel Escrow <a href="#cancel-escrow-1" id="cancel-escrow-1"></a>
+
+Cancel an escrow after it passes the expiration date.
+
+```
+async function cancelEscrow() {
+```
+
+Connect to the XRP Ledger instance.
+
+```
+  let net = getNet()
+  const client = new xrpl.Client(net)
+  results = 'Connecting to ' + getNet() + '....'
+  standbyResultField.value = results
+
+  await client.connect()   
+  results += '\nConnected.'
+  standbyResultField.value = results
+```
+
+Get the account wallets.
+
+```
+  const standby_wallet = xrpl.Wallet.fromSeed(standbySeedField.value)
+  const operational_wallet = xrpl.Wallet.fromSeed(operationalSeedField.value)
+```
+
+Prepare the EscrowCancel transaction.
+
+```
+  const prepared = await client.autofill({
+    "TransactionType": "EscrowCancel",
+    "Account": standby_wallet.address,
+    "Owner": standbyAccountField.value,
+    "OfferSequence": parseInt(standbyEscrowSequenceNumberField.value)
+  })
+```
+
+Sign the transaction.
+
+```
+  const signed = standby_wallet.sign(prepared)
+```
+
+Submit the transaction and wait for the response.
+
+```
+  const tx = await client.submitAndWait(signed.tx_blob)
+```
+
+Report the results.
+
+```
+  results  += "\nBalance changes: " + 
+    JSON.stringify(xrpl.getBalanceChanges(tx.result.meta), null, 2)
+  standbyResultField.value = results
+  standbyBalanceField.value = (await client.getXrpBalance(standby_wallet.address))
+  operationalBalanceField.value = (await client.getXrpBalance(operational_wallet.address))
+```
+
+Disconnect from the XRP Ledger instance.
+
+```
+  client.disconnect()
+}
+```
+
+### 8.escrow.html <a href="#8escrowhtml" id="8escrowhtml"></a>
+
+```
 <html>
   <head>
-    <title>Token Test Harness</title>
+    <title>Time-based Escrow Test Harness</title>
     <link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
     <style>
        body{font-family: "Work Sans", sans-serif;padding: 20px;background: #fafafa;}
@@ -364,18 +524,10 @@ async function oPmintOther() {
        button{font-weight: bold;font-family: "Work Sans", sans-serif;}
        td{vertical-align: middle;}
     </style>
-    <script src='https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js'></script>
+    <script src='https://unpkg.com/xrpl@2.2.3'></script>
     <script src='ripplex1-send-xrp.js'></script>
     <script src='ripplex2-send-currency.js'></script>
-    <script src='ripplex3-mint-nfts.js'></script>
-    <script src='ripplex4-transfer-nfts.js'></script>
-    <script src='ripplex6-authorized-minter.js'></script>
-    <script>
-      if (typeof module !== "undefined") {
-        const xrpl = require('xrpl')
-      }
-
-    </script>
+    <script src='ripplex8-escrow.js'></script>
   </head>
 
 <!-- ************************************************************** -->
@@ -383,17 +535,17 @@ async function oPmintOther() {
 <!-- ************************************************************** -->
 
   <body>
-    <h1>Token Test Harness</h1>
+    <h1>Time-based Escrow Test Harness</h1>
     <form id="theForm">
-      Choose your ledger instance:
+      Choose your ledger instance:  
       &nbsp;&nbsp;
       <input type="radio" id="tn" name="server"
         value="wss://s.altnet.rippletest.net:51233" checked>
-      <label for="testnet">Testnet</label>
+      <label for="tn">Testnet</label>
       &nbsp;&nbsp;
       <input type="radio" id="dn" name="server"
         value="wss://s.devnet.rippletest.net:51233">
-      <label for="devnet">Devnet</label>
+      <label for="dn">Devnet</label>
       <br/><br/>
       <button type="button" onClick="getAccountsFromSeeds()">Get Accounts From Seeds</button>
       <br/>
@@ -415,6 +567,68 @@ async function oPmintOther() {
                       <td>
                         <input type="text" id="standbyAccountField" size="40"></input>
                         <br>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td align="right">
+                        XRP Balance
+                      </td>
+                      <td>
+                        <input type="text" id="standbyBalanceField" size="40"></input>
+                        <br>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        Amount
+                      </td>
+                      <td>
+                        <input type="text" id="standbyAmountField" size="40"></input>
+                        <br>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        Destination Account
+                      </td>
+                      <td>
+                        <input type="text" id="standbyDestinationField" size="40"></input>
+                        <br>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        Escrow Finish (seconds)
+                      </td>
+                      <td>
+                        <input type="text" id="standbyEscrowFinishDateField" size="40"></input>
+                        <br>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        Escrow Cancel (seconds)
+                      </td>
+                      <td>
+                        <input type="text" id="standbyEscrowCancelDateField" size="40"></input>
+                        <br>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        Escrow Sequence Number
+                      </td>
+                      <td>
+                        <input type="text" id="standbyEscrowSequenceNumberField" size="40"></input>
+                        <br>
+                      </td>
+                    </tr>
+                    <tr valign="top">
+                      <td><button type="button" onClick="configureAccount('standby',document.querySelector('#standbyDefault').checked)">Configure Account</button></td>
+                      <td>
+                        <input type="checkbox" id="standbyDefault" checked="true"/>
+                        <label for="standbyDefault">Allow Rippling</label>
                       </td>
                     </tr>
                     <tr>
@@ -444,84 +658,9 @@ async function oPmintOther() {
                         <br>
                       </td>
                     </tr>
-                    <tr>
-                      <td align="right">
-                        XRP Balance
-                      </td>
-                      <td>
-                        <input type="text" id="standbyBalanceField" size="40"></input>
-                        <br>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="right">
-                        Amount
-                      </td>
-                      <td>
-                        <input type="text" id="standbyAmountField" size="40"></input>
-                        <br>
-                      </td>
-                    </tr>
-                    <tr valign="top">
-                      <td><button type="button" onClick="configureAccount('standby',document.querySelector('#standbyDefault').checked)">Configure Account</button></td>
-                      <td>
-                        <input type="checkbox" id="standbyDefault" checked="true"/>
-                        <label for="standbyDefault">Allow Rippling</label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="right">
-                        Currency
-                      </td>
-                      <td>
-                        <input type="text" id="standbyCurrencyField" size="40" value="USD"></input>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="right">NFT URL</td>
-                      <td><input type="text" id="standbyTokenUrlField"
-                        value = "ipfs://bafybeigdyrzt5sfp7udm7hu76uh7y26nf4dfuylqabf3oclgtqy55fbzdi" size="80"/>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="right">Flags</td>
-                      <td><input type="text" id="standbyFlagsField" value="1" size="10"/></td>
-                    </tr>
-                    <tr>
-                      <td align="right">NFT ID</td>
-                      <td><input type="text" id="standbyTokenIdField" value="" size="80"/></td>
-                    </tr>
-                    <tr>
-                      <td align="right">NFT Offer Index</td>
-                      <td><input type="text" id="standbyTokenOfferIndexField" value="" size="80"/></td>
-                    </tr>
-                    <tr>
-                      <td align="right">Owner</td>
-                      <td><input type="text" id="standbyOwnerField" value="" size="80"/></td>
-                    </tr>
-                    <tr>
-                        <td align="right">Authorized Minter</td>
-                        <td><input type="text" id="standbyMinterField" value="" size="80"/></td>
-                    </tr>
-                    <tr>
-                        <td align="right">Issuer</td>
-                        <td><input type="text" id="standbyIssuerField" value="" size="80"/></td>
-                    </tr>
-                    <tr>
-                        <td align="right">Destination</td>
-                        <td><input type="text" id="standbyDestinationField" value="" size="80"/></td>
-                    </tr>
-                            <tr>
-                                <td align="right">Expiration</td>
-                                <td><input type="text" id="standbyExpirationField" value="" size="80"/></td>
-                            </tr>
-                            <tr>
-                              <td align="right">Transfer Fee</td>
-                                <td><input type="text" id="standbyTransferFeeField" value="" size="80"/></td>
-                            </tr>
                   </table>
                   <p align="left">
-                  <textarea id="standbyResultField" cols="80" rows="20" ></textarea>
+                    <textarea id="standbyResultField" cols="80" rows="20" ></textarea>
                   </p>
                 </td>
                 </td>
@@ -529,35 +668,16 @@ async function oPmintOther() {
                   <table>
                     <tr valign="top">
                       <td align="center" valign="top">
-                        <button type="button" onClick="sendXRP()">Send XRP&#62;</button>
+                        <button type="button" onClick="sendXRP()">Send XRP &#62;</button>
                         <br/><br/>
-                        <button type="button" onClick="createTrustline()">Create TrustLine</button>
+                        <button type="button" onClick="getBalances()">Get Balances</button>       
                         <br/>
-                        <button type="button" onClick="sendCurrency()">Send Currency</button>
+                        <button type="button" onClick="createTimeEscrow()">Create Time-based Escrow</button>
                         <br/>
-                        <button type="button" onClick="getBalances()">Get Balances</button>
-                        <br/><br/>
-                        <button type="button" onClick="mintToken()">Mint NFT</button>
+                        <button type="button" onClick="getStandbyEscrows()">Get Escrows</button>
                         <br/>
-                        <button type="button" onClick="getTokens()">Get NFTs</button>
-                        <br/>
-                        <button type="button" onClick="burnToken()">Burn NFT</button>
-                        <br/><br/>
-                        <button type="button" onClick="setMinter('standby')">Set Minter</button>
-                        <br/>
-                        <button type="button" onClick="mintOther()">Mint Other</button>
-                        <br/><br/>
-                        <button type="button" onClick="createSellOffer()">Create Sell Offer</button>
-                        <br/>
-                        <button type="button" onClick="acceptSellOffer()">Accept Sell Offer</button>
-                        <br/>
-                        <button type="button" onClick="createBuyOffer()">Create Buy Offer</button>
-                        <br/>
-                        <button type="button" onClick="acceptBuyOffer()">Accept Buy Offer</button>
-                        <br/>
-                        <button type="button" onClick="getOffers()">Get Offers</button>
-                        <br/>
-                        <button type="button" onClick="cancelOffer()">Cancel Offer</button>
+                        <button type="button" onClick="cancelEscrow()">Cancel Escrow</button>
+                      </td>
                       </td>
                     </tr>
                     </td>
@@ -573,37 +693,17 @@ async function oPmintOther() {
                 <td>
                 <td>
                   <table>
-                    <tr>
+                    <tr valign="top">
                       <td align="center" valign="top">
                         <button type="button" onClick="oPsendXRP()">&#60; Send XRP</button>
                         <br/><br/>
-                        <button type="button" onClick="oPcreateTrustline()">Create TrustLine</button>
-                        <br/>
-                        <button type="button" onClick="oPsendCurrency()">Send Currency</button>
-                        <br/>
                         <button type="button" onClick="getBalances()">Get Balances</button>
-                        <br/><br/>
-                        <button type="button" onClick="oPmintToken()">Mint NFT</button>
                         <br/>
-                        <button type="button" onClick="oPgetTokens()">Get NFTs</button>
+                        <button type="button" onClick="finishEscrow()">Finish Time-based Escrow</button>
                         <br/>
-                        <button type="button" onClick="oPburnToken()">Burn NFT</button>
-                        <br/><br/>
-                        <button type="button" onClick="oPsetMinter()">Set Minter</button>
+                        <button type="button" onClick="getOperationalEscrows()">Get Escrows</button>
                         <br/>
-                        <button type="button" onClick="oPmintOther()">Mint Other</button>
-                        <br/><br/>
-                        <button type="button" onClick="oPcreateSellOffer()">Create Sell Offer</button>
-                        <br/>
-                        <button type="button" onClick="oPacceptSellOffer()">Accept Sell Offer</button>
-                        <br/>
-                        <button type="button" onClick="oPcreateBuyOffer()">Create Buy Offer</button>
-                        <br/>
-                        <button type="button" onClick="oPacceptBuyOffer()">Accept Buy Offer</button>
-                        <br/>
-                        <button type="button" onClick="oPgetOffers()">Get Offers</button>
-                        <br/>
-                        <button type="button" onClick="oPcancelOffer()">Cancel Offer</button>
+                        <button type="button" onClick="getTransaction()">Get Transaction</button>
                       </td>
                       <td valign="top" align="right">
                         <button type="button" onClick="getAccount('operational')">Get New Operational Account</button>
@@ -615,6 +715,61 @@ async function oPmintOther() {
                             <td>
                               <input type="text" id="operationalAccountField" size="40"></input>
                               <br>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td align="right">
+                              XRP Balance
+                            </td>
+                            <td>
+                              <input type="text" id="operationalBalanceField" size="40"></input>
+                              <br>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="right">
+                              Amount
+                            </td>
+                            <td>
+                              <input type="text" id="operationalAmountField" size="40"></input>
+                              <br>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="right">
+                              Destination
+                            </td>
+                            <td>
+                              <input type="text" id="operationalDestinationField" size="40"></input>
+                              <br>
+                            </td>
+                          </tr>
+                          <tr>
+                          <tr>
+                            <td align="right">
+                              Escrow Sequence Number
+                            </td>
+                            <td>
+                              <input type="text" id="operationalEscrowSequenceField" size="40"></input>
+                              <br>
+                            </td>
+                          </tr>
+                          <tr>                            <td align="right">
+                              Transaction to Look Up
+                            </td>
+                            <td>
+                              <input type="text" id="operationalTransactionField" size="40"></input>
+                              <br>
+                            </td>
+                          </tr>
+                          <tr>
+                          <td>
+                            </td>
+                            <td align="right">
+                            <input type="checkbox" id="operationalDefault" checked="true"/>
+                              <label for="operationalDefault">Allow Rippling</label>
+                              <button type="button" onClick="configureAccount('operational',document.querySelector('#operationalDefault').checked)">Configure Account</button>
                             </td>
                           </tr>
                           <tr>
@@ -644,90 +799,14 @@ async function oPmintOther() {
                               <br>
                             </td>
                           </tr>
-                          <tr>
-                            <td align="right">
-                              XRP Balance
-                            </td>
-                            <td>
-                              <input type="text" id="operationalBalanceField" size="40"></input>
-                              <br>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td align="right">
-                              Amount
-                            </td>
-                            <td>
-                              <input type="text" id="operationalAmountField" size="40"></input>
-                              <br>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                            </td>
-                            <td align="right">                        <input type="checkbox" id="operationalDefault" checked="true"/>
-                              <label for="operationalDefault">Allow Rippling</label>
-                              <button type="button" onClick="configureAccount('operational',document.querySelector('#operationalDefault').checked)">Configure Account</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td align="right">
-                              Currency
-                            </td>
-                            <td>
-                              <input type="text" id="operationalCurrencyField" size="40" value="USD"></input>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td align="right">NFT URL</td>
-                            <td><input type="text" id="operationalTokenUrlField"
-                              value = "ipfs://bafybeigdyrzt5sfp7udm7hu76uh7y26nf4dfuylqabf3oclgtqy55fbzdi" size="80"/>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td align="right">Flags</td>
-                            <td><input type="text" id="operationalFlagsField" value="1" size="10"/></td>
-                          </tr>
-                          <tr>
-                            <td align="right">NFT ID</td>
-                            <td><input type="text" id="operationalTokenIdField" value="" size="80"/></td>
-                          </tr>
-                          <tr>
-                            <td align="right">NFT Offer Index</td>
-                            <td><input type="text" id="operationalTokenOfferIndexField" value="" size="80"/></td>
-                          </tr>
-                          <tr>
-                            <td align="right">Owner</td>
-                            <td><input type="text" id="operationalOwnerField" value="" size="80"/></td>
-                          </tr>
-                          <tr>
-                        <td align="right">Authorized Minter</td>
-                        <td><input type="text" id="operationalMinterField" value="" size="80"/></td>
-                    </tr>
-                    <tr>
-                        <td align="right">Issuer</td>
-                        <td><input type="text" id="operationalIssuerField" value="" size="80"/></td>
-                    </tr>
-                            <tr>
-                              <td align="right">Destination</td>
-                              <td><input type="text" id="operationalDestinationField" value="" size="80"/></td>
-                            </tr>
-                            <tr>
-                              <td align="right">Expiration</td>
-                              <td><input type="text" id="operationalExpirationField" value="" size="80"/></td>
-                            </tr>
-                            <tr>
-                              <td align="right">Transfer Fee</td>
-                              <td><input type="text" id="operationalTransferFeeField" value="" size="80"/></td>
-                                        </tr>
                         </table>
                         <p align="right">
                           <textarea id="operationalResultField" cols="80" rows="20" ></textarea>
                         </p>
-                            </td>
-                          </td>
-                        </tr>
                       </td>
+                      </td>
+                    </tr>
+                    </td>
                     </tr>
                   </table>
                 </td>
@@ -740,3 +819,4 @@ async function oPmintOther() {
   </body>
 </html>
 ```
+
