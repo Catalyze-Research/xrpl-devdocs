@@ -1,12 +1,12 @@
-# 2. 신뢰선(trust line) 생성 및 화폐(currency) 전송
+# JavaScript를 이용한 신뢰선 생성 및 화폐 전송(Create Trust Line and Send Currency Using JavaScript)
 
-이 예제는 다음을 보여줍니다:
+이번 페이지에서 아래의 5가지를 배울 수 있습니다:
 
-1. 타사 계정으로 자금을 전송할 수 있도록 계정을 구성합니다.
-2. 거래를 위한 currency type을 설정합니다.
-3. 대기 계정과 운영 계정 사이에 trust line을 생성합니다.
-4. 계정 간에 발행된 currency를 전송합니다.
-5. 모든 currency에 대한 계정 잔액을 표시합니다.
+1. Configure accounts to allow transfer of funds to third party accounts.
+2. Set a currency type for transactions.
+3. Create a trust line between the standby account and the operational account.
+4. Send issued currency between accounts.
+5. Display account balances for all currencies.
 
 <figure><img src="https://xrpl.org/img/quickstart5.png" alt=""><figcaption></figcaption></figure>
 
@@ -32,6 +32,8 @@ Quickstart Samples가 없다면, 이후 예제들을 시도할 수 없습니다.
       2. **Get New Operational Account**를 클릭합니다.
 
 ## 신뢰선 생성
+
+{% embed url="https://youtu.be/HpcyZt1jG3E" %}
 
 계정 간 신뢰선을 생성하려면:
 

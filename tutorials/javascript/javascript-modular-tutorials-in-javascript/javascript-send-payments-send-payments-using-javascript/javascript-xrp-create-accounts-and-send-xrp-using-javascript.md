@@ -1,6 +1,6 @@
-# 계정 생성 및 XRP 전송(Create Accounts and Send XRP Using JavaScript)
+# JavaScript를 이용한 계정 생성 및 XRP 전송(Create Accounts and Send XRP Using JavaScript)
 
-이번 페이지에서 아래의 3가지를 할 예정입니다:
+이번 페이지에서 아래의 3가지를 배울 수 있습니다:
 
 1. 테스트넷에 계정을 생성하고, 실제 가치가 없는 1000개의 테스트 XRP를 받습니다.
 2. 시드 값(seed values)에서 계정을 검색합니다.&#x20;
