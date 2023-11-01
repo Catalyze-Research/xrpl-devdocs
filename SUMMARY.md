@@ -134,6 +134,8 @@
       * [시간 기반 에스크로 생성하기(Create Time-based Escrows Using JavaScript)](tutorials/javascript/undefined.md)
       * [조건부 에스크로 생성하기(Create Conditional Escrows Using JavaScript)](tutorials/javascript/undefined-1.md)
     * [JavaScript를 이용한 NFTs(NFTs Using JavaScript)](tutorials/javascript/javascript-modular-tutorials-in-javascript/javascript-nfts-nfts-using-javascript.md)
+  * [JavaScript를 이용한 브라우저 지갑 개발(Build a Browser Wallet in JavaScript)](tutorials/javascript/javascript-build-a-browser-wallet-in-javascript.md)
+  * [JavaScript를 이용한 데스크탑 지갑 개발(Build a Desktop Wallet in JavaScript)](tutorials/javascript/javascript-build-a-desktop-wallet-in-javascript.md)
   * [3. NFTs 발행 및 소각](tutorials/javascript/3.-nfts.md)
   * [4. NFTs 전송](tutorials/javascript/4.-nfts.md)
   * [NFT 판매 중개](tutorials/javascript/nft.md)
