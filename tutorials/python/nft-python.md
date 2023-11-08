@@ -49,7 +49,7 @@
    5. Broker 계정 번호를 **Destination**으로 입력합니다.&#x20;
    6. **Create Sell Offer**을 클릭합니다.
 
-<figure><img src="../../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 2. Operational account 사용하여 NFT 구매 제안을 작성합니다.&#x20;
    1. 제안 **Amount**를 입력합니다.&#x20;
@@ -58,14 +58,14 @@
    4. 선택적으로 **Expiration**까지 일 수를 입력합니다.&#x20;
    5. **Create Buy Offer**을 클릭합니다.
 
-<figure><img src="../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 제안 받기(Get Offers)
 
 1. **NFT ID**를 입력합니다.
 2. **Get Offers**를 클릭합니다.
 
-<figure><img src="../../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 판매 중개(Broker the Sale)
 
@@ -74,7 +74,7 @@
 3. **Broker Fee**를 드롭 단위로 입력합니다.&#x20;
 4. **Broker Sale**를 클릭합니다.
 
-<figure><img src="../../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 ## 제안 취소(Cancel Offer)
 
@@ -83,7 +83,7 @@
 1. **Buy NFT Offer Index** 필드에 취소할 구매 제안의 nft\_Offer\_index를 입력합니다.&#x20;
 2. **Cancel Offer**를 클릭합니다.
 
-<figure><img src="../../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Code Walkthrough <a href="#code-walkthrough" id="code-walkthrough"></a>
 

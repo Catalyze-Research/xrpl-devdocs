@@ -23,10 +23,10 @@ XRP Ledger (XRPL)은 강력하고 안전하며 사용자 정의가 가능한 서
 
 1. [계정 생성 및 XRP 전송](../1.-xrp-python.md)
 2. [신뢰선 생성 및 화폐 전송.](python-send-payments-send-payments-using-python/currency-create-trust-line-and-send-currency-using-python.md)
-3. [NFTs 발행 및 소각. ](python-nfts-nfts-using-python/nfts-mint-and-burn-nfts-using-python.md)
-4. [NFTs 전송.](python-nfts-nfts-using-python/nfts-transfer-nfts-using-python.md)
+3. [NFTs 발행 및 소각. ](../3.-nfts-python.md)
+4. [NFTs 전송.](../4.-nfts-python.md)
 
-또한 [NFT 판매 중개](python-nfts-nfts-using-python/nft-broker-an-nft-sale-using-python.md), [공인 발행자 지정](python-nfts-nfts-using-python/assign-an-authorized-minter-using-python.md) 방법을 보여주는 확장 레슨도 있습니다.
+또한 [NFT 판매 중개](../nft-python.md), [공인 발행자 지정](../python.md) 방법을 보여주는 확장 레슨도 있습니다.
 
 ## 요구사항&#x20;
 
