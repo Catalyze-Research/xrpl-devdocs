@@ -150,7 +150,7 @@
     * [다중 서명 트랜잭션 전송](tutorials/tasks/manage-account-settings/undefined-4.md)
     * [데스티네이션 태그 필요](tutorials/tasks/manage-account-settings/undefined-5.md)
     * [오프라인 계정 설정 튜토리얼](tutorials/tasks/manage-account-settings/undefined-6.md)
-    * [티켓 사용](tutorials/tasks/manage-account-settings/undefined-7.md)
+    * [티켓 사용(Use Tickets)](tutorials/tasks/manage-account-settings/use-tickets.md)
   * [XRP 보내기(Send XRP)](tutorials/tasks/xrp-send-xrp.md)
   * [특수 결제 유형 사용(Use Specialized Payment Types)](tutorials/tasks/use-specialized-payment-types/README.md)
     * [에스크로 사용(Use escrow)](tutorials/tasks/use-specialized-payment-types/use-escrow/README.md)
