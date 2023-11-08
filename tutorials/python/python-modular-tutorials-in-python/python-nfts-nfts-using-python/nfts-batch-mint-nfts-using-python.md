@@ -2,7 +2,7 @@
 
 한 번에 여러 개의 NFT를 채굴하는 애플리케이션을 생성하고, for 루프를 사용해 트랜잭션을 차례로 전송할 수 있습니다. 가장 좋은 방법은 티켓을 사용해 트랜잭션 시퀀스 번호를 예약하는 것입니다. 티켓을 사용하지 않고 NFT를 생성하는 애플리케이션을 만들 경우, 어떤 이유로든 트랜잭션이 실패하면 애플리케이션이 오류와 함께 중지됩니다. 티켓을 사용하는 경우 애플리케이션은 트랜잭션을 계속 전송하며, 나중에 개별 실패의 원인을 조사할 수 있습니다.
 
-<figure><img src="../../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
 
 ### 사용법(Usage) <a href="#usage" id="usage"></a>
 

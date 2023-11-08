@@ -119,7 +119,7 @@
       * [NFTs 전송 (Transfer NFTs Using Python)](tutorials/python/4.-nfts-python.md)
       * [NFT 판매 중개 (Broker an NFT Sale Using Python)](tutorials/python/nft-python.md)
       * [공인 발행인 지정 (Assign an Authorized Minter Using Python)](tutorials/python/python.md)
-    * [NFTs 일괄 발행 (Batch Mint NFTs Using Python)](tutorials/python/python-modular-tutorials-in-python/nfts-batch-mint-nfts-using-python.md)
+      * [NFTs 일괄 발행 (Batch Mint NFTs Using Python)](tutorials/python/python-modular-tutorials-in-python/python-nfts-nfts-using-python/nfts-batch-mint-nfts-using-python.md)
     * [Python에서 데스크톱 지갑 구축(Build a Desktop Wallet in Python)](tutorials/python/python-modular-tutorials-in-python/python-build-a-desktop-wallet-in-python.md)
 * [JavaScript](tutorials/javascript/README.md)
   * [JavaScript로 시작하기(Get Started Using JavaScript)](tutorials/javascript/javascript-get-started-using-javascript.md)
