@@ -41,7 +41,7 @@ Mainnet에서 현재 reserve requirement은 다음과 같습니다:
 
 계정의 소유자 reserve를 확인하려면 incremental reserve를 계정이 소유한 객체 수로 곱하세요. 계정이 소유한 객체 수를 확인하려면 [account\_info 메소드](../../references/http-websocket-apis/api-1/undefined/account\_info.md)를 호출하고 <mark style="background-color:yellow;">account\_data.OwnerCount</mark>를 가져옵니다.
 
-주소의 총 reserve requirement를 계산하려면 <mark style="background-color:yellow;">OwnerCount</mark>를 <mark style="background-color:yellow;">reserve\_inc\_xrp</mark>로 곱한 다음 <mark style="background-color:yellow;">reserve\_base\_xrp</mark>를 더하세요. 이것은 [파이썬에서 이 계산을 보여주는 예시](../../tutorials/apps/python.md)입니다.
+주소의 총 reserve requirement를 계산하려면 <mark style="background-color:yellow;">OwnerCount</mark>를 <mark style="background-color:yellow;">reserve\_inc\_xrp</mark>로 곱한 다음 <mark style="background-color:yellow;">reserve\_base\_xrp</mark>를 더하세요. 이것은 [파이썬에서 이 계산을 보여주는 예시](../../tutorials/python/python-modular-tutorials-in-python/python-build-a-desktop-wallet-in-python.md)입니다.
 
 ## Reserve Requirement 미충족&#x20;
 

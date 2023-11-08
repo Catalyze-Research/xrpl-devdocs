@@ -2,7 +2,7 @@
 
 XRP Ledger를 사용하는 애플리케이션 및 서비스를 개발합니다.
 
-## [Python에서 데스크톱 지갑 구축](python.md)
+## [Python에서 데스크톱 지갑 구축](../python/python-modular-tutorials-in-python/python-build-a-desktop-wallet-in-python.md)
 
 Python을 사용하여 XRPL용 그래픽 데스크톱 지갑을 구축합니다.
 

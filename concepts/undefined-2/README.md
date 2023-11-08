@@ -205,7 +205,7 @@ XRP Ledger 주소는 rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz 
 * **Concepts:**
   * [Reserves](reserves.md)
   * [Cryptographic Keys](cryptographic-keys.md)
-  * [Issuing and Operational Addresses](undefined-4.md)
+  * [Issuing and Operational Addresses](broken-reference)
 * **References:**
   * [account\_info method](../../references/http-websocket-apis/api-1/undefined/account\_info.md)
   * [wallet\_propose method](../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md)
@@ -214,4 +214,4 @@ XRP Ledger 주소는 rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz 
   * [AccountRoot object](../../references/xrp-ledger/ledger/ledger-1/accountroot.md)
 * **Tutorials:**
   * [Manage Account Settings (Category)](../../tutorials/tasks/manage-account-settings/)
-  * [Monitor Incoming Payments with WebSocket](../../tutorials/http-websocket-apis/http-websocket-apis-get-started-using-http-websocket-apis.md)
+  * [Monitor Incoming Payments with WebSocket](../../tutorials/http-websocket-apis/websocket-monitor-incoming-payments-with-websocket.md)

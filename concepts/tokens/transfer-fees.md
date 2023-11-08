@@ -6,7 +6,7 @@
 
 대체 불가능한 토큰도 이체 수수료를 가질 수 있지만, 작동 방식이 다릅니다. 자세한 내용은 [대체 불가능한 토큰](non-fungible-tokens/)을 참조하십시오.
 
-이체 수수료는 발행 계정으로부터 직접 송금하거나 수신할 때는 적용되지 않지만, [운영 주소](../undefined-2/undefined-4.md)에서 다른 사용자로 이체할 때는 적용됩니다.
+이체 수수료는 발행 계정으로부터 직접 송금하거나 수신할 때는 적용되지 않지만, [운영 주소](broken-reference)에서 다른 사용자로 이체할 때는 적용됩니다.
 
 XRP는 발행자가 없기 때문에 이체 수수료가 없습니다.
 
@@ -36,7 +36,7 @@ XRP는 발행자가 없기 때문에 이체 수수료가 없습니다.
 
 ## 기술적 세부 정보(Technical Details)
 
-이체 수수료는 [발행 주소](../undefined-2/undefined-4.md)의 설정으로 나타냅니다. 이체 수수료는 0% 미만 또는 100% 이상이 될 수 없으며, 가장 가까운 0.0000001%로 반올림됩니다. 이체 수수료는 동일한 계정에서 발행된 모든 토큰에 적용됩니다. 서로 다른 토큰에 대해 다른 이체 수수료를 설정하려면 여러 [발행 주소](../undefined-2/undefined-4.md)를 사용하십시오.
+이체 수수료는 [발행 주소](broken-reference)의 설정으로 나타냅니다. 이체 수수료는 0% 미만 또는 100% 이상이 될 수 없으며, 가장 가까운 0.0000001%로 반올림됩니다. 이체 수수료는 동일한 계정에서 발행된 모든 토큰에 적용됩니다. 서로 다른 토큰에 대해 다른 이체 수수료를 설정하려면 여러 [발행 주소](broken-reference)를 사용하십시오.
 
 XRP Ledger 프로토콜에서 이체 수수료는 <mark style="background-color:yellow;">TransferRate</mark>필드로 표시되며, 해당 토큰의 10억 단위를 수신받기 위해 보내야 하는 금액을 나타내는 정수로 표시됩니다. <mark style="background-color:yellow;">TransferRate</mark> <mark style="background-color:yellow;">1005000000</mark>은 0.5%의 이체 수수료에 해당합니다. 기본적으로 <mark style="background-color:yellow;">TransferRate</mark>는 수수료가 없음을 나타내는 값으로 설정됩니다. <mark style="background-color:yellow;">TransferRate</mark>의 값은 <mark style="background-color:yellow;">1000000000</mark>("0%" 수수료) 미만 또는 <mark style="background-color:yellow;">2000000000</mark>("100%" 수수료) 이상으로 설정할 수 없습니다. 값 <mark style="background-color:yellow;">0</mark>은 수수료가 없는 특수한 경우로, <mark style="background-color:yellow;">1000000000</mark>과 동일합니다.
 
