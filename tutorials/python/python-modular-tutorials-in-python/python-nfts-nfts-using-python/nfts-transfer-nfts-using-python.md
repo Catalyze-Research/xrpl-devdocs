@@ -1,4 +1,4 @@
-# 4. NFTs 전송 (Python)
+# NFTs 전송 (Transfer NFTs Using Python)
 
 이 예제는 다음을 보여줍니다:
 
@@ -13,9 +13,9 @@
 
 [Quickstart Samples](https://github.com/XRPLF/xrpl-dev-portal/tree/master/content/\_code-samples/quickstart/py) 아카이브를 다운로드하여 각 샘플을 브라우저에서 시도해볼 수 있습니다.
 
-## 사용법 <a href="#usage" id="usage"></a>
+## 사용법(Usage) <a href="#usage" id="usage"></a>
 
-## 계정 가져오기&#x20;
+## 계정 가져오기(Get Accounts)
 
 1. 브라우저에서 `4.transfer-nfts.html`을 엽니다.
 2. Ledger 인스턴스(Testnet 또는 Devnet)를 선택합니다.
@@ -35,7 +35,11 @@
 
 <figure><img src="https://xrpl.org/img/quickstart-py16.png" alt=""><figcaption></figcaption></figure>
 
-## 판매 제안 생성하기
+## 판매 제안 생성하기(Create a Sell Offer)
+
+
+
+{% embed url="https://youtu.be/tL3wIJXBt7Q" %}
 
 &#x20;NFT 판매 제안을 생성하려면:
 
@@ -50,7 +54,7 @@
 
 <figure><img src="https://xrpl.org/img/quickstart-py17.png" alt=""><figcaption></figcaption></figure>
 
-## 판매 제안 수락하기&#x20;
+## 판매 제안 수락하기(Accept Sell Offer)
 
 판매 제안이 있으면, 다른 계정은 그 제안을 수락하고 NFT를 구매할 수 있습니다.
 
@@ -63,7 +67,7 @@
 
 <figure><img src="https://xrpl.org/img/quickstart-py18.png" alt=""><figcaption></figcaption></figure>
 
-## 구매 제안 생성하기
+## 구매 제안 생성하기(Create a Buy Offer)
 
 다른 계정에서 NFT를 구매하려는 제안을 할 수 있습니다.
 
@@ -79,7 +83,7 @@ NFT를 구매하려는 제안을 생성하려면:
 
 <figure><img src="https://xrpl.org/img/quickstart-py19.png" alt=""><figcaption></figcaption></figure>
 
-## 구매 제안 수락하기
+## 구매 제안 수락하기(Accept a Buy Offer)
 
 NFT 구매 제안을 수락하려면:
 
@@ -90,7 +94,7 @@ NFT 구매 제안을 수락하려면:
 
 <figure><img src="https://xrpl.org/img/quickstart-py20.png" alt=""><figcaption></figcaption></figure>
 
-## 제안 받기&#x20;
+## 제안 받기(Get Offers)
 
 NFT와 관련된 구매 및 판매 제안을 나열하려면:&#x20;
 
@@ -99,7 +103,7 @@ NFT와 관련된 구매 및 판매 제안을 나열하려면:&#x20;
 
 <figure><img src="https://xrpl.org/img/quickstart-py21.png" alt=""><figcaption></figcaption></figure>
 
-## 제안 취소하기&#x20;
+## 제안 취소하기(Cancel Offer)
 
 자신이 생성한 구매 또는 판매 제안을 취소하려면:
 

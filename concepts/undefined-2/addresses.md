@@ -36,7 +36,7 @@ X-주소 형식은 주소에 목적지 태그를 "함축"하고 있습니다. �
 
 다음 다이어그램은 키와 주소 사이의 관계를 설명합니다.
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
 
 공개 키로부터 분산 원장의 주소를 계산하는 공식은 다음과 같습니다. 완전한 예시 코드를 보려면,[ encode\_address.js](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/address\_encoding/js/encode\_address.js)를 보세요. 공개 키로부터 seed value 혹은 passphrase를 도출하는 과정을 보려면 [키 파생](cryptographic-keys.md)을 참고하세요.
 

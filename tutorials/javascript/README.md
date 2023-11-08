@@ -18,7 +18,7 @@ JavaScript 테스트 harness를 사용하여 XRP를 전송하고, 화폐를 거�
 
 빠른 시작 2단계, 신뢰선을 생성하고 화폐를 전송합니다.
 
-## [3. NFTs 발행 및 소각](../python/3.-nfts-python.md)&#x20;
+## [3. NFTs 발행 및 소각](../python/python-modular-tutorials-in-python/python-nfts-nfts-using-python/nfts-mint-and-burn-nfts-using-python.md)&#x20;
 
 빠른 시작 3단계, NFTs를 발하고 소각합니다.
 

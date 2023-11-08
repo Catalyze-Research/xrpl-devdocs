@@ -31,7 +31,7 @@ XRP Ledger와의 대부분의 상호작용은 원장을 변경하는 트랜잭�
 트랜잭션을 JavaScript, Python, command line, or 호환되는 서비스에서 명령으로 원장에 전송합니다. 리플 서버는 트랜잭션을 XRPL에 제안합니다.\
 
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 검증자의 80%가 현재 제안된 트랜잭션 세트를 승인하면 해당 트랜잭션은 영구 원장의 일부로 기록됩니다. 리플 서버는 사용자가 보낸 트랜잭션의 결과를 반환합니다.
 
@@ -48,7 +48,7 @@ XRP Ledger와의 대부분의 상호작용은 원장을 변경하는 트랜잭�
 요청을 제출하면 리플 서버 또는 요청에 응답하는 전용 서버인 Clio 서버에서 처리될 수 있습니다.\
 
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Clio 서버는 처리 속도와 안정성을 개선하기 위해 XRPL의 다른 리플 서버의 부하를 일부 덜어줍니다.
 

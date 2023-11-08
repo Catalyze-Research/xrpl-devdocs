@@ -8,11 +8,11 @@ XRP Ledger는 자체 디지털 통화를 사용하여 금융 거래를 처리하
 
 블록체인은 지속적으로 증가하는 일련의 기록입니다. 블록체인은 데이터 블록에서 시작됩니다.
 
-<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 신뢰할 수 있는 검증자 노드 그룹이 데이터가 유효하다는 합의에 도달합니다.
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 이 블록은 매우 복잡한 64진수 컴퓨터 생성 암호화 해시 번호로 고유하게 식별됩니다.
 

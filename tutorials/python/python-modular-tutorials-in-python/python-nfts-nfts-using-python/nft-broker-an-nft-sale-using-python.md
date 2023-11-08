@@ -1,8 +1,8 @@
-# NFT 판매 중개 (Python)
+# NFT 판매 중개 (Broker an NFT Sale Using Python)
 
 이전의 예제들은 두 계정 간에 직접 구매 및 판매 제안을 만드는 방법을 보여주었습니다. 또 다른 옵션은 세 번째 계정을 판매의 중개인으로 사용하는 것입니다. 중개인은 NFT 소유자를 대신하여 행동합니다. 판매자는 목적지로 중개 계정을 가진 제안을 생성합니다. 중개인은 구매 제안을 수집하고 평가하며, 판매를 준비하는 데 동의한 수수료를 추가하여 어느 제안을 수락할지 결정합니다. 중개 계정이 판매 제안을 구매 제안으로 수락할 때, 자금과 NFT의 소유권은 동시에 전송되어 거래가 완료됩니다. 이렇게 하면 계정이 NFT 창작자와 거래자를 위한 마켓플레이스나 개인 대리인으로 행동할 수 있게 합니다.
 
-## 사용법
+## 사용법(Usage)
 
 이 예제는 다음을 보여줍니다:
 
@@ -35,7 +35,11 @@
 
 <figure><img src="https://xrpl.org/img/quickstart-py24.png" alt=""><figcaption></figcaption></figure>
 
-## 중개 트랜잭션 준비&#x20;
+## 중개 트랜잭션 준비(Prepare a Brokered Transaction)
+
+
+
+{% embed url="https://youtu.be/2dhWDnhCBuY" %}
 
 1. Standby account을 사용하여 Broker account를 대상으로 하는 NFT 판매 제안을 생성합니다.&#x20;
    1. 판매 제안 **Amount**을 드롭 단위로 입력합니다(XRP의 백만분의 일).&#x20;
@@ -45,42 +49,41 @@
    5. Broker 계정 번호를 **Destination**으로 입력합니다.&#x20;
    6. **Create Sell Offer**을 클릭합니다.
 
-Operational account 사용하여 NFT 구매 제안을 작성합니다.&#x20;
+<figure><img src="../../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-1. 제안 **Amount**를 입력합니다.&#x20;
-2. **NFT ID**를 입력합니다.&#x20;
-3. **Owner** 필드에 소유자의 계정 문자열을 입력합니다.&#x20;
-4. 선택적으로 **Expiration**까지 일 수를 입력합니다.&#x20;
-5. **Create Buy Offer**을 클릭합니다.
+2. Operational account 사용하여 NFT 구매 제안을 작성합니다.&#x20;
+   1. 제안 **Amount**를 입력합니다.&#x20;
+   2. **NFT ID**를 입력합니다.&#x20;
+   3. **Owner** 필드에 소유자의 계정 문자열을 입력합니다.&#x20;
+   4. 선택적으로 **Expiration**까지 일 수를 입력합니다.&#x20;
+   5. **Create Buy Offer**을 클릭합니다.
 
-[![Buy Offer](https://xrpl.org/img/quickstart-py26.png)](https://xrpl.org/img/quickstart-py26.png)
+<figure><img src="../../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
-## 제안 받기
+## 제안 받기(Get Offers)
 
 1. **NFT ID**를 입력합니다.
 2. **Get Offers**를 클릭합니다.
 
-[![Get Offers](https://xrpl.org/img/quickstart-py27.png)](https://xrpl.org/img/quickstart-py27.png)
+<figure><img src="../../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
-## 판매 중개&#x20;
+## 판매 중개(Broker the Sale)
 
 1. 판매 제안의 _nft\_offer\_index_를 복사하여 **Sell NFT Offer Index** 필드에 붙여넣습니다.&#x20;
 2. 매입 제의 _nft\_offer\_index_를 복사하여 **Buy NFT Offer Index** 필드에 붙여넣습니다.&#x20;
 3. **Broker Fee**를 드롭 단위로 입력합니다.&#x20;
 4. **Broker Sale**를 클릭합니다.
 
-[![Brokered Sale](https://xrpl.org/img/quickstart-py28.png)](https://xrpl.org/img/quickstart-py28.png)
+<figure><img src="../../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="https://xrpl.org/img/quickstart26.png" alt=""><figcaption></figcaption></figure>
-
-## 제안 취소
+## 제안 취소(Cancel Offer)
 
 중개인이 구매 제안을 수락한 후, 중개인에게 권한이 있는 경우 다른 모든 제안을 취소하는 것이 좋습니다. **Get Offers**를 사용하여 구매 제안의 전체 목록을 확인할 수 있습니다. 제안을 취소하려면:
 
 1. **Buy NFT Offer Index** 필드에 취소할 구매 제안의 nft\_Offer\_index를 입력합니다.&#x20;
 2. **Cancel Offer**를 클릭합니다.
 
-[![Cancel Offer](https://xrpl.org/img/quickstart-py29.png)](https://xrpl.org/img/quickstart-py29.png)
+<figure><img src="../../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Code Walkthrough <a href="#code-walkthrough" id="code-walkthrough"></a>
 

@@ -1,4 +1,4 @@
-# 공인 발행인 지정 (Python)
+# 공인 발행인 지정 (Assign an Authorized Minter Using Python)
 
 다른 계정에게 당신을 대신하여 NFT를 생성할 수 있는 권한을 부여할 수 있습니다.
 
@@ -30,7 +30,7 @@
       3. **Get Operational Account**를 클릭합니다.
       4. **Get Operational Account Info**를 클릭합니다.
 
-## 계정에 NFT 생성 권한 부여
+## 계정에 NFT 생성 권한 부여(Authorize an Account to Create NFTs)
 
 다른 계정이 당신의 계정을 위해 NFT를 생성할 수 있도록 하려면:
 
@@ -40,7 +40,7 @@
 
 <figure><img src="https://xrpl.org/img/quickstart-py31.png" alt=""><figcaption></figcaption></figure>
 
-## 다른 계정을 위해 NFT 생성하기&#x20;
+## 다른 계정을 위해 NFT 생성하기(Mint an NFT for Another Account)
 
 이 예제에서는 이전 단계에서 권한이 부여된 운영 계정을 사용하여 Standby account를 대신하여 토큰을 발행합니다.
 
@@ -58,7 +58,7 @@
 
 아이템이 발행되면 권한이 부여된 Minter는 일반적인 방식으로 NFT를 판매할 수 있습니다. 판매 수익은 이체 수수료를 제외한 권한이 부여된 Minter에게 지급됩니다. 발행자와 Minter는 가격 분배에 대해 별도로 협의할 수 있습니다.
 
-## 판매 오더 생성하기&#x20;
+## 판매 오더 생성하기(Create a Sell Offer)
 
 NFT 판매 오더를 생성하려면:
 
@@ -72,7 +72,7 @@ NFT 판매 오더를 생성하려면:
 
 <figure><img src="https://xrpl.org/img/quickstart-py33.png" alt=""><figcaption></figcaption></figure>
 
-## Sell Offer 수락하기
+## Sell Offer 수락하기(Accept Sell Offer)
 
 Sell Offer가 있는 경우, 새로운 계정을 생성하여 해당 offer를 수락하고 NFT를 구매할 수 있습니다.
 
