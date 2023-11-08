@@ -1,6 +1,6 @@
-# 조건부 보류 에스크로 보내기
+# 조건부 보류 에스크로 보내기(Send a Conditionally-Held Escrow)
 
-## 1. 조건 및 이행 생성&#x20;
+## 1. 조건 및 이행 생성(Generate condition and fulfillment)&#x20;
 
 XRP ledger 에스크로에는 PREIMAGE-SHA-256 암호화 조건이 필요합니다. 적절한 형식으로 조건과 이행을 계산하려면 5개 종 조건과 같은 암호화 조건 라이브러리를 사용해야 합니다. 이행을 생성합니다:
 
@@ -47,7 +47,7 @@ print("Fulfillment", fulfillment.serialize_binary().hex().upper())
 
 나중에 사용할 수 있도록 조건과 주문 처리를 저장합니다. 보류된 결제 처리를 완료할 때까지 주문 처리를 비밀로 유지해야 합니다. 이행을 아는 사람은 누구나 에스크로를 완료하여 보류된 금액을 원하는 목적지로 릴리스할 수 있습니다.
 
-## 2. 해제 또는 취소 시간 계산&#x20;
+## 2. 해제 또는 취소 시간 계산 (Calculate release or cancel time)
 
 조건부 에스크로 거래에는 취소 후 또는 완료 후 필드 또는 둘 다 포함되어야 합니다. 취소 후 필드를 사용하면 지정된 시간까지 조건이 충족되지 않으면 XRP가 발신자에게 반환됩니다. FinishAfter 필드는 누군가가 올바른 이행을 보내더라도 에스크로가 실행될 수 없는 시간을 지정합니다. 어떤 필드를 입력하든 지정하는 시간은 미래여야 합니다.
 
@@ -70,9 +70,9 @@ Warning:
 XRP ledger에서 시간을 Ripple 에포크 이후 초 단위로 지정해야 합니다. 취소 후 또는 완료 후 필드에 변환하지 않고 UNIX 시간을 사용하면 잠금 해제 시간이 30년 후로 추가 설정됩니다!
 {% endhint %}
 
-## EscrowCreate 트랜잭션 제출
+## EscrowCreate 트랜잭션 제출(Submit EscrowCreate transaction)
 
-EscrowCreate 트랜잭션에 서명하고 제출합니다. 트랜잭션의 조건 필드를 보류된 결제가 해제되어야 하는 시간으로 설정합니다. 수신자를 발신자와 동일한 주소로 설정합니다. 이전 단계에서 계산한 취소 후 또는 완료 후 시간을 포함합니다. 금액을 에스크로할 총 XRP 금액(드롭 단위)으로 설정합니다.
+"EscrowCreate" 거래를 서명하고 제출합니다. 거래의 "Condition" 필드를 보유한 지불이 해제되어야 하는 시간으로 설정합니다. 수신자를 보내는 사람과 동일한 주소로 설정합니다. 이전 단계에서 계산한 "CancelAfter" 또는 "FinishAfter" 시간을 포함합니다. "Amount"를 에스크로로 예치할 XRP의 총액 (단위 : 드롭)으로 설정합니.
 
 {% hint style="info" %}
 Caution:
@@ -136,13 +136,13 @@ Caution:
 {% endtab %}
 {% endtabs %}
 
-## 4. 유효성 검사 대기&#x20;
+## 4. 유효성 검사 대기 (Wait for validation)
 
 라이브 네트워크(mainnet, testnet 또는 devnet 포함)에서는 ledger가 자동으로 닫힐 때까지 4\~7초 정도 기다릴 수 있습니다.
 
 Stand-alone 모드에서 rippled를 실행하는 경우, ledger\_accept 메소드를 사용하여 ledger을 수동으로 닫아야 합니다.&#x20;
 
-## 5. 에스크로가 생성되었는지 확인
+## 5. 에스크로가 생성되었는지 확인(Confirm that the escrow was created)
 
 트랜잭션의 식별 해시와 함께 tx 메서드를 사용해 최종 상태를 확인합니다. 특히 트랜잭션 메타데이터에서 에스크로 ledger 객체를 생성했음을 나타내는 CreatedNode를 찾아보세요.
 
@@ -250,7 +250,7 @@ Stand-alone 모드에서 rippled를 실행하는 경우, ledger\_accept 메소�
 {% endtab %}
 {% endtabs %}
 
-## 6. EscrowFinish 트랜잭션 제출&#x20;
+## 6. EscrowFinish 트랜잭션 제출(Submit EscrowFinish transaction)
 
 FinishAfter 시간이 경과한 후 자금 릴리스를 실행하려면 EscrowFinish 트랜잭션에 서명하고 제출합니다. 트랜잭션의 소유자 필드를 EscrowCreate 트랜잭션의 계정 주소로 설정하고 오퍼 시퀀스를 EscrowCreate 트랜잭션의 시퀀스 번호로 설정합니다. 조건 및 주문 처리 필드를 1단계에서 생성한 조건 및 주문 처리 값(16진수)으로 설정합니다. 조건부 EscrowFinish에는 최소 330드랍의 XRP에 16바이트당 10드랍을 더한 16바이트의 주문 처리 크기를 기준으로 수수료(트랜잭션 비용) 값을 설정합니다.
 
@@ -325,13 +325,13 @@ Cuation:
 
 트랜잭션이 검증된 ledger 버전에 포함되었을 때 최종 상태를 확인할 수 있도록 트랜잭션의 식별 해시값을 메모해 두세요.
 
-## 7. 검증 대기&#x20;
+## 7. 검증 대기 (Wait for validation)
 
 라이브 네트워크(mainnet, testnet 또는 devnet 포함)에서는 ledger가 자동으로 닫힐 때까지 4\~7초 정도 기다릴 수 있습니다.
 
 Stand-alone 모드에서 Ripple을 실행하는 경우, ledger\_accept 메소드를 사용해 ledger를를 수동으로 닫아야 합니다.&#x20;
 
-## 8. 최종 결과 확인&#x20;
+## 8. 최종 결과 확인 (Confirm final result)
 
 트랜잭션의 식별 해시와 함께 tx 메서드를 사용해 트랜잭션의 최종 상태를 확인합니다. 특히 트랜잭션 메타데이터에서 에스크로된 결제의 목적지에 대해 AccountRoot 유형의 ModifiedNode를 찾아보세요. 객체의 FinalFields에 잔액 필드에 XRP가 증가했음을 표시해야 합니다.
 

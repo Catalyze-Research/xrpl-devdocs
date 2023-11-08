@@ -1,8 +1,10 @@
-# 만료된 에스크로 취소
+# 만료된 에스크로 취소(Cancel an Expired Escrow)
 
-## 1. 만료된 에스크로 확인&#x20;
+XRP Ledger의 에스크로는 해당 CancelAfter 시간이 최근 검증된 원장의 close\_time보다 낮아지면 만료됩니다. CancelAfter 시간이 없는 경우에는 만료되지 않습니다.
 
-XRP ledger의 에스크로는 취소 후 시간이 검증된 ledger 버전의 닫기 시간보다 낮으면 만료된 것입니다. (에스크로에 취소 후 시간이 없으면 만료되지 않습니다.) ledger 메소드를 사용하여 가장 최근에 유효성이 검증된 ledger의 마감 시간을 조회할 수 있습니다:
+## 1. 최근 검증된 원장 확인(Get the latest validated ledger)
+
+ledger 메서드를 사용하여 최 검증된 장부를 조회하고 close\_time 값을 가져옵니다.
 
 요청:
 
@@ -45,6 +47,8 @@ XRP ledger의 에스크로는 취소 후 시간이 검증된 ledger 버전의 �
 ```
 {% endtab %}
 {% endtabs %}
+
+## 2. 에스크로 조회(Look up the escrow)
 
 [account\_objects](https://xrpl.org/account\_objects.html) 메소드를 사용하여 에스크로를 조회하고 CancelAfter 시간과 비교할 수 있습니다:
 
@@ -99,9 +103,15 @@ XRP ledger의 에스크로는 취소 후 시간이 검증된 ledger 버전의 �
 {% endtab %}
 {% endtabs %}
 
-## 2. EscrowCancel 트랜잭션 제출&#x20;
+## 3. EscrowCancel 트랜잭션 제출(Submit EscrowCancel transaction)&#x20;
 
-누구나 EscrowCancel 트랜잭션에 서명하고 제출하여 XRP Ledger에서 만료된 에스크로를 취소할 수 있습니다. 트랜잭션의 소유자 필드를 이 에스크로를 생성한 EscrowCreate 트랜잭션의 계정으로 설정합니다. 오퍼 시퀀스 필드를 EscrowCreate 트랜잭션의 시퀀스로 설정합니다.
+누구나 EscrowCancel 트랜잭션에 서명하고 제출하여 XRP Ledger에서 만료된 에스크로를 취소할 수 있습니다. 트랜잭션의 Owner 필드를 이 에스크로를 생성한 EscrowCreate 트랜잭션의 계정으로 설정합니다.  OfferSequence필드를 EscrowCreate 트랜잭션의 시퀀스로 설정합니다.
+
+{% hint style="success" %}
+Tip:
+
+Escrow을 생성한 거래에 어떤 OfferSequence를 사용해야 할지 모르는 경우, Escrow의 PreviousTxnID 필드의 값을 사용하여 tx 메서드를 호출하면 됩니다. tx 응답에서는 해당 거래의 Sequence 값을 EscrowCancel 거래의 OfferSequence 값으로 사용하면 됩니다.
+{% endhint %}
 
 {% hint style="info" %}
 Caution:
@@ -163,13 +173,13 @@ Caution:
 
 트랜잭션의 식별 해시값을 기록해 두면 검증된 ledger 버전에 포함되었을 때 최종 상태를 확인할 수 있습니다.
 
-## 3. 검증 대기&#x20;
+## 4. 검증 대기(Wait for validation)&#x20;
 
 라이브 네트워크(mainnet, testnet 또는 devnet 포함)에서는 ledger가 자동으로 닫힐 때까지 4\~7초 정도 기다릴 수 있습니다.
 
 stand-alone 모드에서 rippled를 실행하는 경우, ledger\_accept 메소드를 사용해 ledger를 수동으로 닫아야 합니다.&#x20;
 
-## 4. 최종 결과 확인&#x20;
+## 5. 최종 결과 확인(Confirm final result)&#x20;
 
 트랜잭션의 식별 해시와 함께 tx 메소드를 사용해 트랜잭션의 최종 상태를 확인합니다. 트랜잭션 메타데이터에서 LedgerEntryType이 에스크로인 DeletedNode를 찾습니다. 또한 에스크로된 결제의 발신자에 대해 AccountRoot 유형의 ModifiedNode를 찾습니다. 개체의 FinalFields에는 반환된 XRP에 대한 잔액 필드에 XRP 증가가 표시되어야 합니다.
 
@@ -298,9 +308,3 @@ stand-alone 모드에서 rippled를 실행하는 경우, ledger\_accept 메소�
 {% endtabs %}
 
 위 예시에서 r3wN3v2vTUkr5qd6daqDc2xE4LSysdVjkT는 에스크로 발신자이며, 잔액이 9999989990드롭에서 9999999990드롭으로 증가한 것은 에스크로된 10,000드롭의 XRP(0.01XRP)를 반환한 것을 나타냅니다.
-
-{% hint style="info" %}
-Tip:
-
-에스크로를 실행하기 위해 EscrowFinish 트랜잭션에서 어떤 OfferSequence를 사용할지 모르는 경우, tx 메소드를 사용하여 에스크로의 PreviousTxnID 필드에 있는 트랜잭션의 식별 해시를 이용해 에스크로를 생성한 트랜잭션을 조회합니다. 에스크로를 완료할 때 해당 트랜잭션의 시퀀스 값을 오퍼 시퀀스 값으로 사용합니다.
-{% endhint %}

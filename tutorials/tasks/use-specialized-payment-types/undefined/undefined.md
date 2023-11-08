@@ -1,456 +1,135 @@
-# 시간 보류 에스크로 보내기
+# 결제 채널을 열어 거래소 간 네트워크 활성화
 
-시간 보류 에스크로 보내기 EscrowCreate 트랜잭션 유형은 특정 시간이 지났을 때만 해제 조건이 되는 에스크로를 만들 수 있습니다. 이렇게 하려면 FinishAfter 필드를 사용하고 Condition 필드를 생략합니다.
+결제 채널을 사용하면 아주 작은 단위로 나누어 나중에 정산할 수 있는 단방향 "비동기" XRP 결제를 보낼 수 있습니다. 디지털 자산 거래소로서 다른 거래소에 많은 XRP 결제를 보내는 경우, 거래소(송금인 거래소)와 다른 거래소(수취인 거래소) 사이에 XRP Ledger 결제 채널을 개설하여 이러한 결제의 효율성을 개선할 수 있습니다. 다른 거래소와의 양방향 흐름의 경우, 두 개의 결제 채널(각 방향에 하나씩)을 열 수 있습니다.
 
-## 1. 릴리스 시간 계산하기&#x20;
+## 다른 거래소에 XRP를 보내는 이유는 무엇인가요?
 
-Ripple 에포크 이후 시간을 전체 초 단위로 지정해야 하며, 이는 UNIX 에포크 이후 946684800초입니다. 예를 들어 2017년 11월 13일 자정(UTC)에 자금을 릴리스하는 경우입니다.
+거래소에서 다른 거래소로 XRP를 보내야 하는 이유는 고객이 거래소에서 XRP를 출금하여 다른 거래소에 입금할 때 발생할 수 있습니다. 대형 거래소인 경우 거래소에서 다른 거래소로 XRP를 이동하는 고객이 많을 것입니다. 하루 종일 XRP 결제를 처리해야 할 수 있으며, 각 결제마다 거래 양쪽에 확인 시간을 기다리는 것은 물론 거래 비용도 지불해야 할 수 있습니다.
 
-{% tabs %}
-{% tab title="JavaScript" %}
-```javascript
-// JavaScript Date() is natively expressed in milliseconds; convert to seconds
-const release_date_unix = Math.floor( new Date("2017-11-13T00:00:00Z") / 1000 );
-const release_date_ripple = release_date_unix - 946684800;
-console.log(release_date_ripple);
-// 563846400
-```
-{% endtab %}
-{% endtabs %}
+## 결제 채널 사용의 이점
 
-{% hint style="info" %}
-Warning:
+개별 결제 거래를 사용하는 대신 결제 채널을 사용해 XRP를 송금할 때 얻을 수 있는 몇 가지 이점은 다음과 같습니다:
 
-먼저 동등한 Ripple 시간으로 변환하지 않고 FinishAfter 필드에 UNIX 시간을 사용하면 잠금 해제 시간이 향후 30년으로 추가 설정됩니다!
-{% endhint %}
+* 인출을 더 빠르게 처리할 수 있습니다: 표준 결제 트랜잭션은 XRP Ledger 트랜잭션을 제출하고 해당 트랜잭션이 포함된 새 ledger 버전이 컨센서스를 통해 승인될 때까지 기다려야 합니다. 결제 채널을 사용해 XRP를 전송하는 경우, XRP 지급을 보장하는 청구의 생성 및 확인은 모두 컨센서스 프로세스 외부에서 이루어집니다. 즉, 지급인 거래소는 청구의 디지털 서명을 생성하고 확인하는 참여자의 능력에 의해서만 제한되는 비율로 수취인 거래소에 대한 XRP 지급을 보장할 수 있습니다. 차익거래 기회를 활용하거나 알고리즘 트레이딩을 하기 위해 XRP를 이동하는 고객에게는 속도가 중요합니다. 고객이 XRP를 이동하고 즉시 거래를 시작할 수 있도록 하는 것은 거래소의 강력한 차별화 요소입니다.
+* 가치의 인터넷에 연결하세요: 가치 인터넷의 핵심 요건 중 하나는 상호운용성입니다. 이러한 상호운용성을 촉진하는 데 큰 역할을 하는 인터레저 프로토콜(ILP)은 결제 채널을 계정 재조정 수단으로 사용할 때 가장 잘 작동합니다. 사실상 거래소에서 다른 거래소로 결제 채널을 열면 가치 인터넷에 연결하고 가치 인터넷과 그 위에 구축된 앱의 성공에 기본이 되는 거래소 간 네트워크를 만드는 데 도움을 주는 것입니다. 결제 채널을 통해 거래소를 다른 거래소와 연결하는 것은 또 다른 차별화 요소입니다. 여러 거래소에서 다양한 화폐폐를 구매하기 위해 XRP를 이동하는 고객의 경우, 귀사의 거래소에서 가치 인터넷의 여러 거래소로 즉시 XRP를 이동할 수 있다는 사실을 알게 되면 귀사의 거래소가 자산을 보관하는 데 선호되는 장소가 될 수 있습니다.
 
-## 2. EscrowCreate 트랜잭션 제출&#x20;
+다음은 이 결제 채널 사용 사례를 구현하기 위해 수행해야 하는 높은 수준의 작업에 대한 로드맵입니다. 전체 결제 채널 튜토리얼로 바로 이동하려면 결제 채널 사용을 참조하세요.
 
-EscrowCreate 트랜잭션에 서명하고 제출합니다. 트랜잭션의 FinishAfter 필드를 보류된 결제를 해제해야 하는 시간으로 설정합니다. 보류된 결제를 해제하기 위한 유일한 조건으로 시간을 설정하려면 조건 필드를 생략합니다. 받는 사람을 발신자와 동일한 주소일 수 있는 수신자로 설정합니다. 금액을 에스크로할 총 XRP 금액(드롭 단위)으로 설정합니다.
+## 결제 채널 이해하기
 
-{% hint style="info" %}
-Caution:
+결제 채널과 특정 구현에 필요한 기능을 제공하는지 여부에 대해 자세히 알아보세요.
 
-제어하지 않는 서버에는 절대로 비밀 키를 제출하지 마세요. 네트워크를 통해 암호화되지 않은 비밀 키를 전송하지 마세요.&#x20;
-{% endhint %}
+[결제 채널 이해하기](https://xrpl.org/payment-channels.html)
 
-요청:
+## 결제자 및 수취인: rippled 서버 설정 및 실행
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 2,
-  "command": "submit",
-  "secret": "s████████████████████████████",
-  "tx_json": {
-      "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-      "TransactionType": "EscrowCreate",
-      "Amount": "10000",
-      "Destination": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
-      "FinishAfter": 557020800
-  }
-}
-```
-{% endtab %}
-{% endtabs %}
+결제 채널을 사용하여 XRP를 주고받으려면 송금인과 수취인 거래소 모두 트랜잭션을 전송하는 데 사용할 수 있는 rippled 서버에 액세스할 수 있어야 합니다. 거래소에서 XRP 인출을 직접 처리하는 경우, 이미 이 용도로 사용할 수 있는 rippled 서버를 운영하고 있을 것입니다.
 
-응답:
+그렇지 않다면 거래소가 rippled 서버에 액세스하는 가장 좋은 방법은 rippled 서버를 설정하고 실행하는 것입니다.
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 2,
-  "status": "success",
-  "type": "response",
-  "result": {
-    "engine_result": "tesSUCCESS",
-    "engine_result_code": 0,
-    "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
-    "tx_blob": "1200012280000000240000000120252133768061400000000000271068400000000000000A732103C3555B7339FFDDB43495A8371A3A87B4C66B67D49D06CB9BA1FDBFEEB57B6E437446304402203C9AA4C21E1A1A7427D41583283E7A513DDBDD967B246CADD3B2705D858A7A8E02201BEA7B923B18910EEB9F306F6DE3B3F53549BBFAD46335B62B4C34A6DCB4A47681143EEB46C355B04EE8D08E8EED00F422895C79EA6A83144B4E9C06F24296074F7BC48F92A97916C6DC5EA9",
-    "tx_json": {
-      "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-      "Amount": "10000",
-      "Destination": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
-      "Fee": "10",
-      "FinishAfter": 557020800,
-      "Flags": 2147483648,
-      "Sequence": 1,
-      "SigningPubKey": "03C3555B7339FFDDB43495A8371A3A87B4C66B67D49D06CB9BA1FDBFEEB57B6E43",
-      "TransactionType": "EscrowCreate",
-      "TxnSignature": "304402203C9AA4C21E1A1A7427D41583283E7A513DDBDD967B246CADD3B2705D858A7A8E02201BEA7B923B18910EEB9F306F6DE3B3F53549BBFAD46335B62B4C34A6DCB4A476",
-      "hash": "55B2057332F8999208C43BA1E7091B423A16E5ED2736C06300B4076085205263"
-    }
-  }
-}
-```
-{% endtab %}
-{% endtabs %}
+[rippled 서버 설정 및 실행](https://xrpl.org/manage-the-rippled-server.html)
 
-트랜잭션이 검증된 ledger 버전에 포함되었을 때 최종 상태를 확인할 수 있도록 트랜잭션의 식별 해시값을 메모해 두세요.
+## 지급인 및 수취인: 충분한 XRP로 XRP 레저 계정에 자금 조달하기
 
-## 3. 검증 대기&#x20;
+거래소에서 XRP 입출금을 직접 처리하는 경우, 이 용도로 사용할 수 있는 기존 자금이 충전된 XRP Ledger 계정이 있을 것입니다. 여기에 설명된 대로 충분한 XRP가 입금되어 있는지 확인하시기 바랍니다.
 
-라이브 네트워크(mainnet, testnet, devnet 포함)에서는 ledger가 자동으로 닫힐 때까지 4\~7초 정도 기다릴 수 있습니다.
+업계 모범 사례를 따르고 있다면 콜드 계정과 하나 이상의 핫 계정을 보유하고 있을 가능성이 높습니다. 결제 채널에 핫 계정을 사용하세요.
 
-Stand-alone에서 rippled을 실행하는 경우, ledger\_accept 메소드를 사용하여 ledger를 수동으로 닫아야 합니다.&#x20;
+* 송금인 거래소는 수취인 거래소로 XRP를 송금하는 데 사용할 수 있는 자금이 예치된 XRP ledger 계정이 있어야 합니다.\
+  기본 예치금(10 XRP)과 결제 채널의 소유자 예치금(2 XRP) 외에, 해당 계정은 결제 채널에 의도한 트랜잭션 수를 감당할 수 있는 충분한 XRP를 따로 보관할 수 있어야 합니다.\
+  결제자 거래소는 XRP가 부족할 경우 언제든지 PaymentChannelFund 트랜잭션을 사용해 채널에 충전할 수 있습니다. 그러나 탑오프에는 실제 온-ledger 트랜잭션과 확인이 필요하므로 탑오프 트랜잭션을 완료하는 데 4\~5초의 처리 시간과 최대 10드롭의 XRP가 소요될 수 있습니다. 결제자 거래소가 더 많은 XRP를 선입금할수록 탑오프해야 하는 빈도가 줄어들기 때문에 더 많은 XRP를 선입금하면 시간과 비용을 절약할 수 있습니다.\
+  그러나 결제자 거래소가 필요한 것보다 더 많은 XRP를 입금하면 결제 채널을 닫아야 XRP를 돌려받을 수 있습니다. 이는 다음 이벤트를 기다리는 것을 의미합니다:\
+  \
+  1\. 결제 채널 폐쇄를 시작하라는 결제자의 요청이 완료됩니다.\
+  \
+  2\. 결제 채널에 설정된 SettleDelay 시간이 경과 했습니다다.\
+  \
+  3\. 결제 채널 폐쇄를 완료하라는 요청이 SettleDelay가 지난 후 완료되었습니다.
 
-## 4. 에스크로가 생성되었는지 확인
+수취인 거래소는 지급인 거래소에서 송금한 XRP를 상환(수령)하는 데 사용할 자금이 입금된 XRP Ledger 계정을 보유해야 합니다.\
+이 계정에는 최소 11개의 XRP가 필요하며, 이는 10개의 XRP 기본 준비금과 클레임 상환에 드는 거래 비용을 지불하기에 충분한 금액입니다. 예를 들어, 총 1XRP 미만으로 수천 건의 청구를 상환할 수 있습니다.
 
-트랜잭션의 식별 해시와 함께 tx 메소드를 사용해 최종 상태를 확인합니다. 트랜잭션 메타데이터에서 에스크로 ledger 객체를 생성했음을 나타내는 CreatedNode를 찾습니다.
+[충분한 XRP가 있는 펀드 XRP Ledger 계정](https://xrpl.org/accounts.html)
 
-요청:
+## 결제자: 결제 채널 열기
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 3,
-  "command": "tx",
-  "transaction": "55B2057332F8999208C43BA1E7091B423A16E5ED2736C06300B4076085205263"
-}
-```
-{% endtab %}
-{% endtabs %}
+지급인 거래소는 자신의 XRP Ledger 계정에서 수취인 거래소의 XRP Ledger 계정으로 결제 채널을 엽니다. 결제 채널을 열려면 만료일과 보유할 수 있는 금액 등 채널의 특정 세부 사항을 설정해야 합니다.
 
-응답:
+이 거래소 사용 사례에서는 채널을 실제로 닫을 필요가 없으므로, 수취인 거래소는 취소 후(만료) 값을 정의하지 않을 수 있습니다. 채널을 닫아야 하는 경우에도 채널을 닫을 수 있습니다.
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 3,
-  "status": "success",
-  "type": "response",
-  "result": {
-    "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-    "Amount": "10000",
-    "Destination": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
-    "Fee": "10",
-    "FinishAfter": 557020800,
-    "Flags": 2147483648,
-    "Sequence": 1,
-    "SigningPubKey": "03C3555B7339FFDDB43495A8371A3A87B4C66B67D49D06CB9BA1FDBFEEB57B6E43",
-    "TransactionType": "EscrowCreate",
-    "TxnSignature": "304402203C9AA4C21E1A1A7427D41583283E7A513DDBDD967B246CADD3B2705D858A7A8E02201BEA7B923B18910EEB9F306F6DE3B3F53549BBFAD46335B62B4C34A6DCB4A476",
-    "date": 557014081,
-    "hash": "55B2057332F8999208C43BA1E7091B423A16E5ED2736C06300B4076085205263",
-    "inLedger": 1828796,
-    "ledger_index": 1828796,
-    "meta": {
-      "AffectedNodes": [
-        {
-          "ModifiedNode": {
-            "LedgerEntryType": "AccountRoot",
-            "LedgerIndex": "13F1A95D7AAB7108D5CE7EEAF504B2894B8C674E6D68499076441C4837282BF8",
-            "PreviousTxnID": "613B28E0890FC975F2CBA3D700F75116F623B1E3FE48CB7CB2EB216EAD6F097D",
-            "PreviousTxnLgrSeq": 1799920
-          }
-        },
-        {
-          "CreatedNode": {
-            "LedgerEntryType": "Escrow",
-            "LedgerIndex": "2B9845CB9DF686B9615BF04F3EC66095A334D985E03E71B893B90FCF6D4DC9E6",
-            "NewFields": {
-              "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-              "Amount": "10000",
-              "Destination": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
-              "FinishAfter": 557020800
-            }
-          }
-        },
-        {
-          "ModifiedNode": {
-            "FinalFields": {
-              "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-              "Balance": "9999989990",
-              "Flags": 0,
-              "OwnerCount": 1,
-              "Sequence": 2
-            },
-            "LedgerEntryType": "AccountRoot",
-            "LedgerIndex": "AE5AB6584A76C37C7382B6880609FC7792D90CDA36FF362AF412EB914C1715D3",
-            "PreviousFields": {
-              "Balance": "10000000000",
-              "OwnerCount": 0,
-              "Sequence": 1
-            },
-            "PreviousTxnID": "F181D45FD094A7417926F791D9DF958B84CE4B7B3D92CC9DDCACB1D5EC59AAAA",
-            "PreviousTxnLgrSeq": 1828732
-          }
-        },
-        {
-          "CreatedNode": {
-            "LedgerEntryType": "DirectoryNode",
-            "LedgerIndex": "D623EBEEEE701D4323D0ADA5320AF35EA8CC6520EBBEF69343354CD593DABC88",
-            "NewFields": {
-              "Owner": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-              "RootIndex": "D623EBEEEE701D4323D0ADA5320AF35EA8CC6520EBBEF69343354CD593DABC88"
-            }
-          }
-        }
-      ],
-      "TransactionIndex": 3,
-      "TransactionResult": "tesSUCCESS"
-    },
-    "validated": true
-  }
-}
-```
-{% endtab %}
-{% endtabs %}
+결제자 거래소 입장에서는 결제 채널을 특정 목적지 전용의 특별한 하위 지갑으로 생각할 수 있습니다. 핫월렛의 필요량을 추정하는 방법과 유사하게 결제 채널에 필요한 XRP의 양을 추정해 보시기 바랍니다. 일반적인 모범 사례에 따르면 거래소는 모든 사용자 계정에 걸쳐 대부분의 XRP를 콜드월렛에 보관하고, 핫월렛에는 소량의 XRP를 보관합니다.
 
-## 5. 릴리스 시간 대기
+이러한 원칙에 따라 매일, 4시간마다, 15분마다 등 결제 채널에 XRP를 추가할 빈도를 대략적으로 결정하고 해당 기간 동안 수취인 거래소에 전송할 XRP의 양을 추정해야 합니다. 결제 채널에 최소 해당 금액 또는 지체 없이 처리하고자 하는 최대 인출액 중 더 큰 금액을 충당할 수 있는 충분한 금액을 입금해야 합니다. 예를 들어 15분마다 채널을 재충전하고 15분마다 평균 50XRP를 송금하지만 가끔 10,000XRP를 송금하는 경우, 채널에 최소 10,000XRP를 공급해야 합니다.
 
-FinishAfter 시간이 있는 보류된 결제는 에스크로 노드의 FinishAfter 시간보다 늦은 close\_time 헤더 필드를 가진 ledger가 이미 마감될 때까지 완료할 수 없습니다.
+결제 채널에 보유한 XRP보다 큰 금액을 인출하려면 특별히 처리해야 합니다. 결제 채널을 완전히 건너뛰고 일반 XRP 결제로 고액 인출을 보내거나, 먼저 트랜잭션을 전송하여 결제 채널에 전체 인출 금액을 추가한 다음 청구를 생성할 수 있습니다. (청구 생성에 대한 자세한 내용은 아래를 참조하세요.)
 
-가장 최근에 유효성을 검사한 ledger의 마감 시간은 ledger 메소드를 사용하여 확인할 수 있습니다:
+두 거래소가 XRP Ledger에 여러 개의 핫 계정을 가지고 있는 경우, 두 거래소는 각각 결제 채널에 사용할 특정 핫 계정을 선택해야 합니다. 다른 구성도 있을 수 있지만, 이 사용 사례에서는 두 거래소를 연결하는 하나의 결제 채널을 가정합니다. 이 채널은 송금인 거래소에서 수취인 거래소로 XRP를 송금하는 모든 고객에게 서비스를 제공할 수 있습니다.
 
-요청:
+결제 채널은 단방향이므로 수취인 거래소에서 지급인 거래소로 XRP를 보내려면 반대 방향의 두 번째 채널이 필요합니다. 이 두 번째 채널은 정확히 동일한 쌍의 핫 계정을 연결할 필요는 없지만, 그렇게 하는 것이 가장 편리합니다. 단방향 채널이 두 개 있으면 각 거래소는 수신 채널에서 상환한 XRP를 사용하여 발신 채널에 재충전할 수 있습니다.
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 4,
-  "command": "ledger",
-  "ledger_index": "validated"
-}
-```
-{% endtab %}
-{% endtabs %}
+## 수취인: 결제 채널 세부 정보 확인
 
-응답:
+수취인 거래소에서 결제 채널의 세부 정보를 검토합니다.
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 4,
-  "status": "success",
-  "type": "response",
-  "result": {
-    "ledger": {
-      "accepted": true,
-      "account_hash": "3B5A8FF5334F94F4D3D09F236F9D1B4C028FCAE30948ACC986D461DDEE1D886B",
-      "close_flags": 0,
-      "close_time": 557256670,
-      "close_time_human": "2017-Aug-28 17:31:10",
-      "close_time_resolution": 10,
-      "closed": true,
-      "hash": "A999223A80174A7CB39D766B625C9E476F24AD2F15860A712CD029EE5ED1C320",
-      "ledger_hash": "A999223A80174A7CB39D766B625C9E476F24AD2F15860A712CD029EE5ED1C320",
-      "ledger_index": "1908253",
-      "parent_close_time": 557256663,
-      "parent_hash": "6A70C5336ACFDA05760D827776079F7A544D2361CFD5B21BD55A92AA20477A61",
-      "seqNum": "1908253",
-      "totalCoins": "99997280690562728",
-      "total_coins": "99997280690562728",
-      "transaction_hash": "49A51DFB1CAB2F134D93D5D1C5FF55A15B12DA36DAF9F5862B17C47EE966647D"
-    },
-    "ledger_hash": "A999223A80174A7CB39D766B625C9E476F24AD2F15860A712CD029EE5ED1C320",
-    "ledger_index": 1908253,
-    "validated": true
-  }
-}
-```
-{% endtab %}
-{% endtabs %}
+[결제 채널 세부 정보 확인](https://xrpl.org/use-payment-channels.html#2-the-payee-checks-specifics-of-the-payment-channel)
 
-## 6. EscrowFinish 트랜잭션 제출&#x20;
+## 수취인: 청구 생성
 
-FinishAfter 시간이 지난 후 자금 출금을 실행하려면 EscrowFinish 트랜잭션에 서명하고 제출합니다. 트랜잭션의 소유자 필드를 EscrowCreate 트랜잭션의 계정 주소로 설정하고 오퍼 시퀀스를 EscrowCreate 트랜잭션의 시퀀스 번호로 설정합니다. 시간으로만 보류되는 에스크로의 경우 조건 및 주문 처리 필드를 생략합니다.
+지급인 거래소는 수취인 거래소에 보증하고자 하는 XRP 금액에 대해 하나 이상의 클레임을 생성합니다.
 
-{% hint style="info" %}
-Tip:
+[클레임 생성](https://xrpl.org/use-payment-channels.html#3-the-payer-creates-one-or-more-signed-claims-for-the-xrp-in-the-channel)
 
-XRP Ledger의 상태는 트랜잭션에 의해서만 수정할 수 있기 때문에 EscrowFinish 트랜잭션이 필요합니다. 이 트랜잭션의 발신자는 에스크로의 수취인, 에스크로의 원래 발신자 또는 기타 XRP Ledger의 주소일 수 있습니다.
-{% endhint %}
+## 지급인: 지급인 거래소에 청구 세부 정보 보내기
 
-에스크로가 만료된 경우, 대신 에스크로를 취소할 수만 있습니다.
+청구를 생성한 후, 지급인 거래소는 청구에 대한 세부 정보를 ledger 외부의 수취인 거래소로 전송해야 합니다.
 
-{% hint style="info" %}
-Caution:
+지급인 거래소 고객이 XRP를 출금하여 수취인 거래소에 입금하는 일련의 청구를생각해 보겠습니다. 이 경우, 수취인 거래소와 지급인 거래소는 수취인 거래소가 고객 계정에 올바르게 입금할 수 있도록 지급인 거래소가 각 청구에 대해 전송해야 하는 정보에 대해 합의해야 합니다. 예를 들어 다음과 같은 청구 정보를 ledger 외부에서 공유하는 것을 고려할 수 있습니다:
 
-제어하지 않는 서버에 비밀 키를 제출하지 마세요. 네트워크를 통해 암호화되지 않은 비밀 키를 전송하지 마세요.&#x20;
-{% endhint %}
+**Channel ID**: 7C02D0802B272599889ADFA4298FD92E4C8BD5120ED9A5BA3884CF636F9B4029
 
-요청:
+**Public key**: 023D9BFCC22FB9A997E45ACA0D2D679A6A1AE5589E51546F3EDC4E9B16713FC255
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 5,
-  "command": "submit",
-  "secret": "s████████████████████████████",
-  "tx_json": {
-    "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-    "TransactionType": "EscrowFinish",
-    "Owner": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-    "OfferSequence": 1
-  }
-}
-```
-{% endtab %}
-{% endtabs %}
+| 클레임 정보        | 목적                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **채널 ID**     | 지급인 거래소가 청구를 생성하는 데 사용한 결제 채널입니다. 수취인 거래소는 청구를 확인하고 상환하기 위해 이 값이 필요합니다.                                                                                                                                                                                                                                                                                                       |
+| **공개 키**      | 결제 채널을 여는 데 사용한 지급자 거래소의 공개 키입니다. 수취인 거래소는 청구를 확인하고 상환하기 위해 이 값이 필요합니다.                                                                                                                                                                                                                                                                                                       |
+| **시퀀스**       | 지급자 거래소가 청구를 생성한 순서를 나타내는 값입니다. 수취인 거래소는 청구를 올바른 순서로 추적하고 상환하기 위해 이 값이 필요합니다. 예를 들어, 지급인 거래소가 시퀀스 값을 제공하지 않았고 수취인 거래소가 위의 두 번째 청구를 추적하지 못한 경우, 수취인 거래소는 대상 태그 34567812에 2000 XRP를 잘못 크레딧할 수 있습니다. 지급인 거래소가 시퀀스 값을 제공했다면 수취인 거래소는 청구 1과 클레임 3 사이의 청구를 설명해야 한다는 것을 알 수 있습니다. 클레임 2를 고려하면 수취인 거래소는 데스티네이션 태그 23456781에 1000 XRP를, 데스티네이션 태그 34567812에 1000 XRP를 올바르게 입금할 수 있습니다. |
+| **서명**        | 청구 서명입니다. 수취인 거래소에서 청구를 확인하고 상환하려면 이 값이 필요합니다.                                                                                                                                                                                                                                                                                                                                |
+| **금액**        | 지급인 거래소에서 생성한 청구의 누적 금액입니다. 수취인 거래소에서 청구를 확인하고 상환하려면 이 값이 필요합니다. 수취인 거래소에서 고객에게 입금해야 하는 실제 금액을 계산하는 방법에 대한 자세한 내용은 청구 확인을 참조하세요.                                                                                                                                                                                                                                              |
+| **데스티네이션 태그** | 청구에 따라 입금해야 하는 수취인 거래소의 고객 계정의 데스티네이션 태그입니다. 수취인 거래소는 고객의 출금 요청에서 이 값을 얻을 수 있으며, 수취인 거래소로 입금할 데스티네이션 태그를 제공해야 합니다. 수취인 거래소가 청구를 상환하면 XRP는 수취인 거래소의 XRP Ledger 계정에 입금됩니다. 그러면 수취 거래소는 제공된 데스티네이션 태그에 따라 클레임에서 적절한 고객 계정으로 XRP를 입금할 수 있습니다.                                                                                                                                     |
 
-응답:
+[지급인 교환으로 클레임 세부 정보 전송](https://xrpl.org/use-payment-channels.html#4-the-payer-sends-a-claim-to-the-payee-as-payment-for-goods-or-services)
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 5,
-  "status": "success",
-  "type": "response",
-  "result": {
-    "engine_result": "tesSUCCESS",
-    "engine_result_code": 0,
-    "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
-    "tx_blob": "1200022280000000240000000220190000000168400000000000000A732103C3555B7339FFDDB43495A8371A3A87B4C66B67D49D06CB9BA1FDBFEEB57B6E4374473045022100923B91BA4FD6450813F5335D71C64BA9EB81304A86859A631F2AD8571424A46502200CCE660D36781B84634C5F23619EB6CFCCF942709F54DCCF27CF6F499AE78C9B81143EEB46C355B04EE8D08E8EED00F422895C79EA6A82143EEB46C355B04EE8D08E8EED00F422895C79EA6A",
-    "tx_json": {
-      "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-      "Fee": "10",
-      "Flags": 2147483648,
-      "OfferSequence": 1,
-      "Owner": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-      "Sequence": 2,
-      "SigningPubKey": "03C3555B7339FFDDB43495A8371A3A87B4C66B67D49D06CB9BA1FDBFEEB57B6E43",
-      "TransactionType": "EscrowFinish",
-      "TxnSignature": "3045022100923B91BA4FD6450813F5335D71C64BA9EB81304A86859A631F2AD8571424A46502200CCE660D36781B84634C5F23619EB6CFCCF942709F54DCCF27CF6F499AE78C9B",
-      "hash": "41856A742B3CAF307E7B4D0B850F302101F0F415B785454F7501E9960A2A1F6B"
-    }
-  }
-}
-```
-{% endtab %}
-{% endtabs %}
+## 수취인: 클레임 확인
 
-트랜잭션이 검증된 ledger 버전에 포함되었을 때 최종 상태를 확인할 수 있도록 트랜잭션의 식별 해시값을 메모해 두세요.
+수취인 거래소는 지급인 거래소가 전송한 청구를 확인합니다.
 
-## 7. 검증 대기&#x20;
+청구를 확인한 후 수취인 거래소는 지급인 거래소가 보낸 데스티네이션 태그에 표시된 고객 계정에 청구된 XRP를 입금해야 합니다. 청구 금액은 누적되므로 수취인 거래소는 고객에게 이전 청구 금액과의 차액만 입금하도록 주의해야 합니다.
 
-라이브 네트워크(mainnet, testnet 또는 devnet 포함)에서는 ledger가 자동으로 닫힐 때까지 4\~7초 정도 기다릴 수 있습니다.
+예를 들어, 고객에게 3000의 청구 금액을 입금하려면 수취인 거래소는 이전 청구 금액이 2000이라는 것을 알아야 합니다. 청구 금액과 이전 청구 금액의 차액(3000 - 2000 = 1000)이 수취인 거래소가 고객 계정에 입금해야 하는 금액입니다.
 
-Stand-alone 모드에서 Ripple을 실행하는 경우, ledger\_accept 메소드를 사용해 ledger를수동으로 닫아야 합니다.&#x20;
+[청구 확인](https://xrpl.org/use-payment-channels.html#5-the-payee-verifies-the-claims)
 
-## 8. 최종 결과 확인&#x20;
+## 수취인: 일괄 상환
 
-트랜잭션의 식별 해시와 함께 tx 메소드를 사용해 트랜잭션의 최종 상태를 확인합니다. 특히 트랜잭션 메타데이터에서 에스크로된 결제의 목적지에 대해 AccountRoot 유형의 ModifiedNode가 있는지 확인하세요. 개체의 FinalFields에 잔액 필드에 XRP의 증가가 표시되어야 합니다.
+수취인 거래소는 지급인 거래소에서 보장하는 XRP를 받을 수 있는지 확인한 후 청구 건을 일괄적으로 상환할 수 있습니다. 다음은 수취인 거래소가 청구 상환 빈도를 결정할 때 사용할 수 있는 몇 가지 지침입니다:
 
-요청:
+* 모든 청구를 상환하지 마세요. 그렇게 하면 결제 채널에서 아무런 이득을 얻지 못합니다.
+* 손실에 대한 두려움보다 더 많은 금액이 청구될 때까지 기다리지 마세요. 문제가 발생하여 청구를 상환할 기회를 놓치면 대금을 지급받지 못합니다. 이런 일이 발생하고 이미 시스템에서 한 명 이상의 고객에게 크레딧을 지급했다면 문제가 발생할 수 있습니다. 해당 고객은 이미 XRP를 다른 암호화폐로 거래하고 인출했을 수 있습니다. 그러면 고객에게 지급해야 할 XRP가 시스템에 더 많이 남게 되고, 입금을 받지 못한 고객의 잔액을 수정하기에는 너무 늦습니다.
+* 결제자가 채널 폐쇄를 요청하는 경우, 채널 폐쇄가 완료되기 전에 청구를 상환하지 않으면 대금을 지급받지 못합니다. 지급받을 수 있는 시간은 SettleDelay을 기준으로 합니다.
+* 채널이 변경할 수 없는 CancelAfter 시간으로 생성된 경우 해당 시간 전에 미결제 청구를 모두 상환해야 합니다.
+* 예를 들어 일정 시간이 지난 후, 일정 금액의 크레딧을 적립한 후 또는 결제자 거래소를 얼마나 신뢰하는지와 같은 기타 기준에 따라 상환을 결정할 수 있습니다. 가장 안전한 전략은 이러한 기준의 조합을 기반으로 하는 것입니다.
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 21,
-  "command": "tx",
-  "transaction": "41856A742B3CAF307E7B4D0B850F302101F0F415B785454F7501E9960A2A1F6B"
-}
-```
-{% endtab %}
-{% endtabs %}
+[일괄 상환](https://xrpl.org/use-payment-channels.html#8-when-ready-the-payee-redeems-a-claim-for-the-authorized-amount)
 
-&#x20;응답:
+## 송금인과 수취인: 결제 채널 계속 사용
 
-{% tabs %}
-{% tab title="WebSocket" %}
-```json
-{
-  "id": 21,
-  "status": "success",
-  "type": "response",
-  "result": {
-    "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-    "Fee": "10",
-    "Flags": 2147483648,
-    "OfferSequence": 1,
-    "Owner": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-    "Sequence": 2,
-    "SigningPubKey": "03C3555B7339FFDDB43495A8371A3A87B4C66B67D49D06CB9BA1FDBFEEB57B6E43",
-    "TransactionType": "EscrowFinish",
-    "TxnSignature": "3045022100923B91BA4FD6450813F5335D71C64BA9EB81304A86859A631F2AD8571424A46502200CCE660D36781B84634C5F23619EB6CFCCF942709F54DCCF27CF6F499AE78C9B",
-    "date": 557256681,
-    "hash": "41856A742B3CAF307E7B4D0B850F302101F0F415B785454F7501E9960A2A1F6B",
-    "inLedger": 1908257,
-    "ledger_index": 1908257,
-    "meta": {
-      "AffectedNodes": [
-        {
-          "ModifiedNode": {
-            "FinalFields": {
-              "Account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
-              "Balance": "400210000",
-              "Flags": 0,
-              "OwnerCount": 0,
-              "Sequence": 1
-            },
-            "LedgerEntryType": "AccountRoot",
-            "LedgerIndex": "13F1A95D7AAB7108D5CE7EEAF504B2894B8C674E6D68499076441C4837282BF8",
-            "PreviousFields": {
-              "Balance": "400200000"
-            },
-            "PreviousTxnID": "55B2057332F8999208C43BA1E7091B423A16E5ED2736C06300B4076085205263",
-            "PreviousTxnLgrSeq": 1828796
-          }
-        },
-        {
-          "DeletedNode": {
-            "FinalFields": {
-              "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-              "Amount": "10000",
-              "Destination": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
-              "FinishAfter": 557020800,
-              "Flags": 0,
-              "OwnerNode": "0000000000000000",
-              "PreviousTxnID": "55B2057332F8999208C43BA1E7091B423A16E5ED2736C06300B4076085205263",
-              "PreviousTxnLgrSeq": 1828796
-            },
-            "LedgerEntryType": "Escrow",
-            "LedgerIndex": "2B9845CB9DF686B9615BF04F3EC66095A334D985E03E71B893B90FCF6D4DC9E6"
-          }
-        },
-        {
-          "ModifiedNode": {
-            "FinalFields": {
-              "Account": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-              "Balance": "9999989980",
-              "Flags": 0,
-              "OwnerCount": 0,
-              "Sequence": 3
-            },
-            "LedgerEntryType": "AccountRoot",
-            "LedgerIndex": "AE5AB6584A76C37C7382B6880609FC7792D90CDA36FF362AF412EB914C1715D3",
-            "PreviousFields": {
-              "Balance": "9999989990",
-              "OwnerCount": 1,
-              "Sequence": 2
-            },
-            "PreviousTxnID": "55B2057332F8999208C43BA1E7091B423A16E5ED2736C06300B4076085205263",
-            "PreviousTxnLgrSeq": 1828796
-          }
-        },
-        {
-          "ModifiedNode": {
-            "FinalFields": {
-              "Flags": 0,
-              "Owner": "rajgkBmMxmz161r8bWYH7CQAFZP5bA9oSG",
-              "RootIndex": "D623EBEEEE701D4323D0ADA5320AF35EA8CC6520EBBEF69343354CD593DABC88"
-            },
-            "LedgerEntryType": "DirectoryNode",
-            "LedgerIndex": "D623EBEEEE701D4323D0ADA5320AF35EA8CC6520EBBEF69343354CD593DABC88"
-          }
-        }
-      ],
-      "TransactionIndex": 2,
-      "TransactionResult": "tesSUCCESS"
-    },
-    "validated": true
-  }
-}
-```
-{% endtab %}
-{% endtabs %}
+지급자 및 수취인 교환은 결제 채널에서 설정한 매개변수 내에서 필요에 따라 청구 배치를 계속 전송, 확인 및 상환할 수 있습니다.
+
+[결제 채널 계속 사용](https://xrpl.org/use-payment-channels.html#7-repeat-steps-3-6-as-desired)
+
+## 지급인: 때가 되면 결제 채널 폐쇄 요청을 합니다.
+
+지급인 교환과 수취인 교환이 결제 채널을 사용하여 완료된 경우, 지급인 교환은 결제 채널 폐쇄를 요청할 수 있습니다.
+
+[결제 채널 폐쇄](https://xrpl.org/use-payment-channels.html#9-when-the-payer-and-payee-are-done-doing-business-the-payer-requests-for-the-channel-to-be-closed)

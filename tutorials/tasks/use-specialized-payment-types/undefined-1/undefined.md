@@ -1,135 +1,657 @@
-# 결제 채널을 열어 거래소 간 네트워크 활성화
+---
+description: 수표 개정에 의해 추가되었습니다.
+---
 
-결제 채널을 사용하면 아주 작은 단위로 나누어 나중에 정산할 수 있는 단방향 "비동기" XRP 결제를 보낼 수 있습니다. 디지털 자산 거래소로서 다른 거래소에 많은 XRP 결제를 보내는 경우, 거래소(송금인 거래소)와 다른 거래소(수취인 거래소) 사이에 XRP Ledger 결제 채널을 개설하여 이러한 결제의 효율성을 개선할 수 있습니다. 다른 거래소와의 양방향 흐름의 경우, 두 개의 결제 채널(각 방향에 하나씩)을 열 수 있습니다.
+# 수표 보내기
 
-## 다른 거래소에 XRP를 보내는 이유는 무엇인가요?
+수표를 보내는 것은 의도한 수취인에게 결제를 받을 수 있는 권한을 부여하는 것과 같습니다. 이 프로세스의 결과는 수취인이 나중에 현금화할 수 있는 수표 객체가 ledger에 생성됩니다.
 
-거래소에서 다른 거래소로 XRP를 보내야 하는 이유는 고객이 거래소에서 XRP를 출금하여 다른 거래소에 입금할 때 발생할 수 있습니다. 대형 거래소인 경우 거래소에서 다른 거래소로 XRP를 이동하는 고객이 많을 것입니다. 하루 종일 XRP 결제를 처리해야 할 수 있으며, 각 결제마다 거래 양쪽에 확인 시간을 기다리는 것은 물론 거래 비용도 지불해야 할 수 있습니다.
+수표 대신 지급을 보내면 한 번에 수취인에게 직접 돈을 전달할 수 있으므로 많은 경우에 수표 대신 지급을 보내려고 합니다. 그러나 수취인이 DepositAuth를 사용하는 경우 직접 지급을 보낼 수 없으므로 수표를 보내는 것이 좋습니다.
 
-## 결제 채널 사용의 이점
+이 튜토리얼에서는 가상의 회사인 BoxSend SG(XRP ledger 주소는 rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za)가 가상의 암호화폐 컨설팅 회사인 Grand Payments(XRP ledger 주소는 rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis)에 일부 컨설팅 작업에 대한 비용을 지불하는 예를 사용했습니다. Grand Payments는 XRP로 결제하는 것을 선호하지만, 세금과 규제를 간소화하기 위해 명시적으로 승인한 결제만 허용합니다.
 
-개별 결제 거래를 사용하는 대신 결제 채널을 사용해 XRP를 송금할 때 얻을 수 있는 몇 가지 이점은 다음과 같습니다:
+Grand Payments는 XRP ledger 외부에서 ID 46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291로 BoxSend SG에 인보이스를 보내고, Grand Payment의 XRP ledger 주소인 rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis로 100 XRP 수표를 보내줄 것을 요청합니다.
 
-* 인출을 더 빠르게 처리할 수 있습니다: 표준 결제 트랜잭션은 XRP Ledger 트랜잭션을 제출하고 해당 트랜잭션이 포함된 새 ledger 버전이 컨센서스를 통해 승인될 때까지 기다려야 합니다. 결제 채널을 사용해 XRP를 전송하는 경우, XRP 지급을 보장하는 청구의 생성 및 확인은 모두 컨센서스 프로세스 외부에서 이루어집니다. 즉, 지급인 거래소는 청구의 디지털 서명을 생성하고 확인하는 참여자의 능력에 의해서만 제한되는 비율로 수취인 거래소에 대한 XRP 지급을 보장할 수 있습니다. 차익거래 기회를 활용하거나 알고리즘 트레이딩을 하기 위해 XRP를 이동하는 고객에게는 속도가 중요합니다. 고객이 XRP를 이동하고 즉시 거래를 시작할 수 있도록 하는 것은 거래소의 강력한 차별화 요소입니다.
-* 가치의 인터넷에 연결하세요: 가치 인터넷의 핵심 요건 중 하나는 상호운용성입니다. 이러한 상호운용성을 촉진하는 데 큰 역할을 하는 인터레저 프로토콜(ILP)은 결제 채널을 계정 재조정 수단으로 사용할 때 가장 잘 작동합니다. 사실상 거래소에서 다른 거래소로 결제 채널을 열면 가치 인터넷에 연결하고 가치 인터넷과 그 위에 구축된 앱의 성공에 기본이 되는 거래소 간 네트워크를 만드는 데 도움을 주는 것입니다. 결제 채널을 통해 거래소를 다른 거래소와 연결하는 것은 또 다른 차별화 요소입니다. 여러 거래소에서 다양한 화폐폐를 구매하기 위해 XRP를 이동하는 고객의 경우, 귀사의 거래소에서 가치 인터넷의 여러 거래소로 즉시 XRP를 이동할 수 있다는 사실을 알게 되면 귀사의 거래소가 자산을 보관하는 데 선호되는 장소가 될 수 있습니다.
+## 요구 조건
 
-다음은 이 결제 채널 사용 사례를 구현하기 위해 수행해야 하는 높은 수준의 작업에 대한 로드맵입니다. 전체 결제 채널 튜토리얼로 바로 이동하려면 결제 채널 사용을 참조하세요.
+이 튜토리얼로 수표를 보내려면 다음이 필요합니다:
 
-## 결제 채널 이해하기
+* 수표를 보낼 자금이 입금된 계좌의 주소와 비밀 키.
+  * XRP Ledger의 testnet Faucet을 사용해 10,000개의 testnet XRP로 펀딩된 주소와 비밀키를 얻을 수 있습니다.
+* 수표를 받을 펀딩된 계좌의 주소입니다.
+* 트랜잭션에 서명하는 안전한 방법.
+* 클라이언트 라이브러리 또는 HTTP 또는 WebSocket 라이브러리.
 
-결제 채널과 특정 구현에 필요한 기능을 제공하는지 여부에 대해 자세히 알아보세요.
+## 1. 수표 만들기 트랜잭션 준비
 
-[결제 채널 이해하기](https://xrpl.org/payment-channels.html)
+수표의 금액과 현금화할 수 있는 사람을 결정합니다. CheckCreate 트랜잭션 필드의 값을 파악합니다. 다음 필드는 최소값이며, 다른 모든 필드는 선택 사항이거나 서명할 때 자동으로 채워질 수 있습니다:
 
-## 결제자 및 수취인: rippled 서버 설정 및 실행
+| 필드                | 값                         | 설명명                                                                                                                                                                                                                                                                                                               |
+| ----------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TransactionType` | String                    | 여기에 CheckCreate 문자열을 사용합니다.                                                                                                                                                                                                                                                                                       |
+| `Account`         | String (Address)          | 수표를 생성하는 발신자의 주소입니다. (즉, 사용자 주소입니다.)                                                                                                                                                                                                                                                                              |
+| `Destination`     | String (Address)          | 수표를 현금화할 수 있는 수취인의 주소입니다.                                                                                                                                                                                                                                                                                         |
+| `SendMax`         | String or Object (Amount) | 이 수표가 현금화될 때 송금인이 인출할 수 있는 최대 금액입니다. XRP의 경우 XRP drops 나타내는 문자열을 사용합니다. 토큰의 경우 통화, 발행자 및 값 필드가 있는 객체를 사용합니다. 자세한 내용은 통화 금액 지정을 참조하세요. 받는 사람이 이체 수수료가 포함된 정확한 금액의 비XRP 통화로 수표를 현금화할 수 있도록 하려면 이체 수수료를 지불할 추가 비율을 포함해야 합니다. (예를 들어 수취인이 송금 수수료가 2%인 발행자의 수표를 100캐나다달러로 현금화하려면 해당 발행자의 SendMax를 102캐나다달러로 설정해야 합니다.) |
 
-결제 채널을 사용하여 XRP를 주고받으려면 송금인과 수취인 거래소 모두 트랜잭션을 전송하는 데 사용할 수 있는 rippled 서버에 액세스할 수 있어야 합니다. 거래소에서 XRP 인출을 직접 처리하는 경우, 이미 이 용도로 사용할 수 있는 rippled 서버를 운영하고 있을 것입니다.
+## 수표 작성 준비 예시
 
-그렇지 않다면 거래소가 rippled 서버에 액세스하는 가장 좋은 방법은 rippled 서버를 설정하고 실행하는 것입니다.
+다음 예는 BoxSend SG(rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za)에서 Grand Payments(rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis)로 100 XRP에 대해 준비된 수표를 보여 줍니다. 추가(선택 사항) 메타데이터로 BoxSend SG는 대금결제의 인보이스 ID를 추가하여 대금결제가 이 수표 어떤 인보이스를 결제할 것인지 알 수 있도록 합니다.
 
-[rippled 서버 설정 및 실행](https://xrpl.org/manage-the-rippled-server.html)
+{% tabs %}
+{% tab title="ripple-lib 1.x" %}
+```javascript
+'use strict'
+const RippleAPI = require('ripple-lib').RippleAPI
 
-## 지급인 및 수취인: 충분한 XRP로 XRP 레저 계정에 자금 조달하기
+// This example connects to a public Test Net server
+const api = new RippleAPI({server: 'wss://s.altnet.rippletest.net:51233'})
+api.connect().then(() => {
+  console.log('Connected')
 
-거래소에서 XRP 입출금을 직접 처리하는 경우, 이 용도로 사용할 수 있는 기존 자금이 충전된 XRP Ledger 계정이 있을 것입니다. 여기에 설명된 대로 충분한 XRP가 입금되어 있는지 확인하시기 바랍니다.
+  const sender = 'rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za'
+  const receiver = 'rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis'
+  const options = {
+    // Allow up to 60 ledger versions (~5 min) instead of the default 3 versions
+    // before this transaction fails permanently.
+    "maxLedgerVersionOffset": 60
+  }
+  return api.prepareCheckCreate(sender, {
+    "destination": receiver,
+    "sendMax": {
+      "currency": "XRP",
+      "value": "100" // RippleAPI uses decimal XRP, not integer drops
+    },
+    "invoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291"
+  }, options)
 
-업계 모범 사례를 따르고 있다면 콜드 계정과 하나 이상의 핫 계정을 보유하고 있을 가능성이 높습니다. 결제 채널에 핫 계정을 사용하세요.
+}).then(prepared => {
+  console.log("txJSON:", prepared.txJSON);
 
-* 송금인 거래소는 수취인 거래소로 XRP를 송금하는 데 사용할 수 있는 자금이 예치된 XRP ledger 계정이 있어야 합니다.\
-  기본 예치금(10 XRP)과 결제 채널의 소유자 예치금(2 XRP) 외에, 해당 계정은 결제 채널에 의도한 트랜잭션 수를 감당할 수 있는 충분한 XRP를 따로 보관할 수 있어야 합니다.\
-  결제자 거래소는 XRP가 부족할 경우 언제든지 PaymentChannelFund 트랜잭션을 사용해 채널에 충전할 수 있습니다. 그러나 탑오프에는 실제 온-ledger 트랜잭션과 확인이 필요하므로 탑오프 트랜잭션을 완료하는 데 4\~5초의 처리 시간과 최대 10드롭의 XRP가 소요될 수 있습니다. 결제자 거래소가 더 많은 XRP를 선입금할수록 탑오프해야 하는 빈도가 줄어들기 때문에 더 많은 XRP를 선입금하면 시간과 비용을 절약할 수 있습니다.\
-  그러나 결제자 거래소가 필요한 것보다 더 많은 XRP를 입금하면 결제 채널을 닫아야 XRP를 돌려받을 수 있습니다. 이는 다음 이벤트를 기다리는 것을 의미합니다:\
-  \
-  1\. 결제 채널 폐쇄를 시작하라는 결제자의 요청이 완료됩니다.\
-  \
-  2\. 결제 채널에 설정된 SettleDelay 시간이 경과 했습니다다.\
-  \
-  3\. 결제 채널 폐쇄를 완료하라는 요청이 SettleDelay가 지난 후 완료되었습니다.
+// Disconnect and return
+}).then(() => {
+  api.disconnect().then(() => {
+    console.log('Disconnected')
+    process.exit()
+  })
+}).catch(console.error)
 
-수취인 거래소는 지급인 거래소에서 송금한 XRP를 상환(수령)하는 데 사용할 자금이 입금된 XRP Ledger 계정을 보유해야 합니다.\
-이 계정에는 최소 11개의 XRP가 필요하며, 이는 10개의 XRP 기본 준비금과 클레임 상환에 드는 거래 비용을 지불하기에 충분한 금액입니다. 예를 들어, 총 1XRP 미만으로 수천 건의 청구를 상환할 수 있습니다.
 
-[충분한 XRP가 있는 펀드 XRP Ledger 계정](https://xrpl.org/accounts.html)
+// Example output:
+//
+// Connected
+// txJSON: {"Account":"rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+//  "TransactionType":"CheckCreate",
+//  "Destination":"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+//  "SendMax":"100000000",
+//  "Flags":2147483648,
+//  "InvoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+//  "LastLedgerSequence":7835917,"Fee":"12","Sequence":2}
+// Disconnected
+```
+{% endtab %}
 
-## 결제자: 결제 채널 열기
+{% tab title="JSON-RPC, WebSocket, or Commandline" %}
+```json
+{
+  "TransactionType": "CheckCreate",
+  "Account": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+  "Destination": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+  "SendMax": "100000000",
+  "InvoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291"
+}
+```
+{% endtab %}
+{% endtabs %}
 
-지급인 거래소는 자신의 XRP Ledger 계정에서 수취인 거래소의 XRP Ledger 계정으로 결제 채널을 엽니다. 결제 채널을 열려면 만료일과 보유할 수 있는 금액 등 채널의 특정 세부 사항을 설정해야 합니다.
+## 2. 수표 생성 트랜잭션에 서명
 
-이 거래소 사용 사례에서는 채널을 실제로 닫을 필요가 없으므로, 수취인 거래소는 취소 후(만료) 값을 정의하지 않을 수 있습니다. 채널을 닫아야 하는 경우에도 채널을 닫을 수 있습니다.
+트랜잭션에 서명하는 가장 안전한 방법은 클라이언트 라이브러리를 사용하여 로컬로 서명하는 것입니다. 또는 자체 rippled 노드를 실행하는 경우 서명 방법을 사용하여 트랜잭션에 서명할 수 있지만 신뢰할 수 있고 암호화된 연결 또는 로컬(동일 컴퓨터) 연결을 통해 수행해야 합니다.
 
-결제자 거래소 입장에서는 결제 채널을 특정 목적지 전용의 특별한 하위 지갑으로 생각할 수 있습니다. 핫월렛의 필요량을 추정하는 방법과 유사하게 결제 채널에 필요한 XRP의 양을 추정해 보시기 바랍니다. 일반적인 모범 사례에 따르면 거래소는 모든 사용자 계정에 걸쳐 대부분의 XRP를 콜드월렛에 보관하고, 핫월렛에는 소량의 XRP를 보관합니다.
+어떤 경우든 나중에 사용할 수 있도록 서명된 트랜잭션의 식별 해시를 기록해 두세요.
 
-이러한 원칙에 따라 매일, 4시간마다, 15분마다 등 결제 채널에 XRP를 추가할 빈도를 대략적으로 결정하고 해당 기간 동안 수취인 거래소에 전송할 XRP의 양을 추정해야 합니다. 결제 채널에 최소 해당 금액 또는 지체 없이 처리하고자 하는 최대 인출액 중 더 큰 금액을 충당할 수 있는 충분한 금액을 입금해야 합니다. 예를 들어 15분마다 채널을 재충전하고 15분마다 평균 50XRP를 송금하지만 가끔 10,000XRP를 송금하는 경우, 채널에 최소 10,000XRP를 공급해야 합니다.
+## 요청 예시
 
-결제 채널에 보유한 XRP보다 큰 금액을 인출하려면 특별히 처리해야 합니다. 결제 채널을 완전히 건너뛰고 일반 XRP 결제로 고액 인출을 보내거나, 먼저 트랜잭션을 전송하여 결제 채널에 전체 인출 금액을 추가한 다음 청구를 생성할 수 있습니다. (청구 생성에 대한 자세한 내용은 아래를 참조하세요.)
+{% tabs %}
+{% tab title="ripple-lib 1.x" %}
+```javascript
+'use strict'
+const RippleAPI = require('ripple-lib').RippleAPI
 
-두 거래소가 XRP Ledger에 여러 개의 핫 계정을 가지고 있는 경우, 두 거래소는 각각 결제 채널에 사용할 특정 핫 계정을 선택해야 합니다. 다른 구성도 있을 수 있지만, 이 사용 사례에서는 두 거래소를 연결하는 하나의 결제 채널을 가정합니다. 이 채널은 송금인 거래소에서 수취인 거래소로 XRP를 송금하는 모든 고객에게 서비스를 제공할 수 있습니다.
+// Can sign offline if the txJSON has all required fields
+const api = new RippleAPI()
 
-결제 채널은 단방향이므로 수취인 거래소에서 지급인 거래소로 XRP를 보내려면 반대 방향의 두 번째 채널이 필요합니다. 이 두 번째 채널은 정확히 동일한 쌍의 핫 계정을 연결할 필요는 없지만, 그렇게 하는 것이 가장 편리합니다. 단방향 채널이 두 개 있으면 각 거래소는 수신 채널에서 상환한 XRP를 사용하여 발신 채널에 재충전할 수 있습니다.
+const txJSON = '{"Account":"rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za", \
+  "TransactionType":"CheckCreate", \
+  "Destination":"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis", \
+  "SendMax":"100000000", \
+  "Flags":2147483648, \
+  "LastLedgerSequence":7835923, \
+  "Fee":"12", \
+  "Sequence":2}'
 
-## 수취인: 결제 채널 세부 정보 확인
+// Be careful where you store your real secret.
+const secret = 's████████████████████████████'
 
-수취인 거래소에서 결제 채널의 세부 정보를 검토합니다.
+const signed = api.sign(txJSON, secret)
 
-[결제 채널 세부 정보 확인](https://xrpl.org/use-payment-channels.html#2-the-payee-checks-specifics-of-the-payment-channel)
+console.log("tx_blob is:", signed.signedTransaction)
+console.log("tx hash is:", signed.id)
+```
+{% endtab %}
 
-## 수취인: 청구 생성
+{% tab title="WebSocket" %}
+```json
+{
+  "id": "sign_req_1",
+  "command": "sign",
+  "tx_json": {
+    "TransactionType": "CheckCreate",
+    "Account": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+    "Destination": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+    "SendMax": "100000000",
+    "InvoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+    "DestinationTag": 1,
+    "Fee": "12"
+  },
+   "secret" : "s████████████████████████████"
+}
+```
+{% endtab %}
 
-지급인 거래소는 수취인 거래소에 보증하고자 하는 XRP 금액에 대해 하나 이상의 클레임을 생성합니다.
+{% tab title="Commandline" %}
+```json
+rippled sign s████████████████████████████ '{
+  "TransactionType": "CheckCreate",
+  "Account": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+  "Destination": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+  "SendMax": "100000000",
+  "Expiration": 570113521,
+  "InvoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+  "DestinationTag": 1,
+  "Fee": "12"
+}'
+```
+{% endtab %}
+{% endtabs %}
 
-[클레임 생성](https://xrpl.org/use-payment-channels.html#3-the-payer-creates-one-or-more-signed-claims-for-the-xrp-in-the-channel)
+## 응답 예시
 
-## 지급인: 지급인 거래소에 청구 세부 정보 보내기
+{% tabs %}
+{% tab title="ripple-lib 1.x" %}
+```javascript
+tx_blob is: 12001022800000002400000002201B0077911368400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400744630440220181FE2F945EBEE632966D5FB03114611E3047ACD155AA1BDB9DF8545C7A2431502201E873A4B0D177AB250AF790CE80621E16F141506CF507586038FC4A8E95887358114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39
+tx hash is: C0B27D20669BAB837B3CDF4B8148B988F17CE1EF8EDF48C806AE9BF69E16F441
+```
+{% endtab %}
 
-청구를 생성한 후, 지급인 거래소는 청구에 대한 세부 정보를 ledger 외부의 수취인 거래소로 전송해야 합니다.
+{% tab title="WebSocket" %}
+```json
+{
+  "id": "sign_req_1",
+  "result": {
+    "tx_blob": "120010228000000024000000042E00000001501146060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE29168400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB40074463044022071A341F911A8EF3B68399487CAF5BA3B59C6FE476B626698AEF044B8183721BC0220166053A859BD907251DFCCF34DD71202180EBABAE7098BB5903D16EBFC993C408114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39",
+    "tx_json": {
+      "Account": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+      "Destination": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+      "DestinationTag": 1,
+      "Fee": "12",
+      "Flags": 2147483648,
+      "InvoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+      "SendMax": "100000000",
+      "Sequence": 4,
+      "SigningPubKey": "03B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400",
+      "TransactionType": "CheckCreate",
+      "TxnSignature": "3044022071A341F911A8EF3B68399487CAF5BA3B59C6FE476B626698AEF044B8183721BC0220166053A859BD907251DFCCF34DD71202180EBABAE7098BB5903D16EBFC993C40",
+      "hash": "09D992D4C89E2A24D4BA9BB57ED81C7003815940F39B7C87ADBF2E49034380BB"
+    }
+  },
+  "status": "success",
+  "type": "response"
+}
+```
+{% endtab %}
 
-지급인 거래소 고객이 XRP를 출금하여 수취인 거래소에 입금하는 일련의 청구를생각해 보겠습니다. 이 경우, 수취인 거래소와 지급인 거래소는 수취인 거래소가 고객 계정에 올바르게 입금할 수 있도록 지급인 거래소가 각 청구에 대해 전송해야 하는 정보에 대해 합의해야 합니다. 예를 들어 다음과 같은 청구 정보를 ledger 외부에서 공유하는 것을 고려할 수 있습니다:
+{% tab title="Commandline" %}
+```json
+Loading: "/etc/opt/ripple/rippled.cfg"
+2018-Mar-21 21:00:05 HTTPClient:NFO Connecting to 127.0.0.1:5005
 
-**Channel ID**: 7C02D0802B272599889ADFA4298FD92E4C8BD5120ED9A5BA3884CF636F9B4029
+{
+   "result" : {
+      "status" : "success",
+      "tx_blob" : "120010228000000024000000012A21FB3DF12E00000001501146060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE29168400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB40074473045022100EB5A9001E14FC7304C4C2DF66507F9FC59D17FDCF98B43A4E30356658AB2A7CF02207127187EE0F287665D9552D15BEE6B00D3C6691C6773CE416E8A714B853F44FC8114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39",
+      "tx_json" : {
+         "Account" : "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+         "Destination" : "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+         "DestinationTag" : 1,
+         "Expiration" : 570113521,
+         "Fee" : "12",
+         "Flags" : 2147483648,
+         "InvoiceID" : "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+         "SendMax" : "100000000",
+         "Sequence" : 1,
+         "SigningPubKey" : "03B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400",
+         "TransactionType" : "CheckCreate",
+         "TxnSignature" : "3045022100EB5A9001E14FC7304C4C2DF66507F9FC59D17FDCF98B43A4E30356658AB2A7CF02207127187EE0F287665D9552D15BEE6B00D3C6691C6773CE416E8A714B853F44FC",
+         "hash" : "07C3B2878B6941FED97BA647244531B7E2203268B05C71C3A1A014045ADDF408"
+      }
+   }
+}
+```
+{% endtab %}
+{% endtabs %}
 
-**Public key**: 023D9BFCC22FB9A997E45ACA0D2D679A6A1AE5589E51546F3EDC4E9B16713FC255
+## 3. 서명된 트랜잭션 제출하기
 
-| 클레임 정보        | 목적                                                                                                                                                                                                                                                                                                                                                                            |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **채널 ID**     | 지급인 거래소가 청구를 생성하는 데 사용한 결제 채널입니다. 수취인 거래소는 청구를 확인하고 상환하기 위해 이 값이 필요합니다.                                                                                                                                                                                                                                                                                                       |
-| **공개 키**      | 결제 채널을 여는 데 사용한 지급자 거래소의 공개 키입니다. 수취인 거래소는 청구를 확인하고 상환하기 위해 이 값이 필요합니다.                                                                                                                                                                                                                                                                                                       |
-| **시퀀스**       | 지급자 거래소가 청구를 생성한 순서를 나타내는 값입니다. 수취인 거래소는 청구를 올바른 순서로 추적하고 상환하기 위해 이 값이 필요합니다. 예를 들어, 지급인 거래소가 시퀀스 값을 제공하지 않았고 수취인 거래소가 위의 두 번째 청구를 추적하지 못한 경우, 수취인 거래소는 대상 태그 34567812에 2000 XRP를 잘못 크레딧할 수 있습니다. 지급인 거래소가 시퀀스 값을 제공했다면 수취인 거래소는 청구 1과 클레임 3 사이의 청구를 설명해야 한다는 것을 알 수 있습니다. 클레임 2를 고려하면 수취인 거래소는 데스티네이션 태그 23456781에 1000 XRP를, 데스티네이션 태그 34567812에 1000 XRP를 올바르게 입금할 수 있습니다. |
-| **서명**        | 청구 서명입니다. 수취인 거래소에서 청구를 확인하고 상환하려면 이 값이 필요합니다.                                                                                                                                                                                                                                                                                                                                |
-| **금액**        | 지급인 거래소에서 생성한 청구의 누적 금액입니다. 수취인 거래소에서 청구를 확인하고 상환하려면 이 값이 필요합니다. 수취인 거래소에서 고객에게 입금해야 하는 실제 금액을 계산하는 방법에 대한 자세한 내용은 청구 확인을 참조하세요.                                                                                                                                                                                                                                              |
-| **데스티네이션 태그** | 청구에 따라 입금해야 하는 수취인 거래소의 고객 계정의 데스티네이션 태그입니다. 수취인 거래소는 고객의 출금 요청에서 이 값을 얻을 수 있으며, 수취인 거래소로 입금할 데스티네이션 태그를 제공해야 합니다. 수취인 거래소가 청구를 상환하면 XRP는 수취인 거래소의 XRP Ledger 계정에 입금됩니다. 그러면 수취 거래소는 제공된 데스티네이션 태그에 따라 클레임에서 적절한 고객 계정으로 XRP를 입금할 수 있습니다.                                                                                                                                     |
+이전 단계에서 서명한 트랜잭션 blob을 가져와 rippled 서버에 제출합니다. rippled 서버를 실행하지 않아도 안전하게 이 작업을 수행할 수 있습니다. 응답에는 임시 결과가 포함되며, 이 결과는 일반적으로 tesSUCCESS여야 하지만 최종 결과는 아닙니다. 대기 중인 트랜잭션은 일반적으로 다음 오픈 ledger 버전에 포함되므로(일반적으로 제출 후 약 10초 후), terQUEUED의 임시 응답도 괜찮습니다.
 
-[지급인 교환으로 클레임 세부 정보 전송](https://xrpl.org/use-payment-channels.html#4-the-payer-sends-a-claim-to-the-payee-as-payment-for-goods-or-services)
+{% hint style="info" %}
+Tip:
 
-## 수취인: 클레임 확인
+예비 결과가 tefMAX\_LEDGER인 경우, 트랜잭션이 영구적으로 실패한 것은 LastLedgerSequence 매개변수가 현재 ledger보다 낮기 때문입니다. 이는 트랜잭션 준비와 제출 사이에 예상되는 ledger 버전 수보다 오래 걸리는 경우 발생합니다. 이 경우 더 높은 LastLedgerSequence 값으로 1단계부터 다시 시작하세요.
+{% endhint %}
 
-수취인 거래소는 지급인 거래소가 전송한 청구를 확인합니다.
+## 요청 예시
 
-청구를 확인한 후 수취인 거래소는 지급인 거래소가 보낸 데스티네이션 태그에 표시된 고객 계정에 청구된 XRP를 입금해야 합니다. 청구 금액은 누적되므로 수취인 거래소는 고객에게 이전 청구 금액과의 차액만 입금하도록 주의해야 합니다.
+{% tabs %}
+{% tab title="ripple-lib 1.x" %}
+```javascript
+'use strict'
+const RippleAPI = require('ripple-lib').RippleAPI
 
-예를 들어, 고객에게 3000의 청구 금액을 입금하려면 수취인 거래소는 이전 청구 금액이 2000이라는 것을 알아야 합니다. 청구 금액과 이전 청구 금액의 차액(3000 - 2000 = 1000)이 수취인 거래소가 고객 계정에 입금해야 하는 금액입니다.
+// This example connects to a public Test Net server
+const api = new RippleAPI({server: 'wss://s.altnet.rippletest.net:51233'})
+api.connect().then(() => {
+  console.log('Connected')
 
-[청구 확인](https://xrpl.org/use-payment-channels.html#5-the-payee-verifies-the-claims)
+  const tx_blob = "12001022800000002400000002201B0077911368400000000000000"+
+    "C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6"+
+    "CFCF2E359045FF4BB400744630440220181FE2F945EBEE632966D5FB03114611E3047"+
+    "ACD155AA1BDB9DF8545C7A2431502201E873A4B0D177AB250AF790CE80621E16F1415"+
+    "06CF507586038FC4A8E95887358114735FF88E5269C80CD7F7AF10530DAB840BBF6FD"+
+    "F8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39"
 
-## 수취인: 일괄 상환
+  return api.submit(tx_blob)
+}).then(response => {
+  console.log("Preliminary transaction result:", response.resultCode)
 
-수취인 거래소는 지급인 거래소에서 보장하는 XRP를 받을 수 있는지 확인한 후 청구 건을 일괄적으로 상환할 수 있습니다. 다음은 수취인 거래소가 청구 상환 빈도를 결정할 때 사용할 수 있는 몇 가지 지침입니다:
+// Disconnect and return
+}).then(() => {
+  api.disconnect().then(() => {
+    console.log('Disconnected')
+    process.exit()
+  })
+}).catch(console.error)
+```
+{% endtab %}
 
-* 모든 청구를 상환하지 마세요. 그렇게 하면 결제 채널에서 아무런 이득을 얻지 못합니다.
-* 손실에 대한 두려움보다 더 많은 금액이 청구될 때까지 기다리지 마세요. 문제가 발생하여 청구를 상환할 기회를 놓치면 대금을 지급받지 못합니다. 이런 일이 발생하고 이미 시스템에서 한 명 이상의 고객에게 크레딧을 지급했다면 문제가 발생할 수 있습니다. 해당 고객은 이미 XRP를 다른 암호화폐로 거래하고 인출했을 수 있습니다. 그러면 고객에게 지급해야 할 XRP가 시스템에 더 많이 남게 되고, 입금을 받지 못한 고객의 잔액을 수정하기에는 너무 늦습니다.
-* 결제자가 채널 폐쇄를 요청하는 경우, 채널 폐쇄가 완료되기 전에 청구를 상환하지 않으면 대금을 지급받지 못합니다. 지급받을 수 있는 시간은 SettleDelay을 기준으로 합니다.
-* 채널이 변경할 수 없는 CancelAfter 시간으로 생성된 경우 해당 시간 전에 미결제 청구를 모두 상환해야 합니다.
-* 예를 들어 일정 시간이 지난 후, 일정 금액의 크레딧을 적립한 후 또는 결제자 거래소를 얼마나 신뢰하는지와 같은 기타 기준에 따라 상환을 결정할 수 있습니다. 가장 안전한 전략은 이러한 기준의 조합을 기반으로 하는 것입니다.
+{% tab title="WebSocket" %}
+```json
+{
+  "id": "submit_req_1",
+  "command": "submit",
+  "tx_blob": "120010228000000024000000042E00000001501146060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE29168400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB40074463044022071A341F911A8EF3B68399487CAF5BA3B59C6FE476B626698AEF044B8183721BC0220166053A859BD907251DFCCF34DD71202180EBABAE7098BB5903D16EBFC993C408114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39"
+}
+```
+{% endtab %}
 
-[일괄 상환](https://xrpl.org/use-payment-channels.html#8-when-ready-the-payee-redeems-a-claim-for-the-authorized-amount)
+{% tab title="Commandline" %}
+```json
+rippled submit 120010228000000024000000012A21FB3DF12E00000001501146060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE29168400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB40074473045022100EB5A9001E14FC7304C4C2DF66507F9FC59D17FDCF98B43A4E30356658AB2A7CF02207127187EE0F287665D9552D15BEE6B00D3C6691C6773CE416E8A714B853F44FC8114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39
+```
+{% endtab %}
+{% endtabs %}
 
-## 송금인과 수취인: 결제 채널 계속 사용
+## 응답 예시
 
-지급자 및 수취인 교환은 결제 채널에서 설정한 매개변수 내에서 필요에 따라 청구 배치를 계속 전송, 확인 및 상환할 수 있습니다.
+{% tabs %}
+{% tab title="ripple-lib 1.x" %}
+```javascript
+Connected
+Preliminary transaction result: tesSUCCESS
+Disconnected
+```
+{% endtab %}
 
-[결제 채널 계속 사용](https://xrpl.org/use-payment-channels.html#7-repeat-steps-3-6-as-desired)
+{% tab title="WebSocket" %}
+```javascript
+{
+  "id": "submit_req_1",
+  "result": {
+    "engine_result": "terQUEUED",
+    "engine_result_code": -89,
+    "engine_result_message": "Held until escalated fee drops.",
+    "tx_blob": "120010228000000024000000042E00000001501146060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE29168400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB40074463044022071A341F911A8EF3B68399487CAF5BA3B59C6FE476B626698AEF044B8183721BC0220166053A859BD907251DFCCF34DD71202180EBABAE7098BB5903D16EBFC993C408114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39",
+    "tx_json": {
+      "Account": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+      "Destination": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+      "DestinationTag": 1,
+      "Fee": "12",
+      "Flags": 2147483648,
+      "InvoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+      "SendMax": "100000000",
+      "Sequence": 4,
+      "SigningPubKey": "03B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400",
+      "TransactionType": "CheckCreate",
+      "TxnSignature": "3044022071A341F911A8EF3B68399487CAF5BA3B59C6FE476B626698AEF044B8183721BC0220166053A859BD907251DFCCF34DD71202180EBABAE7098BB5903D16EBFC993C40",
+      "hash": "09D992D4C89E2A24D4BA9BB57ED81C7003815940F39B7C87ADBF2E49034380BB"
+    }
+  },
+  "status": "success",
+  "type": "response"
+}
+```
+{% endtab %}
 
-## 지급인: 때가 되면 결제 채널 폐쇄 요청을 합니다.
+{% tab title="Commandline" %}
+```json
+Loading: "/etc/opt/ripple/rippled.cfg"
+2018-Mar-28 01:52:49 HTTPClient:NFO Connecting to 127.0.0.1:5005
 
-지급인 교환과 수취인 교환이 결제 채널을 사용하여 완료된 경우, 지급인 교환은 결제 채널 폐쇄를 요청할 수 있습니다.
+{
+  "result": {
+    "engine_result": "terQUEUED",
+    "engine_result_code": -89,
+    "engine_result_message": "Held until escalated fee drops.",
+    "status" : "success",
+    "tx_blob" : "120010228000000024000000012A21FB3DF12E00000001501146060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE29168400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB40074473045022100EB5A9001E14FC7304C4C2DF66507F9FC59D17FDCF98B43A4E30356658AB2A7CF02207127187EE0F287665D9552D15BEE6B00D3C6691C6773CE416E8A714B853F44FC8114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39",
+    "tx_json" : {
+      "Account" : "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+      "Destination" : "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+      "DestinationTag" : 1,
+      "Expiration" : 570113521,
+      "Fee" : "12",
+      "Flags" : 2147483648,
+      "InvoiceID" : "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+      "SendMax" : "100000000",
+      "Sequence" : 1,
+      "SigningPubKey" : "03B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400",
+      "TransactionType" : "CheckCreate",
+      "TxnSignature" : "3045022100EB5A9001E14FC7304C4C2DF66507F9FC59D17FDCF98B43A4E30356658AB2A7CF02207127187EE0F287665D9552D15BEE6B00D3C6691C6773CE416E8A714B853F44FC",
+      "hash" : "07C3B2878B6941FED97BA647244531B7E2203268B05C71C3A1A014045ADDF408"
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
 
-[결제 채널 폐쇄](https://xrpl.org/use-payment-channels.html#9-when-the-payer-and-payee-are-done-doing-business-the-payer-requests-for-the-channel-to-be-closed)
+## 4. 유효성 검사 대기
+
+라이브 네트워크(mainnet, testnet 또는 devnet 포함)에서는 ledger가 자동으로 닫힐 때까지 4\~7초 정도 기다릴 수 있습니다.
+
+stand-alone 모드에서 rippled을 실행하는 경우, ledger\_accept 메소드를 사용하여 ledger를 수동으로 닫아야 합니다.
+
+## 5. 최종 결과 확인
+
+트랜잭션의 상태를 확인하려면 CheckCreate 트랜잭션의 식별 해시와 함께 tx 메소드를 사용하세요. 트랜잭션의 메타데이터에서 "TransactionResult": "tesSUCCESS" 필드와 이 결과가 최종 결과임을 나타내는 결과에서 "validated": true 필드를 찾습니다.
+
+트랜잭션 메타데이터에서 LedgerEntryType이 "Check"인 CreatedNode 객체를 찾습니다. 이는 트랜잭션이 수표 ledger 객체를 생성했음을 나타냅니다. 이 객체의 LedgerIndex는 수표의 ID입니다. 다음 예제에서 수표의 ID는 84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9입니다.
+
+## 요청 예시
+
+{% tabs %}
+{% tab title="rippled-lib 1.x" %}
+```javascript
+'use strict'
+const RippleAPI = require('ripple-lib').RippleAPI
+const decodeAddress = require('ripple-address-codec').decodeAddress;
+const createHash = require('crypto').createHash;
+
+// This example connects to a public Test Net server
+const api = new RippleAPI({server: 'wss://s.altnet.rippletest.net:51233'})
+api.connect().then(() => {
+  console.log('Connected')
+
+  const tx_hash = "C0B27D20669BAB837B3CDF4B8148B988F17CE1EF8EDF48C806AE9BF69E16F441"
+
+  return api.getTransaction(tx_hash)
+}).then(response => {
+  console.log("Final transaction result:", response)
+
+  // Re-calculate checkID to work around issue ripple-lib#876
+  const checkIDhasher = createHash('sha512')
+  checkIDhasher.update(Buffer.from('0043', 'hex'))
+  checkIDhasher.update(new Buffer(decodeAddress(response.address)))
+  const seqBuf = Buffer.alloc(4)
+  seqBuf.writeUInt32BE(response.sequence, 0)
+  checkIDhasher.update(seqBuf)
+  const checkID = checkIDhasher.digest('hex').slice(0,64).toUpperCase()
+  console.log("Calculated checkID:", checkID)
+
+// Disconnect and return
+}).then(() => {
+  api.disconnect().then(() => {
+    console.log('Disconnected')
+    process.exit()
+  })
+}).catch(console.error)
+```
+{% endtab %}
+
+{% tab title="WebSocket" %}
+```json
+{
+  "id": "tx_req_1",
+  "command": "tx",
+  "transaction": "09D992D4C89E2A24D4BA9BB57ED81C7003815940F39B7C87ADBF2E49034380BB"
+}
+```
+{% endtab %}
+
+{% tab title="Commandline" %}
+```json
+rippled tx 07C3B2878B6941FED97BA647244531B7E2203268B05C71C3A1A014045ADDF408
+```
+{% endtab %}
+{% endtabs %}
+
+## 응답 예시
+
+{% tabs %}
+{% tab title="rippled-lib 1.x" %}
+```javascript
+Connected
+Final transaction result: { type: 'checkCreate',
+  address: 'rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za',
+  sequence: 2,
+  id: 'C0B27D20669BAB837B3CDF4B8148B988F17CE1EF8EDF48C806AE9BF69E16F441',
+  specification:
+   { destination: 'rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis',
+     sendMax: { currency: 'XRP', value: '100' } },
+  outcome:
+   { result: 'tesSUCCESS',
+     timestamp: '2018-03-27T20:47:40.000Z',
+     fee: '0.000012',
+     balanceChanges: { rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za: [Array] },
+     orderbookChanges: {},
+     ledgerVersion: 7835887,
+     indexInLedger: 0 } }
+Calculated checkID: CEA5F0BD7B2B5C85A70AE735E4CE722C43C86410A79AB87C11938AA13A11DBF9
+Disconnected
+```
+{% endtab %}
+
+{% tab title="WebSocket" %}
+```json
+{
+  "id": "tx_req_1",
+  "result": {
+    "Account": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+    "Destination": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+    "DestinationTag": 1,
+    "Fee": "12",
+    "Flags": 2147483648,
+    "InvoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+    "SendMax": "100000000",
+    "Sequence": 4,
+    "SigningPubKey": "03B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400",
+    "TransactionType": "CheckCreate",
+    "TxnSignature": "3044022071A341F911A8EF3B68399487CAF5BA3B59C6FE476B626698AEF044B8183721BC0220166053A859BD907251DFCCF34DD71202180EBABAE7098BB5903D16EBFC993C40",
+    "date": 575516100,
+    "hash": "09D992D4C89E2A24D4BA9BB57ED81C7003815940F39B7C87ADBF2E49034380BB",
+    "inLedger": 7841263,
+    "ledger_index": 7841263,
+    "meta": {
+      "AffectedNodes": [
+        {
+          "ModifiedNode": {
+            "FinalFields": {
+              "Flags": 0,
+              "Owner": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+              "RootIndex": "3F248A0715ECCAFC3BEE0C63C8F429ACE54ABC403AAF5F2885C2B65D62D1FAC1"
+            },
+            "LedgerEntryType": "DirectoryNode",
+            "LedgerIndex": "3F248A0715ECCAFC3BEE0C63C8F429ACE54ABC403AAF5F2885C2B65D62D1FAC1"
+          }
+        },
+        {
+          "CreatedNode": {
+            "LedgerEntryType": "Check",
+            "LedgerIndex": "84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9",
+            "NewFields": {
+              "Account": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+              "Destination": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+              "DestinationTag": 1,
+              "InvoiceID": "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+              "SendMax": "100000000",
+              "Sequence": 4
+            }
+          }
+        },
+        {
+          "ModifiedNode": {
+            "FinalFields": {
+              "Account": "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+              "Balance": "9999999952",
+              "Flags": 0,
+              "OwnerCount": 2,
+              "Sequence": 5
+            },
+            "LedgerEntryType": "AccountRoot",
+            "LedgerIndex": "A9A591BA661F69433D5BEAA49F10BA2B8DEA5183EF414B9130BFE5E0328FE875",
+            "PreviousFields": {
+              "Balance": "9999999964",
+              "OwnerCount": 1,
+              "Sequence": 4
+            },
+            "PreviousTxnID": "45AF36CF7A810D0054C38C82C898EFC7E4898DF94FA7A3AAF80CB868708F7CE0",
+            "PreviousTxnLgrSeq": 7841237
+          }
+        },
+        {
+          "ModifiedNode": {
+            "FinalFields": {
+              "Flags": 0,
+              "Owner": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+              "RootIndex": "C6A30AD85346718C7148D161663F84A96A4F0CE7F4D68C3C74D176A6C50BA6B9"
+            },
+            "LedgerEntryType": "DirectoryNode",
+            "LedgerIndex": "C6A30AD85346718C7148D161663F84A96A4F0CE7F4D68C3C74D176A6C50BA6B9"
+          }
+        }
+      ],
+      "TransactionIndex": 0,
+      "TransactionResult": "tesSUCCESS"
+    },
+    "validated": true
+  },
+  "status": "success",
+  "type": "response"
+}
+```
+{% endtab %}
+
+{% tab title="Commandline" %}
+```json
+Loading: "/etc/opt/ripple/rippled.cfg"
+2018-Mar-28 02:17:55 HTTPClient:NFO Connecting to 127.0.0.1:5005
+
+{
+   "result" : {
+      "Account" : "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+      "Destination" : "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+      "DestinationTag" : 1,
+      "Expiration" : 570113521,
+      "Fee" : "12",
+      "Flags" : 2147483648,
+      "InvoiceID" : "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+      "SendMax" : "100000000",
+      "Sequence" : 1,
+      "SigningPubKey" : "03B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400",
+      "TransactionType" : "CheckCreate",
+      "TxnSignature" : "3045022100EB5A9001E14FC7304C4C2DF66507F9FC59D17FDCF98B43A4E30356658AB2A7CF02207127187EE0F287665D9552D15BEE6B00D3C6691C6773CE416E8A714B853F44FC",
+      "hash" : "07C3B2878B6941FED97BA647244531B7E2203268B05C71C3A1A014045ADDF408"
+
+      "date" : 575516100,
+      "inLedger" : 7841263,
+      "ledger_index" : 7841263,
+      "meta" : {
+         "AffectedNodes" : [
+            {
+               "ModifiedNode" : {
+                  "FinalFields" : {
+                     "Flags" : 0,
+                     "Owner" : "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+                     "RootIndex" : "3F248A0715ECCAFC3BEE0C63C8F429ACE54ABC403AAF5F2885C2B65D62D1FAC1"
+                  },
+                  "LedgerEntryType" : "DirectoryNode",
+                  "LedgerIndex" : "3F248A0715ECCAFC3BEE0C63C8F429ACE54ABC403AAF5F2885C2B65D62D1FAC1"
+               }
+            },
+            {
+               "CreatedNode" : {
+                  "LedgerEntryType" : "Check",
+                  "LedgerIndex" : "84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9",
+                  "NewFields" : {
+                     "Account" : "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+                     "Destination" : "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+                     "DestinationTag" : 1,
+                     "InvoiceID" : "46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291",
+                     "SendMax" : "100000000",
+                     "Sequence" : 1
+                  }
+               }
+            },
+            {
+               "ModifiedNode" : {
+                  "FinalFields" : {
+                     "Account" : "rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za",
+                     "Balance" : "9999999952",
+                     "Flags" : 0,
+                     "OwnerCount" : 2,
+                     "Sequence" : 2
+                  },
+                  "LedgerEntryType" : "AccountRoot",
+                  "LedgerIndex" : "A9A591BA661F69433D5BEAA49F10BA2B8DEA5183EF414B9130BFE5E0328FE875",
+                  "PreviousFields" : {
+                     "Balance" : "9999999964",
+                     "OwnerCount" : 1,
+                     "Sequence" : 1
+                  },
+                  "PreviousTxnID" : "45AF36CF7A810D0054C38C82C898EFC7E4898DF94FA7A3AAF80CB868708F7CE0",
+                  "PreviousTxnLgrSeq" : 7841237
+               }
+            },
+            {
+               "ModifiedNode" : {
+                  "FinalFields" : {
+                     "Flags" : 0,
+                     "Owner" : "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",
+                     "RootIndex" : "C6A30AD85346718C7148D161663F84A96A4F0CE7F4D68C3C74D176A6C50BA6B9"
+                  },
+                  "LedgerEntryType" : "DirectoryNode",
+                  "LedgerIndex" : "C6A30AD85346718C7148D161663F84A96A4F0CE7F4D68C3C74D176A6C50BA6B9"
+               }
+            }
+         ],
+         "TransactionIndex" : 0,
+         "TransactionResult" : "tesSUCCESS"
+      },
+      "status" : "success",
+      "validated" : true
+   }
+}
+```
+{% endtab %}
+{% endtabs %}
