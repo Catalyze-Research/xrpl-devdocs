@@ -138,7 +138,7 @@
   * [JavaScript를 이용한 브라우저 지갑 개발(Build a Browser Wallet in JavaScript)](tutorials/javascript/javascript-build-a-browser-wallet-in-javascript.md)
   * [JavaScript를 이용한 데스크탑 지갑 개발(Build a Desktop Wallet in JavaScript)](tutorials/javascript/javascript-build-a-desktop-wallet-in-javascript.md)
 * [Java](tutorials/java/README.md)
-  * [Java로 시작하기](tutorials/java/java.md)
+  * [Java로 시작하기(Get Started Using Java)](tutorials/java/java-get-started-using-java.md)
 * [HTTP / Websocket APIs](tutorials/http-websocket-apis/README.md)
   * [HTTP/WebSocket API 사용 시작하기(Get Started Using HTTP / WebSocket APIs)](tutorials/http-websocket-apis/http-websocket-api-get-started-using-http-websocket-apis.md)
   * [WebSocket으로 수신 결제 모니터링(Monitor Incoming Payments with WebSocket)](tutorials/http-websocket-apis/websocket-monitor-incoming-payments-with-websocket.md)
@@ -226,8 +226,8 @@
     * [rippled 서버가 수정이 차단됨](tutorials/rippled/undefined-1/rippled-2.md)
     * [rippled 서버가 시작되지 않음](tutorials/rippled/undefined-1/rippled-3.md)
     * [SQLite 트랜잭션 데이터베이스 페이지 크기 문제 해결](tutorials/rippled/undefined-1/sqlite.md)
-* [클리오 서버 관리](tutorials/undefined/README.md)
-  * [우분투 리눅스에 클리오 설치](tutorials/undefined/undefined.md)
+* [클리오 서버 관리](tutorials/undefined-3/README.md)
+  * [우분투 리눅스에 클리오 설치](tutorials/undefined-3/undefined.md)
 
 ## References
 
