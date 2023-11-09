@@ -119,7 +119,7 @@
       * [NFTs 전송 (Transfer NFTs Using Python)](tutorials/python/4.-nfts-python.md)
       * [NFT 판매 중개 (Broker an NFT Sale Using Python)](tutorials/python/nft-python.md)
       * [공인 발행인 지정 (Assign an Authorized Minter Using Python)](tutorials/python/python.md)
-      * [NFTs 일괄 발행 (Batch Mint NFTs Using Python)](tutorials/python/python-modular-tutorials-in-python/python-nfts-nfts-using-python/nfts-batch-mint-nfts-using-python.md)
+      * [NFTs 일괄 발행 (Batch Mint NFTs Using Python)](tutorials/python/python-modular-tutorials-in-python/nfts-batch-mint-nfts-using-python.md)
     * [Python에서 데스크톱 지갑 구축(Build a Desktop Wallet in Python)](tutorials/python/python-modular-tutorials-in-python/python-build-a-desktop-wallet-in-python.md)
 * [JavaScript](tutorials/javascript/README.md)
   * [JavaScript로 시작하기(Get Started Using JavaScript)](tutorials/javascript/javascript-get-started-using-javascript.md)
@@ -175,13 +175,9 @@
     * [동결 금지 활성화](tutorials/tasks/use-tokens/undefined-2.md)
     * [글로벌 동결 시행](tutorials/tasks/use-tokens/undefined-3.md)
     * [신뢰선 동결하기](tutorials/tasks/use-tokens/undefined-4.md)
-* [빠른 시작](tutorials/undefined.md)
-* [시작하기](tutorials/undefined-1/README.md)
-  * [Javascript로 시작하기](tutorials/undefined-1/javascript.md)
 * [Apps 구축](tutorials/apps/README.md)
   * [JS에서 데스크톱 지갑 구축](tutorials/apps/js.md)
   * [JS에서 브라우저 지갑 구축](tutorials/apps/js-1.md)
-* [생산 준비](tutorials/undefined-2.md)
 * [XRP Ledger 비즈니스](tutorials/xrp-ledger/README.md)
   * [XRP 차트에 거래소 등록하기](tutorials/xrp-ledger/xrp.md)
   * [스테이블코인 발행자 되기](tutorials/xrp-ledger/undefined.md)
@@ -230,8 +226,8 @@
     * [rippled 서버가 수정이 차단됨](tutorials/rippled/undefined-1/rippled-2.md)
     * [rippled 서버가 시작되지 않음](tutorials/rippled/undefined-1/rippled-3.md)
     * [SQLite 트랜잭션 데이터베이스 페이지 크기 문제 해결](tutorials/rippled/undefined-1/sqlite.md)
-* [클리오 서버 관리](tutorials/undefined-3/README.md)
-  * [우분투 리눅스에 클리오 설치](tutorials/undefined-3/undefined.md)
+* [클리오 서버 관리](tutorials/undefined/README.md)
+  * [우분투 리눅스에 클리오 설치](tutorials/undefined/undefined.md)
 
 ## References
 

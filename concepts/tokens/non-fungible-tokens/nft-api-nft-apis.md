@@ -34,4 +34,4 @@
 * [nft\_info](../../../references/http-websocket-apis/api-1/undefined-5/nft\_info.md) - 지정된 NFT에 대한 현재 상태 정보를 가져옵니다.
 * [nft\_history](../../../references/http-websocket-apis/api-1/undefined-5/nft\_history.md) - 지정된 NFT에 대한 과거 트랜잭션 메타데이터를 가져옵니다.&#x20;
 
-클리오 서버에 접속하려면 해당 URL과 클리오 포트(일반적으로 51233)로 요청을 보내면 됩니다. 공개 클리오 API 서버는 SLA(Servie Level Agreement)가 없으며 우선순위로 수정되는 책임도 없습니다. 비즈니스 케이스에서 지속적인 모니터링과 정보 요청이 필요한 경우, 자체 클리오 서버 인스턴스를 설정하는 것을 고려해야 합니다. [install-clio-on-ubuntu](../../../tutorials/undefined-3/undefined.md)를 참조하세요.
+클리오 서버에 접속하려면 해당 URL과 클리오 포트(일반적으로 51233)로 요청을 보내면 됩니다. 공개 클리오 API 서버는 SLA(Servie Level Agreement)가 없으며 우선순위로 수정되는 책임도 없습니다. 비즈니스 케이스에서 지속적인 모니터링과 정보 요청이 필요한 경우, 자체 클리오 서버 인스턴스를 설정하는 것을 고려해야 합니다. [install-clio-on-ubuntu](../../../tutorials/undefined/undefined.md)를 참조하세요.

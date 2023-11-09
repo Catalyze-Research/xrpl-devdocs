@@ -23,7 +23,7 @@ XRP Ledger의 중심인 P2P 네트워크는 합의 규칙과 거래 처리를 �
 
 XRP Ledger 데이터에 접근하기 위해 [프로그래밍 라이브러리](https://xrpl.org/client-libraries.html)는 엄밀히 말해 필수적이지 않습니다. HTTP나 WebSocket을 사용하여 직접 [rippled API](../../references/http-websocket-apis/)에 연결할 수 있습니다. 라이브러리는 <mark style="background-color:yellow;">rippled</mark> API에 접근하는 일반적인 작업을 간소화하고, 데이터를 라이브러리의 프로그래밍 언어에서 더 쉽게 이해하고 프로그래밍할 수 있는 형태로 변환합니다.
 
-[JavaScript용 xrpl.js](../../tutorials/undefined-1/javascript.md)(이전에 "ripple-lib"라고 불렸음)는 XRP Ledger에 접근하기 위한 가장 오래되고 가장 잘 지원되는 라이브러리입니다. 많은 [미들웨어 서비스](undefined-1.md#undefined-2)는 내부적으로 이런 프로그래밍 라이브러리를 사용합니다.
+[JavaScript용 xrpl.js](broken-reference)(이전에 "ripple-lib"라고 불렸음)는 XRP Ledger에 접근하기 위한 가장 오래되고 가장 잘 지원되는 라이브러리입니다. 많은 [미들웨어 서비스](undefined-1.md#undefined-2)는 내부적으로 이런 프로그래밍 라이브러리를 사용합니다.
 
 ## 미들웨어
 
