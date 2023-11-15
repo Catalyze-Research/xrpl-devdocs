@@ -16,7 +16,7 @@ P2P XRP Ledger 네트워크는 애플리케이션에 ledger의 상태에 대한 
 * [트랜잭션 비용](../transactions/transaction-cost.md) 및 [reserve](../undefined-2/reserves.md) 금액과 같은 네트워크 설정.&#x20;
 * 타임스탬프.
 
-Ledger 버전에서 포함되는 데이터에 대한 자세한 기술적 설명은 [ledger 형식 참조](../../references/xrp-ledger/ledger/) 문서를 참조하십시오.
+Ledger 버전에서 포함되는 데이터에 대한 자세한 기술적 설명은 [ledger 형식 참조](../../references/xrp-ledger/ledger-ledger-data-formats/) 문서를 참조하십시오.
 
 <figure><img src="../../.gitbook/assets/Consensus_1.png" alt=""><figcaption></figcaption></figure>
 
@@ -50,7 +50,7 @@ tes와 tec 외의 다른 결과 코드 클래스도 있습니다. 다른 결과�
 
 XRP Ledger API와 작업할 때, 애플리케이션은 후보 거래와 유효화된 거래를 구분해야 합니다. 유효화된 ledger에 포함된 거래 결과만이 불변합니다. 후보 거래는 나중에 유효화된 ledger에 포함될 수도 있고, 포함되지 않을 수도 있습니다.
 
-중요: 일부 [<mark style="background-color:yellow;">rippled</mark> API](../../references/http-websocket-apis/)는 후보 결과를 제공할 수 있습니다. 애플리케이션은 결코 후보 결과에 의존하여 거래의 최종 결과를 판단해서는 안됩니다. 거래가 최종적으로 성공했음을 확신하기 위해서는 거래의 상태를 확인하여 유효화된 ledger에 포함되었고 <mark style="background-color:yellow;">tesSUCCESS</mark> 결과 코드를 갖는지 여부를 확인해야 합니다. 만약 거래가 유효화된 ledger에 다른 결과 코드와 함께 포함되어 있다면, 거래는 실패한 것입니다. 거래의 [<mark style="background-color:yellow;">LastLedgerSequence</mark>](../../references/xrp-ledger/undefined-1/undefined.md)에 지정된 ledger이 유효화되었지만, 해당 거래가 해당 ledger이나 이전 ledger에 나타나지 않는다면 해당 거래는 실패한 것이며 어떠한 ledger에도 나타날 수 없습니다. 유효화된 ledger에 나타나거나 <mark style="background-color:yellow;">LastLedgerSequence</mark> 제한으로 인해 나타날 수 없는 거래에 대해서만 최종 결과를 알 수 있습니다. 이에 대한 자세한 내용은 이 문서의 이후 설명에서 설명됩니다.
+중요: 일부 [<mark style="background-color:yellow;">rippled</mark> API](../../references/http-websocket-apis/)는 후보 결과를 제공할 수 있습니다. 애플리케이션은 결코 후보 결과에 의존하여 거래의 최종 결과를 판단해서는 안됩니다. 거래가 최종적으로 성공했음을 확신하기 위해서는 거래의 상태를 확인하여 유효화된 ledger에 포함되었고 <mark style="background-color:yellow;">tesSUCCESS</mark> 결과 코드를 갖는지 여부를 확인해야 합니다. 만약 거래가 유효화된 ledger에 다른 결과 코드와 함께 포함되어 있다면, 거래는 실패한 것입니다. 거래의 [<mark style="background-color:yellow;">LastLedgerSequence</mark>](../../references/xrp-ledger/undefined/undefined.md)에 지정된 ledger이 유효화되었지만, 해당 거래가 해당 ledger이나 이전 ledger에 나타나지 않는다면 해당 거래는 실패한 것이며 어떠한 ledger에도 나타날 수 없습니다. 유효화된 ledger에 나타나거나 <mark style="background-color:yellow;">LastLedgerSequence</mark> 제한으로 인해 나타날 수 없는 거래에 대해서만 최종 결과를 알 수 있습니다. 이에 대한 자세한 내용은 이 문서의 이후 설명에서 설명됩니다.
 
 ## XRP Ledger 프로토콜 - 컨센서스와 유효화(The XRP Ledger Protocol – Consensus and Validation)
 

@@ -2,7 +2,7 @@
 
 XRP Ledger의 중요하고 의도된 기능 중 하나는 [트랜잭션](../transactions/)이 [컨센서스 과정](consensus-structure.md)에서 유효성 검사를 거친 ledger 버전에 포함된 순간 결과가 최종적이라는 것입니다.
 
-만약 트랜잭션이 아직 유효성 검사된 ledger에 포함되지 않았다면, 동일한 송신 주소에서 동일한 <mark style="background-color:yellow;">시퀀스</mark> 값을 가지는 다른 트랜잭션을 보내어 효과적으로 취소할 수 있을 수도 있습니다. 취소하고자 하는 트랜잭션과 동일한 동작을 하는 트랜잭션을 수행하지 않도록 하기 위해 옵션 없이 [AccountSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 보내면 됩니다.
+만약 트랜잭션이 아직 유효성 검사된 ledger에 포함되지 않았다면, 동일한 송신 주소에서 동일한 <mark style="background-color:yellow;">시퀀스</mark> 값을 가지는 다른 트랜잭션을 보내어 효과적으로 취소할 수 있을 수도 있습니다. 취소하고자 하는 트랜잭션과 동일한 동작을 하는 트랜잭션을 수행하지 않도록 하기 위해 옵션 없이 [AccountSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/accountset.md)을 보내면 됩니다.
 
 {% hint style="info" %}
 Caution:

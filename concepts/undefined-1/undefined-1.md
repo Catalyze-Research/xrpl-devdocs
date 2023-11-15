@@ -12,14 +12,14 @@ XRP Ledger 수표는 더 이상 현금화될 수 없는 만료 시간을 가질 
 
 ## 수표 수명주기
 
-1. 송신자는 [CheckCreate 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/checkcreate.md)을 보냅니다, 이것은 다음을 정의합니다:
+1. 송신자는 [CheckCreate 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/checkcreate.md)을 보냅니다, 이것은 다음을 정의합니다:
 
 * 수령인.
 * 만료 날짜.
 * 그들의 계정에서 인출될 수 있는 최대 금액.&#x20;
 
-2. 트랜잭션이 처리될 때, XRP Ledger는 <mark style="background-color:yellow;">수표</mark> 객체를 생성합니다. 수표는 송신자나 수신자가 [CheckCancel 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/checkcancel.md)으로 취소할 수 있습니다.
-3. 수령인은 자금을 이체하고 <mark style="background-color:yellow;">수표</mark> 객체를 파괴하는 [CheckCash 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/checkcash.md)을 제출합니다. 수령인은 수표를 현금화하는 데 두 가지 옵션이 있습니다:
+2. 트랜잭션이 처리될 때, XRP Ledger는 <mark style="background-color:yellow;">수표</mark> 객체를 생성합니다. 수표는 송신자나 수신자가 [CheckCancel 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/checkcancel.md)으로 취소할 수 있습니다.
+3. 수령인은 자금을 이체하고 <mark style="background-color:yellow;">수표</mark> 객체를 파괴하는 [CheckCash 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/checkcash.md)을 제출합니다. 수령인은 수표를 현금화하는 데 두 가지 옵션이 있습니다:
 
 * 정확한 금액: 그들은 수표 최대 금액을 초과하지 않는 정확한 금액을 현금화하도록 지정합니다.
 * 유연한 금액: 그들은 현금화할 최소 금액을 지정하고 XRP Ledger는 수표 최대 금액까지 가능한 한 많은 금액을 전달합니다. 송신자가 지정된 최소 금액을 적어도 충족시키기 위한 자금을 보유하고 있지 않으면 트랜잭션은 실패합니다.&#x20;
@@ -62,7 +62,7 @@ For more information about related features, see:
 {% hint style="info" %}
 Note:&#x20;
 
-[수표 수정안](../xrp-ledger/amendments/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../tokens/decentralized-exchange/offers.md#undefined-6)를 참조하세요.
+[수표 수정안](../xrp-ledger/amendments/undefined.md)은 [OfferCreate](../../references/xrp-ledger/undefined/undefined-1/offercreate.md) 트랜잭션의 만료 동작을 변경합니다. 자세한 내용은 [제안 만료](../tokens/decentralized-exchange/offers.md#undefined-6)를 참조하세요.
 {% endhint %}
 
 ## 수표의 필요성
@@ -75,7 +75,7 @@ XRP Ledger 수표는 또한 XRP Ledger에만 있는 문제를 해결합니다. �
 
 **문제:** [BSA, KYC, AML 및 CFT](../../tutorials/xrp-ledger/undefined.md)와 같은 규정을 준수하기 위해 금융 기관은 받은 자금의 원천에 대한 문서를 제공해야 합니다. 이러한 규정은 기관이 처리하는 모든 지불의 원천과 목적지를 알고자 하여 불법 자금 이체를 방지하기 위한 것입니다. XRP Ledger의 특성 상, 누구든지 잠재적으로 XRP(그리고 적절한 조건하에 토큰)를 기관의 XRP Ledger 계정으로 송금할 수 있습니다. 이러한 원하지 않는 지불을 처리하는 것은 이러한 기관의 규정 준수 부서에 상당한 비용과 시간 지연을 유발하며, 잠재적으로 벌금이나 처벌을 받을 수도 있습니다.
 
-**해결책:** 기관은 [AccountSet 거래에서 <mark style="background-color:yellow;">asfDepositAuth</mark> 플래그를 설정](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)하여 XRP Ledger 계정에서 [입금 승인](../undefined-2/deposit-authorization.md)을 활성화할 수 있습니다. 이렇게 하면 해당 계정은 결제 거래를 통해 자금을 받을 수 없게 됩니다. 예금 승인이 활성화된 계정은 에스크로, 결제 채널, 또는 수표를 통해 자금을 받을 수 있습니다. 수표는 예금 승인이 활성화된 경우 자금을 이동시키는 가장 직관적이고 유연한 방법입니다.
+**해결책:** 기관은 [AccountSet 거래에서 <mark style="background-color:yellow;">asfDepositAuth</mark> 플래그를 설정](../../references/xrp-ledger/undefined/undefined-1/accountset.md)하여 XRP Ledger 계정에서 [입금 승인](../undefined-2/deposit-authorization.md)을 활성화할 수 있습니다. 이렇게 하면 해당 계정은 결제 거래를 통해 자금을 받을 수 없게 됩니다. 예금 승인이 활성화된 계정은 에스크로, 결제 채널, 또는 수표를 통해 자금을 받을 수 있습니다. 수표는 예금 승인이 활성화된 경우 자금을 이동시키는 가장 직관적이고 유연한 방법입니다.
 
 ## 사용 방법
 
@@ -85,9 +85,9 @@ XRP Ledger 수표는 또한 XRP Ledger에만 있는 문제를 해결합니다. �
 
 **1단계:** 수표를 생성하기 위해 송신자는 CheckCreate 거래를 제출하고 수령인(<mark style="background-color:yellow;">Destination</mark>), 만료 시간(<mark style="background-color:yellow;">Expiration</mark>), 송신자의 계정에서 인출될 수 있는 최대 금액(<mark style="background-color:yellow;">SendMax</mark>)을 지정합니다.
 
-**2단계:** CheckCreate 거래가 처리된 후, XRP Ledger에 [Check 객체](../../references/xrp-ledger/ledger/ledger-1/check.md)가 생성됩니다. 이 객체는 생성한 거래에서 정의된 Check의 속성을 포함합니다. 만료 시간이 경과하기 전까지는 송신자([CheckCancel](../../references/xrp-ledger/undefined-1/undefined-1/checkcancel.md) 거래를 사용하여 취소) 또는 수령인(취소 또는 현금화)만이 객체를 수정할 수 있습니다. 만료 시간이 지나면 누구나 Check를 취소할 수 있습니다.
+**2단계:** CheckCreate 거래가 처리된 후, XRP Ledger에 [Check 객체](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/check.md)가 생성됩니다. 이 객체는 생성한 거래에서 정의된 Check의 속성을 포함합니다. 만료 시간이 경과하기 전까지는 송신자([CheckCancel](../../references/xrp-ledger/undefined/undefined-1/checkcancel.md) 거래를 사용하여 취소) 또는 수령인(취소 또는 현금화)만이 객체를 수정할 수 있습니다. 만료 시간이 지나면 누구나 Check를 취소할 수 있습니다.
 
-**3단계:** 수표를 현금화하기 위해 수령인은 [CheckCash](../../references/xrp-ledger/undefined-1/undefined-1/checkcash.md) 거래를 제출합니다. 수령인은 다음 두 가지 옵션 중 하나를 선택하여 수표를 현금화할 수 있습니다:
+**3단계:** 수표를 현금화하기 위해 수령인은 [CheckCash](../../references/xrp-ledger/undefined/undefined-1/checkcash.md) 거래를 제출합니다. 수령인은 다음 두 가지 옵션 중 하나를 선택하여 수표를 현금화할 수 있습니다:
 
 * <mark style="background-color:yellow;">Amount</mark> - 수령인은 정확한 현금화 금액을 지정할 수 있습니다. 이는 송신자가 [수수료](../transactions/fees.md)를 고려하여 수표를 패딩한 경우에 유용할 수 있으며, 수령인이 송장이나 계약서와 같은 정확한 금액을 수락하고자 할 때 유용할 수 있습니다.
 * <mark style="background-color:yellow;">DeliverMin</mark> - 수령인은 이 옵션을 사용하여 수표로부터 수령하려는 최소 금액을 지정할 수 있습니다. 수령인이 이 옵션을 사용하는 경우, XRP Ledger는 가능한 한 많은 금액을 제공하고 항상 이 금액 이상을 제공합니다. 수령인에게 제공될 수 있는 금액이 요청한 금액 이상이 아닌 경우 거래는 실패합니다.

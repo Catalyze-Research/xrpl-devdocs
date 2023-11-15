@@ -4,18 +4,18 @@
 
 ## NFT 객체들&#x20;
 
-* [NFToken](../../../references/xrp-ledger/undefined/nftoken.md) 데이터 타입 - ledger에 저장된 NFT 객체입니다.&#x20;
+* [NFToken](../../../references/xrp-ledger/basic-data-types/nftoken.md) 데이터 타입 - ledger에 저장된 NFT 객체입니다.&#x20;
 * Ledger 객체들&#x20;
-  * [NFTokenOffer 객체](../../../references/xrp-ledger/ledger/ledger-1/nftokenoffer.md) - NFT를 구매하거나 판매하기 위한 제안입니다.
-  * [NFTokenPage 객체](../../../references/xrp-ledger/ledger/ledger-1/nftokenpage.md) - NFT 페이지는 최대 32개의 NFT 객체를 보유할 수 있습니다. 실제로 각 NFT 페이지는 일반적으로 16-24개의 NFT를 보유합니다.&#x20;
+  * [NFTokenOffer 객체](../../../references/xrp-ledger/ledger-ledger-data-formats/ledger/nftokenoffer.md) - NFT를 구매하거나 판매하기 위한 제안입니다.
+  * [NFTokenPage 객체](../../../references/xrp-ledger/ledger-ledger-data-formats/ledger/nftokenpage.md) - NFT 페이지는 최대 32개의 NFT 객체를 보유할 수 있습니다. 실제로 각 NFT 페이지는 일반적으로 16-24개의 NFT를 보유합니다.&#x20;
 
 ## NFT 트랜잭션들&#x20;
 
-* [NFTokenMint](../../../references/xrp-ledger/undefined-1/undefined-1/nftokenmint.md) - NFT를 생성합니다.
-* [NFTokenCreateOffer](../../../references/xrp-ledger/undefined-1/undefined-1/nftokencreateoffer.md) - NFT를 구매하거나 판매하기 위한 제안을 생성합니다.
-* [NFTokenCancelOffer](../../../references/xrp-ledger/undefined-1/undefined-1/nftokencanceloffer.md) - NFT를 구매하거나 판매하기 위한 제안을 취소합니다.
-* [NFTokenAcceptOffer](../../../references/xrp-ledger/undefined-1/undefined-1/nftokenacceptoffer.md) - NFT를 구매하거나 판매하기 위한 제안을 수락합니다.
-* [NFTokenBurn](../../../references/xrp-ledger/undefined-1/undefined-1/nftokenburn.md) - NFT를 영구히 파괴합니다.
+* [NFTokenMint](../../../references/xrp-ledger/undefined/undefined-1/nftokenmint.md) - NFT를 생성합니다.
+* [NFTokenCreateOffer](../../../references/xrp-ledger/undefined/undefined-1/nftokencreateoffer.md) - NFT를 구매하거나 판매하기 위한 제안을 생성합니다.
+* [NFTokenCancelOffer](../../../references/xrp-ledger/undefined/undefined-1/nftokencanceloffer.md) - NFT를 구매하거나 판매하기 위한 제안을 취소합니다.
+* [NFTokenAcceptOffer](../../../references/xrp-ledger/undefined/undefined-1/nftokenacceptoffer.md) - NFT를 구매하거나 판매하기 위한 제안을 수락합니다.
+* [NFTokenBurn](../../../references/xrp-ledger/undefined/undefined-1/nftokenburn.md) - NFT를 영구히 파괴합니다.
 
 ## NFT 요청들&#x20;
 

@@ -1,8 +1,8 @@
 # 부분 결제
 
-[결제 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)의 송신자는 ["부분 결제" 플래그](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)를 활성화하고 <mark style="background-color:yellow;">Amount</mark> 필드가 표시하는 것보다 적은 결제를 보낼 수 있습니다. 결제를 처리할 때는 <mark style="background-color:yellow;">Amount</mark> 필드가 아닌 <mark style="background-color:yellow;">delivered\_amount</mark> 메타데이터 필드를 사용하세요. <mark style="background-color:yellow;">delivered\_amount</mark>는 결제가 실제로 전달한 금액입니다.
+[결제 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/payment.md)의 송신자는 ["부분 결제" 플래그](../../references/xrp-ledger/undefined/undefined-1/payment.md)를 활성화하고 <mark style="background-color:yellow;">Amount</mark> 필드가 표시하는 것보다 적은 결제를 보낼 수 있습니다. 결제를 처리할 때는 <mark style="background-color:yellow;">Amount</mark> 필드가 아닌 <mark style="background-color:yellow;">delivered\_amount</mark> 메타데이터 필드를 사용하세요. <mark style="background-color:yellow;">delivered\_amount</mark>는 결제가 실제로 전달한 금액입니다.
 
-결제에서 부분 결제 플래그를 활성화하지 않으면 XRP Ledger의 [결제 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)의 <mark style="background-color:yellow;">Amount</mark> 필드는 환전율과 [이체 수수료](../tokens/transfer-fees.md)를 부과한 후 전달할 금액을 지정합니다. 부분 결제 플래그(<mark style="background-color:yellow;">tfPartialPayment</mark>)는 보낸 금액을 증가시키는 대신 받은 금액을 줄여서 결제가 성공하도록 허용합니다. 부분 결제는 추가 비용을 자신에게 발생시키지 않고 [결제를 반환](../../tutorials/xrp-ledger/undefined.md)하는 데 유용합니다.
+결제에서 부분 결제 플래그를 활성화하지 않으면 XRP Ledger의 [결제 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/payment.md)의 <mark style="background-color:yellow;">Amount</mark> 필드는 환전율과 [이체 수수료](../tokens/transfer-fees.md)를 부과한 후 전달할 금액을 지정합니다. 부분 결제 플래그(<mark style="background-color:yellow;">tfPartialPayment</mark>)는 보낸 금액을 증가시키는 대신 받은 금액을 줄여서 결제가 성공하도록 허용합니다. 부분 결제는 추가 비용을 자신에게 발생시키지 않고 [결제를 반환](../../tutorials/xrp-ledger/undefined.md)하는 데 유용합니다.
 
 [트랜잭션 비용](../transactions/transaction-cost.md)으로 사용된 XRP의 금액은 트랜잭션의 유형에 관계없이 항상 송신자의 계정에서 공제됩니다. 이 트랜잭션 비용, 또는 수수료는 <mark style="background-color:yellow;">Amount</mark>에 포함되지 않습니다.
 
@@ -50,7 +50,7 @@ Amount ≥ (Delivered Amount) = SendMax - (Fees) ≥ DeliverMin > 0
 
 ## delivered\_mount 필드
 
-부분 결제가 실제로 얼마나 전달되었는지 이해하는 데 도움을 주기 위해, 성공적인 결제 트랜잭션의 메타데이터에는 <mark style="background-color:yellow;">delivered\_amount</mark> 필드가 포함되어 있습니다. 이 필드는 <mark style="background-color:yellow;">Amount</mark> 필드와 [동일한 형식](../../references/xrp-ledger/undefined/)으로 실제로 전달된 금액을 설명합니다.
+부분 결제가 실제로 얼마나 전달되었는지 이해하는 데 도움을 주기 위해, 성공적인 결제 트랜잭션의 메타데이터에는 <mark style="background-color:yellow;">delivered\_amount</mark> 필드가 포함되어 있습니다. 이 필드는 <mark style="background-color:yellow;">Amount</mark> 필드와 [동일한 형식](../../references/xrp-ledger/basic-data-types/)으로 실제로 전달된 금액을 설명합니다.
 
 부분 결제가 아닌 경우, 트랜잭션 메타데이터의 <mark style="background-color:yellow;">delivered\_amount</mark> 필드는 트랜잭션의 <mark style="background-color:yellow;">Amount</mark> 필드와 동일합니다. 결제가 토큰을 전달할 때, <mark style="background-color:yellow;">delivered\_amount</mark>은 반올림으로 인해 <mark style="background-color:yellow;">Amount</mark> 필드와 약간 다를 수 있습니다.
 

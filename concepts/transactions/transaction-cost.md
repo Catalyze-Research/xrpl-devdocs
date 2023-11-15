@@ -127,11 +127,11 @@
 
 ## 키 재설정 거래(Key Reset Transaction)
 
-특별한 경우로, 계정의 [lsfPasswordSpent 플래그](../../references/xrp-ledger/ledger/ledger-1/accountroot.md)가 비활성화된 상태에서 거래 비용이 0인 [SetRegularKey](../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md) 트랜잭션을 보낼 수 있습니다. 이 트랜잭션은 계정의 마스터 키 쌍으로 서명해야 합니다. 이러한 트랜잭션을 보내면 lsfPasswordSpent 플래그가 활성화됩니다.
+특별한 경우로, 계정의 [lsfPasswordSpent 플래그](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/accountroot.md)가 비활성화된 상태에서 거래 비용이 0인 [SetRegularKey](../../references/xrp-ledger/undefined/undefined-1/setregularkey.md) 트랜잭션을 보낼 수 있습니다. 이 트랜잭션은 계정의 마스터 키 쌍으로 서명해야 합니다. 이러한 트랜잭션을 보내면 lsfPasswordSpent 플래그가 활성화됩니다.
 
 이 기능은 RegularKey가 손상된 경우 계정을 복구할 수 있도록 설계되었습니다, 그리고 그럴 때 손상된 계정에 XRP가 얼마나 있는지에 대해 걱정할 필요가 없습니다. 이렇게 하면, 더 많은 XRP를 그 계정에 보내기 전에 계정을 다시 통제할 수 있습니다.
 
-[lsfPasswordSpent 플래그](../../references/xrp-ledger/ledger/ledger-1/accountroot.md)는 처음에 비활성화됩니다. 이 플래그는 마스터 키 쌍으로 서명한 SetRegularKey 트랜잭션을 보낼 때 활성화됩니다. 계정이 XRP [결제](../../references/xrp-ledger/undefined-1/undefined-1/payment.md)를 받을 때 다시 비활성화됩니다.
+[lsfPasswordSpent 플래그](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/accountroot.md)는 처음에 비활성화됩니다. 이 플래그는 마스터 키 쌍으로 서명한 SetRegularKey 트랜잭션을 보낼 때 활성화됩니다. 계정이 XRP [결제](../../references/xrp-ledger/undefined/undefined-1/payment.md)를 받을 때 다시 비활성화됩니다.
 
 <mark style="background-color:yellow;">rippled</mark>는 키 재설정 트랜잭션의 명목상의 트랜잭션 비용이 0임에도 불구하고 다른 트랜잭션보다 키 재설정 트랜잭션을 우선시합니다.
 

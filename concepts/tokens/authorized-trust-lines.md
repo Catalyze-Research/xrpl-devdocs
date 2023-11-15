@@ -4,7 +4,7 @@
 
 승인된 신뢰선 기능을 사용하려면 발행 계정에서 **Require Auth** 플래그를 활성화하세요. 이 설정이 활성화되어 있는 동안 다른 계정은 발행 계정으로부터 승인받은 신뢰선만 보유할 수 있습니다.
 
-신뢰선을 승인하기 위해 발행 주소에서 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보내어 자신의 계정과 승인할 계정 간의 신뢰선을 구성합니다. 한번 신뢰선을 승인하면 해당 승인을 취소할 수 없습니다. (필요한 경우 신뢰선을 [동결](freezing-tokens/)할 수는 있습니다.)
+신뢰선을 승인하기 위해 발행 주소에서 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/trustset.md)을 보내어 자신의 계정과 승인할 계정 간의 신뢰선을 구성합니다. 한번 신뢰선을 승인하면 해당 승인을 취소할 수 없습니다. (필요한 경우 신뢰선을 [동결](freezing-tokens/)할 수는 있습니다.)
 
 신뢰선을 승인하는 트랜잭션은 발행 주소로부터 서명되어야 합니다. 이는 해당 주소에 대한 위험 요소가 증가한다는 점에 주의해야 합니다.
 
@@ -20,7 +20,7 @@ XRP Ledger에서 스테이블코인을 사용하고 승인된 신뢰선을 사�
 
 1. 고객이 스테이블코인 발행자의 시스템에 등록하고, 신원 증명(일명 "고객 식별(KYC)" 정보)을 보냅니다.
 2. 고객과 스테이블코인 발행자는 서로의 XRP Ledger 주소를 알려줍니다.
-3. 고객은 발행자 주소로 향하는 신뢰선을 생성하기 위해 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 보냅니다. 이때 신뢰선의 한도를 양수로 설정합니다.
+3. 고객은 발행자 주소로 향하는 신뢰선을 생성하기 위해 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/trustset.md)을 보냅니다. 이때 신뢰선의 한도를 양수로 설정합니다.
 4. 발행자는 고객의 신뢰선을 승인하기 위해 TrustSet 트랜잭션을 보냅니다.
 
 {% hint style="info" %}
@@ -37,7 +37,7 @@ Tip:
 
 ### Require Auth 활성화
 
-다음은 <mark style="background-color:yellow;">asfRequireAuth</mark> 플래그를 사용하여 Require Auth를 활성화하는 [AccountSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/accountset.md)을 로컬 호스트의 <mark style="background-color:yellow;">rippled</mark> [제출 메소드를](../../references/http-websocket-apis/api-1/undefined-1/submit.md) 예시로 나타낸 것입니다. (주소가 발행 주소, 운영 주소 또는 대기 주소인지와 관계없이 방법은 동일하게 작동합니다.)
+다음은 <mark style="background-color:yellow;">asfRequireAuth</mark> 플래그를 사용하여 Require Auth를 활성화하는 [AccountSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/accountset.md)을 로컬 호스트의 <mark style="background-color:yellow;">rippled</mark> [제출 메소드를](../../references/http-websocket-apis/api-1/undefined-1/submit.md) 예시로 나타낸 것입니다. (주소가 발행 주소, 운영 주소 또는 대기 주소인지와 관계없이 방법은 동일하게 작동합니다.)
 
 요청:
 
@@ -68,7 +68,7 @@ Caution:
 
 ## Require Auth가 활성화된 계정인지 확인&#x20;
 
-Require Auth 설정이 활성화되어 있는지 확인하려면 account\_info 메소드를 사용하여 계정을 조회하십시오. <mark style="background-color:yellow;">result.account\_data</mark> 객체의 <mark style="background-color:yellow;">플래그</mark> 필드의 값과 [AccountRoot ledger 객체에 정의된 비트별 플래그와 비교합니다.](../../references/xrp-ledger/ledger/ledger-1/accountroot.md)
+Require Auth 설정이 활성화되어 있는지 확인하려면 account\_info 메소드를 사용하여 계정을 조회하십시오. <mark style="background-color:yellow;">result.account\_data</mark> 객체의 <mark style="background-color:yellow;">플래그</mark> 필드의 값과 [AccountRoot ledger 객체에 정의된 비트별 플래그와 비교합니다.](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/accountroot.md)
 
 플래그 값의 결과와 lsfRequireAuth <mark style="background-color:yellow;">플래그</mark> 값 (<mark style="background-color:yellow;">0x00040000</mark>)의 bitwise-AND 결과가 0이 아닌 경우 계정에 <mark style="background-color:yellow;">lsfRequireAuth</mark>가 활성화되어 있습니다. 결과가 0인 경우 계정에 Require Auth가 비활성화되어 있습니다.
 
@@ -76,7 +76,7 @@ Require Auth 설정이 활성화되어 있는지 확인하려면 account\_info �
 
 승인된 신뢰선 기능을 사용하는 경우 다른 사람은 승인되지 않은 신뢰선을 보유할 수 없습니다. 여러 통화를 발행한다면 각 통화에 대해 별도로 신뢰선을 승인해야 합니다.
 
-신뢰선을 승인하기 위해 발행 주소에서 <mark style="background-color:yellow;">LimitAmount</mark>의 <mark style="background-color:yellow;">발행자</mark>로서 사용자를 설정한 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md)을 제출하고, <mark style="background-color:yellow;">값</mark>을(신뢰할 금액) 0으로 설정하고 [<mark style="background-color:yellow;">tfSetfAuth</mark>](../../references/xrp-ledger/undefined-1/undefined-1/trustset.md) 플래그를 트랜잭션에 활성화합니다.
+신뢰선을 승인하기 위해 발행 주소에서 <mark style="background-color:yellow;">LimitAmount</mark>의 <mark style="background-color:yellow;">발행자</mark>로서 사용자를 설정한 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/trustset.md)을 제출하고, <mark style="background-color:yellow;">값</mark>을(신뢰할 금액) 0으로 설정하고 [<mark style="background-color:yellow;">tfSetfAuth</mark>](../../references/xrp-ledger/undefined/undefined-1/trustset.md) 플래그를 트랜잭션에 활성화합니다.
 
 다음은 로컬 호스트의 <mark style="background-color:yellow;">rippled</mark> [제출 메소드](../../references/http-websocket-apis/api-1/undefined-1/submit.md)를 예시로 나타낸 것입니다. 이 예시에서는 발행 주소 <mark style="background-color:yellow;">rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW</mark>가 발행한 USD를 신뢰하는 고객 주소 <mark style="background-color:yellow;">rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn</mark>에 대한 TrustSet 트랜잭션을 보내는 것입니다.
 

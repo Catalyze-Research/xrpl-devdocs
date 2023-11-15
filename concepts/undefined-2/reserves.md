@@ -24,14 +24,14 @@ Mainnet에서 현재 reserve requirement은 다음과 같습니다:
 
 분산원장에는 특정 계정이 소유하는 여러 객체(ledger entries)가 있습니다. 일반적으로 객체를 생성한 계정이 소유자(owner)가 됩니다. 각 객체는 소유자의 총 reserve requirement를 owner reserve 만큼 증가시킵니다. 객체가 분산원장에서 제거되면 그에 해당하는 소유자 reserve는 더 이상 reserve requirement 계산에 포함되지 않습니다.
 
-소유자의 reserve requirement에 가산되는 객체는 다음과 같습니다: [Checks](../undefined-1/undefined-1.md), [Deposit Preauthorizations](deposit-authorization.md), [Escrows](../undefined-1/undefined-2.md), [NFT Offers](../tokens/non-fungible-tokens/xrp-ledger-nft-trading-nftokens-on-the-xrp-ledger.md), [NFT Pages](../tokens/non-fungible-tokens/), [Offers](../../references/xrp-ledger/ledger/ledger-1/offer.md), [Payment Channels](../undefined-1/undefined-4.md), [Signer Lists](undefined-1.md), [Tickets](../undefined-1/undefined-1.md), 그리고 [신뢰선](../tokens/trust-lines-and-issuing.md).
+소유자의 reserve requirement에 가산되는 객체는 다음과 같습니다: [Checks](../undefined-1/undefined-1.md), [Deposit Preauthorizations](deposit-authorization.md), [Escrows](../undefined-1/undefined-2.md), [NFT Offers](../tokens/non-fungible-tokens/xrp-ledger-nft-trading-nftokens-on-the-xrp-ledger.md), [NFT Pages](../tokens/non-fungible-tokens/), [Offers](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/offer.md), [Payment Channels](../undefined-1/undefined-4.md), [Signer Lists](undefined-1.md), [Tickets](../undefined-1/undefined-1.md), 그리고 [신뢰선](../tokens/trust-lines-and-issuing.md).
 
 일부 특수한 경우:
 
-* Non-Fungible Tokens(NFTs)은 각각 최대 32개의 NFT를 포함하는 페이지로 그룹화되며, 소유자 reserve은 페이지 당 적용되며 NFT 당으로 적용되지 않습니다. 페이지를 분할하고 결합하는 메커니즘으로 인해 페이지당 실제 저장되는 NFT의 수가 다를 수 있습니다. 참고[: NFTokenPage 객체의 reserve](../../references/xrp-ledger/ledger/ledger-1/nftokenoffer.md#nftokenoffer-reserve).
-* 신뢰선(<mark style="background-color:yellow;">RippleState</mark> 항목)은 두 개의 계정 간에 공유됩니다. 소유자 reserve는 둘 중 하나 또는 둘 다에 적용될 수 있습니다. 대부분의 경우, 토큰 보유자는 reserve를 부담하고 발행자는 부담하지 않습니다. 참고: [RippleState: 소유자 Reserve에 기여](../../references/xrp-ledger/ledger/ledger-1/ripplestate.md#reserve).
-* 2019년 4월에 활성화된 [MultiSignReserve 수정안](../xrp-ledger/amendments/undefined.md#multisignreserve) 이전에 생성된 서명자 목록(Signer lists)은 여러 개의 객체로 계산됩니다. 참고: [Signer Lists 와 Reserves](../../references/xrp-ledger/ledger/ledger-1/signerlist.md#signerlist-reserve).
-* [소유자 디렉터리](../../references/xrp-ledger/ledger/ledger-1/directorynode.md)는 계정과 관련된 모든 객체, 즉 계정이 소유하는 모든 객체를 나열하는 ledger 항목입니다. 그러나 Owner Directory 자체는 reserve에는 포함되지 않습니다.
+* Non-Fungible Tokens(NFTs)은 각각 최대 32개의 NFT를 포함하는 페이지로 그룹화되며, 소유자 reserve은 페이지 당 적용되며 NFT 당으로 적용되지 않습니다. 페이지를 분할하고 결합하는 메커니즘으로 인해 페이지당 실제 저장되는 NFT의 수가 다를 수 있습니다. 참고[: NFTokenPage 객체의 reserve](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/nftokenoffer.md#nftokenoffer-reserve).
+* 신뢰선(<mark style="background-color:yellow;">RippleState</mark> 항목)은 두 개의 계정 간에 공유됩니다. 소유자 reserve는 둘 중 하나 또는 둘 다에 적용될 수 있습니다. 대부분의 경우, 토큰 보유자는 reserve를 부담하고 발행자는 부담하지 않습니다. 참고: [RippleState: 소유자 Reserve에 기여](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/ripplestate.md#reserve).
+* 2019년 4월에 활성화된 [MultiSignReserve 수정안](../xrp-ledger/amendments/undefined.md#multisignreserve) 이전에 생성된 서명자 목록(Signer lists)은 여러 개의 객체로 계산됩니다. 참고: [Signer Lists 와 Reserves](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/signerlist.md#signerlist-reserve).
+* [소유자 디렉터리](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/directorynode.md)는 계정과 관련된 모든 객체, 즉 계정이 소유하는 모든 객체를 나열하는 ledger 항목입니다. 그러나 Owner Directory 자체는 reserve에는 포함되지 않습니다.
 
 ## Reserves 조회하기&#x20;
 
@@ -52,7 +52,7 @@ Mainnet에서 현재 reserve requirement은 다음과 같습니다:
 {% hint style="info" %}
 Tip:
 
-당신의 계정이 reserve requirement를 충족하지 못하면, XRP를 획득하기 위해 [OfferCreate 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/offercreate.md)을 보내고 그 결과로 reserve requirement를 충족시키는방법을 생각해볼 수 있습니다. 그러나, reserve requirement 이하일 동안 [분산원장에 Offer 항목](../../references/xrp-ledger/ledger/ledger-1/offer.md)을 생성할 수 없기 때문에, 이 거래는 오더북에 이미 있는 Offer만을 소비할 수 있습니다.
+당신의 계정이 reserve requirement를 충족하지 못하면, XRP를 획득하기 위해 [OfferCreate 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/offercreate.md)을 보내고 그 결과로 reserve requirement를 충족시키는방법을 생각해볼 수 있습니다. 그러나, reserve requirement 이하일 동안 [분산원장에 Offer 항목](../../references/xrp-ledger/ledger-ledger-data-formats/ledger/offer.md)을 생성할 수 없기 때문에, 이 거래는 오더북에 이미 있는 Offer만을 소비할 수 있습니다.
 {% endhint %}
 
 ## Reserve Requirements 변경&#x20;

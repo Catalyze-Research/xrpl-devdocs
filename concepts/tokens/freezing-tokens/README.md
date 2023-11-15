@@ -25,7 +25,7 @@ Tip:
 * 동결된 신뢰선의 두 당사자 간에는 여전히 직접 결제가 가능합니다.
 * 동결된 신뢰선의 상대방은 발행된 토큰 잔액을 발행자에게 직접적인 지불을 제외하고는 감소시킬 수 없습니다. 상대방은 동결된 토큰을 직접적으로 발행자에게 보낼 수만 있습니다.&#x20;
 * 동결된 신뢰선 상에서 상대방은 여전히 다른 사람들로부터 지불을 받을 수 있습니다.
-* 동결된 신뢰선의 토큰을 판매하기 위한 상대방의 거래 제안은 [미지급으로 간주](../../../references/xrp-ledger/ledger/ledger-1/offer.md)됩니다.
+* 동결된 신뢰선의 토큰을 판매하기 위한 상대방의 거래 제안은 [미지급으로 간주](../../../references/xrp-ledger/ledger-ledger-data-formats/ledger/offer.md)됩니다.
 
 알림: 신뢰선은 XRP를 보유하지 않습니다. XRP는 동결할 수 없습니다.
 
@@ -72,7 +72,7 @@ XRP Ledger는 발행자가 발행한 자금의 의무를 준수할 것을 강제
 
 동결 없음 설정은 주소로부터 발행된 모든 토큰에 적용됩니다. 일부 토큰을 동결하고 다른 토큰을 동결하지 않기 위해서는 각각의 토큰에 대해 서로 다른 주소를 사용해야 합니다.
 
-동결 없음 설정은 해당 주소의 마스터 키 비밀로 서명된 트랜잭션으로만 활성화할 수 있습니다. [일반 키](../../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md)나 [다중 서명 트랜잭션](../../undefined-2/undefined-1.md)은 동결 없음을 활성화하는 데 사용할 수 없습니다.
+동결 없음 설정은 해당 주소의 마스터 키 비밀로 서명된 트랜잭션으로만 활성화할 수 있습니다. [일반 키](../../../references/xrp-ledger/undefined/undefined-1/setregularkey.md)나 [다중 서명 트랜잭션](../../undefined-2/undefined-1.md)은 동결 없음을 활성화하는 데 사용할 수 없습니다.
 
 ## See Also <a href="#see-also" id="see-also"></a>
 

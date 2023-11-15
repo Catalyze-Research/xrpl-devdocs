@@ -2,7 +2,7 @@
 
 Ripple 또는 다른 사람들이 XRP를 동결할 수 있다는 것은 일반적인 오해입니다. 이는 중앙집중식 서비스인 PayPal과 같이 계정을 중지하고 자금에 접근할 수 없게 하는 것과 유사하게 XRP가 동결  될 수 있다고 생각하는 것입니다. 하지만 실제로 XRP Ledger에는 [동결 기능](./)이 있지만, 이 기능은 발행된 토큰에만 적용될 수 있고 XRP에는 적용되지 않습니다. **XRP는 아무도 동결할 수 없습니다.**
 
-XRP Ledger의 토큰은 [XRP와 근본적으로 다릅니다](../../../references/xrp-ledger/undefined/undefined.md). 토큰은 항상 신뢰선에서 존재하며 그것은 동결할 수 있습니다. XRP는 계정에 존재하며 _동결할 수 없습니다._
+XRP Ledger의 토큰은 [XRP와 근본적으로 다릅니다](../../../references/xrp-ledger/basic-data-types/currency-formats.md). 토큰은 항상 신뢰선에서 존재하며 그것은 동결할 수 있습니다. XRP는 계정에 존재하며 _동결할 수 없습니다._
 
 ## XRP는 Ripple의 토큰인가요?(Isn't XRP Just Ripple's Token? )
 

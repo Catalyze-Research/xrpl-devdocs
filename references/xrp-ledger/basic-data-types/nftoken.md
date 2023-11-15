@@ -35,7 +35,7 @@ E) (자동 생성된) 단조롭게 증가하는 32비트 시퀀스 번호.
 
 16비트 플래그, 이체 수수료 필드, 32비트 NFTokenTaxon, 시퀀스 번호 필드는 big-endian 형식으로 저장됩니다.
 
-## NFToken 플래그
+## NFToken 플래그(NFToken Flags)
 
 플래그는 NFToken 객체와 관련된 속성 또는 기타 옵션입니다.
 
@@ -49,7 +49,7 @@ E) (자동 생성된) 단조롭게 증가하는 32비트 시퀀스 번호.
 
 NFToken 플래그는 불변이며, NFTokenMint 트랜잭션 중에만 설정할 수 있고 나중에 변경할 수 없습니다.
 
-## 예시
+## Example
 
 이 예시에서는 세 가지 플래그를 설정합니다: lsfBurnable(0x0001), lsfOnlyXRP(0x0002), lsfTransferable(0x0008). 1+2+8 = 11, 또는 빅 엔디안에서 0x000B
 
@@ -57,13 +57,13 @@ NFToken 플래그는 불변이며, NFTokenMint 트랜잭션 중에만 설정할 
 
 TransferFee 값은 토큰의 2차 판매에 대해 발행자가 부과하는 백분율 수수료(1/100,000 단위)를 지정합니다. 이 필드의 유효한 값은 0에서 50,000 사이입니다. 값이 1이면 0.001% 또는 1/10 베이시스 포인트(bps)에 해당하며, 0%에서 50% 사이의 전송 수수료율을 허용합니다.
 
-## 예시
+## Example
 
 이 값은 이체 수수료를 314, 즉 0.314%로 설정합니다.
 
 <figure><img src="https://xrpl.org/img/nftokenb.png" alt=""><figcaption></figcaption></figure>
 
-## 발행자 식별
+## 발행자 식별(Issuer Identification)
 
 NFTokenID의 세 번째 섹션은 발행자의 공개 주소를 큰 엔디안 단위로 표현한 것입니다.
 
@@ -79,7 +79,7 @@ NFTokenID의 세 번째 섹션은 발행자의 공개 주소를 큰 엔디안 �
 
 스크램블된 NFTokenTaxon의 버전은 발행자가 지정한 스크램블된 버전인 0xBC8B858E임을 알 수 있습니다. 그러나 NFTokenTaxon의 실제 값은 스크램블되지 않은 값입니다.
 
-## 토큰 시퀀스
+## 토큰 시퀀스(Token Sequence)
 
 다섯 번째 섹션은 발행자가 NFToken을 생성할 때마다 증가하는 시퀀스 번호입니다.
 
@@ -97,13 +97,13 @@ Caution:
 URI는 변경할 수 없으므로 예를 들어 더 이상 존재하지 않는 웹사이트로 연결되는 경우 아무도 업데이트할 수 없습니다.
 {% endhint %}
 
-## NFToken 데이터 및 메타데이터 검색하기
+## NFToken 데이터 및 메타데이터 검색하기(Retrieving NFToken Data and Metadata)
 
 기능을 희생하거나 불필요한 제한을 두지 않고 NFT토큰의 풋프린트를 최소화하기 위해 XRPL NFT에는 임의의 데이터 필드가 없습니다. 대신, 데이터는 별도로 유지되고 NFT토큰에 의해 참조됩니다. URI는 해시에 대한 불변 콘텐츠와 NFToken 객체에 대한 모든 변경 가능한 데이터에 대한 참조를 제공합니다.
 
 URI 필드는 특히 비 전통적인 P2P URL을 참조할 때 유용합니다. 예를 들어, 행성 간 파일 시스템(IPFS)을 사용하여 NFToken 데이터 또는 메타데이터를 저장하는 채굴자는 URI 필드를 사용하여 각기 다른 사용 사례에 적합한 다양한 방식으로 IPFS의 데이터를 참조할 수 있습니다. NFT 데이터를 저장하는 데 사용할 수 있는 IPFS 링크 유형에 대한 자세한 내용은 IPFS를 사용한 NFT 데이터 저장 모범 사례를 참조하세요,
 
-## TXT 레코드 형식
+## TXT 레코드 형식(TXT Record Format)
 
 텍스트 레코드의 형식은 다음과 같습니다.
 

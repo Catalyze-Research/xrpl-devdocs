@@ -34,7 +34,7 @@ XRP Ledger는 [토큰](../)을 지원합니다. 이러한 자산은 주로 교�
 
 XRP Ledger에서 비교 가능하지 않은 토큰은 <mark style="background-color:yellow;">NFToken</mark> 객체로 표현됩니다. NFToken은 고유하고 나뉘어질 수 없는 단위로서 결제에 사용되지 않습니다. 사용자는 이러한 토큰을 생성, 보유, 구매, 판매 및 소각할 수 있습니다.
 
-ledger는 동일한 계정이 소유하는 최대 32개의 <mark style="background-color:yellow;">NFToken</mark> 객체를 하나의 [NFTokenPage 객체](../../../references/xrp-ledger/ledger/ledger-1/nftokenpage.md)에 저장하여 공간을 절약합니다. 결과적으로 NFToken 객체에 대한 소유자의 [reserve requirement](https://xrpl.org/reserves.html) 새로운 페이지를 만들어 추가 토큰을 저장할 때만 증가합니다.
+ledger는 동일한 계정이 소유하는 최대 32개의 <mark style="background-color:yellow;">NFToken</mark> 객체를 하나의 [NFTokenPage 객체](../../../references/xrp-ledger/ledger-ledger-data-formats/ledger/nftokenpage.md)에 저장하여 공간을 절약합니다. 결과적으로 NFToken 객체에 대한 소유자의 [reserve requirement](https://xrpl.org/reserves.html) 새로운 페이지를 만들어 추가 토큰을 저장할 때만 증가합니다.
 
 계정은 <mark style="background-color:yellow;">NFToken</mark> 객체를 대신해서 NFToken 객체를 생성하고 판매할 수 있는 중개인 또는 "권한 있는 발행자"를 지정할 수도 있습니다.
 
@@ -48,7 +48,7 @@ ledger는 동일한 계정이 소유하는 최대 32개의 <mark style="backgrou
 
 ## NFToken 수명 주기&#x20;
 
-[NFTokenMint 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/nftokenmint.md) 유형을 사용하여 누구나 새로운 <mark style="background-color:yellow;">NFToken</mark>을 생성할 수 있습니다. NFToken은 발행 계정의 [NFTokenPage 객체](../../../references/xrp-ledger/ledger/ledger-1/nftokenpage.md)에 저장됩니다. 소유자 또는 관심있는 당사자는 [NFTokenCreateOffer 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/nftokencreateoffer.md)을 보내어 <mark style="background-color:yellow;">NFToken</mark>의 구매 또는 판매를 제안할 수 있습니다. ledger는 제안된 이체를 <mark style="background-color:yellow;">NFTokenOffer</mark> 객체로 추적하며, 양측이 제안을 수락하거나 취소할 때 NFTokenOffer를 삭제합니다. <mark style="background-color:yellow;">NFToken</mark>이 이전 가능하다면 계정 간에 여러 차례 거래될 수 있습니다.
+[NFTokenMint 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/nftokenmint.md) 유형을 사용하여 누구나 새로운 <mark style="background-color:yellow;">NFToken</mark>을 생성할 수 있습니다. NFToken은 발행 계정의 [NFTokenPage 객체](../../../references/xrp-ledger/ledger-ledger-data-formats/ledger/nftokenpage.md)에 저장됩니다. 소유자 또는 관심있는 당사자는 [NFTokenCreateOffer 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/nftokencreateoffer.md)을 보내어 <mark style="background-color:yellow;">NFToken</mark>의 구매 또는 판매를 제안할 수 있습니다. ledger는 제안된 이체를 <mark style="background-color:yellow;">NFTokenOffer</mark> 객체로 추적하며, 양측이 제안을 수락하거나 취소할 때 NFTokenOffer를 삭제합니다. <mark style="background-color:yellow;">NFToken</mark>이 이전 가능하다면 계정 간에 여러 차례 거래될 수 있습니다.
 
 NFTokenBurn 트랜잭션을 사용하여 소유한 <mark style="background-color:yellow;">NFToken</mark>을 소각할 수 있습니다. 발행자가 <mark style="background-color:yellow;">tfBurnable</mark> 플래그를 활성화하여 토큰을 발행한 경우, 발행자는 현재 소유자와 관계없이 토큰을 소각할 수도 있습니다. (예를 들어 일정 시점에 소진되는 이벤트 티켓을 나타내는 토큰에 유용할 수 있습니다.)
 

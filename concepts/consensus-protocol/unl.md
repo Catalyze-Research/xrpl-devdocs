@@ -74,7 +74,7 @@ Ledger 버전의 ledger 인덱스가 256으로 나누어 떨어지면 해당 led
 
 {% hint style="info" %}
 Note:\
-이는 [트랜잭션](../transactions/)이나 유사한 [의사 트랜잭션](../../references/xrp-ledger/undefined-1/pseudo-transactions/) 없이도 ledger의 상태 데이터가 수정되는 몇 가지 경우 중 하나입니다.
+이는 [트랜잭션](../transactions/)이나 유사한 [의사 트랜잭션](../../references/xrp-ledger/undefined/pseudo-transactions/) 없이도 ledger의 상태 데이터가 수정되는 몇 가지 경우 중 하나입니다.
 {% endhint %}
 
 2. 만약 Negative UNL이 가득 차 있지 않다면, 각 서버는 신뢰도가 50% 미만인 신뢰할 수 있는 유효성 검증인 중에서 **최대 1**명을 Negative UNL에 추가하기 위해 제안합니다.
@@ -85,7 +85,7 @@ Note:\
 
 4. Negative UNL에 대한 제안 변경 사항이 컨센서스를 달성하면 해당 변경 사항은 다음 플래그 ledger에 적용될 수 있도록 예약됩니다. 한 번에 최대 1명의 추가와 1명의 제거가 이와 같은 방식으로 예약될 수 있습니다.
 
-Negative UNL에 유효성 검증인을 추가하거나 제거하기 위한 제안은 [UNLModify 의사 트랜잭션](../../references/xrp-ledger/undefined-1/pseudo-transactions/unlmodify.md) 형태로 이루어집니다. 컨센서스 프로세스는 각 [의사 트랜잭션](../../references/xrp-ledger/undefined-1/pseudo-transactions/)이 컨센서스를 달성하거나 폐기되는지를 결정합니다. 즉, 특정 유효성 검증인을 Negative UNL에서 추가하거나 제거하기 위해서는 신뢰할 수 있는 서버들의 컨센서스가 동일한 변경 사항을 제안해야 합니다.
+Negative UNL에 유효성 검증인을 추가하거나 제거하기 위한 제안은 [UNLModify 의사 트랜잭션](../../references/xrp-ledger/undefined/pseudo-transactions/unlmodify.md) 형태로 이루어집니다. 컨센서스 프로세스는 각 [의사 트랜잭션](../../references/xrp-ledger/undefined/pseudo-transactions/)이 컨센서스를 달성하거나 폐기되는지를 결정합니다. 즉, 특정 유효성 검증인을 Negative UNL에서 추가하거나 제거하기 위해서는 신뢰할 수 있는 서버들의 컨센서스가 동일한 변경 사항을 제안해야 합니다.
 
 Negative UNL에 대한 예약된 및 실제 변경 사항은 ledger의 상태 데이터에 있는 NegativeUNL 객체에서 추적됩니다.
 

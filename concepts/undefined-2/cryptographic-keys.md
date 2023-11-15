@@ -58,8 +58,8 @@ XRP Ledger에서의 거래는 네트워크가 거래의 서명을 검증할 수 
 
 **계정 ID**는 [계정](./)이나 키 쌍의 핵심 식별자입니다. 이는 공개 키에서 유도됩니다. XRP Ledger 프로토콜에서, 계정 ID는 20바이트의 이진 데이터입니다. 대부분의 XRP Ledger API는 계정 ID를 주소 형태로 나타냅니다, 이는 두 가지 형식 중 하나입니다:
 
-* "classic address"는 계정 ID를 체크섬과 함께 [base58](../../references/xrp-ledger/undefined/base58.md)로 작성합니다. [wallet\_propose 메소드](../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md) 응답에서, 이는 <mark style="background-color:yellow;">account\_id</mark> 값입니다.&#x20;
-* "X-Address"는 계정 ID와 [데스티네이션 태그](../transactions/source-and-destination-tags.md)를 결합하고, 결합된 값을 체크섬과 함께 [base58](../../references/xrp-ledger/undefined/base58.md)로 작성합니다.
+* "classic address"는 계정 ID를 체크섬과 함께 [base58](../../references/xrp-ledger/basic-data-types/base58-base58-encodings.md)로 작성합니다. [wallet\_propose 메소드](../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md) 응답에서, 이는 <mark style="background-color:yellow;">account\_id</mark> 값입니다.&#x20;
+* "X-Address"는 계정 ID와 [데스티네이션 태그](../transactions/source-and-destination-tags.md)를 결합하고, 결합된 값을 체크섬과 함께 [base58](../../references/xrp-ledger/basic-data-types/base58-base58-encodings.md)로 작성합니다.
 
 두 형식 모두 체크섬이 포함되어 있어서, 작은 변화가 다른 유효한 계정을 참조하는 주소가 아닌 무효한 주소를 결과로 만듭니다. 이렇게 하면, 오타가 나거나 전송 오류가 발생해도 돈을 잘못된 곳으로 보내는 것을 방지할 수 있습니다.
 
@@ -110,7 +110,7 @@ XRP Ledger 계정은 _일반 키 쌍_이라고 불리는 2차 키 쌍을 승인�
 
 일반 키 쌍은 마스터 키 쌍과 같은 형식을 가집니다. (예를 들어, [wallet\_propose 메소드](../../references/http-websocket-apis/api-2/undefined/wallet\_propose.md)를 사용하여) 동일한 방법으로 그것들을 생성합니다. 유일한 차이점은 일반 키 쌍이 그것이 거래를 서명하는 계정에 본질적으로 연결되어 있지 않다는 것입니다. 한 계정의 마스터 키 쌍을 다른 계정의 일반 키 쌍으로 사용하는 것이 가능하긴 하지만 좋은 아이디어는 아닙니다.
 
-[SetRegularKey 트랜잭션](../../references/xrp-ledger/undefined-1/undefined-1/setregularkey.md)은 계정의 일반 키 쌍을 지정하거나 변경합니다. 일반 키 쌍을 지정하거나 변경하는 방법에 대한 튜토리얼에서는 [일반 키 쌍 지정](../../tutorials/tasks/manage-account-settings/undefined.md)을 참조하세요.
+[SetRegularKey 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/setregularkey.md)은 계정의 일반 키 쌍을 지정하거나 변경합니다. 일반 키 쌍을 지정하거나 변경하는 방법에 대한 튜토리얼에서는 [일반 키 쌍 지정](../../tutorials/tasks/manage-account-settings/undefined.md)을 참조하세요.
 
 ## 서명 알고리즘(Signing Algorithms)
 
@@ -133,7 +133,7 @@ XRP Ledger는 다음의 암호화 서명 알고리즘을 지원합니다:
 
 ## 키 파생(Key Derivation)
 
-키 쌍을 파생시키는 과정은 서명 알고리즘에 따라 다릅니다. 모든 경우에서, 키는 16 바이트 (128 비트)의 길이를 가진 _시드_ 값에서 생성됩니다. 시드 값은 완전히 랜덤일 수도 있고 (권장됨), [SHA-512 해시](../../references/xrp-ledger/undefined/)를 취하고 출력값의 처음 16 바이트를 유지하여 특정 패스프레이즈에서 파생될 수도 있습니다 ([SHA-512Half](../../references/xrp-ledger/undefined/)와 같지만, 출력의 256 비트 대신 128 비트만 유지).
+키 쌍을 파생시키는 과정은 서명 알고리즘에 따라 다릅니다. 모든 경우에서, 키는 16 바이트 (128 비트)의 길이를 가진 _시드_ 값에서 생성됩니다. 시드 값은 완전히 랜덤일 수도 있고 (권장됨), [SHA-512 해시](../../references/xrp-ledger/basic-data-types/)를 취하고 출력값의 처음 16 바이트를 유지하여 특정 패스프레이즈에서 파생될 수도 있습니다 ([SHA-512Half](../../references/xrp-ledger/basic-data-types/)와 같지만, 출력의 256 비트 대신 128 비트만 유지).
 
 ## 샘플 코드(Sample Code)
 
@@ -152,7 +152,7 @@ XRP Ledger는 다음의 암호화 서명 알고리즘을 지원합니다:
 
 <figure><img src="../../.gitbook/assets/cryptographic keys_1.png" alt=""><figcaption></figcaption></figure>
 
-1. 시드 값의 [SHA-512Half](../../references/xrp-ledger/undefined/)를 계산합니다. 결과는 32바이트 비밀 키입니다.
+1. 시드 값의 [SHA-512Half](../../references/xrp-ledger/basic-data-types/)를 계산합니다. 결과는 32바이트 비밀 키입니다.
 
 {% hint style="info" %}
 Tip:
@@ -169,7 +169,7 @@ Caution:
 {% endhint %}
 
 3. 32바이트 공개 키 앞에 단일 바이트 <mark style="background-color:yellow;">0xED</mark>를 붙여 Ed25519 공개 키를 나타냅니다, 결과는 33 바이트입니다. 거래를 서명하는 코드를 구현하는 경우, <mark style="background-color:yellow;">0xED</mark> 접두사를 제거하고 실제 서명 과정에는 32바이트 키를 사용하세요.
-4.  계정 공개 키를 [base58](../../references/xrp-ledger/undefined/base58.md)로 직렬화 할 때, 계정 공개 키 접두사 <mark style="background-color:yellow;">0x23</mark>을 사용하세요.
+4.  계정 공개 키를 [base58](../../references/xrp-ledger/basic-data-types/base58-base58-encodings.md)로 직렬화 할 때, 계정 공개 키 접두사 <mark style="background-color:yellow;">0x23</mark>을 사용하세요.
 
     검증자 일시적 키는 Ed25519가 될 수 없습니다.
 
@@ -188,14 +188,14 @@ secp256k1 XRP Ledger 계정 키에 대한 키 파생은 몇 가지 이유로 Ed2
    1. 다음을 순서대로 연결하여 총 20바이트를 얻습니다:\
       － 시드 값 (16바이트)\
       － "루트 시퀀스" 값 (4바이트), 빅 엔디안 부호 없는 정수로. 루트 시퀀스의 시작 값으로 0을 사용합니다.
-   2. 연결된 (시드+루트 시퀀스) 값의 [SHA-512Half](../../references/xrp-ledger/undefined/)를 계산합니다。
+   2. 연결된 (시드+루트 시퀀스) 값의 [SHA-512Half](../../references/xrp-ledger/basic-data-types/)를 계산합니다。
    3. 만약 결과가 유효한 secp256k1 비밀키가 아닌 경우, 루트 순서를 1 증가시키고 처음부터 다시 시작하세요. [｢출처｣](https://github.com/XRPLF/rippled/blob/fc7ecd672a3b9748bfea52ce65996e324553c05f/src/ripple/crypto/impl/GenerateDeterministicKey.cpp#L103) \
       유효한 secp256k1 키는 0일 수 없으며 secp256k1 그룹 순서보다 숫자가 작아야 합니다. secp256k1 그룹 순서는 상수 값 <mark style="background-color:yellow;">0xFFFFFFFFFFFFFFFFFAEDCE6AF48A03BBFD25E8CD0364141</mark>입니다.
    4. 유효한 secp256k1 비밀키로부터 secp256k1 곡선을 사용하여 표준 ECDSA 공개키 파생을 수행하세요. (암호화 알고리즘의 경우 가능한 경우 표준이고 잘 알려진, 공개적으로 감사된 구현을 사용하세요. 예를 들어, [OpenSSL](https://www.openssl.org/)은 핵심 Ed25519과 secp256k1 함수의 구현을 제공합니다.)
 
 {% hint style="info" %}
 Tip:\
-검증자(Validators)는 이 루트 키 쌍을 사용합니다. 검증자의 키 쌍을 계산하고 있다면, 여기에서 중단할 수 있습니다. 이 두 가지 다른 유형의 공개키를 구별하기 위해 검증자 공개키의 [base58](../../references/xrp-ledger/undefined/base58.md) 직렬화는 접두사 <mark style="background-color:yellow;">0x1c</mark>를 사용합니다.
+검증자(Validators)는 이 루트 키 쌍을 사용합니다. 검증자의 키 쌍을 계산하고 있다면, 여기에서 중단할 수 있습니다. 이 두 가지 다른 유형의 공개키를 구별하기 위해 검증자 공개키의 [base58](../../references/xrp-ledger/basic-data-types/base58-base58-encodings.md) 직렬화는 접두사 <mark style="background-color:yellow;">0x1c</mark>를 사용합니다.
 {% endhint %}
 
 2.  루트 공개키를 33바이트 압축 형식으로 변환하세요.\
@@ -211,7 +211,7 @@ Tip:\
       1. 압축된 루트 공개키 (33바이트)
       2. <mark style="background-color:yellow;">0x00000000000000000000000000000000</mark> (4바이트의 0). (이 값은 동일한 패밀리의 다른 구성원을 파생시키기 위해 사용되었지만 실제로는 값 0만 사용됩니다.)
       3. "키 시퀀스" 값 (4바이트), 빅엔디언 부호 없는 정수로 표현합니다. 키 시퀀스의 시작 값으로 0을 사용하세요.
-   2. 연결된 값의 [SHA-512Half](../../references/xrp-ledger/undefined/)를 계산합니다.
+   2. 연결된 값의 [SHA-512Half](../../references/xrp-ledger/basic-data-types/)를 계산합니다.
    3. 만약 결과가 유효한 secp256k1 비밀키가 아닌 경우, 키 시퀀스를 1 증가시키고 계정의 중간 키 쌍 파생을 재시작하세요.
    4. 유효한 secp256k1 비밀키를 사용하여 표준 ECDSA 공개키 파생을 수행하여 중간 공개키를 얻으세요. (암호화 알고리즘의 경우 가능한 경우 표준이고 잘 알려진, 공개적으로 감사된 구현을 사용하세요. 예를 들어, [OpenSSL](https://www.openssl.org/)은 핵심 Ed25519과 secp256k1 함수의 구현을 제공합니다.)\
 
@@ -219,7 +219,7 @@ Tip:\
    1. ECDSA 비밀키는 매우 큰 정수이므로 secp256k1 그룹 순서로 모듈로 연산하여 두 비밀키의 합을 계산할 수 있습니다.
    2. ECDSA 공개키는 타원 곡선 상의 점이므로 타원 곡선 수학을 사용하여 점을 합산해야 합니다.
 5. 마스터 공개키를 이전과 같이 33바이트 압축 형식으로 변환하세요.
-6.  계정의 공개키를 [base58](../../references/xrp-ledger/undefined/base58.md) 형식으로 직렬화할 때, 계정 공개키 접두사 <mark style="background-color:yellow;">0x23</mark>을 사용하세요.
+6.  계정의 공개키를 [base58](../../references/xrp-ledger/basic-data-types/base58-base58-encodings.md) 형식으로 직렬화할 때, 계정 공개키 접두사 <mark style="background-color:yellow;">0x23</mark>을 사용하세요.
 
     계정의 공개키를 [주소로 변환](./)하는 정보와 샘플 코드는 "Address Encoding"을 참조하세요.
 

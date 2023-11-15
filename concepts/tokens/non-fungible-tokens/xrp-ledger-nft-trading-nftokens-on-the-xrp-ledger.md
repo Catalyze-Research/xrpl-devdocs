@@ -1,6 +1,6 @@
 # XRP Ledger에서 NFT 토큰 거래(Trading NFTokens on the XRP Ledger)
 
-XRP Ledger에서는 <mark style="background-color:yellow;">NFToken</mark> 객체를 계정 간에 이전할 수 있습니다. <mark style="background-color:yellow;">NFToken</mark>을 구매하거나 판매하기 위해 구매 또는 판매 제안을 할 수 있습니다. 또한 소유한 <mark style="background-color:yellow;">NFToken</mark>을 구매하고자 하는 다른 계정의 제안을 수락할 수도 있습니다. 심지어 <mark style="background-color:yellow;">NFToken</mark>을 0 가격으로 판매 제안하여 무료로 양도할 수도 있습니다. 모든 제안은 [NFTokenCreateOffer 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/nftokencreateoffer.md)을 사용하여 생성됩니다.
+XRP Ledger에서는 <mark style="background-color:yellow;">NFToken</mark> 객체를 계정 간에 이전할 수 있습니다. <mark style="background-color:yellow;">NFToken</mark>을 구매하거나 판매하기 위해 구매 또는 판매 제안을 할 수 있습니다. 또한 소유한 <mark style="background-color:yellow;">NFToken</mark>을 구매하고자 하는 다른 계정의 제안을 수락할 수도 있습니다. 심지어 <mark style="background-color:yellow;">NFToken</mark>을 0 가격으로 판매 제안하여 무료로 양도할 수도 있습니다. 모든 제안은 [NFTokenCreateOffer 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/nftokencreateoffer.md)을 사용하여 생성됩니다.
 
 _(_[_NonFungibleTokensV1\_1 수정안_](../../xrp-ledger/amendments/undefined.md)_으로 추가됨.)_
 
@@ -14,7 +14,7 @@ _(_[_NonFungibleTokensV1\_1 수정안_](../../xrp-ledger/amendments/undefined.md
 
 ## 판매 제안 생성&#x20;
 
-<mark style="background-color:yellow;">NFToken</mark> 객체의 소유자로서, tfSellToken 플래그를 사용하여 [NFTokenCreateOffer 트랜잭션](../../../references/xrp-ledger/undefined-1/undefined-1/nftokencreateoffer.md)을 사용하여 판매 제안을 생성할 수 있습니다. <mark style="background-color:yellow;">NFTokenID</mark>와 지불로 받을 <mark style="background-color:yellow;">금액</mark>을 제공합니다. 선택적으로 제안의 유효 기간인 만료 날짜와 <mark style="background-color:yellow;">NFToken</mark>을 구매할 수 있는 유일한 계정인 대상 계정을 지정할 수도 있습니다.
+<mark style="background-color:yellow;">NFToken</mark> 객체의 소유자로서, tfSellToken 플래그를 사용하여 [NFTokenCreateOffer 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/nftokencreateoffer.md)을 사용하여 판매 제안을 생성할 수 있습니다. <mark style="background-color:yellow;">NFTokenID</mark>와 지불로 받을 <mark style="background-color:yellow;">금액</mark>을 제공합니다. 선택적으로 제안의 유효 기간인 만료 날짜와 <mark style="background-color:yellow;">NFToken</mark>을 구매할 수 있는 유일한 계정인 대상 계정을 지정할 수도 있습니다.
 
 ## 판매 제안 수락&#x20;
 
