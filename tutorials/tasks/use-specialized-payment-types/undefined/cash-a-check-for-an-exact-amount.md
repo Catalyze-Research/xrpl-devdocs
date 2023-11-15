@@ -2,13 +2,13 @@
 description: 수표 개정에 의해 추가되었습니다.
 ---
 
-# 정확한 금액의 수표 현금화
+# 정확한 금액의 수표 현금화(Cash a Check for an Exact Amount)
 
 수표가 ledger에 있고 만료되지 않았다면, 지정된 수취인은 금액 필드가 있는 수표 현금 트랜잭션을 전송하여 수표에 지정된 금액까지 정확하게 현금화하여 받을 수 있습니다. 송장이나 청구서를 정확히 지불하는 등 특정 금액을 수령하려는 경우 이 방법으로 수표를 현금화할 수 있습니다.
 
 지정된 수취인은 수표를 유연한 금액으로 현금화할 수도 있습니다.
 
-## 요구 조건
+## 요구 조건(Prerequisites)
 
 수표를 현금화하기 위한 전제 조건은 정확한 금액으로 현금화하든, 유동적인 금액으로 현금화하든 동일합니다.
 
@@ -19,7 +19,7 @@ description: 수표 개정에 의해 추가되었습니다.
 * 트랜잭션에 서명하는 안전한 방법.
 * XRP Ledger에 연결할 수 있는 클라이언트 라이브러리 또는 HTTP 또는 웹소켓 클라이언트.
 
-## 1. CheckCash 트랜잭션 준비하기
+## 1. CheckCash 트랜잭션 준비하기(Prepare the CheckCreate transaction)
 
 CheckCash 트랜잭션 필드의 값을 파악합니다. 정확한 금액으로 수표를 현금화하려면 다음 필드는 최소한이며, 나머지 필드는 선택사항이거나 서명할 때 자동으로 채워질 수 있습니다:
 
@@ -30,7 +30,7 @@ CheckCash 트랜잭션 필드의 값을 파악합니다. 정확한 금액으로 
 | `CheckID`         | String                    | 현금화할 ledger 내 수표 객체의 ID입니다. 이 정보는 tx 메소드를 사용하여 CheckCreate 트랜잭션의 메타데이터를 조회하거나 account\_objects 메소드를 사용하여 수표를 조회하여 얻을 수 있습니다.                                                                                                                                                                                                             |
 | `Amount`          | String or Object (Amount) | 수표에서 상환할 금액입니다. XRP의 경우, XRP 드롭을 지정하는 문자열이어야 합니다. 토큰의 경우 통화, 발행자 및 값 필드가 있는 객체입니다. 통화 및 발행자 필드는 수표 객체의 해당 필드와 일치해야 하며, 값은 수표 객체의 금액보다 작거나 같아야 합니다. (송금 수수료가 있는 통화의 경우 송금 수수료가 송금 수수료로 결제될 수 있도록 수표를 SendMax보다 적은 금액으로 현금화해야 합니다.) 이 금액을 받을 수 없는 경우 수표 현금화가 실패하고 수표가 ledger에 남아 있으므로 다시 시도할 수 있습니다. 통화 금액 지정에 대한 자세한 내용은 통화 금액 지정을 참조하세요. |
 
-## 정확한 금액에 대한 수표 현금 준비 예시
+## 정확한 금액에 대한 수표 현금 준비 예시(Example CheckCash Preparation for an exact amount)
 
 다음 예는 수표를 정해진 금액으로 현금화하기 위해 트랜잭션을 준비하는 방법을 보여줍니다.
 
@@ -48,13 +48,13 @@ CheckCash 트랜잭션 필드의 값을 파악합니다. 정확한 금액으로 
 {% endtab %}
 {% endtabs %}
 
-## 2. CheckCash 트랜잭션에 서명하기
+## 2. CheckCash 트랜잭션에 서명하기(Sign the CheckCreate transaction)
 
 트랜잭션에 서명하는 가장 안전한 방법은 클라이언트 라이브러리를 사용하여 로컬로 서명하는 것입니다. 또는 자체 rippled 노드를 실행하는 경우 서명 방법을 사용하여 트랜잭션에 서명할 수 있지만, 신뢰할 수 있고 암호화된 연결 또는 로컬(동일 컴퓨터) 연결을 통해 수행해야 합니다.
 
 어떤 경우든 나중에 사용할 수 있도록 서명된 트랜잭션의 식별 해시를 기록해 두세요.
 
-## 요청 예시
+## 요청 예시(Example Request)
 
 {% tabs %}
 {% tab title="Commandline" %}
@@ -70,7 +70,7 @@ rippled sign s██████████████████████
 {% endtab %}
 {% endtabs %}
 
-## &#x20;응답 예시
+## &#x20;응답 예시(Example Response)
 
 {% tabs %}
 {% tab title="Commandline" %}
@@ -100,7 +100,7 @@ Loading: "/etc/opt/ripple/rippled.cfg"
 {% endtab %}
 {% endtabs %}
 
-## 3. 서명된 CheckCash 트랜잭션 제출하기
+## 3. 서명된 CheckCash 트랜잭션 제출하기(Submit the signed transaction)
 
 이전 단계에서 서명된 트랜잭션 blob을 가져와 rippled 서버에 제출합니다. rippled 서버를 실행하지 않아도 안전하게 이 작업을 수행할 수 있습니다. 응답에는 임시 결과가 포함되며, 이 결과는 일반적으로 최종 결과가 아닙니다. 대기 중인 트랜잭션은 일반적으로 다음 오픈 ledger 버전에 포함되므로(일반적으로 제출 후 약 10초 후), terQUEUED의 임시 응답도 괜찮습니다.
 
@@ -110,7 +110,7 @@ Tip:
 예비 결과가 tefMAX\_LEDGER인 경우, 트랜잭션이 영구적으로 실패한 것은 LastLedgerSequence 매개변수가 현재 ledger보다 낮기 때문입니다. 이는 트랜잭션 준비와 제출 사이에 예상되는 ledger 버전 수보다 오래 걸리는 경우 발생합니다. 이 경우 더 높은 LastLedgerSequence 값으로 1단계부터 다시 시작하세요.
 {% endhint %}
 
-## 요청 예시
+## 요청 예시(Example Request)
 
 {% tabs %}
 {% tab title="Commandline" %}
@@ -120,7 +120,7 @@ rippled submit 120011228000000024000000015018838766BA2B995C00744175F69A1B11E32C3
 {% endtab %}
 {% endtabs %}
 
-## 응답 예시
+## 응답 예시(Example Response)
 
 {% tabs %}
 {% tab title="Commandline" %}
@@ -153,13 +153,13 @@ Loading: "/etc/opt/ripple/rippled.cfg"
 {% endtab %}
 {% endtabs %}
 
-## 4. 유효성 검사 대기
+## 4. 유효성 검사 대기(Wait for validation)
 
 라이브 네트워크(mainnet, testnet 또는 devnet 포함)에서는 ledger 자동으로 닫힐 때까지 4\~7초 정도 기다릴 수 있습니다.
 
 stand-alone 모드에서 rippled를 실행하는 경우, ledger\_accept 메소드를 사용하여 ledger을 수동으로 닫아야 합니다.
 
-## 5. 최종 결과 확인
+## 5. 최종 결과 확인()Confirm final result)
 
 tx 메소드를 CheckCash 트랜잭션의 식별 해시와 함께 사용하여 트랜잭션의 상태를 확인합니다. 트랜잭션의 메타데이터에서 "TransactionResult": "tesSUCCESS" 필드와 이 결과가 최종 결과임을 나타내는 "validated": true 필드를 확인합니다.
 
@@ -167,7 +167,7 @@ tx 메소드를 CheckCash 트랜잭션의 식별 해시와 함께 사용하여 �
 
 수표 현금화에 실패한 경우 수표는 ledger에 남아 있으므로 나중에 다시 현금화를 시도할 수 있습니다. 대신 유연한 금액으로 수표를 현금화할 수 있습니다.
 
-## 요청 예시
+## 요청 예시(Example Request)
 
 {% tabs %}
 {% tab title="Commandline" %}
@@ -177,7 +177,7 @@ rippled tx 0521707D510858BC8AF69D2227E1D1ADA7DB7C5B4B74115BCD0D91B62AFA8EDC
 {% endtab %}
 {% endtabs %}
 
-## 응답 예시
+## 응답 예시(Example Response)
 
 {% tabs %}
 {% tab title="Commandline" %}

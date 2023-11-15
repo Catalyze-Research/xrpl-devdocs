@@ -2,7 +2,7 @@
 description: 수표 개정에 의해 추가되었습니다.
 ---
 
-# 수표 보내기
+# 수표 보내기(Send a Check)
 
 수표를 보내는 것은 의도한 수취인에게 결제를 받을 수 있는 권한을 부여하는 것과 같습니다. 이 프로세스의 결과는 수취인이 나중에 현금화할 수 있는 수표 객체가 ledger에 생성됩니다.
 
@@ -12,7 +12,7 @@ description: 수표 개정에 의해 추가되었습니다.
 
 Grand Payments는 XRP ledger 외부에서 ID 46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291로 BoxSend SG에 인보이스를 보내고, Grand Payment의 XRP ledger 주소인 rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis로 100 XRP 수표를 보내줄 것을 요청합니다.
 
-## 요구 조건
+## 요구 조건(Prerequisites)
 
 이 튜토리얼로 수표를 보내려면 다음이 필요합니다:
 
@@ -22,7 +22,7 @@ Grand Payments는 XRP ledger 외부에서 ID 46060241FABCF692D4D934BA2A6C4427CD4
 * 트랜잭션에 서명하는 안전한 방법.
 * 클라이언트 라이브러리 또는 HTTP 또는 WebSocket 라이브러리.
 
-## 1. 수표 만들기 트랜잭션 준비
+## 1. 수표 만들기 트랜잭션 준비(Prepare the CheckCreate transaction)
 
 수표의 금액과 현금화할 수 있는 사람을 결정합니다. CheckCreate 트랜잭션 필드의 값을 파악합니다. 다음 필드는 최소값이며, 다른 모든 필드는 선택 사항이거나 서명할 때 자동으로 채워질 수 있습니다:
 
@@ -33,7 +33,7 @@ Grand Payments는 XRP ledger 외부에서 ID 46060241FABCF692D4D934BA2A6C4427CD4
 | `Destination`     | String (Address)          | 수표를 현금화할 수 있는 수취인의 주소입니다.                                                                                                                                                                                                                                                                                         |
 | `SendMax`         | String or Object (Amount) | 이 수표가 현금화될 때 송금인이 인출할 수 있는 최대 금액입니다. XRP의 경우 XRP drops 나타내는 문자열을 사용합니다. 토큰의 경우 통화, 발행자 및 값 필드가 있는 객체를 사용합니다. 자세한 내용은 통화 금액 지정을 참조하세요. 받는 사람이 이체 수수료가 포함된 정확한 금액의 비XRP 통화로 수표를 현금화할 수 있도록 하려면 이체 수수료를 지불할 추가 비율을 포함해야 합니다. (예를 들어 수취인이 송금 수수료가 2%인 발행자의 수표를 100캐나다달러로 현금화하려면 해당 발행자의 SendMax를 102캐나다달러로 설정해야 합니다.) |
 
-## 수표 작성 준비 예시
+## 수표 작성 준비 예시(Example CheckCreate Preparation)
 
 다음 예는 BoxSend SG(rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za)에서 Grand Payments(rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis)로 100 XRP에 대해 준비된 수표를 보여 줍니다. 추가(선택 사항) 메타데이터로 BoxSend SG는 대금결제의 인보이스 ID를 추가하여 대금결제가 이 수표 어떤 인보이스를 결제할 것인지 알 수 있도록 합니다.
 
@@ -103,13 +103,13 @@ api.connect().then(() => {
 {% endtab %}
 {% endtabs %}
 
-## 2. 수표 생성 트랜잭션에 서명
+## 2. 수표 생성 트랜잭션에 서명(Sign the CheckCreate transaction)
 
 트랜잭션에 서명하는 가장 안전한 방법은 클라이언트 라이브러리를 사용하여 로컬로 서명하는 것입니다. 또는 자체 rippled 노드를 실행하는 경우 서명 방법을 사용하여 트랜잭션에 서명할 수 있지만 신뢰할 수 있고 암호화된 연결 또는 로컬(동일 컴퓨터) 연결을 통해 수행해야 합니다.
 
 어떤 경우든 나중에 사용할 수 있도록 서명된 트랜잭션의 식별 해시를 기록해 두세요.
 
-## 요청 예시
+## 요청 예시(Example Request)
 
 {% tabs %}
 {% tab title="ripple-lib 1.x" %}
@@ -174,7 +174,7 @@ rippled sign s██████████████████████
 {% endtab %}
 {% endtabs %}
 
-## 응답 예시
+## 응답 예시(**Example Response)**
 
 {% tabs %}
 {% tab title="ripple-lib 1.x" %}
@@ -241,7 +241,7 @@ Loading: "/etc/opt/ripple/rippled.cfg"
 {% endtab %}
 {% endtabs %}
 
-## 3. 서명된 트랜잭션 제출하기
+## 3. 서명된 트랜잭션 제출하기(Submit the signed transaction)
 
 이전 단계에서 서명한 트랜잭션 blob을 가져와 rippled 서버에 제출합니다. rippled 서버를 실행하지 않아도 안전하게 이 작업을 수행할 수 있습니다. 응답에는 임시 결과가 포함되며, 이 결과는 일반적으로 tesSUCCESS여야 하지만 최종 결과는 아닙니다. 대기 중인 트랜잭션은 일반적으로 다음 오픈 ledger 버전에 포함되므로(일반적으로 제출 후 약 10초 후), terQUEUED의 임시 응답도 괜찮습니다.
 
@@ -251,7 +251,7 @@ Tip:
 예비 결과가 tefMAX\_LEDGER인 경우, 트랜잭션이 영구적으로 실패한 것은 LastLedgerSequence 매개변수가 현재 ledger보다 낮기 때문입니다. 이는 트랜잭션 준비와 제출 사이에 예상되는 ledger 버전 수보다 오래 걸리는 경우 발생합니다. 이 경우 더 높은 LastLedgerSequence 값으로 1단계부터 다시 시작하세요.
 {% endhint %}
 
-## 요청 예시
+## 요청 예시(Example Request)
 
 {% tabs %}
 {% tab title="ripple-lib 1.x" %}
@@ -302,7 +302,7 @@ rippled submit 120010228000000024000000012A21FB3DF12E00000001501146060241FABCF69
 {% endtab %}
 {% endtabs %}
 
-## 응답 예시
+## 응답 예시(Example Response)
 
 {% tabs %}
 {% tab title="ripple-lib 1.x" %}
@@ -376,19 +376,19 @@ Loading: "/etc/opt/ripple/rippled.cfg"
 {% endtab %}
 {% endtabs %}
 
-## 4. 유효성 검사 대기
+## 4. 유효성 검사 대기(Wait for validation)
 
 라이브 네트워크(mainnet, testnet 또는 devnet 포함)에서는 ledger가 자동으로 닫힐 때까지 4\~7초 정도 기다릴 수 있습니다.
 
 stand-alone 모드에서 rippled을 실행하는 경우, ledger\_accept 메소드를 사용하여 ledger를 수동으로 닫아야 합니다.
 
-## 5. 최종 결과 확인
+## 5. 최종 결과 확인(Confirm final result)
 
 트랜잭션의 상태를 확인하려면 CheckCreate 트랜잭션의 식별 해시와 함께 tx 메소드를 사용하세요. 트랜잭션의 메타데이터에서 "TransactionResult": "tesSUCCESS" 필드와 이 결과가 최종 결과임을 나타내는 결과에서 "validated": true 필드를 찾습니다.
 
 트랜잭션 메타데이터에서 LedgerEntryType이 "Check"인 CreatedNode 객체를 찾습니다. 이는 트랜잭션이 수표 ledger 객체를 생성했음을 나타냅니다. 이 객체의 LedgerIndex는 수표의 ID입니다. 다음 예제에서 수표의 ID는 84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9입니다.
 
-## 요청 예시
+## 요청 예시(Example Request)
 
 {% tabs %}
 {% tab title="rippled-lib 1.x" %}
@@ -446,7 +446,7 @@ rippled tx 07C3B2878B6941FED97BA647244531B7E2203268B05C71C3A1A014045ADDF408
 {% endtab %}
 {% endtabs %}
 
-## 응답 예시
+## 응답 예시(Example Response)
 
 {% tabs %}
 {% tab title="rippled-lib 1.x" %}
