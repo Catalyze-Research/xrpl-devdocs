@@ -10,11 +10,11 @@
 * 다양한 설정과 메타데이터. 각 계정은 신뢰선에 대한 자체 **설정**을 제어할 수 있습니다.
   * 가장 중요한 점은, 각 측이 신뢰선의 **한도**를 설정한다는 것이며, 이는 기본적으로 0입니다. 각 계정의 잔액(신뢰선의 입장에서)은 해당 계정의 한도를 넘어갈 수 없으며, 이는 [해당 계정의 행동](https://xrpl.org/trust-lines-and-issuing.html#going-above-the-limit)을 통해서만 가능합니다.
 
-신뢰선은 주어진 화폐 코드에 특정합니다. 두 계정 사이에는 다른 [화폐 코드](../../references/xrp-ledger/basic-data-types/currency-formats.md)를 위한 신뢰선 여러 개 있을 수 있지만, 특정 화폐 코드에 대해서는 하나의 공유 신뢰선만 있을 수 있습니다.
+신뢰선은 주어진 화폐 코드에 특정합니다. 두 계정 사이에는 다른 [화폐 코드](../../references/xrp-ledger-xrp-ledger-protocol-reference/basic-data-types/currency-formats.md)를 위한 신뢰선 여러 개 있을 수 있지만, 특정 화폐 코드에 대해서는 하나의 공유 신뢰선만 있을 수 있습니다.
 
 ## 생성&#x20;
 
-어느 계정이든 다른 계정에 대해 토큰을 발행하도록 일방적으로 "신뢰"를 할 수 있습니다. 이는 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/trustset.md)을 통해 0이 아닌 한도와 자체 설정을 보내는 것으로, 이는 잔액이 0인 신뢰선을 생성하고 다른 쪽의 설정을 기본값으로 설정합니다.
+어느 계정이든 다른 계정에 대해 토큰을 발행하도록 일방적으로 "신뢰"를 할 수 있습니다. 이는 [TrustSet 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/trustset.md)을 통해 0이 아닌 한도와 자체 설정을 보내는 것으로, 이는 잔액이 0인 신뢰선을 생성하고 다른 쪽의 설정을 기본값으로 설정합니다.
 
 신뢰선은 [탈중앙화 거래소](decentralized-exchange/)에서 토큰을 사는 것과 같은 일부 트랜잭션에 의해 암시적으로 생성될 수 있습니다. 이 경우, 신뢰선은 완전히 기본 설정을 사용합니다.
 
@@ -44,8 +44,8 @@
 
 신뢰선은 양쪽의 설정이 기본 상태에 있고 잔액이 0인 경우 자동으로 삭제됩니다. 이는 신뢰선을 삭제하려면 다음을 수행해야 함을 의미합니다:
 
-1. 기본 설정으로 설정하려면 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/trustset.md)을 보냅니다.
-2. 신뢰선에서 당신이 가진 양의(positive)잔액을 모두 없애야 합니다. 이를 위해 [지불](../../references/xrp-ledger/undefined/undefined-1/payment.md)을 보내거나 [탈중앙화 거래소](decentralized-exchange/)에서 화폐를 팔 수 있습니다.
+1. 기본 설정으로 설정하려면 [TrustSet 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/trustset.md)을 보냅니다.
+2. 신뢰선에서 당신이 가진 양의(positive)잔액을 모두 없애야 합니다. 이를 위해 [지불](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/payment.md)을 보내거나 [탈중앙화 거래소](decentralized-exchange/)에서 화폐를 팔 수 있습니다.
 
 당신의잔액이 음수(발행자인 경우)이거나 다른 쪽의 설정이 기본 상태가 아닌 경우, 신뢰선을 완전히 삭제할 수는 없지만, 동일한 단계를 따르면 소유자 reserve에 대한 부담을 줄일 수 있습니다.
 

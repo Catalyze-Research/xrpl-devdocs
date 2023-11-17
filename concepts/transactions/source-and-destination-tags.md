@@ -1,6 +1,6 @@
 # 출발, 데스티네이션 태그(Source and Destination Tags)
 
-_출발 태그_ 및 _데스티네이션 태그_는 다목적 주소로 송수신되는 [결제](../../references/xrp-ledger/undefined/undefined-1/payment.md)에 대한 특정 목적지 나타낼 수 있는 XRP Ledger 결제의 기능입니다. 출발 및 데스티네이션 태그는 직접 온-ledger 기능이 없습니다. 출발 및 데스티네이션 태그는 오프-ledger 시스템이 결제를 처리하는 방법에 대한 정보만 제공합니다. 트랜잭션에서 출발 태그와 데스티네이션 태그는 모두 32비트 부호 없는 정수로 포맷됩니다.
+_출발 태그_ 및 _데스티네이션 태그_는 다목적 주소로 송수신되는 [결제](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/payment.md)에 대한 특정 목적지 나타낼 수 있는 XRP Ledger 결제의 기능입니다. 출발 및 데스티네이션 태그는 직접 온-ledger 기능이 없습니다. 출발 및 데스티네이션 태그는 오프-ledger 시스템이 결제를 처리하는 방법에 대한 정보만 제공합니다. 트랜잭션에서 출발 태그와 데스티네이션 태그는 모두 32비트 부호 없는 정수로 포맷됩니다.
 
 데스티네이션 태그는 지급 데스티네이션 또는 수취인을 나타냅니다. 예를 들어, [거래소](../../use-cases/decentralized-finance/xrp-list-xrp-as-an-exchange.md) 또는 [게이트웨이](../../tutorials/xrp-ledger/undefined.md) 주소로 결제하는 경우 데스티네이션 태그를 사용하여 해당 비즈니스의 시스템에서 결제 금액에 대해 어떤 고객에게 크레딧을 제공해야 하는지 나타낼 수 있습니다. 판매자에게 지불하면 지불한 물건이나 카트를 표시할 수 있습니다.
 

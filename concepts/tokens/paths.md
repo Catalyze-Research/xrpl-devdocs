@@ -64,7 +64,7 @@ Caution:
 
 <figure><img src="../../.gitbook/assets/Path_2.png" alt=""><figcaption></figcaption></figure>
 
-[<mark style="background-color:yellow;">tfNoDirectRipple</mark> 플래그](../../references/xrp-ledger/undefined/undefined-1/payment.md)를 사용하여 기본 경로를 비활성화할 수 있습니다. 이 경우, 트랜잭션은 트랜잭션에 명시적으로 포함된 경로를 사용하여만 실행될 수 있습니다. 트레이더는 이 옵션을 사용하여 사재기 기회를 이용할 수 있습니다.
+[<mark style="background-color:yellow;">tfNoDirectRipple</mark> 플래그](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/payment.md)를 사용하여 기본 경로를 비활성화할 수 있습니다. 이 경우, 트랜잭션은 트랜잭션에 명시적으로 포함된 경로를 사용하여만 실행될 수 있습니다. 트레이더는 이 옵션을 사용하여 사재기 기회를 이용할 수 있습니다.
 
 ## 경로 사양(Path Specifications)
 

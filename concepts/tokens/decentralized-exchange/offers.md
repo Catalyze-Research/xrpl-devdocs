@@ -2,15 +2,15 @@
 
 XRP Ledger의 [탈중앙화 거래소](./)에서는 거래 주문을 "제안"이라고 합니다. 제안은 XRP를 [토큰](../)으로 또는 다른 토큰으로 거래하거나, 발행자가 다른 같은 화폐 코드를 가진 토큰을 거래할 수 있습니다. (발행자가 다른 같은 코드를 가진 토큰도 가끔 rippling을 통해 교환될 수 있습니다.)
 
-* 제안을 생성하려면, [OfferCreate 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/offercreate.md)을 보내세요.
-* 즉시 완전히 채워지지 않는 제안은 ledger 데이터의 제안 객체가 됩니다. 나중의 제안과 결제는 ledger에서 [제안 객체](../../../references/xrp-ledger/ledger-ledger-data-formats/ledger/)를 소비할 수 있습니다.
+* 제안을 생성하려면, [OfferCreate 트랜잭션](../../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/offercreate.md)을 보내세요.
+* 즉시 완전히 채워지지 않는 제안은 ledger 데이터의 제안 객체가 됩니다. 나중의 제안과 결제는 ledger에서 [제안 객체](../../../references/xrp-ledger-xrp-ledger-protocol-reference/ledger-ledger-data-formats/ledger/)를 소비할 수 있습니다.
 * [교차 화폐 결제](../../undefined-1/undefined.md)는 유동성을 제공하기 위해 제안을 소비합니다. 하지만, 그들은 결코 ledger에 제안 객체를 생성하지 않습니다.
 
 ## 제안의 생명주기(Lifecycle of an Offer)
 
-[OfferCreate 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/offercreate.md)은 두 토큰 간, 또는 토큰과 XRP 간에 거래를 수행하라는 지시입니다. 이러한 거래의 각 트랜잭션에는 매입 금액(<mark style="background-color:yellow;">TakerPays</mark>)과 판매 금액(<mark style="background-color:yellow;">TakerGets</mark>)이 포함됩니다. 트랜잭션이 처리되면 가능한 한 많은 매칭이나 크로스 제안을 자동으로 소비합니다. 만약 이것이 새 제안을 완전히 채우지 못하면 나머지는 ledger의 제안 객체가 됩니다.
+[OfferCreate 트랜잭션](../../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/offercreate.md)은 두 토큰 간, 또는 토큰과 XRP 간에 거래를 수행하라는 지시입니다. 이러한 거래의 각 트랜잭션에는 매입 금액(<mark style="background-color:yellow;">TakerPays</mark>)과 판매 금액(<mark style="background-color:yellow;">TakerGets</mark>)이 포함됩니다. 트랜잭션이 처리되면 가능한 한 많은 매칭이나 크로스 제안을 자동으로 소비합니다. 만약 이것이 새 제안을 완전히 채우지 못하면 나머지는 ledger의 제안 객체가 됩니다.
 
-제안 객체는 다른 제안이나 다른 화폐 간 결제가 완전히 소비할 때까지 ledger에 대기합니다. 제안을 제시한 계정을 제안의 소유자라고 합니다. [OfferCancel 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/offercancel.md)을 사용하여 언제든지 자신의 제안을 취소할 수 있으며, 또는 [OfferCreate 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/offercreate.md)의 옵션으로 이를 수행할 수 있습니다.
+제안 객체는 다른 제안이나 다른 화폐 간 결제가 완전히 소비할 때까지 ledger에 대기합니다. 제안을 제시한 계정을 제안의 소유자라고 합니다. [OfferCancel 트랜잭션](../../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/offercancel.md)을 사용하여 언제든지 자신의 제안을 취소할 수 있으며, 또는 [OfferCreate 트랜잭션](../../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/offercreate.md)의 옵션으로 이를 수행할 수 있습니다.
 
 ledger에 제안이 있는 동안, [소유자 reserve](../../undefined-2/reserves.md)에 따라 일부 XRP가 분리됩니다. 제안이 어떤 이유로든 제거되면, 해당 XRP는 다시 사용할 수 있게 됩니다.
 

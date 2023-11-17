@@ -22,7 +22,7 @@ Bob이 Charlie에게 $3을 지불하려면 "Alice, 네게 빚진 돈 중 $3을 �
 
 <figure><img src="https://xrpl.org/img/noripple-02.svg" alt=""><figcaption></figcaption></figure>
 
-우리는 이러한 과정을 두 주소가 서로에게 대금을 조정하는 것으로 "rippling"이라고 합니다. 이는 XRP Ledger의 유용하고 중요한 기능입니다. rippling은 동일한 [화폐 코드](../../references/xrp-ledger/basic-data-types/currency-formats.md)를 사용하는 신뢰선으로 연결된 주소 간에 발생합니다. 발행자가 동일할 필요는 없으며, 사실 더 큰 체인은 항상 발행자를 변경하여 발생합니다.
+우리는 이러한 과정을 두 주소가 서로에게 대금을 조정하는 것으로 "rippling"이라고 합니다. 이는 XRP Ledger의 유용하고 중요한 기능입니다. rippling은 동일한 [화폐 코드](../../references/xrp-ledger-xrp-ledger-protocol-reference/basic-data-types/currency-formats.md)를 사용하는 신뢰선으로 연결된 주소 간에 발생합니다. 발행자가 동일할 필요는 없으며, 사실 더 큰 체인은 항상 발행자를 변경하여 발생합니다.
 
 ## No Ripple 플래그(The No Ripple Flag)
 
@@ -58,7 +58,7 @@ No Ripple 플래그는 특정 경로를 유효하지 않게 만들어 결제에 
 
 **기본 Ripple** 플래그는 기본적으로 모든 들어오는 신뢰선에 대해 rippling을 활성화하는 계정 설정입니다. 발행자는 고객이 서로 토큰을 전송할 수 있도록 이 플래그를 활성화해야 합니다.
 
-계정의 기본 Ripple 설정은 사용자가 생성하는 신뢰선에 영향을 주지 않습니다. 다만, 다른 사람이 열어주는 신뢰선에만 영향을 줍니다. 계정의 기본 Ripple 설정을 변경하면 변경 전에 생성된 신뢰선은 기존의 No Ripple 설정을 유지합니다. [TrustSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/trustset.md)을 사용하여 신뢰선의 No Ripple 설정을 주소의 새 기본값과 일치시킬 수 있습니다.
+계정의 기본 Ripple 설정은 사용자가 생성하는 신뢰선에 영향을 주지 않습니다. 다만, 다른 사람이 열어주는 신뢰선에만 영향을 줍니다. 계정의 기본 Ripple 설정을 변경하면 변경 전에 생성된 신뢰선은 기존의 No Ripple 설정을 유지합니다. [TrustSet 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/trustset.md)을 사용하여 신뢰선의 No Ripple 설정을 주소의 새 기본값과 일치시킬 수 있습니다.
 
 자세한 내용은 ['XRP Ledger 게이트웨이 되기'의 기본 Ripple을](../../tutorials/xrp-ledger/undefined.md) 참조하세요.
 
@@ -68,7 +68,7 @@ No Ripple 플래그는 특정 경로를 유효하지 않게 만들어 결제에 
 
 No Ripple 플래그는 주소가 해당 신뢰선의 양수 또는 0 잔액을 가진 경우에만 활성화할 수 있습니다. 이렇게 하면 기능을 남용하여 신뢰선 잔액의 의무를 무단으로 철회하는 것을 방지할 수 있습니다. (물론 주소를 버리는 것으로는 여전히 의무를 무단으로 철회할 수 있습니다.)
 
-No Ripple 플래그를 활성화하려면 <mark style="background-color:yellow;">tfSetNoRipple</mark> 플래그를 사용하는 [TrustSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/trustset.md)을 보내십시오. No Ripple 플래그를 비활성화하려면 <mark style="background-color:yellow;">tfClearNoRipple</mark> 플래그를 사용하면 됩니다.
+No Ripple 플래그를 활성화하려면 <mark style="background-color:yellow;">tfSetNoRipple</mark> 플래그를 사용하는 [TrustSet 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/trustset.md)을 보내십시오. No Ripple 플래그를 비활성화하려면 <mark style="background-color:yellow;">tfClearNoRipple</mark> 플래그를 사용하면 됩니다.
 
 ## No Ripple 상태 확인하기(Looking Up No Ripple Status)
 

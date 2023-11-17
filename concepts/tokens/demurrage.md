@@ -4,7 +4,7 @@
 Demurrage(과잉 보유 비용)는 지원이 중단된 기능으로, 이 페이지는 XRP Ledger 소프트웨어의 이전 버전의 역사적인 동작을 설명합니다.
 {% endhint %}
 
-[Demurrage](https://en.wikipedia.org/wiki/Demurrage\_\(currency\))(과잉 보유 비용)는 보유한 자산에 대한 비용을 나타내는 음의 이자율입니다. XRP Ledger에서 토큰의 과잉 보유 비용을 나타내기 위해 과잉 보유율을 표시하는 사용자 정의 [화폐 코드](../../references/xrp-ledger/basic-data-types/currency-formats.md)를 사용할 수 있습니다. 이렇게 하면 각각 다른 과잉 보유율을 갖는 토큰의 별도 버전이 생성됩니다. 클라이언트 응용 프로그램은 통화 코드와 함께 연간 이율 백분율을 표시하여 과잉 보유 통화 코드를 지원할 수 있습니다. 예: "XAU (-0.5% 연간)".
+[Demurrage](https://en.wikipedia.org/wiki/Demurrage\_\(currency\))(과잉 보유 비용)는 보유한 자산에 대한 비용을 나타내는 음의 이자율입니다. XRP Ledger에서 토큰의 과잉 보유 비용을 나타내기 위해 과잉 보유율을 표시하는 사용자 정의 [화폐 코드](../../references/xrp-ledger-xrp-ledger-protocol-reference/basic-data-types/currency-formats.md)를 사용할 수 있습니다. 이렇게 하면 각각 다른 과잉 보유율을 갖는 토큰의 별도 버전이 생성됩니다. 클라이언트 응용 프로그램은 통화 코드와 함께 연간 이율 백분율을 표시하여 과잉 보유 통화 코드를 지원할 수 있습니다. 예: "XAU (-0.5% 연간)".
 
 ## 과잉 보유 토큰 금액 표현(Representing Demurraging Token Amounts)
 
@@ -45,7 +45,7 @@ D = A × ( e ^ (t ÷ τ) )
 
 ## 이자를 받는 화폐 코드 형식(Interest-Bearing Currency Code Format)
 
-양수 이자 또는 음수 이자(과잉 보유)를 갖는 토큰은 [표준 화폐 코드 형식](../../references/xrp-ledger/basic-data-types/currency-formats.md) 대신 다음 형식의 160비트 화폐 코드를 사용합니다:
+양수 이자 또는 음수 이자(과잉 보유)를 갖는 토큰은 [표준 화폐 코드 형식](../../references/xrp-ledger-xrp-ledger-protocol-reference/basic-data-types/currency-formats.md) 대신 다음 형식의 160비트 화폐 코드를 사용합니다:
 
 <figure><img src="https://xrpl.org/img/demurrage-currency-code-format.png" alt=""><figcaption></figcaption></figure>
 

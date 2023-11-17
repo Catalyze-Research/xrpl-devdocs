@@ -18,7 +18,7 @@
 
 ## 비최종 결과는 어떻게 바뀔 수 있나요? (How can non-final results change?)
 
-트랜잭션을 처음 제출할 때, <mark style="background-color:yellow;">rippled</mark> 서버는 그 트랜잭션을 현재 열려 있는 ledger에 임시적으로 적용한 후 그 결과를 반환합니다. 그러나 [트랜잭션의 최종 결과](../../../references/xrp-ledger/undefined/pseudo-transactions/undefined/)는 그 임시 결과와 매우 다를 수 있습니다. 그 이유는 여러 가지입니다:
+트랜잭션을 처음 제출할 때, <mark style="background-color:yellow;">rippled</mark> 서버는 그 트랜잭션을 현재 열려 있는 ledger에 임시적으로 적용한 후 그 결과를 반환합니다. 그러나 [트랜잭션의 최종 결과](../../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/pseudo-transactions/undefined/)는 그 임시 결과와 매우 다를 수 있습니다. 그 이유는 여러 가지입니다:
 
 * 트랜잭션은 나중의 ledger 버전까지 지연될 수 있거나, 검증된 ledger에 포함되지 않을 수도 있습니다. 대부분, XRP Ledger는 모든 유효한 트랜잭션이 가능한 한 빨리 처리되어야 한다는 원칙을 따릅니다. 그러나 예외 상황도 있습니다:
   * 제안된 트랜잭션이 [컨센서스 라운드](../../consensus-protocol/consensus-structure.md)가 시작될 때까지 대다수의 검증자에게 중계되지 않았다면, 남은 검증자들이 트랜잭션을 가져와 유효한지 확인하는 시간을 주기 위해 다음 ledger 버전까지 연기될 수 있습니다.
@@ -29,7 +29,7 @@
 * [닫힌 ledger에 적용된 트랜잭션의 순서](../../undefined-1/ledgers.md)는 일반적으로 현재 열려 있는 ledger에 임시적으로 적용된 트랜잭션의 순서와 다릅니다. 트랜잭션에 따라, 일시적으로 성공했던 트랜잭션이 실패할 수 있고, 일시적으로 실패했던 트랜잭션이 성공할 수 있습니다. 몇 가지 예는 다음과 같습니다:
   * 두 개의 트랜잭션이 각각 탈중앙화 거래에서 같은 제안을 완전히 소비하려고 한다면, 먼저 온 트랜잭션이 성공하고, 다른 트랜잭션은 실패합니다. 적용되는 트랜잭션의 순서가 바뀔 수 있으므로, 성공했던 트랜잭션이 실패하고, 실패했던 트랜잭션이 성공할 수 있습니다. 제안이 부분적으로 실행될 수 있으므로, 그들은 더 크거나 더 작은 범위로 여전히 성공할 수 있습니다.
   * [교차 화폐 결제](../../undefined-1/undefined.md)가 탈중앙화 거래의 제안을 소비하여 성공했지만, 다른 트랜잭션이 같은 오더북에서 제안을 소비하거나 생성하면, 교차 화폐 결제는 처음에 예상했던 것보다 다른 환율로 성공할 수 있습니다. 부분 결제인 경우, 다른 금액을 전달할 수도 있습니다.
-  * 송신자가 충분한 자금을 갖고 있지 않아 일시적으로 실패한 [결제 트랜잭션](../../../references/xrp-ledger/undefined/undefined-1/payment.md)은 필요한 자금을 전달하는 다른 트랜잭션이 표준 순서에 따라 먼저 온 경우 나중에 성공할 수 있습니다. 그 반대의 경우도 가능합니다. 필요한 자금을 전달하는 거래가 표준적인 순서로 정렬된 후에 우선되지 않았기 때문에 잠정적으로 성공한 거래가 실패할 수 있습니다.
+  * 송신자가 충분한 자금을 갖고 있지 않아 일시적으로 실패한 [결제 트랜잭션](../../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/payment.md)은 필요한 자금을 전달하는 다른 트랜잭션이 표준 순서에 따라 먼저 온 경우 나중에 성공할 수 있습니다. 그 반대의 경우도 가능합니다. 필요한 자금을 전달하는 거래가 표준적인 순서로 정렬된 후에 우선되지 않았기 때문에 잠정적으로 성공한 거래가 실패할 수 있습니다.
 
 {% hint style="info" %}
 Tip:

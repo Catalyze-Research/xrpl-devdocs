@@ -40,7 +40,7 @@ XRP는 발행자가 없기 때문에 이체 수수료가 없습니다.
 
 XRP Ledger 프로토콜에서 이체 수수료는 <mark style="background-color:yellow;">TransferRate</mark>필드로 표시되며, 해당 토큰의 10억 단위를 수신받기 위해 보내야 하는 금액을 나타내는 정수로 표시됩니다. <mark style="background-color:yellow;">TransferRate</mark> <mark style="background-color:yellow;">1005000000</mark>은 0.5%의 이체 수수료에 해당합니다. 기본적으로 <mark style="background-color:yellow;">TransferRate</mark>는 수수료가 없음을 나타내는 값으로 설정됩니다. <mark style="background-color:yellow;">TransferRate</mark>의 값은 <mark style="background-color:yellow;">1000000000</mark>("0%" 수수료) 미만 또는 <mark style="background-color:yellow;">2000000000</mark>("100%" 수수료) 이상으로 설정할 수 없습니다. 값 <mark style="background-color:yellow;">0</mark>은 수수료가 없는 특수한 경우로, <mark style="background-color:yellow;">1000000000</mark>과 동일합니다.
 
-토큰 발행자는 발행 주소에서 [AccountSet 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/accountset.md)을 제출하여 모든 토큰의 <mark style="background-color:yellow;">TransferRate</mark>를 변경할 수 있습니다.
+토큰 발행자는 발행 주소에서 [AccountSet 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/accountset.md)을 제출하여 모든 토큰의 <mark style="background-color:yellow;">TransferRate</mark>를 변경할 수 있습니다.
 
 누구나 [account\_info 메소드](../../references/http-websocket-apis/api-1/undefined/account\_info.md)를 사용하여 계정의 <mark style="background-color:yellow;">TransferRate</mark>를 확인할 수 있습니다. <mark style="background-color:yellow;">TransferRate</mark>가 생략된 경우 수수료가 없음을 나타냅니다.
 

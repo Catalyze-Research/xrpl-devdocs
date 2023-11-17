@@ -46,11 +46,11 @@ ICO는 미국에서 [증권으로 규제](https://www.sec.gov/oiea/investor-aler
 
 ## 토큰 속성&#x20;
 
-XRP Ledger의 토큰은 [XRP와 근본적으로 다릅니다](../../references/xrp-ledger/basic-data-types/currency-formats.md). 토큰은 항상 신뢰선에 존재하며, 모든 토큰 전송은 신뢰선을 따라 이동합니다. 다른 사람의 계정이 신뢰 한도에 설정된 _한도_보다 더 많은 토큰을 보유하게 할 수는 없습니다. (신뢰선에 구성된 한도 이상으로 자신의 신뢰선을 증가시킬 _수는_ 있습니다. 예를 들어 [탈중앙화 거래소](decentralized-exchange/)에서 해당 토큰을 더 많이 구매하거나 이미 양수 잔액을 보유한 후 한도를 감소시킴으로써 가능합니다.)
+XRP Ledger의 토큰은 [XRP와 근본적으로 다릅니다](../../references/xrp-ledger-xrp-ledger-protocol-reference/basic-data-types/currency-formats.md). 토큰은 항상 신뢰선에 존재하며, 모든 토큰 전송은 신뢰선을 따라 이동합니다. 다른 사람의 계정이 신뢰 한도에 설정된 _한도_보다 더 많은 토큰을 보유하게 할 수는 없습니다. (신뢰선에 구성된 한도 이상으로 자신의 신뢰선을 증가시킬 _수는_ 있습니다. 예를 들어 [탈중앙화 거래소](decentralized-exchange/)에서 해당 토큰을 더 많이 구매하거나 이미 양수 잔액을 보유한 후 한도를 감소시킴으로써 가능합니다.)
 
 토큰은 15자리의 정밀도를 가진 10진법을 사용하며, 지수를 통해 매우 큰 값(9999999999999999 × 1080까지)과 매우 작은 값(1.0 × 10-81까지)을 표현할 수 있습니다.
 
-신뢰선이 적절하게 설정된 경우 누구든지 [결제 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/payment.md)을 보내는 것으로 토큰을 발행할 수 있습니다. 토큰을 발행한 자에게 다시 돌려보내는 것으로 토큰을 "소각"할 수도 있습니다. 경우에 따라 [교차 화폐 결제](../undefined-1/undefined.md)나 거래를 통해 발행자의 설정에 따라 추가 토큰을 생성할 수도 있습니다.
+신뢰선이 적절하게 설정된 경우 누구든지 [결제 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/payment.md)을 보내는 것으로 토큰을 발행할 수 있습니다. 토큰을 발행한 자에게 다시 돌려보내는 것으로 토큰을 "소각"할 수도 있습니다. 경우에 따라 [교차 화폐 결제](../undefined-1/undefined.md)나 거래를 통해 발행자의 설정에 따라 추가 토큰을 생성할 수도 있습니다.
 
 발행자는 사용자가 토큰을 이동할 때 자동으로 공제되는 [이체 수수료](../transactions/fees.md)를 부과할 수 있습니다. 발행자는 또한 토큰을 포함한 환율에 대한 [틱 크기](decentralized-exchange/tick-size.md)를 정의할 수 있습니다. 발행자 및 일반 계정 모두 신뢰선을 동결할 수 있으며, 이는 해당 신뢰선의 토큰 사용을 제한합니다. (이러한 사항은 XRP에는 적용되지 않습니다.)
 

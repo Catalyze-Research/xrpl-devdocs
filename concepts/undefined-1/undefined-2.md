@@ -68,7 +68,7 @@ EscrowFinish 트랜잭션은 [crypto-condition](https://datatracker.ietf.org/doc
 
 추가적으로 필요한 트랜잭션 비용은 주문 처리의 크기에 비례합니다. 트랜잭션이 다중 서명인 경우, [다중 서명](../undefined-2/undefined-1.md)의 비용은 주문 처리의 비용에 추가됩니다.
 
-현재, 주문 처리를 포함한 EscrowFinish는 **최소한 330** [**드롭의 XRP**](../../references/xrp-ledger/basic-data-types/)**와 주문 처리의 크기당 16바이트마다 10 드롭의 XRP가 추가 트랜잭션 비용으로 필요**합니다.&#x20;
+현재, 주문 처리를 포함한 EscrowFinish는 **최소한 330** [**드롭의 XRP**](../../references/xrp-ledger-xrp-ledger-protocol-reference/basic-data-types/)**와 주문 처리의 크기당 16바이트마다 10 드롭의 XRP가 추가 트랜잭션 비용으로 필요**합니다.&#x20;
 
 {% hint style="info" %}
 Note:
@@ -108,11 +108,11 @@ For more information on Ripple's 55-billion XRP lock-up, see [Ripple's Insights 
 
 <figure><img src="../../.gitbook/assets/Escrow_1.png" alt=""><figcaption></figcaption></figure>
 
-**1단계**: 에스크로를 보내기 위해 송신자는 [EscrowCreate 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/escrowcreate.md)을 사용하여 일부 XRP를 잠그게 됩니다. 이 트랜잭션에서는 완료 시간, 만료 시간 또는 둘 다를 정의할 수 있습니다. 또한 트랜잭션에는 에스크로를 완료하기 위해 충족되어야 할 암호 조건을 정의할 수도 있습니다. 이 트랜잭션은 XRP의 수령인을 정의해야 합니다. 수령인은 송신자와 동일할 수도 있습니다.
+**1단계**: 에스크로를 보내기 위해 송신자는 [EscrowCreate 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/escrowcreate.md)을 사용하여 일부 XRP를 잠그게 됩니다. 이 트랜잭션에서는 완료 시간, 만료 시간 또는 둘 다를 정의할 수 있습니다. 또한 트랜잭션에는 에스크로를 완료하기 위해 충족되어야 할 암호 조건을 정의할 수도 있습니다. 이 트랜잭션은 XRP의 수령인을 정의해야 합니다. 수령인은 송신자와 동일할 수도 있습니다.
 
 **2단계**: 이 트랜잭션이 처리된 후에는 XRP Ledger에 [에스크로](undefined-2.md) 객체가 생성됩니다. 이 개체는 생성한 트랜잭션에 의해 정의된 에스크로의 속성을 포함합니다. 만약 에스크로에 완료 시간이 정의되어 있다면, 해당 시간이 지나기 전까지는 아무도 XRP에 접근할 수 없습니다.
 
-**3단계**: 수령인이나 다른 XRP Ledger 주소는 [EscrowFinish 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/escrowfinish.md)을 내서 XRP를 전달합니다. 올바른 조건이 충족되면, 이 트랜잭션은 ledger에서 에스크로 객체를 파괴하고 XRP를 수령인에게 이체합니다. 에스크로에 암호 조건이 있는 경우, 이 트랜잭션에는 해당 조건의 충족을 포함해야 합니다. 이미 지나간 만료 시간이 있는 에스크로의 경우, EscrowFinish 트랜잭션은 <mark style="background-color:yellow;">tecNO\_PERMISSION</mark> 코드와 함께 실패합니다.
+**3단계**: 수령인이나 다른 XRP Ledger 주소는 [EscrowFinish 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/escrowfinish.md)을 내서 XRP를 전달합니다. 올바른 조건이 충족되면, 이 트랜잭션은 ledger에서 에스크로 객체를 파괴하고 XRP를 수령인에게 이체합니다. 에스크로에 암호 조건이 있는 경우, 이 트랜잭션에는 해당 조건의 충족을 포함해야 합니다. 이미 지나간 만료 시간이 있는 에스크로의 경우, EscrowFinish 트랜잭션은 <mark style="background-color:yellow;">tecNO\_PERMISSION</mark> 코드와 함께 실패합니다.
 
 ## 만료 시나리오
 
@@ -122,7 +122,7 @@ For more information on Ripple's 55-billion XRP lock-up, see [Ripple's Insights 
 
 **3단계a**: 에스크로에 만료 시간이 있는 경우, 그리고 해당 시간까지 에스크로 성공적으로 완료되지 않은 경우, 에스크로는 만료되었다고 간주됩니다. XRP Ledger에는 여전히 존재하지만 성공적으로 완료할 수 없습니다. (만료된 객체는 트랜잭션이 수정될 때까지 ledger에 남아 있습니다. 시간 기반 트리거는 ledger 내용을 변경할 수 없습니다.)
 
-**4단계a**: 송신자나 다른 XRP Ledger 주소는 [EscrowCancel 트랜잭션](../../references/xrp-ledger/undefined/undefined-1/escrowcancel.md)을 보내 만료된 에스크로를 취소할 수 있습니다. 이로써 ledger에서 [에스크로 객체](undefined-2.md)가 파괴되고 XRP가 송신자에게 반환됩니다.
+**4단계a**: 송신자나 다른 XRP Ledger 주소는 [EscrowCancel 트랜잭션](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-types/escrowcancel.md)을 보내 만료된 에스크로를 취소할 수 있습니다. 이로써 ledger에서 [에스크로 객체](undefined-2.md)가 파괴되고 XRP가 송신자에게 반환됩니다.
 
 ##
 
