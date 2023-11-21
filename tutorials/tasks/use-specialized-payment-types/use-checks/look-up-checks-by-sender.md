@@ -2,21 +2,21 @@
 description: 수표 개정에 의해 추가되었습니다.
 ---
 
-# 발신자별 수표 조회
+# 발신자별 수표 조회(Look Up Checks by Sender)
 
 이 튜토리얼에서는 발신자별로 수표를 조회하는 방법을 보여드립니다. 수취인별로 수표를 조회할 수도 있습니다.
 
-## 1. 주소로 모든 수표 조회하기
+## 1. 주소로 모든 수표 조회(Look up all Checks for the address)
 
-계정에 대해 수신 및 발신되는 모든 수표 목록을 조회하려면 보내는 계정의 주소와 함께 account\_objects 명령을 사용하고 요청의 유형 필드를 수표로 설정합니다.
+계정에 대해 수신 및 발신되는 모든 수표 목록을 가져오려면 보내는 계정의 주소와 함께 `account_objects` 명령을 사용하고 요청의 `type` 필드를 `checks`로 설정합니다.
 
 {% hint style="info" %}
 Note:
 
-account\_objects 명령에 대한 커맨드라인 인터페이스는 유형 필드를 허용하지 않습니다. 대신 json 메소드를 사용하여 명령줄에서 JSON-RPC 형식의 요청을 보낼 수 있습니다.
+account\_objects 명령에 대한 커맨드라인 인터페이스는 type 필드를 허용하지 않습니다. 대신 [json method](https://xrpl.org/json.html)를 사용하여 명령줄에서 JSON-RPC 형식 요청을 보낼 수 있습니다.
 {% endhint %}
 
-## 요청 예시
+## 요청 예시(Example Request)
 
 {% tabs %}
 {% tab title="ripple-lib 1.x" %}
@@ -66,7 +66,7 @@ api.connect().then(() => {
 {% endtab %}
 {% endtabs %}
 
-## 응답 예시
+## 응답 예시(Example Response)
 
 {% tabs %}
 {% tab title="ripple-lib 1.x" %}
@@ -204,9 +204,9 @@ Disconnected
 {% endtab %}
 {% endtabs %}
 
-## 2. 발신자별로 응답 필터링하기
+## 2. 발신자별로 응답 필터링(Filter the responses by sender)
 
-응답에는 요청의 발신자 계정이 어디인지 확인하는 항목과 수신자 계정이 어디인지 확인하는 항목이 포함될 수 있습니다. 응답의 account\_objects 배열의 각 멤버는 하나의 Check를 나타냅니다. 이러한 각 수표 객체에 대해 계정의 주소는 해당 수표의 발신자 주소입니다.
+응답에는 요청의 계정이 발신자인 경우의 Check와 계정이 수신자인 경우의 Check가 포함될 수 있습니다. 응답의 account\_objects 배열의 각 멤버는 하나의 수표를 나타냅니다. 이러한 각 수표 객체에 대해 Account의 주소는 해당 수표의 발신자 주소입니다.
 
 다음 의사 코드는 발신자별로 응답을 필터링하는 방법을 보여줍니다:
 
