@@ -2,7 +2,7 @@
 
 XRP Ledger에서 토큰(대체 가능 또는 기타)을 생성하고 거래하세요.
 
-*   ### 대체 가능한 토큰 발행([Issue a Fungible Token](https://xrpl.org/issue-a-fungible-token.html))
+*   ### 대체가능한 토큰 발행([Issue a Fungible Token](https://xrpl.org/issue-a-fungible-token.html))
 
     자신만의 토큰을 생성하고 XRP Ledger testnet에서 발행하세요.\
 
@@ -14,7 +14,7 @@ XRP Ledger에서 토큰(대체 가능 또는 기타)을 생성하고 거래하�
 
     계정이 발행하는 토큰 동결 기능을 영구적으로 포기합니다.\
 
-*   ### 글로벌 동결 시행([Enact Global Freeze](https://xrpl.org/enact-global-freeze.html))
+*   ### 광역 동결 시행([Enact Global Freeze](https://xrpl.org/enact-global-freeze.html))
 
     내 주소로 발급된 모든 토큰을 동결합니다.\
 
