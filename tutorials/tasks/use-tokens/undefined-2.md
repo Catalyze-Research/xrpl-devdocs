@@ -1,49 +1,49 @@
-# 동결 금지 활성화
+# 신뢰선 동결하기
 
-XRP Ledger에서 토큰을 발행하는 경우, 동결 금지 설정을 활성화하여 XRP Ledger의 토큰 동결 기능을 영구적으로 사용할 수 없도록 제한할 수 있습니다. (참고로, 이는 XRP가 아닌 발행된 토큰에만 적용됩니다.) 이 튜토리얼에서는 발행 계정에서 동결 금지 설정을 활성화하는 방법을 보여드리겠습니다.
+이 튜토리얼에서는 개별 트랜잭션 라인을 동결하는 단계를 보여드리겠습니다. XRP Ledger의 토큰 발행자는 해당 계정이 의심스러운 활동을 하는 경우 특정 트랜잭션 상대방에 대한 신뢰선을 동결할 수 있습니다.
 
-## 요구 조건
+{% hint style="info" %}
+Tip:
 
-* XRP Ledger 네트워크에 연결해야 합니다. 이 튜토리얼에 표시된 대로 공용 서버를 사용하여 테스트할 수 있습니다.
+다시 한 번 말씀드리자면, 동결은 XRP가 아닌 발행된 토큰에만 적용됩니다.&#x20;
+{% endhint %}
+
+## 요구  조건
+
+* XRP Ledger 네트워크에 연결해야 합니다. 이 튜토리얼에 표시된 대로 공용 서버를 사용해 테스트할 수 있습니다.
 * 선호하는 클라이언트 라이브러리에 대한 시작하기 지침을 숙지하고 있어야 합니다. 이 페이지에서는 다음에 대한 예제를 제공합니다:
   * xrpl.js 라이브러리를 사용한 JavaScript. 설정 단계는 JavaScript를 사용하여 시작하기를 참조하세요.
-* 동결 방지를 활성화하기 위해 XRP Ledger에 토큰을 발행할 필요는 없지만, 토큰을 발행할 계획이 있거나 이미 발행한 경우 동결 방지를 활성화하는 것이 좋습니다.
+* 이 튜토리얼에서는 XRP Ledger에서 이미 토큰을 발행했다고 가정합니다.
+* 개별 신뢰선을 동결하는 기능을 포기하는 동결 금지 설정을 활성화할 수 없습니다.
 
 ## 예제 코드
 
-이 튜토리얼의 모든 단계에 대한 전체 샘플 코드는 MIT 라이선스에 따라 사용할 수 있습니다.
+이 튜토리얼의 모든 단계에 대한 전체 샘플 코드는 MIT 라이선스 에 따라 사용할 수 있습니다.
 
-* 코드 샘플을 참조하세요: 이 웹사이트의 소스 저장소에서 동결을 참조하세요.
+* 코드 샘플을 참조하세요: 이 웹사이트의 소스 저장소에서 고정하기를 참조하세요.
 
 ## 단계
 
 ## 1. 자격증명 가져오기
 
-XRP Ledger에서 트랜잭션하려면 주소와 비밀 키, 그리고 약간의 XRP가 필요합니다. "콜드" 주소와 "핫" 주소를 별도로 사용하는 모범 사례를 사용하는 경우, 토큰 발행자인 콜드 주소의 마스터 키가 필요합니다. 발행자의 동결 금지 설정만 토큰에 영향을 미칩니다.
+XRP Ledger에서 트랜잭션하려면 주소와 비밀 키, 그리고 약간의 XRP가 필요합니다. "콜드" 주소와 "핫" 주소를 별도로 보유하는 모범 사례를 사용하는 경우, 토큰 발행자인 콜드 주소의 키가 필요합니다.
+
+* [Generate](https://xrpl.org/freeze-a-trust-line.html#interactive-generate)
+* [Connect](https://xrpl.org/freeze-a-trust-line.html#interactive-connect)
+* [Choose Trust Line](https://xrpl.org/freeze-a-trust-line.html#interactive-choose\_trust\_line)
+* [Send TrustSet to Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_freeze)
+* [Wait](https://xrpl.org/freeze-a-trust-line.html#interactive-wait)
+* [Check Freeze Status](https://xrpl.org/freeze-a-trust-line.html#interactive-check\_freeze\_status)
+* [Send TrustSet to End Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_end\_freeze)
+* [Wait (again)](https://xrpl.org/freeze-a-trust-line.html#interactive-wait\_again)
 
 {% hint style="info" %}
 Caution:
 
-일반 키 쌍이나 다중 서명을 사용하여 동결 금지 설정을 사용할 수 없습니다.&#x20;
+Ripple은 testnet devnet을 테스트 목적으로만 제공하며, 때때로 이러한 테스트 네트워크의 상태를 모든 잔액과 함께 초기화하기도 합니다. 예방책으로 testnet/devnet 과 mainnet에서 동일한 주소를 사용하지 마시기 바랍니다.
 {% endhint %}
 
-이 튜토리얼에서는 다음 인터페이스에서 자격 증명을 얻을 수 있습니다:
-
-* [Generate](https://xrpl.org/enable-no-freeze.html#interactive-generate)
-* [Connect](https://xrpl.org/enable-no-freeze.html#interactive-connect)
-* [Send AccountSet](https://xrpl.org/enable-no-freeze.html#interactive-send\_accountset)
-* [Wait](https://xrpl.org/enable-no-freeze.html#interactive-wait)
-* [Confirm Settings](https://xrpl.org/enable-no-freeze.html#interactive-confirm\_settings)&#x20;
-
-{% hint style="info" %}
-Caution:
-
-Ripple은 testnet과 devnet을 테스트 목적으로만 제공하며, 때때로 이러한 테스트 네트워크의 상태를 모든 잔액과 함께 초기화합니다. 예방책으로 testnet/devnet 과 mainnet에서 동일한 주소를 사용하지 마시기 바랍니다.
-{% endhint %}
-
-프로덕션에 사용할 수 있는 소프트웨어를 빌드할 때는 기존 계정을 사용하고 보안 서명 구성을 사용하여 키를 관리해야 합니다.
-
-## 2. 네트워크에 연결
+## 2. 네트워크에 연결하기
 
 네트워크에 트랜잭션을 제출하려면 네트워크에 연결해야 합니다. 다음 코드는 지원되는 클라이언트 라이브러리로 퍼블릭 XRP Ledger testnet 서버에 연결하는 방법을 보여줍니다:
 
@@ -69,54 +69,207 @@ async function main() {
 main()
 ```
 {% endtab %}
+
+{% tab title="WebSocket" %}
+```json
+(Connect to wss:// URL of an XRP Ledger server using your preferred client.)
+```
+{% endtab %}
 {% endtabs %}
 
-이 튜토리얼에서는 다음 버튼을 클릭하여 연결합니다:
+* [Generate](https://xrpl.org/freeze-a-trust-line.html#interactive-generate)
+* [Connect](https://xrpl.org/freeze-a-trust-line.html#interactive-connect)
+* [Choose Trust Line](https://xrpl.org/freeze-a-trust-line.html#interactive-choose\_trust\_line)
+* [Send TrustSet to Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_freeze)
+* [Wait](https://xrpl.org/freeze-a-trust-line.html#interactive-wait)
+* [Check Freeze Status](https://xrpl.org/freeze-a-trust-line.html#interactive-check\_freeze\_status)
+* [Send TrustSet to End Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_end\_freeze)
+* [Wait (again)](https://xrpl.org/freeze-a-trust-line.html#interactive-wait\_again)
 
-* [Generate](https://xrpl.org/enable-no-freeze.html#interactive-generate)
-* [Connect](https://xrpl.org/enable-no-freeze.html#interactive-connect)
-* [Send AccountSet](https://xrpl.org/enable-no-freeze.html#interactive-send\_accountset)
-* [Wait](https://xrpl.org/enable-no-freeze.html#interactive-wait)
-* [Confirm Settings](https://xrpl.org/enable-no-freeze.html#interactive-confirm\_settings)
+## 3. 신뢰선 선택
 
-## 3. AccountSet 트랜잭션 전송
+트랜잭션당 하나의 신뢰선만 동결할 수 있으므로 어떤 신뢰선을 원하는지 알아야 합니다. 각 신뢰선은 다음 세 가지로 고유하게 식별됩니다:
 
-동결 금지 설정을 활성화하려면 asfNoFreeze 값(6)이 포함된 SetFlag 필드가 있는 AccountSet 트랜잭션을 전송합니다. 트랜잭션을 보내려면 먼저 필요한 모든 필드를 채우도록 트랜잭션을 준비한 다음 계정의 비밀 키로 서명한 다음 마지막으로 네트워크에 제출합니다.
+* 본인의 주소.
+* 신뢰선을 통해 본인에게 연결된 계정의 주소.
+* 신뢰선의 화폐 코드.
 
-예를 들어:
+두 계정 사이에 각각 다른 화폐를 사용하는 여러 개의 신뢰선이 있을 수 있습니다. 특정 계정이 악의적으로 행동하는 것으로 의심되는 경우 계정 간의 모든 신뢰선을 한 번에 하나씩 동결할 수 있습니다. 한 쌍의 계정에 account\_lines 메소드를 사용하여 해당 계정 간의 모든 신뢰선을 찾은 다음, 그 결과 중에서 동결할 신뢰선을 선택합니다. 예를 들면 다음과 같습니다:
 
 {% tabs %}
 {% tab title="JavaScript" %}
 ```javascript
-// Submit an AccountSet transaction to enable No Freeze ----------------------
-  const accountSetTx = {
-    TransactionType: "AccountSet",
-    Account: wallet.address,
-    // Set the NoFreeze flag for this account
-    SetFlag: xrpl.AccountSetAsfFlags.asfNoFreeze
+// Look up current trust lines -----------------------------------------------
+  const issuing_address = wallet.address
+  const address_to_freeze = 'rhPuJPcd9kcSRCGHWudV3tjUuTvvysi6sv'
+  const currency_to_freeze = 'FOO'
+
+  console.log('Looking up', currency_to_freeze, 'trust line from',
+              issuing_address, 'to', address_to_freeze)
+  const account_lines = await client.request({
+    "command": "account_lines",
+    "account": issuing_address,
+    "peer": address_to_freeze,
+    "ledger_index": "validated"
+  })
+  const trustlines = account_lines.result.lines
+  console.log("Found lines:", trustlines)
+
+  // Find the trust line for our currency_to_freeze ----------------------------
+  let trustline = null
+  for (let i = 0; i < trustlines.length; i++) {
+    if(trustlines[i].currency === currency_to_freeze) {
+      trustline = trustlines[i]
+      break
+    }
   }
 
-  // Best practice for JS users - validate checks if a transaction is well-formed
-  xrpl.validate(accountSetTx)
+  if (trustline === null) {
+    console.error(`Couldn't find a ${currency_to_freeze} trustline between
+                  ${issuing_address} and ${address_to_freeze}`)
+    return
+  }a
+```
+{% endtab %}
 
-  console.log('Sign and submit the transaction:', accountSetTx)
-  await client.submitAndWait(accountSetTx, { wallet: wallet })
+{% tab title="WebSocket" %}
+```json
+Example Request:
+
+{
+  "id": "example_look_up_trust_lines",
+  "command": "account_lines",
+  "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+  "peer": "rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW",
+  "ledger_index": "validated"
+}
+
+// Example Response:
+
+{
+  "id": "example_look_up_trust_lines",
+  "result": {
+    "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+    "ledger_hash": "AF5C6E6FBC44183D8662C7F5BF88D52F99738A0E66FF07FC7B5A516AC8EA1B37",
+    "ledger_index": 67268474,
+    "lines": [
+      {
+        "account": "rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW",
+        "balance": "0",
+        "currency": "USD",
+        "limit": "0",
+        "limit_peer": "110",
+        "quality_in": 0,
+        "quality_out": 0
+      }
+    ],
+    "validated": true
+  },
+  "status": "success",
+  "type": "response"
+}
+```
+{% endtab %}
+{% endtabs %}
+
+이 튜토리얼에서는 두 번째 테스트 주소가 다음 예시에서 볼 수 있는 것처럼 화폐 'FOO'에 대한 테스트 주소에 대한 신뢰선을 만들었습니다:
+
+* [Generate](https://xrpl.org/freeze-a-trust-line.html#interactive-generate)
+* [Connect](https://xrpl.org/freeze-a-trust-line.html#interactive-connect)
+* [Choose Trust Line](https://xrpl.org/freeze-a-trust-line.html#interactive-choose\_trust\_line)
+* [Send TrustSet to Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_freeze)
+* [Wait](https://xrpl.org/freeze-a-trust-line.html#interactive-wait)
+* [Check Freeze Status](https://xrpl.org/freeze-a-trust-line.html#interactive-check\_freeze\_status)
+* [Send TrustSet to End Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_end\_freeze)
+* [Wait (again)](https://xrpl.org/freeze-a-trust-line.html#interactive-wait\_again)
+
+## 4. 신뢰선 동결을 위해 TrustSet 트랜잭션 보내기
+
+특정 트랜잭션 라인에서 개별 동결을 활성화 또는 비활성화하려면 tfSetFreeze 플래그가 활성화된 TrustSet 트랜잭션을 전송합니다. 트랜잭션의 필드는 다음과 같아야 합니다:
+
+| 필드                       | 값   | 설명                                                                  |
+| ------------------------ | --- | ------------------------------------------------------------------- |
+| `Account`                | 문자열 | 발급 계정의 주소입니다.                                                       |
+| `TransactionType`        | 문자열 | `TrustSet`                                                          |
+| `LimitAmount`            | 객체  | 동결할 신뢰선을 정의하는 객체입니다.                                                |
+| `LimitAmount`.`currency` | 문자열 | 신뢰선의 화폐(XRP일 수 없음)                                                  |
+| `LimitAmount`.`issuer`   | 문자열 | 동결할 트랜잭션 상대방의 XRP Ledger 주소.                                        |
+| `LimitAmount`.`value`    | 문자열 | 트랜잭션 상대방이 당신에게 발행하도록 신뢰하는 화폐 금액(따옴표로 표시됨)입니다. 발행자의 경우 일반적으로 "0"입니다. |
+| `Flags`                  | 숫자  | 동결을 활성화하려면 tfSetFreeze 비트(0x00100000)를 켭니다.                         |
+
+항상 그렇듯이 트랜잭션을 전송하려면 필요한 모든 필드를 채우고 암호화 키로 서명하여 트랜잭션을 준비한 다음 네트워크에 제출합니다. 예를 들어:
+
+{% tabs %}
+{% tab title="JavaScript" %}
+```javascript
+// Send a TrustSet transaction to set an individual freeze -------------------
+  // Construct a TrustSet, preserving our existing limit value
+  const trust_set = {
+    "TransactionType": 'TrustSet',
+    "Account": issuing_address,
+    "LimitAmount": {
+      "value": trustline.limit,
+      "currency": trustline.currency,
+      "issuer": trustline.account
+    },
+    "Flags": xrpl.TrustSetFlags.tfSetFreeze
+  }
+
+  // Best practice for JavaScript users: use validate(tx_json) to confirm
+  // that a transaction is well-formed or throw ValidationError if it isn't.
+  xrpl.validate(trust_set)
+
+  console.log('Submitting TrustSet tx:', trust_set)
+  const result = await client.submitAndWait(trust_set, { wallet: wallet })
+  console.log("Transaction result:", result)
+
+  // Confirm trust line status -------------------------------------------------
+  const account_lines_2 = await client.request({
+    "command": "account_lines",
+    "account": issuing_address,
+    "peer": address_to_freeze,
+    "ledger_index": "validated"
+  })
+  const trustlines_2 = account_lines_2.result.lines
+
+  let line = null
+  for (let i = 0; i < trustlines_2.length; i++) {
+    if(trustlines_2[i].currency === currency_to_freeze) {
+      line = trustlines_2[i]
+      console.log(`Status of ${currency_to_freeze} line between
+          ${issuing_address} and ${address_to_freeze}:
+          ${JSON.stringify(line, null, 2)}`)
+      if (line.freeze === true) {
+        console.log(`✅ Line is frozen.`)
+      } else {
+        console.error(`❌ Line is NOT FROZEN.`)
+      }
+    }
+  }
+  if (line === null) {
+    console.error(`Couldn't find a ${CURRENCY_TO_FREEZE} line between
+        ${issuing_address} and ${address_to_freeze}.`)
+  }
 ```
 {% endtab %}
 
 {% tab title="WebSocket" %}
 ```json
 {
-  "id": 12,
+  "id": "example_freeze_individual_line",
   "command": "submit",
   "tx_json": {
-    "TransactionType": "AccountSet",
-    "Account": "raKEEVSGnKSD9Zyvxu4z6Pqpm4ABH8FS6n",
+    "TransactionType": "TrustSet",
+    "Account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
     "Fee": "12",
-    "Flags": 0,
-    "SetFlag": 6,
-    "LastLedgerSequence": 18124917,
-    "Sequence": 4
+    "Flags": 1048576,
+    "LastLedgerSequence": 18103014,
+    "LimitAmount": {
+      "currency": "USD",
+      "issuer": "rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW",
+      "value": "0"
+    },
+    "Sequence": 340
   },
   "secret": "s████████████████████████████"
 }
@@ -124,88 +277,135 @@ main()
 {% endtab %}
 {% endtabs %}
 
-* [Generate](https://xrpl.org/enable-no-freeze.html#interactive-generate)
-* [Connect](https://xrpl.org/enable-no-freeze.html#interactive-connect)
-* [Send AccountSet](https://xrpl.org/enable-no-freeze.html#interactive-send\_accountset)
-* [Wait](https://xrpl.org/enable-no-freeze.html#interactive-wait)
-* [Confirm Settings](https://xrpl.org/enable-no-freeze.html#interactive-confirm\_settings)
+* [Generate](https://xrpl.org/freeze-a-trust-line.html#interactive-generate)
+* [Connect](https://xrpl.org/freeze-a-trust-line.html#interactive-connect)
+* [Choose Trust Line](https://xrpl.org/freeze-a-trust-line.html#interactive-choose\_trust\_line)
+* [Send TrustSet to Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_freeze)
+* [Wait](https://xrpl.org/freeze-a-trust-line.html#interactive-wait)
+* [Check Freeze Status](https://xrpl.org/freeze-a-trust-line.html#interactive-check\_freeze\_status)
+* [Send TrustSet to End Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_end\_freeze)
+* [Wait (again)](https://xrpl.org/freeze-a-trust-line.html#interactive-wait\_again)
 
-## 4. 유효성 검사 대기
+{% hint style="info" %}
+Note:
 
-대부분의 트랜잭션은 제출된 후 다음 Ledger 버전으로 승인되므로, 트랜잭션 결과가 최종적으로 확정되기까지 4\~7초가 소요될 수 있습니다. XRP Ledger 사용 중이거나 네트워크 연결 상태가 좋지 않아 트랜잭션이 네트워크를 통해 릴레이되는 것이 지연되는 경우, 트랜잭션이 확인되는 데 더 오랜 시간이 걸릴 수 있습니다. (트랜잭션 만료를 설정하는 방법에 대한 자세한 내용은 안정적인 트랜잭션 제출을 참조하세요.)
+동일한 트랜잭션 상대방과 서로 다른 화폐로 여러 개의 신뢰선을 동결하려면 각 신뢰선에 대해 이 단계를 반복하세요. 각 트랜잭션에 다른 시퀀스 번호를 사용하면 단일 Ledger에 여러 트랜잭션을 전송할 수 있습니다
+{% endhint %}
 
-* [Generate](https://xrpl.org/enable-no-freeze.html#interactive-generate)
-* [Connect](https://xrpl.org/enable-no-freeze.html#interactive-connect)
-* [Send AccountSet](https://xrpl.org/enable-no-freeze.html#interactive-send\_accountset)
-* [Wait](https://xrpl.org/enable-no-freeze.html#interactive-wait)
-* [Confirm Settings](https://xrpl.org/enable-no-freeze.html#interactive-confirm\_settings)
+## 5. 유효성 검사 대기
 
-## 5. 계정 설정 확인
+대부분의 트랜잭션은 제출된 후 다음 Ledger 버전으로 승인되므로, 트랜잭션 결과가 최종적으로 확정되기까지 4\~7초가 소요될 수 있습니다. XRP Ledger이 사용 중이거나 네트워크 연결 상태가 좋지 않아 트랜잭션이 네트워크를 통해 릴레이되는 것이 지연되는 경우, 트랜잭션이 확인되는 데 더 오랜 시간이 걸릴 수 있습니다. (트랜잭션 만료를 설정하는 방법에 대한 자세한 내용은 안정적인 트랜잭션 제출을 참조하세요.)
 
-트랜잭션이 확인된 후 계정 설정을 확인하여 동결 금지 플래그가 활성화되어 있는지 확인할 수 있습니다. 계정 정보 메소드를 호출하고 계정의 플래그 필드 값을 확인하여 lsfNoFreeze 비트(0x00200000)가 활성화되어 있는지 확인하면 됩니다.
+* [Generate](https://xrpl.org/freeze-a-trust-line.html#interactive-generate)
+* [Connect](https://xrpl.org/freeze-a-trust-line.html#interactive-connect)
+* [Choose Trust Line](https://xrpl.org/freeze-a-trust-line.html#interactive-choose\_trust\_line)
+* [Send TrustSet to Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_freeze)
+* [Wait](https://xrpl.org/freeze-a-trust-line.html#interactive-wait)
+* [Check Freeze Status](https://xrpl.org/freeze-a-trust-line.html#interactive-check\_freeze\_status)
+* [Send TrustSet to End Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_end\_freeze)
+* [Wait (again)](https://xrpl.org/freeze-a-trust-line.html#interactive-wait\_again)
+
+## 6. 신뢰선 동결 상태 확인
+
+이 시점에서 트랜잭션 상대방의 신뢰선이 동결되어야 합니다. 다음 필드와 함께 account\_lines 메소드를 사용하여 모든 신뢰선의 동결 상태를 확인할 수 있습니다:
+
+| 필드        | 값      | 설명                      |
+| --------- | ------ | ----------------------- |
+| `account` | String | 주소입니다. (이 경우 발급 주소입니다.) |
+| `peer`    | String | 상대방의 주소입니다.             |
+
+{% hint style="info" %}
+Caution:
+
+응답에는 두 계정 간의 모든 신뢰선이 포함됩니다. (각 화폐 코드는 서로 다른 신뢰선을 사용합니다.) 올바른 토큰에 대한 신뢰선을 확인해야 합니다.&#x20;
+{% endhint %}
+
+응답에서 "freeze": true 필드는 요청을 보낸 계정이 해당 신뢰선에서 개별 동결을 활성화했음을 나타냅니다. "freeze\_peer": true 필드는 요청의 상대방(피어)이 신뢰선을을 동결했음을 나타냅니다. 예를 들면 다음과 같습니다:
+
+* [Generate](https://xrpl.org/freeze-a-trust-line.html#interactive-generate)
+* [Connect](https://xrpl.org/freeze-a-trust-line.html#interactive-connect)
+* [Choose Trust Line](https://xrpl.org/freeze-a-trust-line.html#interactive-choose\_trust\_line)
+* [Send TrustSet to Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_freeze)
+* [Wait](https://xrpl.org/freeze-a-trust-line.html#interactive-wait)
+* [Check Freeze Status](https://xrpl.org/freeze-a-trust-line.html#interactive-check\_freeze\_status)
+* [Send TrustSet to End Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_end\_freeze)
+* [Wait (again)](https://xrpl.org/freeze-a-trust-line.html#interactive-wait\_again)
+
+## 7. (선택 사항) TrustSet 트랜잭션을 전송하여 동결 종료하기
+
+의심스러운 활동을 조사한 결과 양성이라고 판단되는 등 더 이상 신뢰선을 동결할 필요가 없다고 판단되면 처음에 신뢰선을 동결할 때와 거의 동일한 방법으로 개별 동결을 종료할 수 있습니다. 개별 동결을 종료하려면 tfClearFreeze 플래그를 활성화한 상태로 TrustSet 트랜잭션을 전송합니다. 트랜잭션의 다른 필드는 신뢰선을 동결할 때와 동일해야 합니다:
+
+| Field                    | Value  | Description                                                         |
+| ------------------------ | ------ | ------------------------------------------------------------------- |
+| `Account`                | String | 발급 계정의 주소입니다.                                                       |
+| `TransactionType`        | String | `TrustSet`                                                          |
+| `LimitAmount`            | Object | 동결을 해제할 지정한도를 정의하는 객체입니다.                                           |
+| `LimitAmount`.`currency` | String | 신뢰선의 화폐(XRP일 수 없음)                                                  |
+| `LimitAmount`.`issuer`   | String | 동결을 해제할 트랜잭션. 상대방의 XRP Ledger 주소.                                   |
+| `LimitAmount`.`value`    | String | 트랜잭션 상대방이 당신에게 발행하도록 신뢰하는 화폐 금액(따옴표로 표시됨)입니다. 발행자의 경우 일반적으로 "0"입니다. |
+| `Flags`                  | Number | 개별 동결을 종료하려면 tfClearFreeze 비트(0x00200000)를 켭니다.                     |
+
+항상 그렇듯이 트랜잭션을 전송하려면 필요한 모든 필드를 채우고 암호화 키로 서명하여 트랜잭션을 준비한 다음 네트워크에 제출합니다. 예를 들어:
 
 {% tabs %}
 {% tab title="JavaScript" %}
 ```javascript
-// Request account info for my_address to check account settings ------------
-  const response = await client.request(
-    {command: 'account_info', account: my_address })
-  const settings = response.result
-  const lsfNoFreeze = xrpl.LedgerEntry.AccountRootFlags.lsfNoFreeze
+// Clear the individual freeze -----------------------------------------------
+  // We're reusing our TrustSet transaction from earlier with a different flag.
+  trust_set.Flags = xrpl.TrustSetFlags.tfClearFreeze
 
-  console.log('Got settings for address', my_address);
-  console.log('No Freeze enabled?',
-    (settings.account_data.Flags & lsfNoFreeze) 
-    === lsfNoFreeze)
+  // Submit a TrustSet transaction to clear an individual freeze ---------------
+  console.log('Submitting TrustSet tx:', trust_set)
+  const result2 = await client.submitAndWait(trust_set, { wallet: wallet })
+  console.log("Transaction result:", result2)
+
+  console.log("Finished submitting. Now disconnecting.")
+  await client.disconnect()
 ```
 {% endtab %}
 
 {% tab title="WebSocket" %}
 ```json
-Request:
-
 {
-  "id": 1,
-  "command": "account_info",
-  "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
-  "ledger_index": "validated"
-}
-
-Response:
-
-{
-  "id": 4,
-  "status": "success",
-  "type": "response",
-  "result": {
-    "account_data": {
-      "Account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
-      "AccountTxnID": "41320138CA9837B34E82B3B3D6FB1E581D5DE2F0A67B3D62B5B8A8C9C8D970D0",
-      "Balance": "100258663",
-      "Domain": "6D64756F31332E636F6D",
-      "EmailHash": "98B4375E1D753E5B91627516F6D70977",
-      "Flags": 12582912,
-      "LedgerEntryType": "AccountRoot",
-      "MessageKey": "0000000000000000000000070000000300",
-      "OwnerCount": 4,
-      "PreviousTxnID": "41320138CA9837B34E82B3B3D6FB1E581D5DE2F0A67B3D62B5B8A8C9C8D970D0",
-      "PreviousTxnLgrSeq": 18123095,
-      "Sequence": 352,
-      "TransferRate": 1004999999,
-      "index": "13F1A95D7AAB7108D5CE7EEAF504B2894B8C674E6D68499076441C4837282BF8",
-      "urlgravatar": "http://www.gravatar.com/avatar/98b4375e1d753e5b91627516f6d70977"
+  "id": "example_end_individual_freeze",
+  "command": "submit",
+  "tx_json": {
+    "TransactionType": "TrustSet",
+    "Account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+    "Fee": "12",
+    "Flags": 2097152,
+    "LastLedgerSequence": 18105115,
+    "LimitAmount": {
+      "currency": "USD",
+      "issuer": "rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW",
+      "value": "0"
     },
-    "ledger_hash": "A777B05A293A73E511669B8A4A45A298FF89AD9C9394430023008DB4A6E7FDD5",
-    "ledger_index": 18123249,
-    "validated": true
-  }
+    "Sequence": 341
+  },
+  "secret": "s████████████████████████████"
 }
 ```
 {% endtab %}
 {% endtabs %}
 
-* [Generate](https://xrpl.org/enable-no-freeze.html#interactive-generate)
-* [Connect](https://xrpl.org/enable-no-freeze.html#interactive-connect)
-* [Send AccountSet](https://xrpl.org/enable-no-freeze.html#interactive-send\_accountset)
-* [Wait](https://xrpl.org/enable-no-freeze.html#interactive-wait)
-* [Confirm Settings](https://xrpl.org/enable-no-freeze.html#interactive-confirm\_settings)
+* [Generate](https://xrpl.org/freeze-a-trust-line.html#interactive-generate)
+* [Connect](https://xrpl.org/freeze-a-trust-line.html#interactive-connect)
+* [Choose Trust Line](https://xrpl.org/freeze-a-trust-line.html#interactive-choose\_trust\_line)
+* [Send TrustSet to Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_freeze)
+* [Wait](https://xrpl.org/freeze-a-trust-line.html#interactive-wait)
+* [Check Freeze Status](https://xrpl.org/freeze-a-trust-line.html#interactive-check\_freeze\_status)
+* [Send TrustSet to End Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_end\_freeze)
+* [Wait (again)](https://xrpl.org/freeze-a-trust-line.html#interactive-wait\_again)
+
+## 8. 유효성 검사 대기
+
+이전과 마찬가지로 컨센서스에 의해 트랜잭션이 검증될 때까지 기다립니다.
+
+* [Generate](https://xrpl.org/freeze-a-trust-line.html#interactive-generate)
+* [Connect](https://xrpl.org/freeze-a-trust-line.html#interactive-connect)
+* [Choose Trust Line](https://xrpl.org/freeze-a-trust-line.html#interactive-choose\_trust\_line)
+* [Send TrustSet to Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_freeze)
+* [Wait](https://xrpl.org/freeze-a-trust-line.html#interactive-wait)
+* [Check Freeze Status](https://xrpl.org/freeze-a-trust-line.html#interactive-check\_freeze\_status)
+* [Send TrustSet to End Freeze](https://xrpl.org/freeze-a-trust-line.html#interactive-send\_trustset\_to\_end\_freeze)
+* [Wait (again)](https://xrpl.org/freeze-a-trust-line.html#interactive-wait\_again)

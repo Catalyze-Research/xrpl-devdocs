@@ -54,4 +54,4 @@ XRP Ledger의 토큰은 [XRP와 근본적으로 다릅니다](../../references/x
 
 발행자는 사용자가 토큰을 이동할 때 자동으로 공제되는 [이체 수수료](../transactions/fees.md)를 부과할 수 있습니다. 발행자는 또한 토큰을 포함한 환율에 대한 [틱 크기](decentralized-exchange/tick-size.md)를 정의할 수 있습니다. 발행자 및 일반 계정 모두 신뢰선을 동결할 수 있으며, 이는 해당 신뢰선의 토큰 사용을 제한합니다. (이러한 사항은 XRP에는 적용되지 않습니다.)
 
-토큰 발행에 관련된 기술적 단계에 대한 튜토리얼은 [대체 가능한 토큰 발행](../../tutorials/tasks/use-tokens/undefined.md)을 참조하십시오.
+토큰 발행에 관련된 기술적 단계에 대한 튜토리얼은 [대체 가능한 토큰 발행](../../tutorials/tasks/use-tokens/issue-a-fungible-token.md)을 참조하십시오.

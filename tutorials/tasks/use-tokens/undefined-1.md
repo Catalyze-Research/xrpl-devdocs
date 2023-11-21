@@ -1,38 +1,66 @@
-# 탈중앙화 거래소에서 거래
+# 글로벌 동결 시행
 
-이 튜토리얼에서는 탈중앙화 거래소(DEX)에서 토큰을 사고 파는 방법을 설명합니다.
+XRP Ledger에서 토큰을 발행하는 경우, 사용자가 서로 토큰을 보내거나 탈중앙화 트랜잭션소에서 토큰을 트랜잭션하지 못하도록 글로벌 동결을 시행할 수 있습니다. 이 튜토리얼에서는 글로벌 동결을 시작하고 종료하는 방법을 보여드리겠습니다. 예를 들어, Ledger에서 토큰을 발행한 주소나 토큰을 관리하는 데 사용하는 오프-ledger 시스템과 관련된 의심스러운 활동의 징후를 발견한 경우 이 작업을 수행할 수 있습니다. (예를 들어, 토큰이 스테이블코인이고 Ledger에서 출금과 입금을 처리하는 경우 시스템이 해킹당한 것으로 의심되는 경우 조사하는 동안 토큰을 동결할 수 있습니다.) 나중에 동결 안 함 설정을 활성화하지 않은 경우 전역 동결 설정을 비활성화할 수 있습니다.
+
+{% hint style="info" %}
+Tip:
+
+다시 한 번 말씀드리자면, 동결은 발급된 토큰에만 적용되며 XRP에는 적용되지 않으며 사용자가 토큰을 발급자에게 직접 다시 보내는 것을 막지는 않습니다.
+{% endhint %}
 
 ## 요구 조건
 
 * XRP Ledger 네트워크에 연결해야 합니다. 이 튜토리얼에 표시된 대로 공용 서버를 사용하여 테스트할 수 있습니다.
 * 선호하는 클라이언트 라이브러리에 대한 시작하기 지침을 숙지하고 있어야 합니다. 이 페이지에서는 다음에 대한 예제를 제공합니다:
   * xrpl.js 라이브러리를 사용한 JavaScript. 설정 단계는 JavaScript를 사용하여 시작하기를 참조하세요.
-  * xrpl-py 라이브러리를 사용하는 Python. 설정 단계는 Python을 사용하여 시작하기를 참조하세요.
-  * 설정 없이 브라우저에서 대화형 단계를 따라 읽고 사용할 수도 있습니다.
+* 글로벌 동결을 실행하기 위해 XRP Ledger에 토큰을 발행할 필요는 없지만, 글로벌 동결을 실행하는 주된 이유는 이미 토큰을 발행한 경우에 해당합니다.
 
 ## 예제 코드
 
-이 튜토리얼의 모든 단계에 대한 전체 샘플 코드는 MIT 라이선스 에 따라 사용할 수 있습니다.&#x20;
+이 튜토리얼의 모든 단계에 대한 전체 샘플 코드는 MIT 라이선스에 따라 사용할 수 있습니다.
 
-* 코드 샘플을 참조하세요: 이 웹사이트의 소스 저장소에서 탈중앙화 거래소에서 트랜잭션하기를 참조하세요.
+* 코드 샘플을 참조하세요: 이 웹사이트의 소스 저장소에서 동결을 참조하세요.
 
 ## 단계
 
-이 튜토리얼에서는 XRP를 판매하여 탈중앙화 거래소에서 대체 가능한 토큰을 구매하는 방법을 보여드립니다. (다른 유형의 트랜잭션도 가능하지만, 토큰을 판매하려면 먼저 토큰을 보유해야 합니다.) 이 튜토리얼에서 사용하는 예시 토큰은 다음과 같습니다:
+## 1. 자격증명 가져오기
 
-## 1. 네트워크에 연결
+XRP Ledger에서 트랜잭션하려면 주소와 비밀 키, 그리고 약간의 XRP가 필요합니다. "콜드" 주소와 "핫" 주소를 분리하는 모범 사례를 사용하는 경우, 토큰 발행자인 콜드 주소의 키가 필요합니다. 발행자의 글로벌 동결 설정만 토큰에 영향을 미칩니다.
 
-트랜잭션을 제출하려면 네트워크에 연결해야 합니다. 또한 일부 언어(JavaScript 포함)는 Ledger에서 찾을 수 있는 화폐 금액에 대한 계산을 수행하기 위해 고정밀 숫자 라이브러리가 필요합니다. 다음 코드는 적절한 종속성을 갖춘 지원되는 클라이언트 라이브러리를 퍼블릭 XRP Ledger 테스트넷 서버에 연결하는 방법을 보여줍니다.
+{% hint style="info" %}
+Tip:
+
+동결 없음 설정과 달리 일반 키 쌍 또는 다중 서명을 사용하여 글로벌 동결을 활성화 및 비활성화할 수 있습니다.
+{% endhint %}
+
+이 튜토리얼에서는 다음 인터페이스에서 자격 증명을 얻을 수 있습니다:
+
+* [Generate](https://xrpl.org/enact-global-freeze.html#interactive-generate)
+* [Connect](https://xrpl.org/enact-global-freeze.html#interactive-connect)
+* [Send AccountSet (Start Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_start\_freeze)
+* [Wait](https://xrpl.org/enact-global-freeze.html#interactive-wait)
+* [Confirm Settings](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings)
+* [Send AccountSet (End Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_end\_freeze)
+* [Wait (again)](https://xrpl.org/enact-global-freeze.html#interactive-wait\_again)
+* [Confirm Settings (After Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings\_after\_freeze)
+
+{% hint style="info" %}
+Caution:
+
+Ripple은 testnet과 devnet을 테스트 목적으로만 제공하며, 때때로 이러한 테스트 네트워크의 상태를 모든 잔액과 함께 초기화합니다. 예방책으로 testnet/devnet 과 mainnet에서 동일한 주소를 사용하지 마시기 바랍니다.
+{% endhint %}
+
+프로덕션에 사용할 수 있는 소프트웨어를 빌드할 때는 기존 계정을 사용하고 보안 서명 구성을 사용하여 키를 관리해야 합니다.
+
+## 2. 네트워크에 연결
+
+네트워크에 트랜잭션을 제출하려면 네트워크에 연결해야 합니다. 다음 코드는 지원되는 클라이언트 라이브러리로 퍼블릭 XRP Ledger testnet 서버에 연결하는 방법을 보여줍니다:
 
 {% tabs %}
 {% tab title="JavaScript" %}
 ```javascript
-// In browsers, add the following <script> tags to the HTML to load dependencies
-// instead of using require():
-// <script src="https://unpkg.com/xrpl@2.2.0/build/xrpl-latest-min.js"></script>
-// <script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.0.2/bignumber.min.js'></script>
-const xrpl = require('xrpl')
-const BigNumber = require('bignumber.js')
+// In browsers, use a <script> tag. In Node.js, uncomment the following line:
+// const xrpl = require('xrpl')
 
 // Wrap code in an async function so we can use await
 async function main() {
@@ -50,634 +78,250 @@ async function main() {
 main()
 ```
 {% endtab %}
-
-{% tab title="Python" %}
-```python
-import asyncio
-from xrpl.asyncio.clients import AsyncWebsocketClient
-
-
-async def main():
-    # Define the network client
-    async with AsyncWebsocketClient("wss://s.altnet.rippletest.net:51233") as client:
-        # inside the context the client is open
-
-        # ... custom code goes here
-
-    # after exiting the context, the client is closed
-
-
-asyncio.run(main())
-```
-{% endtab %}
 {% endtabs %}
-
-{% hint style="info" %}
-Tip:
-
-이 튜토리얼의 자바스크립트 코드 샘플은 async/await 패턴을 사용합니다. await은 비동기 함수 내에서 사용해야 하므로 나머지 코드 샘플은 여기서 시작한 main() 함수 내에서 계속 사용하도록 작성되었습니다. 원하는 경우 async/await 대신 Promise 메소드 .then() 및 .catch()를 사용할 수도 있습니다.
-{% endhint %}
 
 이 튜토리얼에서는 다음 버튼을 클릭하여 연결합니다:
 
-* [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
-* [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
-* [Look Up Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-look\_up\_offers)
-* [Send OfferCreate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-send\_offercreate)
-* [Wait](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-wait)
-* [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
-* [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
+* [Generate](https://xrpl.org/enact-global-freeze.html#interactive-generate)
+* [Connect](https://xrpl.org/enact-global-freeze.html#interactive-connect)
+* [Send AccountSet (Start Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_start\_freeze)
+* [Wait](https://xrpl.org/enact-global-freeze.html#interactive-wait)
+* [Confirm Settings](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings)
+* [Send AccountSet (End Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_end\_freeze)
+* [Wait (again)](https://xrpl.org/enact-global-freeze.html#interactive-wait\_again)
+* [Confirm Settings (After Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings\_after\_freeze)
 
-## 2. 자격증명 가져오기
+## 3. 동결을 시작하기 위해 AccountSet 트랜잭션 보내기
 
-XRP Ledger에서 거래하려면 주소, 비밀 키, 약간의 XRP가 필요합니다. 개발 목적으로 다음 인터페이스를 사용해 이 정보를 얻을 수 있습니다:
-
-* [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
-* [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
-* [Look Up Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-look\_up\_offers)
-* [Send OfferCreate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-send\_offercreate)
-* [Wait](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-wait)
-* [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
-* [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
+글로벌 동결 설정을 활성화하려면, asfGlobalFreeze 값(7)이 포함된 SetFlag 필드가 있는 AccountSet 트랜잭션을 전송합니다. 트랜잭션을 보내려면 먼저 필요한 모든 필드를 채우도록 트랜잭션을 준비한 다음 계정의 비밀 키로 서명하고 마지막으로 네트워크에 제출합니다.
 
 {% hint style="info" %}
 Caution:
 
-Ripple은 testnet과 devnet을 테스트 목적으로만 제공하며, 때때로 이러한 테스트 네트워크의 상태를 모든 잔액과 함께 초기화하기도 합니다. 예방책으로 testnet, devnet과 mainnet에서 동일한 주소를 사용하지 마시기 바랍니다.
+글로벌 동결을 시행하면 해당 주소에서 발행한 모든 토큰에 영향을 미칩니다. 또한 동결 안 함 설정을 사용하는 경우 이 작업을 취소할 수 없습니다.
 {% endhint %}
 
-프로덕션용 소프트웨어를 빌드할 때는 기존 계정을 사용하고 보안 서명 구성을 사용하여 키를 관리해야 합니다. 다음 코드는 키를 사용하기 위해 월렛 인스턴스를 만드는 방법을 보여줍니다:
+예를 들어:
 
 {% tabs %}
 {% tab title="JavaScript" %}
 ```javascript
-// Get credentials from the Testnet Faucet -----------------------------------
-  console.log("Requesting address from the Testnet faucet...")
-  const wallet = (await client.fundWallet()).wallet
-  console.log(`Got address ${wallet.address}.`)
-  // To use existing credentials, you can load them from a seed value, for
-  // example using an environment variable as follows:
-  // const wallet = xrpl.Wallet.fromSeed(process.env['MY_SEED'])
+// Prepare an AccountSet transaction to enable global freeze -----------------
+  const accountSetTx = {
+    TransactionType: "AccountSet",
+    Account: wallet.address,
+    // Set a flag to turn on a global freeze on this account
+    SetFlag: xrpl.AccountSetAsfFlags.asfGlobalFreeze
+  }
+
+  // Best practice for JS users - validate checks if a transaction is well-formed
+  xrpl.validate(accountSetTx)
+
+  // Sign and submit the AccountSet transaction to enable a global freeze ------
+  console.log('Signing and submitting the transaction:', accountSetTx)
+  await client.submitAndWait(accountSetTx, { wallet })
+  console.log(`Finished submitting! ${wallet.address} should be frozen now.`)
 ```
 {% endtab %}
 
-{% tab title="Python" %}
-```python
-        # Get credentials from the Testnet Faucet -----------------------------------
-        print("Requesting addresses from the Testnet faucet...")
-        wallet = await generate_faucet_wallet(client, debug=True)
+{% tab title="WebSocket" %}
+```json
+{
+  "id": "example_enable_global_freeze",
+  "command": "submit",
+  "tx_json": {
+    "TransactionType": "AccountSet",
+    "Account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+    "Fee": "12",
+    "Flags": 0,
+    "SetFlag": 7,
+    "LastLedgerSequence": 18122753,
+    "Sequence": 349
+  },
+  "secret": "s████████████████████████████"
+}
 ```
 {% endtab %}
 {% endtabs %}
 
-## 3. 제안 조회
+* [Generate](https://xrpl.org/enact-global-freeze.html#interactive-generate)
+* [Connect](https://xrpl.org/enact-global-freeze.html#interactive-connect)
+* [Send AccountSet (Start Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_start\_freeze)
+* [Wait](https://xrpl.org/enact-global-freeze.html#interactive-wait)
+* [Confirm Settings](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings)
+* [Send AccountSet (End Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_end\_freeze)
+* [Wait (again)](https://xrpl.org/enact-global-freeze.html#interactive-wait\_again)
+* [Confirm Settings (After Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings\_after\_freeze)
 
-토큰을 구매하거나 판매하기 전에 다른 사람들이 토큰을 어떤 가격에 구매하고 판매하는지 조회하여 다른 사람들이 토큰을 어떻게 평가하는지 파악하고 싶을 것입니다. XRP Ledger에서 book\_offers 메소드를 사용해 모든 화폐 쌍에 대한 기존 제안을 조회할 수 있습니다.
+## 4. 유효성 검사 대기
 
-{% hint style="info" %}
-Tip:
+대부분의 트랜잭션은 제출된 후 다음 Ledger 버전으로 승인되므로, 트랜잭션 결과가 최종적으로 확정되기까지 4\~7초가 소요될 수 있습니다. XRP Ledger이 사용 중이거나 네트워크 연결 상태가 좋지 않아 트랜잭션이 네트워크를 통해 전달되는 것이 지연되는 경우, 트랜잭션이 확인되는 데 더 오랜 시간이 걸릴 수 있습니다. (트랜잭션 만료를 설정하는 방법에 대한 자세한 내용은 안정적인 트랜잭션 제출을 참조하세요.)
 
-엄밀히 말하면 이 단계는 제안을 제출하기 위한 필수 조건은 아니지만, 실제 가치가 있는 상품을 트랜잭션하기 전에 현재 상황을 확인하는 것은 좋은 습관입니다.
-{% endhint %}
+* [Generate](https://xrpl.org/enact-global-freeze.html#interactive-generate)
+* [Connect](https://xrpl.org/enact-global-freeze.html#interactive-connect)
+* [Send AccountSet (Start Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_start\_freeze)
+* [Wait](https://xrpl.org/enact-global-freeze.html#interactive-wait)
+* [Confirm Settings](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings)
+* [Send AccountSet (End Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_end\_freeze)
+* [Wait (again)](https://xrpl.org/enact-global-freeze.html#interactive-wait\_again)
+* [Confirm Settings (After Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings\_after\_freeze)
 
-다음 코드는 기존 제안을 조회하고 제안한 제안과 비교하여 어떻게 체결될지 예측하는 방법을 보여줍니다:
+## 5. 계정 설정 확인
+
+트랜잭션의 유효성이 확인되면 발급 계정 설정을 확인하여 글로벌 동결 플래그가 활성화되어 있는지 확인할 수 있습니다. 계정 정보 메소드를 호출하고 계정의 Flags 필드 값을 확인하여 lsfGlobalFreeze 비트(0x00400000)가 켜져 있는지 확인하면 됩니다.
 
 {% tabs %}
 {% tab title="JavaScript" %}
 ```javascript
-// Define the proposed trade. ------------------------------------------------
-  // Technically you don't need to specify the amounts (in the "value" field)
-  // to look up order books using book_offers, but for this tutorial we reuse
-  // these variables to construct the actual Offer later.
-  const we_want = {
-    currency: "TST",
-    issuer: "rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd",
-    value: "25"
-  }
-  const we_spend = {
-    currency: "XRP",
-           // 25 TST * 10 XRP per TST * 15% financial exchange (FX) cost
-    value: xrpl.xrpToDrops(25*10*1.15)
-  }
-  // "Quality" is defined as TakerPays / TakerGets. The lower the "quality"
-  // number, the better the proposed exchange rate is for the taker.
-  // The quality is rounded to a number of significant digits based on the
-  // issuer's TickSize value (or the lesser of the two for token-token trades.)
-  const proposed_quality = BigNumber(we_spend.value) / BigNumber(we_want.value)
+// Request account info for my_address to check account settings ------------
+  const response = await client.request(
+    {command: 'account_info', account: my_address })
+  const settings = response.result
+  const lsfGlobalFreeze = xrpl.LedgerEntry.AccountRootFlags.lsfGlobalFreeze
 
-  // Look up Offers. -----------------------------------------------------------
-  // To buy TST, look up Offers where "TakerGets" is TST:
-  const orderbook_resp = await client.request({
-    "command": "book_offers",
-    "taker": wallet.address,
-    "ledger_index": "current",
-    "taker_gets": we_want,
-    "taker_pays": we_spend
-  })
-  console.log(JSON.stringify(orderbook_resp.result, null, 2))
-
-  // Estimate whether a proposed Offer would execute immediately, and...
-  // If so, how much of it? (Partial execution is possible)
-  // If not, how much liquidity is above it? (How deep in the order book would
-  //    other Offers have to go before ours would get taken?)
-  // Note: These estimates can be thrown off by rounding if the token issuer
-  // uses a TickSize setting other than the default (15). In that case, you
-  // can increase the TakerGets amount of your final Offer to compensate.
-
-  const offers = orderbook_resp.result.offers
-  const want_amt = BigNumber(we_want.value)
-  let running_total = BigNumber(0)
-  if (!offers) {
-    console.log(`No Offers in the matching book.
-                 Offer probably won't execute immediately.`)
-  } else {
-    for (const o of offers) {
-      if (o.quality <= proposed_quality) {
-        console.log(`Matching Offer found, funded with ${o.owner_funds}
-            ${we_want.currency}`)
-        running_total = running_total.plus(BigNumber(o.owner_funds))
-        if (running_total >= want_amt) {
-          console.log("Full Offer will probably fill")
-          break
-        }
-      } else {
-        // Offers are in ascending quality order, so no others after this
-        // will match, either
-        console.log(`Remaining orders too expensive.`)
-        break
-      }
-    }
-    console.log(`Total matched:
-          ${Math.min(running_total, want_amt)} ${we_want.currency}`)
-    if (running_total > 0 && running_total < want_amt) {
-      console.log(`Remaining ${want_amt - running_total} ${we_want.currency}
-            would probably be placed on top of the order book.`)
-    }
-  }
-
-  if (running_total == 0) {
-    // If part of the Offer was expected to cross, then the rest would be placed
-    // at the top of the order book. If none did, then there might be other
-    // Offers going the same direction as ours already on the books with an
-    // equal or better rate. This code counts how much liquidity is likely to be
-    // above ours.
-
-    // Unlike above, this time we check for Offers going the same direction as
-    // ours, so TakerGets and TakerPays are reversed from the previous
-    // book_offers request.
-    const orderbook2_resp = await client.request({
-      "command": "book_offers",
-      "taker": wallet.address,
-      "ledger_index": "current",
-      "taker_gets": we_spend,
-      "taker_pays": we_want
-    })
-    console.log(JSON.stringify(orderbook2_resp.result, null, 2))
-
-    // Since TakerGets/TakerPays are reversed, the quality is the inverse.
-    // You could also calculate this as 1/proposed_quality.
-    const offered_quality = BigNumber(we_want.value) / BigNumber(we_spend.value)
-
-    const offers2 = orderbook2_resp.result.offers
-    let tally_currency = we_spend.currency
-    if (tally_currency == "XRP") { tally_currency = "drops of XRP" }
-    let running_total2 = 0
-    if (!offers2) {
-      console.log(`No similar Offers in the book. Ours would be the first.`)
-    } else {
-      for (const o of offers2) {
-        if (o.quality <= offered_quality) {
-          console.log(`Existing offer found, funded with
-                ${o.owner_funds} ${tally_currency}`)
-          running_total2 = running_total2.plus(BigNumber(o.owner_funds))
-        } else {
-          console.log(`Remaining orders are below where ours would be placed.`)
-          break
-        }
-      }
-      console.log(`Our Offer would be placed below at least
-            ${running_total2} ${tally_currency}`)
-      if (running_total > 0 && running_total < want_amt) {
-        console.log(`Remaining ${want_amt - running_total} ${tally_currency}
-              will probably be placed on top of the order book.`)
-      }
-    }
-  }
+  console.log('Got settings for address', my_address);
+  console.log('Global Freeze enabled?',
+              ((settings.account_data.Flags & lsfGlobalFreeze) 
+              === lsfGlobalFreeze))
 ```
 {% endtab %}
 
-{% tab title="Python" %}
-```python
-        # Define the proposed trade. ------------------------------------------------
-        # Technically you don't need to specify the amounts (in the "value" field)
-        # to look up order books using book_offers, but for this tutorial we reuse
-        # these variables to construct the actual Offer later.
-        #
-        # Note that XRP is represented as drops, whereas any other currency is
-        # represented as a decimal value.
-        we_want = {
-            "currency": IssuedCurrency(
-                currency="TST",
-                issuer="rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd"
-            ),
-            "value": "25",
-        }
+{% tab title="WebSocket" %}
+```json
+Request:
 
-        we_spend = {
-            "currency": XRP(),
-            # 25 TST * 10 XRP per TST * 15% financial exchange (FX) cost
-            "value": xrp_to_drops(25 * 10 * 1.15),
-        }
+{
+  "id": 1,
+  "command": "account_info",
+  "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+  "ledger_index": "validated"
+}
 
-        # "Quality" is defined as TakerPays / TakerGets. The lower the "quality"
-        # number, the better the proposed exchange rate is for the taker.
-        # The quality is rounded to a number of significant digits based on the
-        # issuer's TickSize value (or the lesser of the two for token-token trades).
-        proposed_quality = Decimal(we_spend["value"]) / Decimal(we_want["value"])
+Response:
 
-        # Look up Offers. -----------------------------------------------------------
-        # To buy TST, look up Offers where "TakerGets" is TST:
-        print("Requesting orderbook information...")
-        orderbook_info = await client.request(
-            BookOffers(
-                taker=wallet.address,
-                ledger_index="current",
-                taker_gets=we_want["currency"],
-                taker_pays=we_spend["currency"],
-                limit=10,
-            )
-        )
-        print(f"Orderbook:\n{pprint.pformat(orderbook_info.result)}")
-
-        # Estimate whether a proposed Offer would execute immediately, and...
-        # If so, how much of it? (Partial execution is possible)
-        # If not, how much liquidity is above it? (How deep in the order book would
-        # other Offers have to go before ours would get taken?)
-        # Note: These estimates can be thrown off by rounding if the token issuer
-        # uses a TickSize setting other than the default (15). In that case, you
-        # can increase the TakerGets amount of your final Offer to compensate.
-
-        offers = orderbook_info.result.get("offers", [])
-        want_amt = Decimal(we_want["value"])
-        running_total = Decimal(0)
-        if len(offers) == 0:
-            print("No Offers in the matching book. Offer probably won't execute immediately.")
-        else:
-            for o in offers:
-                if Decimal(o["quality"]) <= proposed_quality:
-                    print(f"Matching Offer found, funded with {o.get('owner_funds')} "
-                          f"{we_want['currency']}")
-                    running_total += Decimal(o.get("owner_funds", Decimal(0)))
-                    if running_total >= want_amt:
-                        print("Full Offer will probably fill")
-                        break
-                else:
-                    # Offers are in ascending quality order, so no others after this
-                    # will match either
-                    print("Remaining orders too expensive.")
-                    break
-
-            print(f"Total matched: {min(running_total, want_amt)} {we_want['currency']}")
-            if 0 < running_total < want_amt:
-                print(f"Remaining {want_amt - running_total} {we_want['currency']} "
-                      "would probably be placed on top of the order book.")
-
-        if running_total == 0:
-            # If part of the Offer was expected to cross, then the rest would be placed
-            # at the top of the order book. If none did, then there might be other
-            # Offers going the same direction as ours already on the books with an
-            # equal or better rate. This code counts how much liquidity is likely to be
-            # above ours.
-            #
-            # Unlike above, this time we check for Offers going the same direction as
-            # ours, so TakerGets and TakerPays are reversed from the previous
-            # book_offers request.
-
-            print("Requesting second orderbook information...")
-            orderbook2_info = await client.request(
-                BookOffers(
-                    taker=wallet.address,
-                    ledger_index="current",
-                    taker_gets=we_spend["currency"],
-                    taker_pays=we_want["currency"],
-                    limit=10,
-                )
-            )
-            print(f"Orderbook2:\n{pprint.pformat(orderbook2_info.result)}")
-
-            # Since TakerGets/TakerPays are reversed, the quality is the inverse.
-            # You could also calculate this as 1 / proposed_quality.
-            offered_quality = Decimal(we_want["value"]) / Decimal(we_spend["value"])
-
-            tally_currency = we_spend["currency"]
-            if isinstance(tally_currency, XRP):
-                tally_currency = f"drops of {tally_currency}"
-
-            offers2 = orderbook2_info.result.get("offers", [])
-            running_total2 = Decimal(0)
-            if len(offers2) == 0:
-                print("No similar Offers in the book. Ours would be the first.")
-            else:
-                for o in offers2:
-                    if Decimal(o["quality"]) <= offered_quality:
-                        print(f"Existing offer found, funded with {o.get('owner_funds')} "
-                              f"{tally_currency}")
-                        running_total2 += Decimal(o.get("owner_funds", Decimal(0)))
-                    else:
-                        print("Remaining orders are below where ours would be placed.")
-                        break
-
-                print(f"Our Offer would be placed below at least {running_total2} "
-                      f"{tally_currency}")
-                if 0 < running_total2 < want_amt:
-                    print(f"Remaining {want_amt - running_total2} {tally_currency} "
-                          "will probably be placed on top of the order book.")
+{
+  "id": 4,
+  "status": "success",
+  "type": "response",
+  "result": {
+    "account_data": {
+      "Account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+      "AccountTxnID": "41320138CA9837B34E82B3B3D6FB1E581D5DE2F0A67B3D62B5B8A8C9C8D970D0",
+      "Balance": "100258663",
+      "Domain": "6D64756F31332E636F6D",
+      "EmailHash": "98B4375E1D753E5B91627516F6D70977",
+      "Flags": 12582912,
+      "LedgerEntryType": "AccountRoot",
+      "MessageKey": "0000000000000000000000070000000300",
+      "OwnerCount": 4,
+      "PreviousTxnID": "41320138CA9837B34E82B3B3D6FB1E581D5DE2F0A67B3D62B5B8A8C9C8D970D0",
+      "PreviousTxnLgrSeq": 18123095,
+      "Sequence": 352,
+      "TransferRate": 1004999999,
+      "index": "13F1A95D7AAB7108D5CE7EEAF504B2894B8C674E6D68499076441C4837282BF8",
+      "urlgravatar": "http://www.gravatar.com/avatar/98b4375e1d753e5b91627516f6d70977"
+    },
+    "ledger_hash": "A777B05A293A73E511669B8A4A45A298FF89AD9C9394430023008DB4A6E7FDD5",
+    "ledger_index": 18123249,
+    "validated": true
+  }
+}
 ```
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
-Note:
+## 인터미션: 동결된 동안
 
-XRP Ledger의 다른 사용자도 언제든지 트랜잭션을 할 수 있으므로, 이는 다른 변화가 없을 경우의 추정치일 뿐입니다. 트랜잭션이 최종적으로 체결될 때까지는 트랜잭션의 결과가 보장되지 않습니다.
-{% endhint %}
+이 시점에서는 주소에서 발급된 모든 토큰이 동결됩니다. 이 기간 동안 글로벌 동결을 시행한 이유에 따라 잠재적인 보안 침해를 조사하거나 토큰 잔액의 스냅샷을 찍을 수 있습니다.
 
-다음 블록은 이러한 계산이 실제로 작동하는 모습을 보여줍니다:
+토큰이 동결된 상태에서도 동결된 토큰이 발행자에게 직접 또는 발행자로부터 직접 전송될 수 있으므로 이러한 트랜잭션을 전송하도록 구성된 시스템을 비활성화하고, 수신되는 트랜잭션을 처리하지 않고 추적하여 정상적인 트랜잭션을 처리할 수 있도록 해야 할 수도 있습니다.
 
-* [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
-* [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
-* [Look Up Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-look\_up\_offers)
-* [Send OfferCreate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-send\_offercreate)
-* [Wait](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-wait)
-* [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
-* [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
+핫월렛이나 운영 주소를 사용하는 경우 다른 사용자에 비해 특별한 지위를 가지지 않으므로 발행자와 직접 트랜잭션하는 경우를 제외하고 동결된 토큰을 주고받을 수 없습니다.
 
-## 4. 제안 보내기 트랜잭션 생성
+동결 안 함 설정을 사용하면 글로벌 동결이 영원히 지속됩니다. 토큰 발급을 재개하려면 새 계정을 생성하고 거기서부터 다시 시작해야 합니다.
 
-실제로 트랜잭션을 하려면 제안 생성 트랜잭션을 전송합니다. 이 경우 XRP를 사용해 TST를 구매하고자 하므로 다음과 같이 매개변수를 설정해야 합니다:
+그렇지 않으면 준비가 되면 언제든지 다음 단계로 넘어갈 수 있습니다.
 
-| 필드          | 유형                                                                                        | 설명                                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `TakerPays` | [Token Amount object](https://xrpl.org/basic-data-types.html#specifying-currency-amounts) | TakerPays 토큰 금액 객체 총 구매하고자 하는 화폐 금액입니다. 이 튜토리얼에서는 rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd가 발행한 일정 금액의 TST를 구매합니다. |
-| `TakerGets` | [XRP, in drops](https://xrpl.org/basic-data-types.html#specifying-currency-amounts)       | 총 지불할 화폐의 양을 지정합니다. 이 튜토리얼에서는 TST당 약 11.5 XRP 또는 그 이상을 지정해야 합니다.                                             |
+## 6. 동결을 종료하기 위해 AccountSet 트랜잭션 보내기
 
-다음 코드는 트랜잭션을 준비하고, 서명하고, 제출하는 방법을 보여줍니다:
+글로벌 동결을 종료하려면 asfGlobalFreeze 값(7)이 포함된 ClearFlag 필드가 있는 AccountSet 트랜잭션을 보냅니다. 항상 그렇듯이 먼저 트랜잭션을 준비하고 서명한 다음 마지막으로 네트워크에 제출합니다.\
+\
+예를 들어:
 
 {% tabs %}
 {% tab title="JavaScript" %}
 ```javascript
-// Send OfferCreate transaction ----------------------------------------------
-
-  // For this tutorial, we already know that TST is pegged to
-  // XRP at a rate of approximately 10:1 plus spread, so we use
-  // hard-coded TakerGets and TakerPays amounts.
-
-  const offer_1 = {
-    "TransactionType": "OfferCreate",
-    "Account": wallet.address,
-    "TakerPays": we_want,
-    "TakerGets": we_spend.value // since it's XRP
+// Now we disable the global freeze ------------------------------------------
+  const accountSetTx2 = {
+    TransactionType: "AccountSet",
+    Account: wallet.address,
+    // ClearFlag let's us turn off a global freeze on this account
+    ClearFlag: xrpl.AccountSetAsfFlags.asfGlobalFreeze
   }
 
-  const prepared = await client.autofill(offer_1)
-  console.log("Prepared transaction:", JSON.stringify(prepared, null, 2))
-  const signed = wallet.sign(prepared)
-  console.log("Sending OfferCreate transaction...")
-  const result = await client.submitAndWait(signed.tx_blob)
-  if (result.result.meta.TransactionResult == "tesSUCCESS") {
-    console.log(`Transaction succeeded:
-          https://testnet.xrpl.org/transactions/${signed.hash}`)
-  } else {
-    throw `Error sending transaction: ${result}`
-  }
+  // Best practice for JS users - validate checks if a transaction is well-formed
+  xrpl.validate(accountSetTx2)
+
+  // Sign and submit the AccountSet transaction to end a global freeze ---------
+  console.log('Signing and submitting the transaction:', accountSetTx2)
+  const result = await client.submitAndWait(accountSetTx2, { wallet: wallet })
+  console.log("Finished submitting!")
 ```
 {% endtab %}
 
-{% tab title="Python" %}
-```python
-        # Send OfferCreate transaction ----------------------------------------------
-
-        # For this tutorial, we already know that TST is pegged to
-        # XRP at a rate of approximately 10:1 plus spread, so we use
-        # hard-coded TakerGets and TakerPays amounts.
-
-        tx = OfferCreate(
-            account=wallet.address,
-            taker_gets=we_spend["value"],
-            taker_pays=we_want["currency"].to_amount(we_want["value"]),
-        )
-
-        # Sign and autofill the transaction (ready to submit)
-        signed_tx = await autofill_and_sign(tx, client, wallet)
-        print("Transaction:", signed_tx)
-
-        # Submit the transaction and wait for response (validated or rejected)
-        print("Sending OfferCreate transaction...")
-        result = await submit_and_wait(signed_tx, client)
-        if result.is_successful():
-            print(f"Transaction succeeded: "
-                  f"https://testnet.xrpl.org/transactions/{signed_tx.get_hash()}")
-        else:
-            raise Exception(f"Error sending transaction: {result}")
+{% tab title="WebSocket" %}
+```json
+{
+  "id": "example_disable_global_freeze",
+  "command": "submit",
+  "tx_json": {
+    "TransactionType": "AccountSet",
+    "Account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+    "Fee": "12",
+    "Flags": 0,
+    "ClearFlag": 7,
+    "LastLedgerSequence": 18122788,
+    "Sequence": 350
+  },
+  "secret": "s████████████████████████████"
+}
 ```
 {% endtab %}
 {% endtabs %}
 
-이 인터페이스를 사용하여 이전 단계에서 지정한 금액으로 트랜잭션을 전송할 수 있습니다:
+* [Generate](https://xrpl.org/enact-global-freeze.html#interactive-generate)
+* [Connect](https://xrpl.org/enact-global-freeze.html#interactive-connect)
+* [Send AccountSet (Start Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_start\_freeze)
+* [Wait](https://xrpl.org/enact-global-freeze.html#interactive-wait)
+* [Confirm Settings](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings)
+* [Send AccountSet (End Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_end\_freeze)
+* [Wait (again)](https://xrpl.org/enact-global-freeze.html#interactive-wait\_again)
+* [Confirm Settings (After Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings\_after\_freeze)
 
-* [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
-* [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
-* [Look Up Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-look\_up\_offers)
-* [Send OfferCreate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-send\_offercreate)
-* [Wait](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-wait)
-* [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
-* [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
+## 7. 유효성 검사 대기
 
-## 5. 유효성 검사 대기
+이전과 마찬가지로 이전 트랜잭션이 컨센서스에 의해 검증될 때까지 기다렸다가 계속 진행합니다.
 
-대부분의 트랜잭션은 제출된 후 다음 Ledger 버전으로 승인되므로, 트랜잭션 결과가 최종적으로 확정되기까지 4\~7초가 소요될 수 있습니다. XRP Ledger가 사용 중이거나 네트워크 연결 상태가 좋지 않아 트랜잭션이 네트워크를 통해 전달되는 것이 지연되는 경우, 트랜잭션이 확인되는 데 더 오랜 시간이 걸릴 수 있습니다. (트랜잭션 만료를 설정하는 방법에 대한 자세한 내용은 안정적인 트랜잭션 제출을 참조하세요.)
+* [Generate](https://xrpl.org/enact-global-freeze.html#interactive-generate)
+* [Connect](https://xrpl.org/enact-global-freeze.html#interactive-connect)
+* [Send AccountSet (Start Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_start\_freeze)
+* [Wait](https://xrpl.org/enact-global-freeze.html#interactive-wait)
+* [Confirm Settings](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings)
+* [Send AccountSet (End Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_end\_freeze)
+* [Wait (again)](https://xrpl.org/enact-global-freeze.html#interactive-wait\_again)
+* [Confirm Settings (After Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings\_after\_freeze)
 
-* [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
-* [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
-* [Look Up Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-look\_up\_offers)
-* [Send OfferCreate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-send\_offercreate)
-* [Wait](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-wait)
-* [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
-* [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
+## 8. 계정 설정 확인
 
-## 6. 메타데이터 확인
+트랜잭션이 유효성을 검사한 후 이전과 동일한 방법으로 계정 정보 메소드를 호출하고 계정의 플래그 필드 값을 확인하여 lsfGlobalFreeze 비트(0x00400000)가 꺼져 있는지 확인하여 글로벌 동결 플래그의 상태를 확인할 수 있습니다.
 
-검증된 트랜잭션의 메타데이터를 사용해 트랜잭션이 정확히 어떤 일을 했는지 확인할 수 있습니다. (특히 탈중앙화 거래소를 사용할 때는 최종 결과와 다를 수 있으므로 임시 트랜잭션 결과의 메타데이터를 사용하지 마세요). 제안 생성 트랜잭션의 경우 가능한 결과는 다음과 같습니다:
+* [Generate](https://xrpl.org/enact-global-freeze.html#interactive-generate)
+* [Connect](https://xrpl.org/enact-global-freeze.html#interactive-connect)
+* [Send AccountSet (Start Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_start\_freeze)
+* [Wait](https://xrpl.org/enact-global-freeze.html#interactive-wait)
+* [Confirm Settings](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings)
+* [Send AccountSet (End Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-send\_accountset\_end\_freeze)
+* [Wait (again)](https://xrpl.org/enact-global-freeze.html#interactive-wait\_again)
+* [Confirm Settings (After Freeze)](https://xrpl.org/enact-global-freeze.html#interactive-confirm\_settings\_after\_freeze)
 
-* 제안의 일부 또는 전부가 Ledger에 있는 기존 제안과 일치하여 채워졌을 수 있습니다.
-* 매칭되지 않은 나머지 제안이 있다면 Ledger에 배치되어 새로운 매칭 제안을 기다리고 있을 것입니다.
-* 매칭될 수 있는 만료되었거나 펀딩되지 않은 제안을 제거하는 등 다른 부기 작업이 발생했을 수도 있습니다.
-
-다음 코드는 트랜잭션의 메타데이터를 확인하는 방법을 보여줍니다:
-
-{% tabs %}
-{% tab title="JavaScript" %}
-```javascript
-// Check metadata ------------------------------------------------------------
-  // In JavaScript, you can use getBalanceChanges() to help summarize all the
-  // balance changes caused by a transaction.
-  const balance_changes = xrpl.getBalanceChanges(result.result.meta)
-  console.log("Total balance changes:", JSON.stringify(balance_changes, null,2))
-
-  // Helper to convert an XRPL amount to a string for display
-  function amt_str(amt) {
-    if (typeof amt == "string") {
-      return `${xrpl.dropsToXrp(amt)} XRP`
-    } else {
-      return `${amt.value} ${amt.currency}.${amt.issuer}`
-    }
-  }
-
-  let offers_affected = 0
-  for (const affnode of result.result.meta.AffectedNodes) {
-    if (affnode.hasOwnProperty("ModifiedNode")) {
-      if (affnode.ModifiedNode.LedgerEntryType == "Offer") {
-        // Usually a ModifiedNode of type Offer indicates a previous Offer that
-        // was partially consumed by this one.
-        offers_affected += 1
-      }
-    } else if (affnode.hasOwnProperty("DeletedNode")) {
-      if (affnode.DeletedNode.LedgerEntryType == "Offer") {
-        // The removed Offer may have been fully consumed, or it may have been
-        // found to be expired or unfunded.
-        offers_affected += 1
-      }
-    } else if (affnode.hasOwnProperty("CreatedNode")) {
-      if (affnode.CreatedNode.LedgerEntryType == "RippleState") {
-        console.log("Created a trust line.")
-      } else if (affnode.CreatedNode.LedgerEntryType == "Offer") {
-        const offer = affnode.CreatedNode.NewFields
-        console.log(`Created an Offer owned by ${offer.Account} with
-          TakerGets=${amt_str(offer.TakerGets)} and
-          TakerPays=${amt_str(offer.TakerPays)}.`)
-      }
-    }
-  }
-  console.log(`Modified or removed ${offers_affected} matching Offer(s)`)
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-        # Check metadata ------------------------------------------------------------
-        balance_changes = get_balance_changes(result.result["meta"])
-        print(f"Balance Changes:\n{pprint.pformat(balance_changes)}")
-
-        # For educational purposes the transaction metadata is analyzed manually in the
-        # following section. However, there is also a get_order_book_changes(metadata)
-        # utility function available in the xrpl library, which is generally the easier
-        # and preferred choice for parsing the metadata and computing orderbook changes.
-
-        # Helper to convert an XRPL amount to a string for display
-        def amt_str(amt) -> str:
-            if isinstance(amt, str):
-                return f"{drops_to_xrp(amt)} XRP"
-            else:
-                return f"{amt['value']} {amt['currency']}.{amt['issuer']}"
-
-        offers_affected = 0
-        for affnode in result.result["meta"]["AffectedNodes"]:
-            if "ModifiedNode" in affnode:
-                if affnode["ModifiedNode"]["LedgerEntryType"] == "Offer":
-                    # Usually a ModifiedNode of type Offer indicates a previous Offer that
-                    # was partially consumed by this one.
-                    offers_affected += 1
-            elif "DeletedNode" in affnode:
-                if affnode["DeletedNode"]["LedgerEntryType"] == "Offer":
-                    # The removed Offer may have been fully consumed, or it may have been
-                    # found to be expired or unfunded.
-                    offers_affected += 1
-            elif "CreatedNode" in affnode:
-                if affnode["CreatedNode"]["LedgerEntryType"] == "RippleState":
-                    print("Created a trust line.")
-                elif affnode["CreatedNode"]["LedgerEntryType"] == "Offer":
-                    offer = affnode["CreatedNode"]["NewFields"]
-                    print(f"Created an Offer owned by {offer['Account']} with "
-                          f"TakerGets={amt_str(offer['TakerGets'])} and "
-                          f"TakerPays={amt_str(offer['TakerPays'])}.")
-
-        print(f"Modified or removed {offers_affected} matching Offer(s)")
-```
-{% endtab %}
-{% endtabs %}
-
-&#x20;이 인터페이스를 사용하여 테스트해 볼 수 있습니다:
-
-* [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
-* [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
-* [Look Up Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-look\_up\_offers)
-* [Send OfferCreate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-send\_offercreate)
-* [Wait](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-wait)
-* [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
-* [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
-
-## 7. 잔액 및 제안 확인
-
-가장 최근에 확인된 ledger를 기준으로 계정의 잔액과 미발행 제안을 조회할 수 있는 좋은 시기입니다. 여기에는 트랜잭션으로 인한 변경 사항과 동일한 ledger 버전에서 실행된 다른 트랜잭션이 모두 표시됩니다.
-
-다음 코드는 account\_lines 메소드를 사용하여 잔액을 조회하고 account\_offers 메소드를 사용하여 제안 조회하는 방법을 보여줍니다.
-
-{% tabs %}
-{% tab title="JavaScript" %}
-```javascript
-// Check balances ------------------------------------------------------------
-  console.log("Getting address balances as of validated ledger...")
-  const balances = await client.request({
-    command: "account_lines",
-    account: wallet.address,
-    ledger_index: "validated"
-    // You could also use ledger_index: "current" to get pending data
-  })
-  console.log(JSON.stringify(balances.result, null, 2))
-
-  // Check Offers --------------------------------------------------------------
-  console.log(`Getting outstanding Offers from ${wallet.address} as of validated ledger...`)
-  const acct_offers = await client.request({
-    command: "account_offers",
-    account: wallet.address,
-    ledger_index: "validated"
-  })
-  console.log(JSON.stringify(acct_offers.result, null, 2))
-```
-{% endtab %}
-
-{% tab title="Python" %}
-```python
-        # Check balances ------------------------------------------------------------
-        print("Getting address balances as of validated ledger...")
-        balances = await client.request(
-            AccountLines(
-                account=wallet.address,
-                ledger_index="validated",
-            )
-        )
-        pprint.pp(balances.result)
-
-        # Check Offers --------------------------------------------------------------
-        print(f"Getting outstanding Offers from {wallet.address} "
-              f"as of validated ledger...")
-        acct_offers = await client.request(
-            AccountOffers(
-                account=wallet.address,
-                ledger_index="validated",
-            )
-        )
-        pprint.pp(acct_offers.result)
-```
-{% endtab %}
-{% endtabs %}
-
-&#x20;이 인터페이스를 사용하여 테스트해 볼 수 있습니다:
-
-* [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
-* [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
-* [Look Up Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-look\_up\_offers)
-* [Send OfferCreate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-send\_offercreate)
-* [Wait](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-wait)
-* [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
-* [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
+\
