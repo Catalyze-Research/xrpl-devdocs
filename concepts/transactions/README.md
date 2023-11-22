@@ -51,7 +51,7 @@ XRP Ledger에 거래를 보내는 것은 몇 단계를 포함합니다:
 3. 거래를 XRP Ledger 서버(보통은 [<mark style="background-color:yellow;">rippled</mark> 인스턴스](../xrp-ledger/))에 제출합니다. 거래가 적절하게 형성되었다면, 서버는 거래를 그것의 현재 버전의 ledger에 잠정적으로 적용하고 거래를 P2P 네트워크의 다른 멤버들에게 전달합니다.&#x20;
 4. 컨센서스 과정은 다음 검증된 ledger에 어떤 잠정적인 거래가 포함되는지를 결정합니다.&#x20;
 5. 서버는 이러한 트랜잭션을 표준 순서에 따라 이전 ledger에 적용하고 그 결과를 공유합니다.
-6. 만약 충분한 [신뢰하 검증자](../xrp-ledger/rippled-rippled-server-modes.md)들이 완전히 같은 ledger을 생성했다면, 그 ledger는 _검증된_ 것으로 선언되고 그 ledger의 [트랜잭션 결과](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/undefined/)는 불변의 특성을 가지게 됩니다.&#x20;
+6. 만약 충분한 [신뢰하 검증자](../xrp-ledger/rippled-rippled-server-modes.md)들이 완전히 같은 ledger을 생성했다면, 그 ledger는 _검증된_ 것으로 선언되고 그 ledger의 [트랜잭션 결과](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-results/)는 불변의 특성을 가지게 됩니다.&#x20;
 
 XRP 결제를 보내는 대한 상호작용 튜토리얼을 보려면, XRP 보내기를 참조해보세요.
 
@@ -91,7 +91,7 @@ XRP Ledger는 트랜잭션 객체가 (<mark style="background-color:yellow;">계
 
 ## 메타데이터를 가진 실행된 거래 예시&#x20;
 
-거래가 실행된 후, XRP Ledger는 거래의 최종 결과와 거래가 XRP Ledger의 공유 상태에 가한 모든 변경 사항을 보여주는 [메타데이터](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/undefined-1.md)를 추가합니다.
+거래가 실행된 후, XRP Ledger는 거래의 최종 결과와 거래가 XRP Ledger의 공유 상태에 가한 모든 변경 사항을 보여주는 [메타데이터](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-metadata.md)를 추가합니다.
 
 API를 사용하여 거래 상태를 확인할 수 있습니다. 예를 들어, [tx 명령](../../references/http-websocket-apis/api-1/undefined-1/tx.md)을 사용할 수 있습니다.
 
