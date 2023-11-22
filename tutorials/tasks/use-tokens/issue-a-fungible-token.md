@@ -238,14 +238,14 @@ print(response)
 
 이 튜토리얼의 코드 샘플은 트랜잭션을 제출할 때 유효성 검사를 기다리는 도우미 함수를 사용합니다:
 
-* **JavaScript**: 제출 및 확인 코드 샘플에 정의된 submit\_and\_verify() 함수.
-* **Python**: xrpl-py 라이브러리의 submit\_and\_wait() 메소드.
-* **Java**: Java: 샘플 Java 클래스의 submitAndWaitForValidation() 메소드.
+* **JavaScript**: 제출 및 확인 코드 샘플([submit-and-verify code sample](https://github.com/XRPLF/xrpl-dev-portal/tree/master/content/\_code-samples/submit-and-verify))에 정의된 `submit_and_verify()` 함수.
+* **Python**: xrpl-py 라이브러리의 submit\_and\_wait() 메소드([method of the xrpl-py library](https://xrpl-py.readthedocs.io/en/stable/source/xrpl.transaction.html#xrpl.transaction.submit\_and\_wait)).
+* **Java**: [sample Java class](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/\_code-samples/issue-a-token/java/IssueToken.java)의 submitAndWaitForValidation() 메소드.
 
 {% hint style="info" %}
-Tip:
+**Tip**:
 
-기술적으로 핫 주소는 발급자 주소 구성과 병행하여 구성할 수 있습니다. 간단하게 하기 위해 이 튜토리얼에서는 각 트랜잭션을 한 번에 하나씩 대기합니다.&#x20;
+기술적으로 핫 주소는 발급자 주소 구성과 병행하여 구성할 수 있습니다. 간단하게 설명하기 위해 이 튜토리얼에서는 각 트랜잭션을 한 번에 하나씩 기다립니다.
 {% endhint %}
 
 * [Generate](https://xrpl.org/issue-a-fungible-token.html#interactive-generate)
@@ -260,11 +260,11 @@ Tip:
 * [Wait (Payment)](https://xrpl.org/issue-a-fungible-token.html#interactive-wait\_payment)
 * [Confirm Balances](https://xrpl.org/issue-a-fungible-token.html#interactive-confirm\_balances)
 
-## 5. 핫 주소 설정 구성하기
+## 5. 핫 주소 설정 구성(Configure Hot Address Settings)
 
-핫 주소는 기본값에서 반드시 설정을 변경해야 하는 것은 아니지만, 다음 사항을 모범 사례로 권장합니다:
+핫 주소는 기본값에서 설정을 반드시 변경해야 하는 것은 아니지만, 다음 사항을 모범 사례로 권장합니다:
 
-| 설설정                                                                        | 권장값         | 요약                                                                                        |
+| 설정                                                                         | 권장값         | 요약                                                                                        |
 | -------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
 | [Default Ripple](https://xrpl.org/rippling.html)                           | 비활성화        | 이 설정을 비활성화합니다. (기본값입니다.)                                                                  |
 | [Authorized Trust Lines](https://xrpl.org/authorized-trust-lines.html)     | 활성화         | 이 설정을 활성화하고 핫 주소에 대한 신뢰선을 승인하지 않으면 실수로 잘못된 주소에서 토큰을 발행하는 것을 방지할 수 있습니다. (선택 사항이지만 권장합니다.) |
@@ -355,9 +355,9 @@ print(response)
 * [Wait (Payment)](https://xrpl.org/issue-a-fungible-token.html#interactive-wait\_payment)
 * [Confirm Balances](https://xrpl.org/issue-a-fungible-token.html#interactive-confirm\_balances)
 
-## 6. 유효성 검사 대기
+## 6. 유효성 검사 대기 (Wait for Validation)
 
-이전과 마찬가지로 이전 트랜잭션이 컨센서스를 통해 검증될 때까지 기다렸다가 계속 진행합니다.
+이전과 마찬가지로 합의를 통해 이전 트랜잭션이 검증될 때까지 기다린 후 계속 진행합니다.
 
 * [Generate](https://xrpl.org/issue-a-fungible-token.html#interactive-generate)
 * [Connect](https://xrpl.org/issue-a-fungible-token.html#interactive-connect)
@@ -371,19 +371,19 @@ print(response)
 * [Wait (Payment)](https://xrpl.org/issue-a-fungible-token.html#interactive-wait\_payment)
 * [Confirm Balances](https://xrpl.org/issue-a-fungible-token.html#interactive-confirm\_balances)
 
-## 7. 핫 주소에서 콜드 주소로 신뢰선 생성
+## 7. 핫 주소에서 콜드 주소로 신뢰선 생성(Create Trust Line from Hot to Cold Address)
 
-토큰을 받으려면 먼저 토큰 발행자에 대한 신뢰선을 생성해야 합니다. 이 신뢰선은 발행하려는 토큰의 통화 코드(예: USD 또는 FOO)에 따라 다릅니다. 원하는 통화 코드는 무엇이든 선택할 수 있으며, 각 발행자의 토큰은 XRP Ledggrer 프로토콜에서 별도의 토큰으로 취급됩니다. 그러나 사용자가 리플 설정을 활성화하면 동일한 통화 코드를 가진 토큰의 잔액이 다른 발행자 간에 ripple될 수 있습니다.
+토큰을 받으려면 먼저 토큰 발급자에 대한 신뢰선을 만들어야 합니다. 이 트랜잭션 라인은 USD 또는 FOO와 같이 발행하려는 토큰의 통화 코드에 따라 다릅니다. 원하는 통화 코드는 무엇이든 선택할 수 있으며, 각 발행자의 토큰은 XRP Ledger 프로토콜에서 별도의 토큰으로 취급됩니다. 그러나 사용자가 리플 설정을 활성화하면 동일한 통화 코드를 가진 토큰의 잔액이 다른 발행자 간에 리플될 수 있습니다.
 
-핫 주소는 발행자로부터 토큰을 받기 전에 이와 같은 신뢰선이 필요합니다. 마찬가지로 토큰을 보유하려는 각 사용자도 trust line¹을 생성해야 합니다. 각 신뢰선은 핫 주소의 [reserve requirement](https://xrpl.org/reserves.html)을 증가시키므로, 증가된 요구량을 지불할 수 있는 충분한 양의 XRP를 보유해야 합니다. 신뢰선을 제거하면 reserve requirement은 다시 낮아집니다.
+핫 주소는 발행자로부터 토큰을 받기 전에 이와 같은 트러스트 라인이 필요합니다. 마찬가지로 토큰을 보유하려는 각 사용자도 trust line¹을 생성해야 합니다. 각 신뢰선은 핫 주소의 [reserve requirement](https://xrpl.org/reserves.html)을 증가시키므로, 증가된 요구량을 지불할 수 있는 충분한 양의 XRP를 보유해야 합니다. 신뢰선을 제거하면 reserve requirement은 다시 낮아집니다.
 
 {% hint style="info" %}
-Tip:
+**Tip**:
 
-신뢰선은 사람이 보유할 수 있는 '한도'가 있으며, 다른 사람은 지정된 한도보다 더 많은 토큰을 보낼 수 없습니다. 커뮤니티 크레딧 시스템의 경우, 해당 사람을 얼마나 신뢰하는지에 따라 개인별 한도를 구성할 수 있습니다. 다른 유형과 용도의 토큰의 경우 일반적으로 한도를 매우 큰 수로 설정해도 괜찮습니다.
+신뢰선에는 받는 사람이 보유할 수 있는 토큰의 양에 대한 '한도'가 있으며, 다른 사람은 지정된 한도보다 더 많은 토큰을 보낼 수 없습니다. 커뮤니티 크레딧 시스템의 경우, 해당 사람을 얼마나 신뢰하는지에 따라 개인별 한도를 구성할 수 있습니다. 다른 유형과 용도의 토큰의 경우 일반적으로 한도를 매우 큰 수로 설정해도 괜찮습니다.
 {% endhint %}
 
-신뢰선을 만들려면 핫 주소에서 다음 필드가 포함된 [TrustSet](https://xrpl.org/trustset.html)트랜잭션을 전송합니다:
+신뢰선을 만들려면 핫 주소에서 다음 필드가 포함된 [TrustSet transaction](https://xrpl.org/trustset.html) 을 전송합니다:
 
 | 필드                     | 값값                                   |
 | ---------------------- | ------------------------------------ |
