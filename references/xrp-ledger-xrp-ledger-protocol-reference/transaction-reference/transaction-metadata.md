@@ -1,26 +1,28 @@
-# 트랜잭션 메타데이터
+# 트랜잭션 메타데이터(Transaction Metadata)
 
-트랜잭션 메타데이터는 트랜잭션이 처리된 후 트랜잭션에 추가되는 데이터 섹션입니다. 원장에 포함되는 모든 트랜잭션에는 성공 여부와 관계없이 메타데이터가 있습니다. 트랜잭션 메타데이터는 트랜잭션의 결과를 자세히 설명합니다.
 
-{% hint style="info" %}
-Warning:
 
-트랜잭션 메타데이터에 설명된 변경 내용은 트랜잭션이 검증된 ledger 버전에 있는 경우에만 최종적입니다.
+[Currency Amount](https://xrpl.org/basic-data-types.html#specifying-currency-amounts)트랜잭션 메타데이터는 트랜잭션이 처리된 후 트랜잭션에 추가되는 데이터 섹션입니다. Ledger에 포함되는 모든 트랜잭션에는 성공 여부와 관계없이 메타데이터가 있습니다. 트랜잭션 메타데이터는 트랜잭션의 결과를 자세히 설명합니다.
+
+{% hint style="danger" %}
+**Warning**:
+
+트랜잭션 메타데이터에 설명된 변경 사항은 트랜잭션이 검증된 Ledger 버전에 있는 경우에만 최종적입니다.
 {% endhint %}
 
 트랜잭션 메타데이터에 표시될 수 있는 일부 필드는 다음과 같습니다:
 
-| 필드                                                                                 | 값                                                                           | 설명                                                                                                                                                                                                                                                                |
-| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AffectedNodes`                                                                    | 배열                                                                          | 이 트랜잭션에 의해 생성, 삭제 또는 수정된 원장 객체 목록 과 각 객체에 대한 특정 변경 사항입니다.                                                                                                                                                                                                         |
-| `DeliveredAmount`                                                                  | [화폐 금액](https://xrpl.org/basic-data-types.html#specifying-currency-amounts) | _(생략가능)_ [부분결제](https://xrpl.org/partial-payments.html)의 경우 실제로 목적지까지 전달된 통화금액을 기록하는 필드입니다. 거래를 읽을 때 오류를 방지하려면 `delivered_amount`부분 여부에 관계없이 모든 결제 거래에 대해 제공되는 필드를 대신 사용하세요.                                                                                      |
-| `TransactionIndex`                                                                 | 부호 없는 정수                                                                    | 해당 거래가 포함된 원장 내 거래의 위치입니다. 이것은 0 인덱스입니다. (예를 들어 값 2는 해당 원장의 세 번째 거래임을 의미합니다.)                                                                                                                                                                                     |
-| `TransactionResult`                                                                | 문자열                                                                         | 트랜잭션의 성공 여부 또는 실패 방법을 나타내는 결과 코드입니다.                                                                                                                                                                                                                              |
-| [`delivered_amount`](https://xrpl.org/transaction-metadata.html#delivered\_amount) | [화폐 금액](https://xrpl.org/basic-data-types.html#specifying-currency-amounts) | (비결제 거래의 경우 생략) 대상 계정에서 실제로 수령한 통화 금액입니다. 이 필드를 사용하여 거래가 부분 결제인지 여부에 관계없이 배송된 금액을 확인할 수 있습니다. 자세한 내용은 이 설명을 참조하세요.[![새로운 기능: 파문이 0.27.0](https://img.shields.io/badge/New%20in-rippled%200.27.0-blue.svg)](https://github.com/ripple/rippled/releases/tag/0.27.0) |
+| 필드                                                                                 | 값                                                                                     | 설명                                                                                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AffectedNodes`                                                                    | Array                                                                                 | 이 트랜잭션에 의해 생성, 삭제 또는 수정된 원장 객체 목록 과 각 객체에 대한 특정 변경 사항입니다.                                                                                                                                                                                                         |
+| `DeliveredAmount`                                                                  | [Currency Amount](https://xrpl.org/basic-data-types.html#specifying-currency-amounts) | _(생략가능)_ [부분결제](https://xrpl.org/partial-payments.html)의 경우 실제로 목적지까지 전달된 통화금액을 기록하는 필드입니다. 거래를 읽을 때 오류를 방지하려면 `delivered_amount`부분 여부에 관계없이 모든 결제 거래에 대해 제공되는 필드를 대신 사용하세요.                                                                                      |
+| `TransactionIndex`                                                                 | Unsigned Integer                                                                      | 해당 거래가 포함된 원장 내 거래의 위치입니다. 이것은 0 인덱스입니다. (예를 들어 값 2는 해당 원장의 세 번째 거래임을 의미합니다.)                                                                                                                                                                                     |
+| `TransactionResult`                                                                | String                                                                                | 트랜잭션의 성공 여부 또는 실패 방법을 나타내는 결과 코드입니다.                                                                                                                                                                                                                              |
+| [`delivered_amount`](https://xrpl.org/transaction-metadata.html#delivered\_amount) | [Currency Amount](https://xrpl.org/basic-data-types.html#specifying-currency-amounts) | (비결제 거래의 경우 생략) 대상 계정에서 실제로 수령한 통화 금액입니다. 이 필드를 사용하여 거래가 부분 결제인지 여부에 관계없이 배송된 금액을 확인할 수 있습니다. 자세한 내용은 이 설명을 참조하세요.[![새로운 기능: 파문이 0.27.0](https://img.shields.io/badge/New%20in-rippled%200.27.0-blue.svg)](https://github.com/ripple/rippled/releases/tag/0.27.0) |
 
-## 메타데이터 예시
+## Metadata 예시
 
-다음 JSON 객체는 복잡한 교차 화폐결제에 대한 메타데이터를 보여줍니다:
+다음 JSON 객체는 [a complex cross-currency payment](https://xrpcharts.ripple.com/?\_\_hstc=78174987.eb834f4976cc9a9e484fa466d5c5acb0.1692504586144.1700629533999.1700631525411.29&\_\_hssc=78174987.8.1700631525411&\_\_hsfp=875642578#/transactions/8C55AFC2A2AA42B5CE624AEECDB3ACFDD1E5379D4E5BF74A8460C5E97EF8706B)에 대한 메타데이터를 보여줍니다:
 
 ```json
 {
@@ -503,37 +505,37 @@ Warning:
 
 ## AffectedNodes
 
-AffectedNodes 배열에는 이 트랜잭션이 어떤 식으로든 수정한 ledger의 객체 전체 목록이 포함됩니다. 이 배열의 각 항목은 어떤 유형인지 나타내는 최상위 필드 하나가 있는 객체입니다:&#x20;
+&#x20;`AffectedNodes`배열에는 이 트랜잭션이 어떤 식으로든 수정한 ledger의 객체 전체 목록이 포함됩니다. 이 배열의 각 항목은 어떤 유형인지 나타내는 최상위 필드 하나가 있는 객체입니다:&#x20;
 
-* CreatedNode는 트랜잭션이 ledger에 새 개체를 생성했음을 나타냅니다.
-* DeletedNode는 트랜잭션이 ledger에서 개체를 제거했음을 나타냅니다.
-* ModifiedNode는 트랜잭션이 ledger에 있는 기존 개체를 수정했음을 나타냅니다.
+* `CreatedNode`는 트랜잭션이 ledger에 새 개체를 생성했음을 나타냅니다.
+* `DeletedNode`는 트랜잭션이 ledger에서 개체를 제거했음을 나타냅니다.
+* `ModifiedNode`는 트랜잭션이 ledger에 있는 기존 개체를 수정했음을 나타냅니다.
 
 이러한 각 필드의 값은 ledger 개체에 대한 변경 사항을 설명하는 JSON 객체입니다.
 
-## CreatedNode 필드
+## CreatedNode Fields
 
-CreatedNode 객체에는 다음 필드가 포함됩니다:
+&#x20;`CreatedNode`객체에는 다음 필드가 포함됩니다:
 
-| 필드              | 값                                                         | 설명                                                                                                                                                                                                                  |
-| --------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| LedgerEntryType | 문자열                                                       | 생성된 [ledger 객체의 유형입니다](https://xrpl.org/ledger-object-types.html) .                                                                                                                                                 |
-| LedgerIndex     | 문자열 - [해시](https://xrpl.org/basic-data-types.html#hashes) | ledger의 [상태 트리 에 있는 ](https://xrpl.org/ledgers.html)[이 원장 객체의 ID](https://xrpl.org/ledger-object-ids.html) 입니다 . 참고: 필드 이름이 매우 유사하더라도 이는 [원장 색인](https://xrpl.org/basic-data-types.html#ledger-index) 과 동일하지 않습니다 . |
-| NewFields       | 객체                                                        | 새로 생성된 원장 개체의 콘텐츠 필드입니다. 존재하는 필드는 생성된 원장 객체의 유형에 따라 달라집니다.                                                                                                                                                          |
+| 필드              | 값                                                              | 설명                                                                                                                                                                                                                  |
+| --------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| LedgerEntryType | String                                                         | 생성된 [ledger 객체의 유형입니다](https://xrpl.org/ledger-object-types.html) .                                                                                                                                                 |
+| LedgerIndex     | String - [Hash](https://xrpl.org/basic-data-types.html#hashes) | ledger의 [상태 트리 에 있는 ](https://xrpl.org/ledgers.html)[이 원장 객체의 ID](https://xrpl.org/ledger-object-ids.html) 입니다 . 참고: 필드 이름이 매우 유사하더라도 이는 [원장 색인](https://xrpl.org/basic-data-types.html#ledger-index) 과 동일하지 않습니다 . |
+| NewFields       | Object                                                         | 새로 생성된 원장 개체의 콘텐츠 필드입니다. 존재하는 필드는 생성된 원장 객체의 유형에 따라 달라집니다.                                                                                                                                                          |
 
-## DeletedNode 필드
+## DeletedNode Fields
 
-DeletedNode 객체에는 다음 필드가 포함됩니다:
+`DeletedNode`객체에는 다음 필드가 포함됩니다:
 
-| 필드                | 값                                                         | 설명                                                                                                                                                                                                                    |
-| ----------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `LedgerEntryType` | 문자열                                                       | 삭제된 [원장 객체의 유형입니다](https://xrpl.org/ledger-object-types.html).                                                                                                                                                        |
-| `LedgerIndex`     | 문자열 - [해시](https://xrpl.org/basic-data-types.html#hashes) | 원장의 [상태 트리 에 있는 ](https://xrpl.org/ledgers.html)[이 원장 객체의 ID](https://xrpl.org/ledger-object-ids.html) 입니다. **참고:** 필드 이름이 매우 유사하더라도 이는 [원장 색인](https://xrpl.org/basic-data-types.html#ledger-index) 과 **동일하지 않습니다.** |
-| `FinalFields`     | 객체                                                        | 삭제 직전 원장 개체의 콘텐츠 필드입니다. 존재하는 필드는 생성된 원장 객체의 유형에 따라 달라집니다.                                                                                                                                                             |
+| 필드                | 값                                                              | 설명                                                                                                                                                                                                                    |
+| ----------------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LedgerEntryType` | String                                                         | 삭제된 [원장 객체의 유형입니다](https://xrpl.org/ledger-object-types.html).                                                                                                                                                        |
+| `LedgerIndex`     | String - [Hash](https://xrpl.org/basic-data-types.html#hashes) | 원장의 [상태 트리 에 있는 ](https://xrpl.org/ledgers.html)[이 원장 객체의 ID](https://xrpl.org/ledger-object-ids.html) 입니다. **참고:** 필드 이름이 매우 유사하더라도 이는 [원장 색인](https://xrpl.org/basic-data-types.html#ledger-index) 과 **동일하지 않습니다.** |
+| `FinalFields`     | Object                                                         | 삭제 직전 원장 개체의 콘텐츠 필드입니다. 존재하는 필드는 생성된 원장 객체의 유형에 따라 달라집니다.                                                                                                                                                             |
 
-## ModifiedNode  필드
+## ModifiedNode  Fields
 
-ModifiedNode 객체에는 다음 필드가 포함됩니다:
+&#x20;`ModifiedNode`객체에는 다음 필드가 포함됩니다:
 
 | 필드                  | 값                                                                 | 설명                                                                                                                                                                                                                   |
 | ------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -545,12 +547,12 @@ ModifiedNode 객체에는 다음 필드가 포함됩니다:
 | `PreviousTxnLgrSeq` | 번호 - [원장 색인](https://xrpl.org/basic-data-types.html#ledger-index) | (생략 가능) 이 원장 개체를 수정하기 위한 이전 트랜잭션이 포함된 원장 버전의 원장 인덱스입니다. PreviousTxnLgrSeq 필드가 없는 원장 객체 유형의 경우 생략됩니다.                                                                                                                 |
 
 {% hint style="info" %}
-Note:
+**Note**:
 
-수정된 ledger 개체에 PreviousTxnID 및 PreviousTxnLgrSeq 필드가 있는 경우, 트랜잭션은 항상 트랜잭션의 고유 식별 해시 및 트랜잭션이 포함된 ledger 버전의 인덱스로 해당 필드를 업데이트하지만, 이러한 필드의 새 값은 ModifiedNode 개체의 FinalFields에 나열되지 않으며, 이전 값은 중첩된 PreviousFields 개체가 아닌 ModifiedNode 개체의 최상위 수준에 나열됩니다.
+수정된 Ledger 항목에 PreviousTxnID 및 PreviousTxnLgrSeq 필드가 있는 경우, 트랜잭션은 항상 트랜잭션의 자체 식별 해시 및 트랜잭션이 포함된 Ledger 버전의 인덱스로 해당 필드를 업데이트하지만, 이러한 필드의 새 값은 ModifiedNode 객체의 FinalFields에 나열되지 않으며 이전 값은 중첩된 PreviousFields 객체가 아닌 ModifiedNode 객체의 최상위 레벨에 나열됩니다.
 {% endhint %}
 
-## NFT 필드
+## NFT Fields
 
 NFT와 관련된 트랜잭션(tx 및 account\_tx)은 메타데이터에 다음 필드를 포함할 수 있습니다. 이러한 값은 요청 시점에 클리오서버에 의해 추가되며 해시된 바이너리 메타데이터에 저장되지 않습니다:&#x20;
 
@@ -569,10 +571,12 @@ rippled 서버는 모든 성공적인 결제 트랜잭션에 대해 JSON 트랜�
 * 부분 결제.
 * 2014-01-20 이전에 확인된 ledger에 포함.
 
-두 조건이 모두 참이면 delivered\_amount에 실제 금액 대신 사용할 수 없는 문자열 값이 포함됩니다. 이 경우 트랜잭션 메타데이터에서 영향을 받는 노드를 읽어야만 실제 송금된 금액을 파악할 수 있습니다.
+두 조건이 모두 참이면 delivered\_amount에 실제 금액 대신 사용할 수 없는 문자열 값이 포함됩니다. 이 경우 트랜잭션의 메타데이터에서 영향을 받는 노드를 읽어야만 실제 전달된 금액을 파악할 수 있습니다.
 
 {% hint style="info" %}
-Note:
+**Note**:
 
-delivered\_amount 필드는 요청에 따라 온디맨드 방식으로 생성되며, 트랜잭션 메타데이터의 바이너리 형식에 포함되지 않으며 트랜잭션 메타데이터의 해시를 계산할 때 사용되지 않습니다. 반면, 2014-01-20 이후 부분 결제 트랜잭션의 경우 DeliveredAmount 필드가 바이너리 형식에 포함됩니다.
+&#x20;`delivered_amount` field는 요청에 따라 on-demand 방식으로 생성되며 거래 메타데이터의 바이너리 형식에 포함되지 않으며 거래 메타데이터의 해시를 계산할 때 사용되지도 않습니다. 반면, 2014-01-20 이후 부분 결제 트랜잭션의 경우 배달된 금액 필드가 바이너리 형식에 포함됩니다.
 {% endhint %}
+
+See also: [Partial Payments](https://xrpl.org/partial-payments.html)
