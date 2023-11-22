@@ -35,7 +35,7 @@ Caution:\
 각 티켓은 [소유자 reserve](reserves.md)에 대해 별도의 항목으로 계산되므로 각 티켓에 대해 2개의 XRP를 설정해야 합니다. (티켓을 사용한 후에 XRP는 다시 사용 가능해집니다.) 한 번에 많은 수의 티켓을 생성하면 이 비용이 빠르게 누적될 수 있습니다.
 {% endhint %}
 
-일련 번호와 마찬가지로, 거래가 컨센서스에 의해 확인된 경우에만 티켓이 소비됩니다. 그러나 원래 의도한 작업을 수행하지 못한 거래도 [tec 클래스 결과 코드](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/pseudo-transactions/undefined/tec-codes.md)를 가진 [컨센서스](../consensus-protocol/consensus-structure.md)에 의해 확인될 수 있습니다.
+일련 번호와 마찬가지로, 거래가 컨센서스에 의해 확인된 경우에만 티켓이 소비됩니다. 그러나 원래 의도한 작업을 수행하지 못한 거래도 [tec 클래스 결과 코드](../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/undefined/tec-codes.md)를 가진 [컨센서스](../consensus-protocol/consensus-structure.md)에 의해 확인될 수 있습니다.
 
 계정이 사용할 수 있는 티켓을 조회하려면 [account\_objects 메소드](../../references/http-websocket-apis/api-1/undefined/account\_objects.md)를 사용하십시오.
 

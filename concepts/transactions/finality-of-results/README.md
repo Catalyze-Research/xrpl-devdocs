@@ -18,7 +18,7 @@
 
 ## 비최종 결과는 어떻게 바뀔 수 있나요? (How can non-final results change?)
 
-트랜잭션을 처음 제출할 때, <mark style="background-color:yellow;">rippled</mark> 서버는 그 트랜잭션을 현재 열려 있는 ledger에 임시적으로 적용한 후 그 결과를 반환합니다. 그러나 [트랜잭션의 최종 결과](../../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/pseudo-transactions/undefined/)는 그 임시 결과와 매우 다를 수 있습니다. 그 이유는 여러 가지입니다:
+트랜잭션을 처음 제출할 때, <mark style="background-color:yellow;">rippled</mark> 서버는 그 트랜잭션을 현재 열려 있는 ledger에 임시적으로 적용한 후 그 결과를 반환합니다. 그러나 [트랜잭션의 최종 결과](../../../references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/undefined/)는 그 임시 결과와 매우 다를 수 있습니다. 그 이유는 여러 가지입니다:
 
 * 트랜잭션은 나중의 ledger 버전까지 지연될 수 있거나, 검증된 ledger에 포함되지 않을 수도 있습니다. 대부분, XRP Ledger는 모든 유효한 트랜잭션이 가능한 한 빨리 처리되어야 한다는 원칙을 따릅니다. 그러나 예외 상황도 있습니다:
   * 제안된 트랜잭션이 [컨센서스 라운드](../../consensus-protocol/consensus-structure.md)가 시작될 때까지 대다수의 검증자에게 중계되지 않았다면, 남은 검증자들이 트랜잭션을 가져와 유효한지 확인하는 시간을 주기 위해 다음 ledger 버전까지 연기될 수 있습니다.
