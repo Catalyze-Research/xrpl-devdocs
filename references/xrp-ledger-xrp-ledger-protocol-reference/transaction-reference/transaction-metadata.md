@@ -2,7 +2,7 @@
 
 
 
-[Currency Amount](https://xrpl.org/basic-data-types.html#specifying-currency-amounts)트랜잭션 메타데이터는 트랜잭션이 처리된 후 트랜잭션에 추가되는 데이터 섹션입니다. Ledger에 포함되는 모든 트랜잭션에는 성공 여부와 관계없이 메타데이터가 있습니다. 트랜잭션 메타데이터는 트랜잭션의 결과를 자세히 설명합니다.
+트랜잭션 메타데이터는 트랜잭션이 처리된 후 트랜잭션에 추가되는 데이터 섹션입니다. Ledger에 포함되는 모든 트랜잭션에는 성공 여부와 관계없이 메타데이터가 있습니다. 트랜잭션 메타데이터는 트랜잭션의 결과를 자세히 설명합니다.
 
 {% hint style="danger" %}
 **Warning**:
