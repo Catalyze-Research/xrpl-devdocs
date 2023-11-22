@@ -300,7 +300,7 @@
       * [ter Codes](references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-results/ter-codes.md)
       * [tes Success](references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-results/tes-success.md)
     * [트랜잭션 메타데이터(Transaction Metadata)](references/xrp-ledger-xrp-ledger-protocol-reference/transaction-reference/transaction-metadata.md)
-  * [직렬화 형식](references/xrp-ledger-xrp-ledger-protocol-reference/undefined.md)
+  * [Binary Format](references/xrp-ledger-xrp-ledger-protocol-reference/binary-format.md)
 * [클라이언트 라이브러리](references/undefined/README.md)
   * [JavaScript / TypeScript 클라이언트 라이브러](references/undefined/javascript-typescript/README.md)
     * [ripple-lib 1.x에서 xrpl.js 2.x로의 마이그레이션 가이드](references/undefined/javascript-typescript/ripple-lib-1.x-xrpl.js-2.x.md)
