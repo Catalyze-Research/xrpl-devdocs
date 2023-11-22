@@ -485,9 +485,9 @@ Note:
 인증된 신뢰선을 사용하는 경우 이 단계 다음에 추가 단계가 있는데, 바로 콜드 주소가 핫 주소의 신뢰선을 승인해야 한다는 것입니다. 이 방법에 대한 자세한 내용은 인증 신뢰선 승인하기를 참조하세요.
 {% endhint %}
 
-## 8. 유효성 검사 대기
+## 8. 유효성 검사 대기(Wait for Validation)
 
-이전과 마찬가지로 이전 트랜잭션이 컨센서스를 통해 검증될 때까지 기다렸다가 계속 진행합니다.
+이전과 마찬가지로 합의 과정을 통해 이전 트랜잭션이 검증될 때까지 기다렸다가 계속 진행합니다.
 
 * [Generate](https://xrpl.org/issue-a-fungible-token.html#interactive-generate)
 * [Connect](https://xrpl.org/issue-a-fungible-token.html#interactive-connect)
@@ -501,9 +501,9 @@ Note:
 * [Wait (Payment)](https://xrpl.org/issue-a-fungible-token.html#interactive-wait\_payment)
 * [Confirm Balances](https://xrpl.org/issue-a-fungible-token.html#interactive-confirm\_balances)
 
-## 9. 토큰 보내기
+## 9. 토큰 전송(Send Token)
 
-이제 콜드 주소에서 핫 주소로 결제 트랜잭션을 전송하여 토큰을 생성할 수 있습니다. 이 트랜잭션에는 다음과 같은 속성이 있어야 합니다(점 표기는 중첩된 필드를 나타냄):
+이제 콜드 주소에서 핫 주소로 결제 트랜잭션을 전송하여 토큰을 생성할 수 있습니다. 이 트랜잭션에는 다음과 같은 속성이 있어야 합니다(점 표기법은 중첩된 필드를 나타냄):
 
 | 필드                | 값                                                                                                                                                |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -518,9 +518,9 @@ Note:
 | `SendMax`         | `SendMax` 토큰을 발행할 때는 이 필드를 생략합니다.                                                                                                                |
 | `DestinationTag`  | 데스티네이 태그 0에서 232-1 사이의 정수입니다. 핫 주소에서 [Require Destination Tags](https://xrpl.org/require-destination-tags.html)를 사용하도록 설정한 경우 여기에 무언가를 지정해야 합니다. |
 
-다른 모든 필수 필드에는 자동 입력된 값을 사용할 수 있습니다.
+다른 모든 필수 필드에는 자동 입력된 값([auto-filled values](https://xrpl.org/transaction-common-fields.html#auto-fillable-fields))을 사용할 수 있습니다.
 
-다음 코드 샘플은 콜드 주소에서 핫 주소로 88 FOO를 발행하는 결제 트랜잭션을 전송하는 방법을 보여줍니다:
+다음 코드 샘플은 콜드 주소에서 핫 주소로 88 FOO를 발행하는 결제 트랜잭션([Payment transaction](https://xrpl.org/payment.html))을 전송하는 방법을 보여줍니다:
 
 {% tabs %}
 {% tab title="JavaScript" %}
@@ -597,9 +597,9 @@ print(response)
 {% endtab %}
 {% endtabs %}
 
-## 10. 유효성 검사 대기
+## 10. 유효성 검사 대기(Wait for Validation)
 
-이전과 마찬가지로 이전 트랜잭션이 컨센서스를 통해 유효성을 검사할 때까지 기다렸다가 계속 진행합니다.
+이전과 마찬가지로 합의 과정을 통해 이전 트랜잭션이 검증될 때까지 기다렸다가 계속 진행합니다.
 
 * [Generate](https://xrpl.org/issue-a-fungible-token.html#interactive-generate)
 * [Connect](https://xrpl.org/issue-a-fungible-token.html#interactive-connect)
@@ -613,18 +613,18 @@ print(response)
 * [Wait (Payment)](https://xrpl.org/issue-a-fungible-token.html#interactive-wait\_payment)
 * [Confirm Balances](https://xrpl.org/issue-a-fungible-token.html#interactive-confirm\_balances)
 
-## 11. 토큰 잔액 확인
+## 11. 토큰 잔액 확인(Confirm Token Balances)
 
 토큰 발행자 또는 핫 주소의 관점에서 토큰의 잔액을 확인할 수 있습니다. XRP Ledger에서 발행된 토큰의 잔액은 항상 0이 되며, 발행자 관점에서는 음수이고 보유자 관점에서는 양수입니다.
 
-[account\_lines method](https://xrpl.org/account\_lines.html)를 사용하여 소유자 관점에서 잔액을 조회할 수 있습니다. 여기에는 각 신뢰이 한도, 잔액 및 설정과 함께 나열됩니다.&#x20;
+[account\_lines method](https://xrpl.org/account\_lines.html)를 사용하여 보유자 관점에서 잔액을 조회할 수 있습니다. 여기에는 각 신뢰선이 한도, 잔액, 설정과 함께 나열됩니다.
 
-토큰 발행자 관점에서 잔액을 조회하려면 [gateway\_balances](https://xrpl.org/gateway\_balances.html) 메소드를 사용합니다. 이 메소드는 특정 주소에서 발행한 모든 토큰의 합계를 제공합니다.
+토큰 발행자의 관점에서 잔액을 조회하려면 [gateway\_balances](https://xrpl.org/gateway\_balances.html) 메서드를 사용합니다. 이 메서드는 특정 주소에서 발행한 모든 토큰의 합계를 제공합니다.
 
 {% hint style="info" %}
-Tip:
+**Tip**:
 
-XRP Ledger은 완전히 공개되어 있으므로 암호화 키 없이도 언제든지 모든 계정의 잔액을 확인할 수 있습니다.&#x20;
+XRP Ledger은 완전히 공개되어 있으므로 암호화 키가 없어도 언제든지 모든 계정의 잔액을 확인할 수 있습니다.
 {% endhint %}
 
 다음 코드 샘플은 두 가지 방법을 모두 사용하는 방법을 보여줍니다:
@@ -702,16 +702,16 @@ print(response)
 * [Wait (Payment)](https://xrpl.org/issue-a-fungible-token.html#interactive-wait\_payment)
 * [Confirm Balances](https://xrpl.org/issue-a-fungible-token.html#interactive-confirm\_balances)
 
-## 다음 단계
+## 다음 단계(Next Steps)
 
 이제 토큰을 만들었으므로, 토큰이 XRP Ledger의 기능에 어떻게 적용되는지 살펴볼 수 있습니다:
 
 * 핫 주소에서 다른 사용자에게 토큰 보내기.
 * 탈중앙화 거래소에서 토큰을 거래합니다.
 * 토큰의 수신 결제를 모니터링합니다.
-* xrp-ledger.toml 파일을 생성하고 토큰 발행자에 대한 도메인 확인을 설정합니다.
-* XRP Ledger 토큰의 다른 기능에 대해 알아보세요.
+* [xrp-ledger.toml file](https://xrpl.org/xrp-ledger-toml.html)을 생성하고 토큰 발행자에 대한 도메인 확인을 설정합니다.
+* XRP Ledger 토큰의 다른 기능([features of XRP Ledger tokens](https://xrpl.org/issued-currencies.html))에 대해 알아보세요.
 
-## 각주
+## 각주(Footnotes)
 
-¹ 사용자가 탈중앙화 거래소에서 토큰을 구매하면 명시적으로 신뢰선을 만들지 않고도 토큰을 보유할 수 있습니다. 거래소에서 토큰을 구매하면 필요한 신뢰선이 자동으로 생성됩니다. 이는 누군가 탈중앙화 거래소에서 토큰을 판매하는 경우에만 가능합니다.
+¹ 사용자가 탈중앙화 거래소에서 토큰을 구매하면 명시적으로 신뢰선을 만들지 않고도 토큰을 보유할 수 있습니다. [탈중앙화 거래소](https://xrpl.org/decentralized-exchange.html)에서 토큰을 구매하면 [필요한 신뢰선이 자동으로 생성](https://xrpl.org/offers.html#offers-and-trust)됩니다. 이는 누군가 탈중앙화 거래소에서 토큰을 판매하는 경우에만 가능합니다.
