@@ -1,28 +1,37 @@
-# 탈중앙화 거래소에서 거래
+# 탈중앙화 거래소에서 거래(Trade in the Decentralized Exchange)
 
 이 튜토리얼에서는 탈중앙화 거래소(DEX)에서 토큰을 사고 파는 방법을 설명합니다.
 
-## 요구 조건
+## 요구 조건(Prerequisites)
 
 * XRP Ledger 네트워크에 연결해야 합니다. 이 튜토리얼에 표시된 대로 공용 서버를 사용하여 테스트할 수 있습니다.
 * 선호하는 클라이언트 라이브러리에 대한 시작하기 지침을 숙지하고 있어야 합니다. 이 페이지에서는 다음에 대한 예제를 제공합니다:
-  * xrpl.js 라이브러리를 사용한 JavaScript. 설정 단계는 JavaScript를 사용하여 시작하기를 참조하세요.
-  * xrpl-py 라이브러리를 사용하는 Python. 설정 단계는 Python을 사용하여 시작하기를 참조하세요.
-  * 설정 없이 브라우저에서 대화형 단계를 따라 읽고 사용할 수도 있습니다.
+  * xrpl.js 라이브러리를 사용한 **JavaScript**. \
+    설정 단계는 JavaScript를 사용하여 시작하기를 참조하세요.
+  * xrpl-py 라이브러리를 사용하는 **Python**. \
+    설정 단계는 Python을 사용하여 시작하기를 참조하세요.
+  * 별도의 설정 없이 브라우저에서 대화형 단계를 따라 읽고 사용할 수도 있습니다.
 
-## 예제 코드
+## 예제 코드(Example Code)
 
 이 튜토리얼의 모든 단계에 대한 전체 샘플 코드는 MIT 라이선스 에 따라 사용할 수 있습니다.&#x20;
 
 * 코드 샘플을 참조하세요: 이 웹사이트의 소스 저장소에서 탈중앙화 거래소에서 트랜잭션하기를 참조하세요.
 
-## 단계
+## 단계(Steps)
 
-이 튜토리얼에서는 XRP를 판매하여 탈중앙화 거래소에서 대체 가능한 토큰을 구매하는 방법을 보여드립니다. (다른 유형의 트랜잭션도 가능하지만, 토큰을 판매하려면 먼저 토큰을 보유해야 합니다.) 이 튜토리얼에서 사용하는 예시 토큰은 다음과 같습니다:
+이 튜토리얼에서는 XRP를 판매하여 탈중앙화 거래소에서 대체 가능한 토큰을 구매하는 방법을 보여드리겠습니다. (다른 유형의 거래도 가능하지만, 예를 들어 토큰을 판매하려면 먼저 토큰을 보유해야 합니다.) 이 튜토리얼에서 사용하는 예시 토큰은 다음과 같습니다:
 
-## 1. 네트워크에 연결
+| Currency Code | Issuer                               | Notes                                                                                                                                                          |
+| ------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TST           | `rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd` | A test token pegged to XRP at a rate of approximately 10 XRP per 1 TST. The issuer has existing Offers on the XRP Ledger Testnet to buy and sell these tokens. |
 
-트랜잭션을 제출하려면 네트워크에 연결해야 합니다. 또한 일부 언어(JavaScript 포함)는 Ledger에서 찾을 수 있는 화폐 금액에 대한 계산을 수행하기 위해 고정밀 숫자 라이브러리가 필요합니다. 다음 코드는 적절한 종속성을 갖춘 지원되는 클라이언트 라이브러리를 퍼블릭 XRP Ledger 테스트넷 서버에 연결하는 방법을 보여줍니다.
+\
+
+
+## 1. 네트워크에 연결(Connect to Network)
+
+트랜잭션을 제출하려면 네트워크에 연결해야 합니다. 또한 일부 언어(JavaScript 포함)는 Ledger에서 찾을 수 있는 화폐 금액에 대한 계산을 수행하기 위해 고정밀 숫자 라이브러리가 필요합니다. 다음 코드는 적절한 종속성을 갖춘 지원되는 [client library](https://xrpl.org/client-libraries.html)를 퍼블릭 XRP Ledger 테스트넷 서버에 연결하는 방법을 보여줍니다.
 
 {% tabs %}
 {% tab title="JavaScript" %}
@@ -73,9 +82,9 @@ asyncio.run(main())
 {% endtabs %}
 
 {% hint style="info" %}
-Tip:
+**Note**:
 
-이 튜토리얼의 자바스크립트 코드 샘플은 async/await 패턴을 사용합니다. await은 비동기 함수 내에서 사용해야 하므로 나머지 코드 샘플은 여기서 시작한 main() 함수 내에서 계속 사용하도록 작성되었습니다. 원하는 경우 async/await 대신 Promise 메소드 .then() 및 .catch()를 사용할 수도 있습니다.
+이 튜토리얼의 JavaScript 코드 샘플은 async/await 패턴을 사용합니다. await은 비동기 함수 내에서 사용해야 하므로 나머지 코드 샘플은 여기서 시작한 main() 함수 내에서 계속 사용하도록 작성되었습니다. 원하는 경우 async/await 대신 Promise 메소드 .then() 및 .catch()를 사용할 수도 있습니다.
 {% endhint %}
 
 이 튜토리얼에서는 다음 버튼을 클릭하여 연결합니다:
@@ -88,9 +97,9 @@ Tip:
 * [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
 * [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
 
-## 2. 자격증명 가져오기
+## 2. 자격증명 가져오기(Get Credentials)
 
-XRP Ledger에서 거래하려면 주소, 비밀 키, 약간의 XRP가 필요합니다. 개발 목적으로 다음 인터페이스를 사용해 이 정보를 얻을 수 있습니다:
+XRP Ledger 에서 거래하려면 주소, 비밀 키, 약간의 XRP가 필요합니다. 개발 목적으로 다음 인터페이스를 사용하여 이러한 정보를 얻을 수 있습니다.
 
 * [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
 * [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
@@ -100,13 +109,13 @@ XRP Ledger에서 거래하려면 주소, 비밀 키, 약간의 XRP가 필요합�
 * [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
 * [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
 
-{% hint style="info" %}
-Caution:
+{% hint style="warning" %}
+**Caution**:
 
-Ripple은 testnet과 devnet을 테스트 목적으로만 제공하며, 때때로 이러한 테스트 네트워크의 상태를 모든 잔액과 함께 초기화하기도 합니다. 예방책으로 testnet, devnet과 mainnet에서 동일한 주소를 사용하지 마시기 바랍니다.
+리플은 테스트 목적으로만 [Testnet and Devnet](https://xrpl.org/parallel-networks.html)을 제공하며, 때때로 이러한 테스트 네트워크의 상태를 모든 잔액과 함께 초기화하기도 합니다. 예방책으로 테스트넷/데브넷과 메인넷에서 동일한 주소를 사용하지 마시기 바랍니다.
 {% endhint %}
 
-프로덕션용 소프트웨어를 빌드할 때는 기존 계정을 사용하고 보안 서명 구성을 사용하여 키를 관리해야 합니다. 다음 코드는 키를 사용하기 위해 월렛 인스턴스를 만드는 방법을 보여줍니다:
+프로덕션용 소프트웨어를 구축할 때는 기존 계정을 사용하고 [secure signing configuration](https://xrpl.org/secure-signing.html)을 사용하여 키를 관리해야 합니다. 다음 코드는 키를 사용하기 위해 월렛 인스턴스를 만드는 방법을 보여줍니다:
 
 {% tabs %}
 {% tab title="JavaScript" %}
@@ -130,17 +139,17 @@ Ripple은 testnet과 devnet을 테스트 목적으로만 제공하며, 때때로
 {% endtab %}
 {% endtabs %}
 
-## 3. 제안 조회
+## 3. '제안' 조회(Look Up Offers)
 
-토큰을 구매하거나 판매하기 전에 다른 사람들이 토큰을 어떤 가격에 구매하고 판매하는지 조회하여 다른 사람들이 토큰을 어떻게 평가하는지 파악하고 싶을 것입니다. XRP Ledger에서 book\_offers 메소드를 사용해 모든 화폐 쌍에 대한 기존 제안을 조회할 수 있습니다.
+토큰을 구매하거나 판매하기 전에 다른 사람들이 토큰을 어떤 가격에 구매하고 판매하는지 조회하여 다른 사람들이 토큰을 어떻게 평가하는지 파악하고 싶을 것입니다. XRP Ledger에서  [book\_offers method](https://xrpl.org/book\_offers.html)를 사용해 모든 화폐 쌍에 대한 기존 제안을 조회할 수 있습니다.
 
-{% hint style="info" %}
-Tip:
+{% hint style="success" %}
+**Tip**:
 
-엄밀히 말하면 이 단계는 제안을 제출하기 위한 필수 조건은 아니지만, 실제 가치가 있는 상품을 트랜잭션하기 전에 현재 상황을 확인하는 것은 좋은 습관입니다.
+엄밀히 말하면 이 단계는 오퍼를 올리기 위한 필수 조건은 아니지만, 실제 가치가 있는 물건을 거래하기 전에 현재 상황을 확인하는 것은 좋은 습관입니다.
 {% endhint %}
 
-다음 코드는 기존 제안을 조회하고 제안한 제안과 비교하여 어떻게 체결될지 예측하는 방법을 보여줍니다:
+다음 코드는 기존 Offers을 조회하고 제안된 Offers와 비교하여 어떻게 실행될지 예측하는 방법을 보여 줍니다:
 
 {% tabs %}
 {% tab title="JavaScript" %}
@@ -397,9 +406,9 @@ Tip:
 {% endtabs %}
 
 {% hint style="info" %}
-Note:
+**Note**:
 
-XRP Ledger의 다른 사용자도 언제든지 트랜잭션을 할 수 있으므로, 이는 다른 변화가 없을 경우의 추정치일 뿐입니다. 트랜잭션이 최종적으로 체결될 때까지는 트랜잭션의 결과가 보장되지 않습니다.
+XRP Ledger의 다른 사용자도 언제든지 거래를 할 수 있으므로, 이는 다른 변화가 없을 경우 발생할 수 있는 상황을 예상한 것입니다. 거래의 결과는 최종적으로 확정될 때까지 보장되지 않습니다.
 {% endhint %}
 
 다음 블록은 이러한 계산이 실제로 작동하는 모습을 보여줍니다:
@@ -412,9 +421,9 @@ XRP Ledger의 다른 사용자도 언제든지 트랜잭션을 할 수 있으므
 * [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
 * [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
 
-## 4. 제안 보내기 트랜잭션 생성
+## 4. '제안생성' 거래 전송 (Send OfferCreate Transaction)
 
-실제로 트랜잭션을 하려면 제안 생성 트랜잭션을 전송합니다. 이 경우 XRP를 사용해 TST를 구매하고자 하므로 다음과 같이 매개변수를 설정해야 합니다:
+실제로 거래를 하려면 [OfferCreate transaction](https://xrpl.org/offercreate.html)을 전송합니다. 이 경우 XRP를 사용하여 TST를 구매하고자 하므로 다음과 같이 매개변수를 설정해야 합니다:
 
 | 필드          | 유형                                                                                        | 설명                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -493,9 +502,9 @@ XRP Ledger의 다른 사용자도 언제든지 트랜잭션을 할 수 있으므
 * [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
 * [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
 
-## 5. 유효성 검사 대기
+## 5. 유효성 검사 대기(Wait for Validation)
 
-대부분의 트랜잭션은 제출된 후 다음 Ledger 버전으로 승인되므로, 트랜잭션 결과가 최종적으로 확정되기까지 4\~7초가 소요될 수 있습니다. XRP Ledger가 사용 중이거나 네트워크 연결 상태가 좋지 않아 트랜잭션이 네트워크를 통해 전달되는 것이 지연되는 경우, 트랜잭션이 확인되는 데 더 오랜 시간이 걸릴 수 있습니다. (트랜잭션 만료를 설정하는 방법에 대한 자세한 내용은 안정적인 트랜잭션 제출을 참조하세요.)
+대부분의 트랜잭션은 제출된 후 다음 Ledger 버전으로 승인되므로, 트랜잭션 결과가 최종 확정되기까지 4\~7초가 소요될 수 있습니다. XRP Ledger이 사용 중이거나 네트워크 연결 상태가 좋지 않아 트랜잭션이 네트워크를 통해 릴레이되는 것이 지연되는 경우, 트랜잭션이 확인되는 데 더 오랜 시간이 걸릴 수 있습니다. (트랜잭션 만료를 설정하는 방법에 대한 자세한 내용은 [Reliable Transaction Submission](https://xrpl.org/reliable-transaction-submission.html)을 참조하세요.)
 
 * [Connect](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-connect)
 * [Generate](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-generate)
@@ -505,9 +514,9 @@ XRP Ledger의 다른 사용자도 언제든지 트랜잭션을 할 수 있으므
 * [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
 * [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
 
-## 6. 메타데이터 확인
+## 6. 메타데이터 확인(Check Metadata)
 
-검증된 트랜잭션의 메타데이터를 사용해 트랜잭션이 정확히 어떤 일을 했는지 확인할 수 있습니다. (특히 탈중앙화 거래소를 사용할 때는 최종 결과와 다를 수 있으므로 임시 트랜잭션 결과의 메타데이터를 사용하지 마세요). 제안 생성 트랜잭션의 경우 가능한 결과는 다음과 같습니다:
+검증된 트랜잭션의 [metadata](https://xrpl.org/transaction-metadata.html)를 사용해 트랜잭션이 정확히 어떤 일을 했는지 확인할 수 있습니다. (특히 탈중앙화 거래소를 사용할 때는 [final result](https://xrpl.org/finality-of-results.html)와 다를 수 있으므로 임시 트랜잭션 결과의 메타데이터를 사용하지 마세요). 오퍼 생성 트랜잭션의 경우 예상되는 결과는 다음과 같습니다:
 
 * 제안의 일부 또는 전부가 Ledger에 있는 기존 제안과 일치하여 채워졌을 수 있습니다.
 * 매칭되지 않은 나머지 제안이 있다면 Ledger에 배치되어 새로운 매칭 제안을 기다리고 있을 것입니다.
@@ -616,11 +625,11 @@ XRP Ledger의 다른 사용자도 언제든지 트랜잭션을 할 수 있으므
 * [Check Metadata](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_metadata)
 * [Check Balances and Offers](https://xrpl.org/trade-in-the-decentralized-exchange.html#interactive-check\_balances\_and\_offers)
 
-## 7. 잔액 및 제안 확인
+## 7. 잔액 및 제안 확인(Check Balances and Offers)
 
-가장 최근에 확인된 ledger를 기준으로 계정의 잔액과 미발행 제안을 조회할 수 있는 좋은 시기입니다. 여기에는 트랜잭션으로 인한 변경 사항과 동일한 ledger 버전에서 실행된 다른 트랜잭션이 모두 표시됩니다.
+또한 가장 최근에 확인된 Ledger을 기준으로 계정의 잔액과 미결제 Offers를 조회할 수 있는 좋은 시기입니다. 여기에는 동일한 Ledger 버전에서 실행된 다른 거래뿐만 아니라 거래로 인해 발생한 모든 변경사항이 표시됩니다.
 
-다음 코드는 account\_lines 메소드를 사용하여 잔액을 조회하고 account\_offers 메소드를 사용하여 제안 조회하는 방법을 보여줍니다.
+다음 코드는 [account\_lines method](https://xrpl.org/account\_lines.html)를 사용하여 잔액을 조회하고 [account\_offers method](https://xrpl.org/account\_offers.html)를 사용하여 제안 조회하는 방법을 보여줍니다.
 
 {% tabs %}
 {% tab title="JavaScript" %}
